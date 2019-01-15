@@ -1,0 +1,41 @@
+# Editor temporary files
+*~
+\#*#
+.#*
+.vscode
+.idea
+
+# Others
+schema-dump-default.lock
+
+## Back-End
+back-end/vendor/*
+back-end/tmp/*
+back-end/logs/*
+back-end/webroot/uploads_dir/*
+back-end/composer.lock
+back-end/config/env.php
+
+## Front-End
+# Dependency directory
+# https://www.npmjs.org/doc/misc/npm-faq.html#should-i-check-my-node_modules-folder-into-git
+front-end/node_modules
+front-end/src/app/vendors/ew-angularjs-utils
+front-end/yarn.lock
+
+# npm debug
+front-end/npm-debug.log
+
+# Typescript-related generated files
+front-end/typings
+front-end/src/**/*.js
+front-end/src/**/*.js.map
+
+# Distribution directory
+front-end/dist
+
+# Code Coverage Report
+front-end/coverage
+
+# Webpack local configuration file
+front-end/Webpack/local-config.js

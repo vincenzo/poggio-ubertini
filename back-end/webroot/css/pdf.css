@@ -1,0 +1,212 @@
+@import url('https://fonts.googleapis.com/css?family=PT+Sans:400,700&lang=it');
+@import url('https://fonts.googleapis.com/css?family=PT+Serif:400,700&lang=it');
+@import url('https://fonts.googleapis.com/css?family=Merienda&lang=it');
+
+.container {
+    font-size:16px;
+    line-height:24px;
+    font-family: 'PT Sans', 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
+    color:#333;
+    max-width: 850px;
+    margin:auto;
+}
+.borbot{border-bottom: 1px solid #bbb;}
+.mny{text-align: right;}
+.center{ text-align: center;}
+.w_xs{ width: 60px;}
+.w_sm{ width: 80px;}
+.w_md{ width: 120px;}
+.ma0{margin: 0 !important;}
+.bold{font-weight: bold;}
+.blue{color: blue !important;}
+.red{color: red !important;}
+.serif{font-family: 'PT Serif';}
+.page-breaker {
+    clear: both;
+    display: block;
+    border :1px solid transparent;
+    page-break-after: always;
+}
+.indent {
+  margin-left: 10px;
+}
+.sepV10 {
+  margin-top: 10px;
+}
+.sepV20 {
+  margin-top: 20px;
+}
+.boxed {
+  border: 1px solid black;
+  padding: 5px;
+}
+.euro_floater {
+  display: inline-block;
+  float: right;
+  margin-right: 100px;
+}
+
+.logo{
+    font-size: 22px;
+    line-height: 26px;
+}
+.logo img{
+    width: 300px;
+}
+
+h1.titolo-logo{
+    border-bottom: 2px solid #000;
+    font-size: 28px;
+    padding-bottom: 10px;
+}
+h1.titolo-logo img{
+    float: right;
+    width: 150px;
+}
+
+.copia {
+  float: right;
+  font-weight: bold;
+  text-align: right;
+  font-size: 22px;
+  padding: 20px;
+  border: 1px solid #666;
+}
+
+p.line-spacing-15{ line-height: 1.5em;}
+p.line-spacing-20{ line-height: 2em;}
+p.line-spacing-25{ line-height: 2.5em;}
+
+p ins{
+    text-decoration: none;
+    display: inline-block;
+    padding: 0 6px;
+}
+
+dl{
+    font-size: 15px;
+    line-height: 22px;
+}
+dt{
+    font-weight: normal;
+    font-style: italic;
+    margin-bottom: 2px;
+}
+dd{
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+dl.normal-weight dd{
+  font-weight: normal;
+}
+
+table{
+    width:100%;
+    line-height:inherit;
+    text-align:left;
+}
+
+table td{
+    padding:5px;
+    vertical-align:top;
+}
+
+table tr td:nth-child(2){
+    text-align:right;
+}
+
+table.top{
+    padding-bottom:20px;
+}
+
+table.top td.title{
+    font-size:45px;
+    line-height:45px;
+    color:#333;
+}
+
+@media only screen and (max-width: 600px) {
+    table tr.top table td{
+        width:100%;
+        display:block;
+        text-align:center;
+    }
+    
+    table tr.information table td{
+        width:100%;
+        display:block;
+        text-align:center;
+    }
+}
+
+/**
+ * Quote cliente
+ */
+#quote-print-cliente {
+  text-align: center;
+}
+
+#quote-print-cliente .oggetto{
+  font-family: Merienda;
+  font-size: 22px;
+  line-height: 1.4em;
+  margin-top: 1.6em;
+}
+
+#quote-print-cliente h2 {
+  font-family: Merienda;
+  font-weight: 700;
+  margin-bottom: 0.1em;
+  margin-top: 1em;
+}
+
+#quote-print-cliente h3{
+  font-family: Merienda;
+  font-size: 18px;
+  font-weight: 400;
+  margin-bottom: 0.1em;
+  margin-top: 0.5em;
+}
+
+#quote-print-cliente section .items {
+  margin-top: 1.2em;
+}
+
+#quote-print-cliente section p{
+  font-family: 'PT Sans';
+  font-size: 18px;
+  margin-bottom: 0.2em;
+}
+
+/**
+ * Quote contabilità
+ */
+#quote-print-contabilita {
+  font-family: 'PT Serif';
+}
+
+#quote-print-contabilita .oggetto {
+  font-size: 18px;  
+}
+
+#quote-print-contabilita h2 {
+  font-weight: 700;
+  font-size: 18px;
+  margin-bottom: 0.1em;
+  margin-top: 1em;
+}
+
+#quote-print-contabilita table {
+  margin-top: 20px;
+}
+
+#quote-print-contabilita td.section-title {
+  font-weight: bold;
+  text-transform: uppercase;
+  border-bottom: 1px solid #999;
+}
+
+#quote-print-contabilita td {
+  border-bottom: 1px solid #dedede;
+  margin-bottom: 0.1em;
+}

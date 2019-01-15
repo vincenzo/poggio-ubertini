@@ -1,0 +1,51 @@
+# Use docker-compose to set local machine environment
+# 
+# 1) First check if you have installed Docker (https://www.docker.com/products/docker)
+# 2) If you don't already have one, create a new Docker Machine
+#    $ docker-machine create --driver virtualbox cakephp
+#    Note: cakephp is the name of the machine
+# 3) Set your terminal for using this machine
+#    $ eval $(docker-machine env cakephp)
+# 4) Build your docker environment
+#    $ docker-compose build
+# 5) Create the containers
+#    $ docker-compose up -d
+#    Note: use "-d" for background execution
+# 6) Login into your machine
+#    $ docker exec -it server_cakephp_1 /bin/bash
+#    Note: replace "server" with your cakephp container's name
+# 7) Start/Stop your containers
+#    $ docker-compose start
+#    $ docker-compose stop
+
+version: '3'
+
+services:
+  cakephp:
+    build:
+      context: .
+      dockerfile: cakephp.dockerfile
+    ports:
+      - "8110:80"
+    volumes:
+      - ./back-end:/var/www/html/back-end
+      - ./front-end/dist:/var/www/html/front-end/dist
+    networks:
+      - network
+
+  mysqlhost:
+    image: mysql
+    user: "1000:50"
+    ports:
+      - "3110:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_DATABASE: xpoggioubertini
+    networks:
+      - network
+    volumes:
+      - ~/Databases/poggioubertini:/var/lib/mysql:delegated
+
+networks:
+  network:
+    driver: bridge

@@ -1,0 +1,32 @@
+# Uncomment the following to prevent the httpoxy vulnerability
+# See: https://httpoxy.org/
+<IfModule mod_headers.c>
+    RequestHeader unset Proxy
+</IfModule>
+
+<IfModule mod_rewrite.c>
+    <IfModule mod_negotiation.c>
+        Options -MultiViews
+    </IfModule>
+
+    RewriteEngine On
+    RewriteBase /
+
+    # Redirect Trailing Slashes...
+    RewriteRule ^(.*)/$ /$1 [L,R=301]
+    
+    # Root requests -> index.html
+    RewriteCond %{REQUEST_URI} ^/$
+    RewriteRule !^/ /index.html [R,L]
+
+    # Backend -> Impostare nella config del virtual host Apache un alias
+    # Alias /api /var/www/html/back-end/webroot
+
+    # Front end
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule (.*) /front-end/dist/$1 [L]
+</IfModule>
+
+Header set Access-Control-Allow-Origin "*"
+AddOutputFilterByType DEFLATE application/json
