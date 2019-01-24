@@ -12,7 +12,7 @@ $db = [
     'driver' => 'Cake\Database\Driver\Mysql',
     'persistent' => true,
     'host' => '192.168.99.100',
-    'port' => '3108',
+    'port' => '3110',
     'username' => 'root',
     'password' => 'secret',
     'database' => 'xpoggioubertini',
@@ -23,7 +23,7 @@ $db = [
     // 'log' => true,
 ];
 
-$fullBaseUrl = 'http://192.168.99.100:8108/';
+$fullBaseUrl = 'http://192.168.99.100:8110/';
 $testDB = $db; $testDB['database'] = 'test';
 $error = E_ALL & ~E_DEPRECATED; // Mostra warning di deprecazione
 
