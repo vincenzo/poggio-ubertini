@@ -66,7 +66,7 @@ export const RootModule = angular
       },
       whiteListedDomains: [
         'poggioubertini.entheosweb.it',
-        'gestionale.poggioubertini.it',
+        'accesso.poggioubertini.it',
         'localhost',
       ]
     });
