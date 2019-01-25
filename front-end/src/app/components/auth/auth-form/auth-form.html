@@ -1,0 +1,41 @@
+<form class="login-form" name="$ctrl.loginForm" ng-submit="$ctrl.submitForm()" novalidate ng-if="!$ctrl.isAuth()">
+  <p status="error" class="has-error" ng-if="$ctrl.hasError">
+    Nome utente e password non validi
+  </p>
+
+  <div class="form-group has-feedback" ng-class="{
+        'has-warning': $ctrl.showNameWarning(),
+        'has-error': $ctrl.hasError,
+        }">
+    <input type="text" class="form-control" id="inputUsername" name="username" placeholder="Nome utente" required="true" ng-model="$ctrl.user.username">
+    <span ng-if="$ctrl.showNameWarning()" class="form-control-feedback" aria-hidden="true"><i class="far fa-exclamation-triangle"></i>
+    </span>
+    <span ng-if="$ctrl.hasError && !$ctrl.showNameWarning()" class="form-control-feedback" aria-hidden="true"><i class="far fa-times"></i>
+    </span>
+
+    <span ng-if="$ctrl.showNameWarning()" class="help-block">
+      Inserire un nome utente.
+    </span>
+  </div>
+  <div class="form-group has-feedback" ng-class="{
+        'has-warning': $ctrl.showPasswordWarning(),
+        'has-error': $ctrl.hasError,
+        }">
+    <input type="password" class="form-control" id="inputPassword" name="password" placeholder="Password" required="true" ng-model="$ctrl.user.password">
+    <span ng-if="$ctrl.showPasswordWarning()" class="form-control-feedback" aria-hidden="true"><i class="far fa-exclamation-triangle"></i>
+    </span>
+    <span ng-if="$ctrl.hasError && !$ctrl.showPasswordWarning()" class="form-control-feedback" aria-hidden="true"><i class="far fa-times"></i>
+    </span>
+
+    <span ng-if="$ctrl.showPasswordWarning()" class="help-block">
+      Inserire una password.
+    </span>
+  </div>
+  <button type="submit" class="btn btn-success btn-block" ladda="$ctrl.isLoading" ng-disabled="$ctrl.loginForm.$invalid">
+    {{ $ctrl.button }}
+  </button>
+</form>
+
+<div class="text-center btn-default btn-block btn-lg" ng-if="$ctrl.isAuth()">
+  <i class="far fa-2x fa-check text-success"></i>
+</div>

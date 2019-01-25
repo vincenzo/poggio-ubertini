@@ -1,0 +1,86 @@
+// -----------------------------------------------------------------------------
+// This file contains very basic styles.
+// -----------------------------------------------------------------------------
+
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600&lang=it');
+
+html {
+  box-sizing: border-box;
+  height: 100%;
+}
+
+/**
+ * Make all elements from the DOM inherit from the parent box-sizing
+ * Since `*` has a specificity of 0, it does not override the `html` value
+ * making all elements inheriting from the root box-sizing value
+ * See: https://css-tricks.com/inheriting-box-sizing-probably-slightly-better-best-practice/
+ */
+*, *::before, *::after {
+  box-sizing: inherit;
+} 
+
+body {
+  background-color: #f7f7f7;
+  color: $text-color;
+  font-family: $font-family-base;
+  font-size: 13px;
+  min-height: 100%;
+  padding-bottom: 60px;
+  padding-top: 70px;
+  position: relative;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1 {
+ color: $brand-color-dark;
+ font-size: 28px;
+ font-weight: bold;
+ letter-spacing: -2px;
+ text-transform: uppercase;
+}
+
+h2 {
+ font-size: 23px;
+ font-weight: 300;
+ letter-spacing: -1px;
+ text-transform: uppercase;
+}
+
+h3 {
+ font-size: 16px;
+}
+
+h4 {
+ font-size: 14px;
+}
+
+h5 {
+ font-size: 14px;
+}
+
+h6 {
+ font-size: 10px;
+}
+
+h3,
+h4,
+h5 {
+  font-weight: 600;
+  margin-top: 5px;
+}
+
+button:focus {
+ outline: 0 !important;
+}
+
+
+// State Change Animation
+
+ui-view.ng-enter {
+ opacity: 0;
+ transition: 0.5s;
+}
+
+ui-view.ng-enter-active {
+ opacity: 1;
+}

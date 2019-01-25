@@ -1,0 +1,212 @@
+@media screen {
+
+  .printonly,
+  .print-only {
+    display: none;
+  }
+
+  .page-preview {
+    max-width: 900px;
+    margin: 0 auto;
+    background-color: #fff;
+    border: 1px solid #eee;
+    box-shadow: 0 2px 5px rgba(0,0,0,.3);
+    margin: 0 auto;
+    width: 80%;
+    padding: 5em;
+  }
+}
+
+@media print {
+
+  nav,
+  .navbar-container,
+  .footer,
+  .nop,
+  .noprint,
+  .intralink::after,
+  .input-group-addon,
+  .input-group-btn,
+  .btn-toolbar,
+  .btn,
+  .actions,
+  th i,
+  tfoot {
+    display: none !important;
+  }
+
+  .print-exact-color {
+    -webkit-print-color-adjust: exact;
+  }
+
+  .printonly,
+  .print-only {
+    display: block !important;
+  }
+
+  #page-wrapper,
+  .wrapper-content,
+  .page-header {
+    margin: 0 !important;
+  }
+
+  .print-noborder {
+    border: none !important;
+    box-shadow: none !important;
+  }
+
+  html,
+  body {
+    height: auto;
+  }
+
+  body {
+    padding: 0 !important;
+  }
+
+  table {
+    page-break-inside: auto;
+  }
+
+  tr {
+    page-break-after: auto;
+    page-break-inside: avoid;
+  }
+
+  select {
+    appearance: none;
+    height: auto !important;
+    margin: 0 !important;
+    padding: 1px !important;
+  }
+
+  input,
+  textarea,
+  select {
+    border: none !important;
+    box-shadow: none !important;
+    outline: none !important;
+  }
+
+  h1 {
+    font-size: 22px !important;
+  }
+
+  hr {
+    background-color: rgba(0,91,170,.25) !important;
+    -webkit-print-color-adjust: exact;
+  }
+
+  .form-control {
+    height: auto;
+    padding: 0 !important;
+    transition: none !important;
+  }
+
+  .ibox-title {
+    border: none;
+    padding: 0 !important;
+  }
+
+  .ibox-title h5 {
+    border-bottom: 1px solid black;
+    font-size: 16px;
+    margin-bottom: 0;
+    margin-top: 0;
+    padding-bottom: 10px;
+  }
+
+  .ibox-content {
+    border-style: none !important;
+    padding: 0 !important;
+  }
+
+  th,
+  td {
+    padding: 5px !important;
+  }
+
+  label {
+    margin-bottom: 2px !important;
+  }
+
+  dl.printable-grid dt,
+  dl.printable-grid dd {
+    border: 1px solid #000;
+    border-right-style: none;
+    border-top-style: none;
+    height: 28px;
+    margin: 0;
+    padding: 3px 5px !important;
+  }
+
+  dl.printable-grid div dd:last-child,
+  dl.printable-grid .solid-rborder {
+    border-right-style: solid;
+  }
+
+  dl.printable-grid div:first-child dt,
+  dl.printable-grid div:first-child dd,
+  dl.printable-grid .solid-tborder {
+    border-top-style: solid;
+  }
+
+  ew-multi-checkbox-select .checkbox {
+    margin: 0;
+  }
+
+  ew-multi-checkbox-select .printable-grid dt,
+  ew-multi-checkbox-select .printable-grid dd {
+    min-height: 30px !important;
+  }
+
+  h1.print-logo {
+    float: right;
+    margin: 0;
+  }
+
+  .print-view .print-recap {
+    background-color: #e6e6e6 !important;
+    -webkit-print-color-adjust: exact;
+  }
+
+  .print-body-separator-black {
+    background-color: #000 !important;
+    -webkit-print-color-adjust: exact;
+  }
+}
+
+.print dt,
+.print dd {
+  display: inline-block;
+}
+
+.print dt {
+  margin-right: 4px;
+}
+
+.print dd {
+  margin-right: 20px;
+}
+
+.print p {
+  margin-bottom: 2px;
+}
+
+.print .indent {
+  margin-left: 10px;
+}
+
+.print .sepV10 {
+  margin-top: 10px;
+}
+
+.boxed {
+  border: 1px solid black;
+  padding: 5px;
+}
+
+.euro_floater {
+  display: inline-block;
+  margin-right: 100px;
+}

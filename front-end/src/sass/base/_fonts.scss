@@ -1,0 +1,15 @@
+// -----------------------------------------------------------------------------
+// This file contains all @font-face declarations, if any.
+// -----------------------------------------------------------------------------
+
+@font-face {
+  font-family: 'Font Awesome 5 Pro';
+  font-style: normal;
+  font-weight: 400;
+  src: url("/assets/webfonts/fa-regular-400.woff?v=5.6.3") format("woff");
+}
+
+.far, .fa {
+  font-family: 'Font Awesome 5 Pro';
+  font-weight: 400;
+}

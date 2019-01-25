@@ -1,0 +1,9 @@
+<div id="main">
+  <app-nav user="$ctrl.user" on-logout="$ctrl.logoutAndRedirect();"></app-nav>
+  <!-- <app-sidebar></app-sidebar> -->
+  <div class="app">
+    <div ui-view></div>
+  </div>
+
+  <uploads-status uploads="$ctrl.uploads.inProgress"></uploads-status>
+</div>

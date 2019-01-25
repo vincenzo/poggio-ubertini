@@ -1,0 +1,291 @@
+#root {
+    margin: 0;
+}
+
+.container {
+    max-width: 1270px;
+    width: calc(100% - 20px);
+    position: relative;
+}
+
+.btn.btn-flat {
+    border: none;
+    border-radius: 2px;
+    box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
+}
+
+.btn.btn-condensed {
+    letter-spacing: -1px;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.btn-add-xs {
+    font-size: 12px;
+    font-weight: bold;
+    padding: 4px 8px;
+    text-transform: uppercase;
+}
+
+// Bootstrap overrides
+.row {
+    margin-left: -5px;
+    margin-right: -5px;
+}
+
+.row [class^='col-'],
+.row [class*=' col-'] {
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.row.no-gutters {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.row.no-gutters [class^='col-'],
+.row.no-gutters [class*=' col-'],
+.row .no-padding,
+.no-padding {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+table.table>thead>tr>th {
+    border-color: rgba(133, 193, 245, 0.46) !important;
+    border-bottom: 2px solid rgba(59, 134, 198, 0.46) !important;
+    background-color: #e7f0f7;
+    white-space: nowrap;
+}
+
+td.tear {
+    text-align: right;
+}
+
+td.teac {
+    text-align: center;
+}
+
+td.long_text {
+    max-width: 100px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.table tbody td.actions {
+    padding: 6px 8px;
+    white-space: nowrap;
+    width: 40px;
+    button {
+        padding: 0 5px !important;
+    }
+    button.btn-flat {
+        background-color: transparent;
+        border: none;
+        color: #337ab7;
+        box-shadow: none;
+    }
+    a {
+        cursor: pointer;
+        font-size: 16px;
+        &:hover {
+            text-decoration: none;
+        }
+    }
+}
+
+td.file-name {
+    width: 140px;
+}
+
+tr.file-row td {
+    height: 40px;
+    vertical-align: middle;
+    .drop-box {
+        border: 3px dashed lightgray;
+        color: #bbb;
+        font-weight: bold;
+        height: 28px;
+        line-height: 22px;
+        margin: 0 auto;
+        text-align: center;
+        width: 100%;
+    }
+    .dragover {
+        background-color: dimgray;
+    }
+}
+
+/**
+ * NAV TABS
+ */
+
+.nav-tabs {
+    background-color: #f9f9f9;
+    border: 1px solid #e7eaec;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.33);
+    padding-right: 280px;
+
+    li>a {
+        border: none;
+        font-weight: bold;
+        height: 60px;
+        min-width: 120px;
+        padding: 20px;
+        text-align: center;
+        width: auto;
+        &:hover {
+            background-color: transparent;
+        }
+    }
+    li.active>a,
+    li.active>a:hover,
+    li.active>a:focus {
+        background-color: transparent;
+        border: none;
+        border-bottom: 3px solid $brand-color;
+        color: $brand-color;
+    }
+}
+
+.tab-pane {
+    background-color: #ffffff;
+    border: 1px solid #e7eaec;
+    border-top: none;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.33);
+    clear: both;
+    margin-bottom: 18px;
+    min-height: 400px;
+    padding: 15px;
+    position: relative;
+}
+
+.tab-content {
+    // padding: 20px;
+}
+
+
+/**
+ * INLINE FORM (ADD rapido in tabella sottostante)
+ */
+
+.inline-add-form {
+    background-color: white;
+    border: 1px solid #f1f1f1;
+    border-bottom: 2px solid lighten($brand-color, 60%);
+    margin: 10px 0;
+    padding: 8px;
+    .form-group,
+    .checkbox,
+    .radio {
+        margin-bottom: 0;
+    }
+    .form-control,
+    .selectize-input {
+        background-color: rgba(66, 66, 66, 0.01);
+        border-color: rgba(59, 134, 198, 0.14);
+        box-shadow: none;
+        margin-bottom: 6px;
+    }
+    .selectize-input.focus,
+    .selectize-input.selectize-focus {
+        border-color: transparent !important;
+        border-bottom: 1px solid lighten($brand-color, 10%) !important;
+        box-shadow: none;
+        outline-style: none;
+    }
+    .form-control {
+        &:active,
+        &:focus {
+            border-bottom-color: lighten($brand-color, 10%);
+            box-shadow: none;
+            outline-style: none;
+        }
+    }
+    label.for-checkbox {
+        margin-top: 7px;
+    }
+    .input--money .form-group::after,
+    .input--percent .form-group::after {
+        top: 10px;
+    }
+    .btn.btn-add {
+        border: none;
+        color: darken($brand-color, 10%);
+        background-color: lighten($brand-color, 60%);
+        font-weight: bold;
+        margin-top: 0;
+        margin-bottom: 6px;
+        &:hover {
+            outline-style: none;
+            background-color: lighten($brand-color, 50%);
+        }
+        &:active,
+        &:focus {
+            outline-style: none;
+            background-color: lighten($brand-color, 55%);
+        }
+    }
+}
+
+
+/**
+*  FOOTER
+**/
+
+.footer {
+    bottom: 0;
+    color: #d8d8d8;
+    left: 0;
+    padding: 20px;
+    position: absolute;
+    right: 0;
+    text-align: center;
+    transition: 0.5s color;
+    &:hover {
+        color: #888;
+    }
+}
+
+.form-control.left-iconed {
+    display: inline;
+    margin-left: 1em;
+    width: calc(100% - 3em);
+}
+
+.swal2-modal .swal2-title {
+    line-height: 1.3em;
+    margin-bottom: 1em;
+}
+
+
+/** Loading Bar */
+
+#loading-bar .bar {
+    background: #FFC107;
+}
+
+#loading-bar .peg {
+    box-shadow: #FFC107 1px 0 6px 1px;
+}
+
+/** Sweet alert */
+.swal2-popup {
+    padding: 20px;
+    width: 40em;
+
+    .swal2-content {
+        font-size: 1.3em;
+        line-height: 1.6em;
+    }
+
+    .swal2-actions {
+        margin-bottom: 1.25em;
+
+        .swal2-styled {
+            font-size: 1.3em;
+        }
+    }
+}

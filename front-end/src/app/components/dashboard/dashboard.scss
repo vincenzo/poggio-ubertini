@@ -1,0 +1,23 @@
+dashboard {
+
+  .quick-buttons {
+  	margin-bottom: 20px;
+  	
+  	.btn-group {
+  		margin-right: 10px;
+  	}
+
+  	.btn {
+  		padding: 20px 12px;
+  		text-align: center;
+  		font-weight: bold;
+  		font-size: 16px;
+  		letter-spacing: -1px;
+  		color: #1C558C;
+  		
+  		&.btn-add {
+  			background-color: #f5f5f5;
+  		}
+  	}
+  }
+}
