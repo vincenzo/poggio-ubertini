@@ -14,7 +14,7 @@ class UsersController extends AppController
         'limit' => 25,
         'maxLimit' => 500,
         'fields' => [
-            'id', 'username', 'email', 'role', 'active',
+            'id', 'username', 'email', 'role', 'attivo',
         ],
         'sortWhitelist' => [
             'id', 'username', 'email', 'role', 'attivo'
@@ -27,9 +27,10 @@ class UsersController extends AppController
             'username'        => 'like',
             'email'           => 'like',
             'role'            => 'string',
-            'active'          => 'boolean',
+            'attivo'          => 'boolean',
         ],
     ];
+
 
     public function beforeFilter(Event $event)
     {
@@ -48,6 +49,7 @@ class UsersController extends AppController
     public function initialize()
     {
         parent::initialize();
+        $this->activeUserConditions = ['attivo' => true];
         $this->Auth->allow(['token']);
         // $this->Auth->allow(['add']);
     }

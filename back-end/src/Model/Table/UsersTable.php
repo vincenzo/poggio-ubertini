@@ -49,9 +49,9 @@ class UsersTable extends Table
             ->notEmpty('role');
 
         $validator
-            ->boolean('active')
-            ->requirePresence('active', 'create')
-            ->notEmpty('active');
+            ->boolean('attivo')
+            ->requirePresence('attivo', 'create')
+            ->notEmpty('attivo');
 
         return $validator;
     }
