@@ -1,0 +1,67 @@
+// -----------------------------------------------------------------------------
+// This file contains CSS helper classes.
+// -----------------------------------------------------------------------------
+
+
+.w_xs {
+	width: 40px !important;
+}
+
+.w_sm {
+	width: 60px !important;
+}
+
+.w_md {
+	width: 100px !important;
+}
+
+.w_lg {
+	width: 120px !important;
+}
+
+.w_xl {
+	width: 200px !important;
+}
+
+.w_datepicker {
+	width: 120px !important;
+}
+
+.margin-0 {
+	margin: 0;
+}
+
+@for $i from 0 through 6 {
+
+ .mar-top-#{$i} {
+   margin-top: #{$i}em !important;
+ }
+
+ .mar-bottom-#{$i} {
+   margin-bottom: #{$i}em !important;
+ }
+}
+
+.hidden {
+	display: none;
+}
+
+.default-cursor {
+	cursor: default;
+}
+
+.text-bold {
+	font-weight: bold;
+}
+
+.nowrap {
+	white-space: nowrap;
+}
+
+.va-end {
+	align-self: end;
+}
+
+.fa-sm {
+    font-size:0.8em !important;
+}

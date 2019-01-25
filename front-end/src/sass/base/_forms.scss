@@ -1,0 +1,450 @@
+/** FORM CONTROLS */
+
+label {
+	color: #73879c;
+	font-weight: bold;
+	margin-bottom: 0;
+	padding: 1px 10px 3px 0;
+	white-space: nowrap;
+
+	small {
+		float: right;
+		margin-left: 4px;
+	}
+}
+
+.form-control,
+.selectize-input,
+.input-group-addon {
+	border: 1px solid rgba(115, 135, 156, 0.26);
+	border-radius: 2px;
+	height: 32px;
+	padding: 6px 10px;
+
+	&:focus {
+		border: 1px solid rgb(68, 135, 193);
+	}
+}
+
+.form-group,
+.checkbox,
+.radio {
+	margin-top: 0;
+	margin-bottom: 10px;
+}
+
+.input--decimal .form-control,
+.input--money .form-control,
+.input--numeric .form-control,
+.input--percent .form-control {
+	text-align: right;
+}
+
+.input--money,
+.input--percent {
+
+	.form-group {
+		position: relative;
+	}
+
+	.form-group::after {
+		display: inline-block;
+		font-size: 11px;
+		position: absolute;
+		right: 12px;
+		top: 33px;
+	}
+
+}
+
+.input--inline {
+
+	.input--money,
+	.input--percent {
+
+		.form-group::after{
+			top: 9px;
+		}
+	}
+}
+
+
+.input--money {
+
+	.form-control {
+		padding-right: 20px !important;
+	}
+
+	.form-group::after {
+		content: '€';
+	}
+}
+
+.input--percent {
+
+	.form-control {
+		padding-right: 24px !important;
+	}
+
+	.form-group::after {
+		content: '%';
+	}
+}
+
+.selectize-control {
+
+	height: 32px;
+
+	input {
+		width: 100% !important;
+	}
+
+	.ui-select-match {
+		line-height: 20px;
+		margin-right: 16px;
+	}
+
+	&.single .selectize-input::after {
+		right: 10px;
+	}
+}
+
+.searchable {
+	
+	position: relative;
+	
+	input {
+		background-color: #f7fbff;
+	}
+}
+
+.linked-fields-actions {
+
+	padding-top: 25px;
+
+	button.btn-sm {
+		padding: 5px 8px;
+	}
+
+	button.btn-xs {
+		padding: 1px;
+	}
+}
+
+.light {
+
+	label {
+		background-color: transparent;
+		color: #333;
+		padding-left: 0;
+	}
+
+	.form-control {
+		border-color: #ccc;
+	}
+}
+
+.readonly {
+
+	.form-control {
+		background-color: rgba(170, 170, 170, 0.1);
+		border: 1px solid rgba(115, 135, 156, 0.26);
+		border-radius: 2px;
+		overflow: hidden;
+	}
+}
+
+.low-impact.form-control,
+.low-impact .form-control {
+	background-color: #fbfbfb;
+	border: none;
+	border-bottom: 1px solid #337ab7;
+	border-radius: 0;
+	-webkit-box-shadow: none;
+	box-shadow: none;
+
+	&:hover {
+		outline: #337ab7;
+	}
+
+	&:disabled {
+		background-color: transparent;
+		border: none;
+	}
+}
+
+.form-control[disabled] {
+	background-color: #f7f7f7;
+}
+
+.fixme {
+
+	label {
+		color: red;
+	}
+
+	.form-control {
+		border-color: red;
+	}
+}
+
+.h2-switch {
+	margin-left: 10px;
+	margin-top: 5px;
+}
+
+.group--compact {
+
+	.form-group {
+		margin-bottom: 0;
+	}
+
+	.form-group > div,
+	.checkbox,
+	.radio {
+		margin: 2px 0;
+	}
+}
+
+.single-checkbox .checkbox {
+	margin-bottom: 0;
+	margin-top: 32px;
+}
+
+.checkbox--align-center{
+	align-self: end;
+}
+
+.vertical-checkbox .checkbox {
+
+	margin-top: 0;
+
+	label {
+		font-weight: bold;
+		padding-left: 0;
+	}
+
+	input {
+		margin-left: 2px;
+		margin-top: 28px;
+	}
+}
+
+.inline-action-button {
+	position: relative;
+	top: 22px;
+	
+	&.no-label {
+		top: 0;
+	}
+
+	button,
+	a {
+		padding: 6px;
+		background: #fff;
+		border: 1px solid rgba(115, 135, 156, 0.26);
+
+		&:hover,
+		&:focus {
+			border: 1px solid #4487c1
+		}
+	}
+}
+
+
+/**
+* Editable classes
+*/
+
+.editable-text .form-control {
+	border: none;
+	border-bottom: 1px solid #999;
+}
+
+.editable-sm form.form-inline input {
+	width: 70px;
+} /* 6 cifre num circa */
+
+.editable-buttons button {
+	background-color: transparent;
+	border: none;
+	color: black;
+	margin: 3px -2px 0 5px;
+	padding: 3px 3px;
+}
+
+/** DIRTY & RELATED */
+
+form.action-edit {
+
+	input.ng-dirty,
+	select.ng-dirty {
+		border-bottom-color: #ff9800;
+	}
+}
+
+input.related {
+	background-color: #dfedff !important;
+	transition: 0.5s background-color;
+}
+
+form .has-error .text-danger{
+	font-size: 10px;
+}
+
+/**
+ * SOFT BORDER
+ */
+
+.soft-border--left {
+	border-left: 1px solid rgba(193, 214, 234, 0.32);
+	padding-left: 10px;
+}
+
+.soft-border--right {
+	border-right: 1px solid rgba(193, 214, 234, 0.32);
+	padding-right: 10px;
+}
+
+/**
+ * INPUT TABLE
+ */
+
+
+.input-table thead {
+	background-color: whitesmoke;
+}
+
+.input-table tbody {
+
+	.form-group, .checkbox, .radio {
+		margin: 0;
+	}
+
+	.icon-field {
+		padding-top: 10px;
+	}
+
+	td {
+		background-color: #fff;
+	}
+
+	td:not(.actions) {
+		padding: 0;
+	}
+
+	td.actions {
+		background-color: #f5f5f5;
+		padding: 5px 5px;
+		white-space: nowrap;
+
+		.btn {
+			padding: 0;
+		}
+	}
+
+	select {
+		border: 1px solid #fff !important;
+		box-shadow: none;
+		padding: 2px;
+		width: 100%;
+
+		&:focus {
+			border-bottom: 1px solid #99c0e2 !important;
+			box-shadow: none;
+		}
+	}
+
+	input[type=text] {
+		border: 1px solid #fff;
+		box-shadow: none;
+		padding: 6px;
+		width: 100%;
+
+		&:focus {
+			border-bottom: 1px solid #99c0e2;
+			outline: none;
+		}
+	}
+
+	.checkbox {
+		padding-top: 3px;
+		padding-left: 10px;
+	}
+}
+
+
+
+/********************************
+*            VALIDATION
+********************************/
+
+.error-messages {
+	position: relative;
+}
+
+.error-messages,
+.message {
+	opacity: 1;
+	transition: 0.3s linear all;
+}
+
+.message {
+	color: #a94442;
+	font-size: 0.8em;
+	margin-top: 2px;
+	position: absolute;
+	width: 100%;
+}
+
+.error-messages.ng-enter.ng-enter-active,
+.message.ng-enter.ng-enter-active {
+	opacity: 1;
+	top: 0;
+}
+
+.error-messages.ng-enter,
+.message.ng-enter {
+	opacity: 0;
+	top: -10px;
+}
+
+.error-messages.ng-leave,
+.message.ng-leave {
+	opacity: 1;
+	top: 0;
+}
+
+.error-messages.ng-leave-active,
+.message.ng-leave-active {
+	opacity: 0;
+	top: -10px;
+}
+
+
+/** HELPERS */
+
+hr {
+	background-color: rgba(0, 91, 170, 0.25);
+	border: none;
+	height: 1px;
+	margin: 8px 0 10px 0;
+}
+
+.left-breaker {
+	border-left: 1px solid rgba(0, 91, 170, 0.25);
+}
+
+.right-breaker {
+	border-right: 1px solid rgba(0, 91, 170, 0.25);
+}
+
+.fa-stack {
+	height: 1.28571em !important;
+	line-height: 1.28571em !important;
+	vertical-align: -25% !important;
+}
+
+.btn-success .fa-inverse {
+	color: #5CB85C;
+}

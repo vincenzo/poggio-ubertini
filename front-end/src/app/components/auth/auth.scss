@@ -1,0 +1,40 @@
+.login-box {
+
+  background-color: #fff;
+  border-radius: 4px;
+  box-shadow: rgba(97, 97, 97, 0.4) 0px 0px 3px 2px;
+  margin-bottom: 20px;
+  margin-top: 50px;
+  padding: 40px;
+
+  .logo {
+    margin-top: 0;
+    text-align: center;
+
+    img {
+      width: 100%;
+      max-width: 250px;
+    }
+  }
+
+  > h3,
+  > p {
+    margin-top: 30px;
+    text-align: center;
+  }
+
+}
+
+.login-form {
+
+  margin-bottom: 15px;
+  margin-top: 25px;
+
+  p.has-error {
+    color: #a94442;
+  }
+
+  .form-group {
+    margin-bottom: 25px;
+  }
+}

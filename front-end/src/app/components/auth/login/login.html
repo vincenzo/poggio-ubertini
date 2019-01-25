@@ -1,0 +1,22 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-4 col-md-offset-4 col-sm-8 col-sm-offset-2">
+      <div class="login-box">
+        <h3>Area Riservata</h3>
+        <h1 class="logo">
+          <img src="/assets/logo.png" alt="Faldi Motors S.r.l.">
+        </h1>
+        <p>Inserisci nome utente e password, quindi premi "Accedi"</p>
+
+        <auth-form
+          user="$ctrl.user"
+          is-loading="$ctrl.auth.isLoading"
+          message="{{ $ctrl.error }}"
+          button="ACCEDI"
+          on-submit="$ctrl.loginUser($event);">
+        </auth-form>
+
+      </div>
+    </div>
+  </div>
+</div>
