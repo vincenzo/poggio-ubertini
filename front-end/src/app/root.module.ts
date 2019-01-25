@@ -65,8 +65,8 @@ export const RootModule = angular
         return AuthService.getToken();
       },
       whiteListedDomains: [
-        'faldimotors.entheosweb.it',
-        'gestionale.faldimotors.it',
+        'poggioubertini.entheosweb.it',
+        'accesso.poggioubertini.it',
         'localhost',
       ]
     });

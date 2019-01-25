@@ -1,4 +1,4 @@
-export const localStoragePrefix = 'faldiApp';
+export const localStoragePrefix = 'poggioUbertiniApp';
 export const localStorageKey = 'auth';
 
-export const brandName = 'FaldiMotors';
+export const brandName = 'Poggio Ubertini';
