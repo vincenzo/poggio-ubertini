@@ -2,13 +2,6 @@ body {
 	background: url("/assets/sayagata-400px.png");
 }
 
-contracts-form .tab-content ew-search-input {	
-	position: absolute;
-	right: 20px;
-	top: -46px;
-	width: 200px;
-}
-
 /** Toaster **/
 #toast-container .toast {
   opacity: 0.95;
@@ -17,7 +10,7 @@ contracts-form .tab-content ew-search-input {
 /** Upload */
 .table td.uploaded_file {
 	padding: 2px 0 0;
-	
+
 	a {
 	    color: #4182bc;
 	    background-color: rgba(244, 249, 253, 0.58);

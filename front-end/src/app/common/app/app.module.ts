@@ -109,41 +109,39 @@ export const AppModule = angular
     });
   })
   .config((ngDialogProvider: any, $stateProvider: StateProvider, $urlRouterProvider: UrlRouterProvider, toastrConfig) => {
-      'ngInject';
+    'ngInject';
 
-      ngDialogProvider.setDefaults({
-        controllerAs: '$ctrl',
-        plain: true,
-        closeByNavigation: true,
-      });
+    ngDialogProvider.setDefaults({
+      controllerAs: '$ctrl',
+      plain: true,
+      closeByNavigation: true,
+    });
 
-      ngDialogProvider.setOpenOnePerName(true);
+    ngDialogProvider.setOpenOnePerName(true);
 
-      $stateProvider
-        .state('app', {
-          redirectTo: 'contracts',
-          url: '/app',
-          data: {
-            requiredAuth: true,
-            roles: {
-              admin: true,
-              officina: true,
-              commercialista: true,
-            },
+    $stateProvider
+      .state('app', {
+        redirectTo: 'camps',
+        url: '/app',
+        data: {
+          requiredAuth: true,
+          roles: {
+            admin: true,
           },
-          component: 'app',
-          resolve: {
-            lookup: ($ngRedux, $state, LookupService: LookupService) => {
-              'ngInject';
-              return $ngRedux.dispatch(LookupService.getLookup())
-                .catch(err => $state.go('app') && Promise.reject(err));
-            }
+        },
+        component: 'app',
+        resolve: {
+          lookup: ($ngRedux, $state, LookupService: LookupService) => {
+            'ngInject';
+            return $ngRedux.dispatch(LookupService.getLookup())
+              .catch(err => $state.go('app') && Promise.reject(err));
           }
-        });
-
-      angular.extend(toastrConfig, {
-        timeOut: 2000,
-        allowHtml: true,
+        }
       });
-    })
+
+    angular.extend(toastrConfig, {
+      timeOut: 2000,
+      allowHtml: true,
+    });
+  })
   .name;

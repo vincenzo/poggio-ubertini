@@ -16,22 +16,6 @@ const INITIAL_STATE = fromJS({
       active: false,
       value: null,
     },
-    'Camps.username': {
-      active: false,
-      value: null,
-    },
-    'Camps.email': {
-      active: false,
-      value: null,
-    },
-    'Camps.role': {
-      active: false,
-      value: null,
-    },
-    'Camps.active': {
-      active: true,
-      value: '1',
-    },
   },
   filterPanel: {
     focusedField: '',
@@ -50,9 +34,9 @@ const INITIAL_STATE = fromJS({
     page_count: 0,
   },
   sort: {
-    default: 'ragione_sociale',
-    direction: 'ASC',
-    field: 'ragione_sociale',
+    default: 'id',
+    direction: 'DESC',
+    field: 'id',
   },
 });
 

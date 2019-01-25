@@ -33,12 +33,12 @@ export class LoginController {
 
   loginUser(event) {
     this.login(event.user).then(() => {
-      if (this.auth.user.role === 'officina') {
-        return this.$state.go('garages');
-      }
-      if (this.auth.user.role === 'commercialista') {
-        return this.$state.go('cashflows');
-      }
+      // if (this.auth.user.role === 'officina') {
+      //   return this.$state.go('garages');
+      // }
+      // if (this.auth.user.role === 'commercialista') {
+      //   return this.$state.go('cashflows');
+      // }
       return this.$state.go('app');
     });
   };

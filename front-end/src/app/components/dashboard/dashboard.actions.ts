@@ -21,18 +21,3 @@ export const {
   toggleActiveAction,
   updateModelAction
 } = generateCommonAction(DASHBOARD);
-
-export const getCarsDataAction = (getCarsDataPromise) => ({
-  type: DASHBOARD.GET_CARS_DATA,
-  payload: getCarsDataPromise
-});
-
-export const getContractsDataAction = (getContractsDataPromise) => ({
-  type: DASHBOARD.GET_CONTRACTS_DATA,
-  payload: getContractsDataPromise
-});
-
-export const getPaymentsDataAction = (getPaymentsDataPromise) => ({
-  type: DASHBOARD.GET_PAYMENTS_DATA,
-  payload: getPaymentsDataPromise
-});

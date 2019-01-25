@@ -13,6 +13,7 @@
 import * as angular from 'angular';
 
 import { AuthModule } from './auth/auth.module';
+import { CampsModule } from './camps/camps.module';
 import { CitiesModule } from './cities/cities.module';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { UsersModule } from './users/users.module';
@@ -20,6 +21,7 @@ import { UsersModule } from './users/users.module';
 export const ComponentsModule = angular
   .module('root.components', [
     AuthModule,
+    CampsModule,
     CitiesModule,
     DashboardModule,
     UsersModule,
