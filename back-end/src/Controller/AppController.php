@@ -124,66 +124,18 @@ class AppController extends Controller
             'Lookup' => \Cake\Core\Configure::read('Lookup'),
         ];
 
-        $data['Lookup']['Items'] = \Cake\ORM\TableRegistry::get('Items')->find('all')
-            ->where(['company_id' => $companyId])
-            ->order(['ordine' => 'ASC', 'descrizione' => 'ASC'])
-            ->groupBy('item_category_id');
-
-        $data['Lookup']['Companies'] = \Cake\ORM\TableRegistry::get('Companies')->find('all');
-        
-        $data['Lookup']['Banks'] = \Cake\ORM\TableRegistry::get('Banks')->find('all')
-            ->where(['company_id' => $companyId])
-            ->order(['codice' => 'ASC'])
-            ->formatResults(function ($results){
-                return $results->map(function ($row) {
-                    return ['value' => $row->id, 'name' => $row->codice_nome_lookup];
-                });
-            });
-
-        $data['Lookup']['Competenze']['list'] = \Cake\ORM\TableRegistry::get('Items')->find('all')
-            ->where(['item_category_id' => 2])
-            ->where(['company_id' => $companyId])
-            ->select(['value' => 'id', 'name' => 'descrizione'])
-            ->order(['ordine' => 'ASC']);
-
-            $data['Lookup']['Certificazioni']['list'] = \Cake\ORM\TableRegistry::get('Items')->find('all')
-            ->where(['item_category_id' => 1])
-            ->where(['company_id' => $companyId])
-            ->select(['value' => 'id', 'name' => 'descrizione'])
-            ->order(['ordine' => 'ASC']);
-
-        $data['Lookup']['Tobaccos']['list'] = \Cake\ORM\TableRegistry::get('Tobaccos')->find('all')
-            ->where(['attivo' => true])
-            ->select(['value' => 'id', 'name' => 'nome', 'codice'])
-            ->order(['nome' => 'ASC']);
+        // $data['Lookup']['Items'] = \Cake\ORM\TableRegistry::get('Items')->find('all')
+        //     ->where(['company_id' => $companyId])
+        //     ->order(['ordine' => 'ASC', 'descrizione' => 'ASC'])
+        //     ->groupBy('item_category_id');
 
         $years = [];
         for($i = 2017; $i <= date('Y') + 1; $i++) $years[$i] = $i;
         $data['Lookup']['Years']['list'] = $years;
 
-
         $data['Lookup'] = $this->all2nv($data['Lookup'], [
-            'BuyDocuments'      => [ 'pagato_via', 'tipo' ],
-            'Clients'           => [ 'tipo', 'pagamento_mod' ],
-            'Contacts'          => [ 'list' ],
-            'Ddts'              => [ 'mittenti', ],
-            'IDs'               => [ 'list', ],
-            'Months'            => [ 'list', ],
-            'Years'             => [ 'list', ],
-            'Invoices'          => [ 'tipo', 'pagamento_mezzo' ],
-            'EmployeeContracts' => [ 'tipo_contratto', 'mansione' ],
-            'QuoteItems'        => [ 'porzione', 'stagioni', 'tipo', 'tipologia_food', 'tipo_costo', 'categoria_food' ],
-            'Quotes'            => [ 'sede', 'tipo_evento', 'tipo_servizio' ],
-            'Products'          => [ 'categoria', 'unita' ],
-            'Sesso'             => [ 'list' ],
             'Users'             => [ 'roles' ],
-            'VatRates'          => [ 'list' ],
         ]);
-
-        $data['Lookup']['QuoteItems']['items_noleggio'] = \Cake\ORM\TableRegistry::get('QuoteItems')->find('all')
-            ->where(['attivo' => true, 'tipo' => 'NOL'])
-            ->select(['value' => 'id', 'name' => 'descrizione'])
-            ->order(['ordine' => 'ASC']);
 
         $this->_setJson(true, $data);
     }
