@@ -31,7 +31,16 @@
 
             <row style="grid-template-columns: 120px 1fr 140px 40px">
               <ew-datepicker name="data_nascita" label="Data di nascita" value="$ctrl.model.data_nascita" on-change="$ctrl.updateModel($event)"></ew-datepicker>
-              <ew-text name="citta_nascita" label="Città di nascita" value="$ctrl.model.citta_nascita" on-change="$ctrl.updateModel($event)"></ew-text>
+              <ew-autocomplete
+                name="citta_nascita"
+                placeholder="Cerca un comune..."
+                label="Città di nascita"
+                label-prop="comune"
+                model="$ctrl.model.citta_nascita"
+                on-query="$ctrl.queryCity($event)"
+                on-select="$ctrl.selectCittaNascita($event)"
+                required="true">
+              </ew-autocomplete>
               <ew-select name="nazione_nascita" label="Nazione" value="$ctrl.model.nazione_nascita" on-change="$ctrl.updateModel($event)" options="::$ctrl.lookup.Countries"></ew-select>
               <ew-text name="provincia_nascita" label="Prov." value="$ctrl.model.provincia_nascita" on-change="$ctrl.updateModel($event)"></ew-text>
             </row>
@@ -48,7 +57,7 @@
               <ew-datepicker name="documento_data_scadenza" label="Data scadenza" value="$ctrl.model.documento_data_scadenza" on-change="$ctrl.updateModel($event)"></ew-datepicker>
               <ew-select name="documento_rilasciato_ente" label="Rilasciato da" value="$ctrl.model.documento_rilasciato_ente" on-change="$ctrl.updateModel($event)" options="::$ctrl.lookup.Guests.documento_rilasciato_ente"></ew-select>
               <ew-text name="documento_rilasciato_comune" label="Comune di rilascio" value="$ctrl.model.documento_rilasciato_comune" on-change="$ctrl.updateModel($event)"></ew-text>
-            </row>  
+            </row>
 
             <ew-checkbox name="documento_italiano" label="Documento italiano" value="$ctrl.model.documento_italiano" on-change="$ctrl.updateModel($event)"></ew-checkbox>
 
@@ -56,7 +65,16 @@
 
             <row style="grid-template-columns: 3fr 2fr 120px 40px 80px">
               <ew-text name="indirizzo" label="Indirizzo" value="$ctrl.model.indirizzo" on-change="$ctrl.updateModel($event)"></ew-text>
-              <ew-text name="citta" label="Città" value="$ctrl.model.citta" on-change="$ctrl.updateModel($event)"></ew-text>
+              <ew-autocomplete
+                name="citta"
+                placeholder="Cerca un comune..."
+                label="Città"
+                label-prop="comune"
+                model="$ctrl.model.citta"
+                on-query="$ctrl.queryCity($event)"
+                on-select="$ctrl.selectCitta($event)"
+                required="true">
+              </ew-autocomplete>
               <ew-select name="nazione" label="Nazione" value="$ctrl.model.nazione" on-change="$ctrl.updateModel($event)" options="::$ctrl.lookup.Countries"></ew-select>
               <ew-text name="provincia" label="Prov." value="$ctrl.model.provincia" on-change="$ctrl.updateModel($event)"></ew-text>
               <ew-text name="cap" label="CAP" value="$ctrl.model.cap" on-change="$ctrl.updateModel($event)"></ew-text>
@@ -71,7 +89,7 @@
             <ew-checkbox name="socio" label="Socio" value="$ctrl.model.socio" on-change="$ctrl.updateModel($event)"></ew-checkbox>
             <ew-checkbox name="disabile" label="Diversamente abile" value="$ctrl.model.disabile" on-change="$ctrl.updateModel($event)"></ew-checkbox>
 
-<!--   
+<!--
   `allergie` varchar(255) DEFAULT NULL,
  -->
             <ew-save-button form-dirty="$ctrl.form.$dirty" alt-save="$ctrl.saveAndStay()"></ew-save-button>

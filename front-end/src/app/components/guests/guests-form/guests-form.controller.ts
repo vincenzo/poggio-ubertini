@@ -1,3 +1,4 @@
+import { CitiesService } from './../../cities/cities.service';
 import * as jQuery from 'jquery';
 import ngRedux from 'ng-redux';
 import { ModalService } from '../../../vendors/ew-angularjs-utils/components/modal/modal.service';
@@ -24,9 +25,11 @@ export class GuestsFormComponentController {
   stateGo: Function;
   title: string;
   unsubscribe: Function;
+  updateModel: Function;
 
   constructor(
     private $ngRedux: ngRedux.INgRedux,
+    private CitiesService: CitiesService,
     private GuestsService: GuestsService,
     private ModalService: ModalService,
   ) {
@@ -51,6 +54,76 @@ export class GuestsFormComponentController {
 
   isEdit() {
     return this.action === 'edit';
+  }
+
+  queryCity(event) {
+    return this.CitiesService.search(event.query)
+      // aggiungo a mano il valore cercato se nessun risultato presente
+      .then((res: any) => (res.data.length ? res.data : [{
+        'id': null,
+        'codice': null,
+        'comune': event.query,
+        'datafineval': null,
+        'provincia': '',
+      }]));
+  }
+
+  selectCitta(event) {
+    this.updateModel({
+      name: 'citta',
+      value: event.item.comune
+    });
+
+    if (event.item.id) {
+      this.updateModel({
+        name: 'nazione',
+        value: 'ITALIA',
+      });
+      this.updateModel({
+        name: 'provincia',
+        value: event.item.provincia
+      });
+      return setTimeout(() => jQuery('guests-form #provincia').focus(), 10);
+    }
+
+    this.updateModel({
+      name: 'nazione',
+      value: null,
+    });
+    this.updateModel({
+      name: 'provincia',
+      value: ''
+    });
+    setTimeout(() => jQuery('guests-form #se-nazione').focus(), 10);
+  }
+
+  selectCittaNascita(event) {
+    this.updateModel({
+      name: 'citta_nascita',
+      value: event.item.comune
+    });
+
+    if (event.item.id) {
+      this.updateModel({
+        name: 'nazione_nascita',
+        value: 'ITALIA',
+      });
+      this.updateModel({
+        name: 'provincia_nascita',
+        value: event.item.provincia
+      });
+      return setTimeout(() => jQuery('guests-form #provincia_nascita').focus(), 10);
+    }
+
+    this.updateModel({
+      name: 'nazione_nascita',
+      value: null,
+    });
+    this.updateModel({
+      name: 'provincia_nascita',
+      value: ''
+    });
+    setTimeout(() => jQuery('guests-form #se-nazione_nascita').focus(), 10);
   }
 
   submit(model) {

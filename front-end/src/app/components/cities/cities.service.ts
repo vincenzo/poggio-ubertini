@@ -12,7 +12,7 @@ export class CitiesService {
     this.apiPath = '/cities';
   }
 
-  autocomplete(comune) {
+  search(comune) {
     return this.EwServerService.post(this.apiPath + '/search', { comune }).then(res => res.data);
   }
 

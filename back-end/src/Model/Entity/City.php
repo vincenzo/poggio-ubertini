@@ -5,7 +5,7 @@ use Cake\ORM\Entity;
 
 class City extends Entity
 {
-    use \App\Lib\ProvinceTrait;
+    // use \App\Lib\ProvinceTrait;
 
     protected $_accessible = [
         '*' => true,
