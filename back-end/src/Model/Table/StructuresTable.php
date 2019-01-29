@@ -6,18 +6,18 @@ use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
 
-class RoomsTable extends Table
+class StructuresTable extends Table
 {
 
     public function initialize(array $config)
     {
         parent::initialize($config);
 
-        $this->setTable('rooms');
+        $this->setTable('structures');
         $this->setDisplayField('id');
         $this->setPrimaryKey('id');
 
-        $this->belongsTo('Structures');
+        $this->hasMany('Rooms');
 
         $this->addBehavior('Timestamp');
     }

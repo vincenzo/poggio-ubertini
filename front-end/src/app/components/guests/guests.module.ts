@@ -36,12 +36,10 @@ export const GuestsModule = angular.module('components.guests', [
       })
       .state('guests.add', {
         url: '/add',
-        onEnter: ($state, ModalService) => {
-          return ModalService.open({
-            name: 'guestsForm',
-            preCloseCallback: (value) => ModalService.preCloseCallbackDefault(value, 'guests'),
-            template: '<guests-form action="add"></guests-form>',
-          });
+        views: {
+          '@app': {
+            component: 'guestsForm',
+          },
         },
         resolve: {
           data: ($ngRedux, AppService: AppService, GuestsService: GuestsService, $stateParams) => {
@@ -60,12 +58,10 @@ export const GuestsModule = angular.module('components.guests', [
       })
       .state('guests.edit', {
         url: '/edit/:id',
-        onEnter: ($state, ModalService) => {
-          return ModalService.open({
-            name: 'guestsForm',
-            preCloseCallback: (value) => ModalService.preCloseCallbackDefault(value, 'guests'),
-            template: '<guests-form action="edit"></guests-form>',
-          });
+        views: {
+          '@app': {
+            component: 'guestsForm',
+          },
         },
         resolve: {
           data: ($ngRedux, AppService: AppService, GuestsService: GuestsService, $stateParams) => {

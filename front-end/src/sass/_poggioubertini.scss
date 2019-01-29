@@ -2,6 +2,11 @@ body {
 	background: url("/assets/sayagata-400px.png");
 }
 
+ew-page-header .page-header .page-title,
+.ibox.ibox-default .ibox-title {
+	background-color: #254f73;
+}
+
 /** Toaster **/
 #toast-container .toast {
   opacity: 0.95;

@@ -38,7 +38,7 @@ export class CampsFormComponentController {
   }
 
   $onInit() {
-    this.title = (this.isEdit() ? 'Modifica ' : 'Aggiungi ') + 'utente';
+    this.title = (this.isEdit() ? 'Modifica ' : 'Aggiungi ') + 'campo';
   }
 
   $onDestroy() {
@@ -58,7 +58,7 @@ export class CampsFormComponentController {
       return this.save(model)
         .then(() => this.get())
         .then(() => this._dismissModal())
-        .then(() => this.CampsService.toaster.success('Utente salvato.'));
+        .then(() => this.CampsService.toaster.success('Campo salvato'));
     }
 
     this.CampsService.toaster.error('Sono presenti degli errori. Controlla e riprova.');

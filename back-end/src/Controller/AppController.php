@@ -124,18 +124,18 @@ class AppController extends Controller
             'Lookup' => \Cake\Core\Configure::read('Lookup'),
         ];
 
-        // $data['Lookup']['Items'] = \Cake\ORM\TableRegistry::get('Items')->find('all')
-        //     ->where(['company_id' => $companyId])
-        //     ->order(['ordine' => 'ASC', 'descrizione' => 'ASC'])
-        //     ->groupBy('item_category_id');
-
-        $years = [];
-        for($i = 2017; $i <= date('Y') + 1; $i++) $years[$i] = $i;
-        $data['Lookup']['Years']['list'] = $years;
+        $data['Lookup']['Countries'] = \Cake\ORM\TableRegistry::get('Countries')->find('all')
+            ->select(['name' => 'descrizione', 'value' => 'descrizione'])
+            ->order(['descrizione' => 'ASC']);
 
         $data['Lookup'] = $this->all2nv($data['Lookup'], [
-            'Users'             => [ 'roles' ],
+            'Camps'         => [ 'tipo', 'tipo_documento_fiscale' ],
+            'Users'         => [ 'roles' ],
         ]);
+
+        $years = [];
+        for($i = 2018; $i <= date('Y') + 1; $i++) $years[$i] = $i;
+        $data['Lookup']['Years']['list'] = $years;
 
         $this->_setJson(true, $data);
     }

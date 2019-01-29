@@ -1,4 +1,4 @@
-<ew-page-header id="top" size="compact" on-action="$ctrl.onAction(action, value)" header-title="Contratto #{{::$ctrl.model.id}}">
+<ew-page-header id="top" size="compact" on-action="$ctrl.onAction(action, value)" header-title="{{::$ctrl.title}}">
   <next-title></next-title>
 
   <right-side>
@@ -10,148 +10,116 @@
 </ew-page-header>
 
 <div class="container">
+<form ng-submit="$ctrl.submit($ctrl.model)" name="$ctrl.form" novalidate>
 
-  <row style="grid-template-columns: 3fr 1fr">
+  <row style="grid-template-columns: 1fr 360px">
     <div>
-      <form ng-submit="$ctrl.submit($ctrl.model)" name="$ctrl.form" novalidate>
         <ew-ibox>
           <ibox-title>
-            <h5>Contratto {{ $ctrl.model.tipo_pc === 'P' ? 'Privato' : 'Concessionario' }}</h5>
+            <h5>Dati Campo</h5>
+          </ibox-title>
+
+          <ibox-content>
+            <row style="grid-template-columns: 120px 300px 1fr">
+              <ew-numeric name="n_scheda" label="N. scheda" value="$ctrl.model.n_scheda" on-change="$ctrl.updateModel($event)"></ew-numeric>
+              <ew-text name="nome" label="Nome campo" value="$ctrl.model.nome" on-change="$ctrl.updateModel($event)"></ew-text>
+              <ew-text name="note" label="Descrizione (uso interno)" value="$ctrl.model.note" on-change="$ctrl.updateModel($event)"></ew-text>
+            </row>
+
+            <row style="grid-template-columns: 120px 120px 170px">
+              <ew-datepicker name="data_inizio" label="Data inizio" value="$ctrl.model.data_inizio" on-change="$ctrl.updateModel($event)"></ew-datepicker>
+              <ew-datepicker name="data_fine" label="Data fine" value="$ctrl.model.data_fine" on-change="$ctrl.updateModel($event)"></ew-datepicker>
+              <ew-select name="tipo" label="Tipo" value="$ctrl.model.tipo" on-change="$ctrl.updateModel($event)" options="::$ctrl.lookup.Camps.tipo"></ew-select>
+            </row>
+
+          </ibox-content>
+        </ew-ibox>
+
+        <ew-ibox>
+          <ibox-title>
+            <h5>Dati documento fiscale</h5>
           </ibox-title>
 
           <ibox-content>
 
-            <row style="grid-template-columns: 1fr 3fr 3fr 3fr 3fr">
-              <div>
-                <label>Numero</label>
-                <p>{{ $ctrl.model.id }}</p>
-              </div>
-              <div>
-                <label>Creato</label>
-                <p>{{ $ctrl.model.created | date:'dd/MM/yyyy HH:mm' }}</p>
-              </div>
-              <div>
-                <ew-select name="user_id" label="Venditore" value="$ctrl.model.user_id" on-change="$ctrl.updateModel($event)"
-                  options="::$ctrl.lookup.Users.list"></ew-select>
-              </div>
-              <div>
-                <ew-select name="tipo_una" label="Tipo" value="$ctrl.model.tipo_una" on-change="$ctrl.updateModel($event)"
-                  options="::$ctrl.lookup.Contracts.tipo_una"></ew-select>
-              </div>
-              <div>
-                <ew-select name="pagamento" label="Pagamento" value="$ctrl.model.pagamento" on-change="$ctrl.updateModel($event)"
-                  options="::$ctrl.lookup.Contracts.pagamento"></ew-select>
-              </div>
+            <row style="grid-template-columns: 1fr 140px 160px 120px">
+              <ew-text name="fattura_ragione_sociale" label="Intestazione (Ragione sociale / nome cognome)" value="$ctrl.model.fattura_ragione_sociale" on-change="$ctrl.updateModel($event)"></ew-text>
+              <ew-input-cleave name="partita_iva" label="Partita IVA" value="$ctrl.model.partita_iva" on-change="$ctrl.updateModel($event)" options="{ blocks: [11], numericOnly: true }" ></ew-input-cleave>
+              <ew-input-cleave name="codice_fiscale" label="Codice fiscale" value="$ctrl.model.codice_fiscale" on-change="$ctrl.updateModel($event)" options="{ blocks: [16], uppercase: true }"></ew-input-cleave>
+              <ew-select name="tipo_documento_fiscale" label="Tipo doc. fiscale" value="$ctrl.model.tipo_documento_fiscale" on-change="$ctrl.updateModel($event)" options="::$ctrl.lookup.Camps.tipo_documento_fiscale"></ew-select>
             </row>
 
-            <hr>
-
-            <row style="grid-template-columns: 1fr 1fr">
-              <contract-people field="intestatario" label="Fattura a" contract="$ctrl.model" autocomplete="$ctrl.queryPeople($event)"
-                on-unlink="$ctrl.unlink($event)" root-state="contracts.edit">
-              </contract-people>
-              <contract-people field="contraente" label="Contraente" contract="$ctrl.model" autocomplete="$ctrl.queryPeople($event)"
-                on-unlink="$ctrl.unlink($event)" root-state="contracts.edit">
-              </contract-people>
-              <contract-people field="cointestatario" label="Cointestatario" contract="$ctrl.model" autocomplete="$ctrl.queryPeople($event)"
-                on-unlink="$ctrl.unlink($event)" root-state="contracts.edit">
-              </contract-people>
-              <contract-people field="locatario" label="Locatario" contract="$ctrl.model" autocomplete="$ctrl.queryPeople($event)"
-                ng-show="$ctrl.model.pagamento === 'LEA'" on-unlink="$ctrl.unlink($event)" root-state="contracts.edit">
-              </contract-people>
+            <row style="grid-template-columns: 1fr 180px 120px 120px 90px">
+              <ew-text name="fattura_indirizzo" label="Indirizzo" value="$ctrl.model.fattura_indirizzo" on-change="$ctrl.updateModel($event)"></ew-text>
+              <ew-text name="fattura_citta" label="Città" value="$ctrl.model.fattura_citta" on-change="$ctrl.updateModel($event)"></ew-text>
+              <ew-select name="fattura_nazione" label="Nazione" value="$ctrl.model.fattura_nazione" on-change="$ctrl.updateModel($event)" options="::$ctrl.lookup.Countries"></ew-select>
+              <ew-text name="fattura_provincia" label="Provincia" value="$ctrl.model.fattura_provincia" on-change="$ctrl.updateModel($event)"></ew-text>
+              <ew-text name="fattura_cap" label="CAP" value="$ctrl.model.fattura_cap" on-change="$ctrl.updateModel($event)"></ew-text>
             </row>
-
-            <row style="grid-template-columns: 1fr 1fr 3fr" ng-if="$ctrl.model.tipo_una === 'V'">
-              <div>
-                <label>Inizio conto vendita</label>
-                <p>{{ $ctrl.model.data_inizio_conto_vendita | date:'dd/MM/yyyy' }}</p>
-              </div>
-              <div>
-                <span ng-if="$ctrl.model.data_fine_conto_vendita">
-                  <label>Fine conto vendita</label>
-                  <p>{{ $ctrl.model.data_fine_conto_vendita | date:'dd/MM/yyyy' }}</p>
-                </span>
-                <span ng-if="!$ctrl.model.data_fine_conto_vendita">
-                  <button class='btn btn-warning' ng-click="$ctrl.endsContoVendita()">Chiudi conto vedita</button>
-                </span>
-              </div>
-            </row>
-
-            <hr>
-
-            <ew-save-button is-loading="$ctrl.contracts.isLoading" form-dirty="$ctrl.form.$dirty" modified="$ctrl.model.modified"
-              alt-save="$ctrl.saveAndStay()">
-            </ew-save-button>
 
           </ibox-content>
         </ew-ibox>
-      </form>
     </div>
 
     <div>
       <ew-ibox>
         <ibox-title>
-          <h5>Documentazione contratto</h5>
+          <h5>Capogruppo</h5>
         </ibox-title>
         <ibox-content>
-          <a class="btn" href="/api/contracts/printPdf/{{ $ctrl.model.id }}.pdf?token={{ $ctrl.auth.token }}" target="_blank">
-            <i class="far fa-fw fa-print fa-lg"></i> Stampa contratto
-          </a>
-          <a class="btn" ng-if="$ctrl.model.intestatario" ui-sref="contracts.mandate({ id: $ctrl.model.id })">
-            <i class="far fa-fw fa-file-alt fa-lg"></i> Mandato agenzia
-          </a>
-          <p class="btn" ng-if="!$ctrl.model.intestatario" uib-tooltip="Intestatario non specificato">
-            <i class="far fa-fw fa-file-alt fa-lg"></i> Mandato agenzia
-          </p>
+          <ew-text name="capogruppo_id" label="Capogruppo" value="$ctrl.model.capogruppo_id" on-change="$ctrl.updateModel($event)"></ew-text>
+        </ibox-content>
+      </ew-ibox>
+
+      <ew-ibox>
+        <ibox-title>
+          <h5>Contatori</h5>
+        </ibox-title>
+        <ibox-content>
+          <section class="input--inline low-impact" id="contatori">
+            <row style="grid-template-columns: 1fr 100px 100px; margin-bottom: 8px">
+              <b></b>
+              <b class="text-center">Ingresso</b>
+              <b class="text-center">Uscita</b>
+            </row>
+
+            <row style="grid-template-columns: 1fr 100px 100px">
+              <label>ACQUA</label>
+              <ew-numeric name="in" value="$ctrl.model.in1" on-change="$ctrl.updateModel($event)"></ew-numeric>
+              <ew-numeric name="out" value="$ctrl.model.out1" on-change="$ctrl.updateModel($event)"></ew-numeric>
+            </row>
+
+            <row style="grid-template-columns: 1fr 100px 100px">
+              <label>ENEL segreteria</label>
+              <ew-numeric name="in" value="$ctrl.model.in2" on-change="$ctrl.updateModel($event)"></ew-numeric>
+              <ew-numeric name="out" value="$ctrl.model.out2" on-change="$ctrl.updateModel($event)"></ew-numeric>
+            </row>
+
+            <row style="grid-template-columns: 1fr 100px 100px">
+              <label>ENEL parco</label>
+              <ew-numeric name="in" value="$ctrl.model.in3" on-change="$ctrl.updateModel($event)"></ew-numeric>
+              <ew-numeric name="out" value="$ctrl.model.out3" on-change="$ctrl.updateModel($event)"></ew-numeric>
+            </row>
+
+            <row style="grid-template-columns: 1fr 100px 100px">
+              <label>ENEL locali</label>
+              <ew-numeric name="in" value="$ctrl.model.in4" on-change="$ctrl.updateModel($event)"></ew-numeric>
+              <ew-numeric name="out" value="$ctrl.model.out4" on-change="$ctrl.updateModel($event)"></ew-numeric>
+            </row>
+
+            <row style="grid-template-columns: 1fr 100px 100px">
+              <label>GAS</label>
+              <ew-numeric name="in" value="$ctrl.model.in5" on-change="$ctrl.updateModel($event)"></ew-numeric>
+              <ew-numeric name="out" value="$ctrl.model.out5" on-change="$ctrl.updateModel($event)"></ew-numeric>
+            </row>
+
+          </section>
         </ibox-content>
       </ew-ibox>
     </div>
 
   </row>
 
-  <div ng-if="['U', 'N'].includes($ctrl.model.tipo_una)">
-    <contract-cars lookup="$ctrl.lookup" model="$ctrl.model" on-contabilizza="$ctrl.onContabilizzaCar($event)"
-      on-delete="$ctrl.deleteCar($event)" on-deliver-car="$ctrl.onDeliverCar($event)" on-emit-invoice="$ctrl.onEmitInvoice($event)"
-      on-query="$ctrl.queryCar($event)" on-select="$ctrl.selectCar($event)" type="vendite">
-    </contract-cars>
-  </div>
-  <div>
-    <contract-cars lookup="$ctrl.lookup" model="$ctrl.model" on-contabilizza="$ctrl.onContabilizzaCar($event)"
-      on-delete="$ctrl.deleteCar($event)" on-query="$ctrl.queryCar($event)" on-retire-car="$ctrl.onRetireCar($event)"
-      on-select="$ctrl.selectCar($event)" type="permute">
-    </contract-cars>
-  </div>
-
-  <div id="tabs">
-    <uib-tabset active="$ctrl.activeTab" ng-if="$ctrl.isEdit()">
-
-      <uib-tab index="0" heading="Prima nota ({{ $ctrl.model.cashflows.length || '0' }})" select="$ctrl.selectTab('prima-nota')"
-        title="Prima nota (ctrl+1)">
-        <contract-cashflows lookup="$ctrl.lookup" on-delete="$ctrl.onDeleteCashflow($event)" on-edit="$ctrl.onEditCashflow($event)"
-          on-save="$ctrl.onAddCashflow($event)" contract="$ctrl.model" on-delete="$ctrl.deleteCashflow({ id })" ng-if="$ctrl.model.tipo_una !== 'V'">
-        </contract-cashflows>
-      </uib-tab>
-
-      <uib-tab index="1" heading="Effetti ({{ $ctrl.model.scheduled_payments.length || '0' }})" select="$ctrl.selectTab('effetti')"
-        title="Effetti (ctrl+2)">
-        <contract-payments on-delete="$ctrl.onDeletePayment($event)" on-edit="$ctrl.onEditPayment($event)" on-save="$ctrl.onAddPayment($event)"
-          contract="$ctrl.model" lookup="$ctrl.lookup" on-delete="$ctrl.deletePayment({ id })" ng-if="$ctrl.model.tipo_una !== 'V'">
-        </contract-payments>
-      </uib-tab>
-
-      <uib-tab index="2" heading="Documenti ({{ $ctrl.model.uploads.CONTRATTO.length || '0' }})" select="$ctrl.selectTab('documenti')"
-        title="Documenti (ctrl+3)">
-        <contracts-documents id="doc_contratto" box-title="Doc." documents="$ctrl.model.uploads.CONTRATTO" grid=""
-          lookup="$ctrl.lookup.Clients.tipo_documento" after-upload-change="$ctrl.afterUploadChange()" on-save="$ctrl.onSaveDocument($event)">
-          <inputs></inputs>
-        </contracts-documents>
-      </uib-tab>
-
-      <uib-tab index="3" heading="Note ({{ $ctrl.model.notes.length || '0' }})" select="$ctrl.selectTab('note')" title="Note (ctrl+4)">
-        <contract-notes notes="$ctrl.model.notes" on-delete="$ctrl.onDeleteNote($event)" on-save="$ctrl.onAddNote($event)">
-        </contract-notes>
-      </uib-tab>
-
-    </uib-tabset>
-  </div>
+  <ew-save-button form-dirty="$ctrl.form.$dirty" alt-save="$ctrl.saveAndStay()" floating="true"></ew-save-button>
+</form>
 </div>

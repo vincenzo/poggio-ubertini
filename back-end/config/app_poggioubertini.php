@@ -3,6 +3,17 @@
 return [
 
     'Lookup' => [
+      'Camps' => [
+        'tipo' => [
+          'GEN' => 'Generico',
+          'MIN'   => 'Con minori',
+          'EXT'  => 'Esterni (locali)',
+        ],
+        'tipo_documento_fiscale' => [
+          'FAT' => 'Fattura',
+          'RIC' => 'Ricevuta',
+        ],
+      ],
       'BooleanWithAll' => [
         ['name' => '-- TUTTI --', 'value' => ''],
         ['name' => 'SI', 'value' => '1'],
