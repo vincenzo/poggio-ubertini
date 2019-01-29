@@ -42,6 +42,7 @@ export const CampsModule = angular.module('components.camps', [
           },
         },
         resolve: {
+          action: () => 'add',
           data: ($ngRedux, AppService: AppService, CampsService: CampsService, $stateParams) => {
             'ngInject';
             $ngRedux.dispatch(AppService.setActiveForm('camps'));
@@ -64,6 +65,7 @@ export const CampsModule = angular.module('components.camps', [
           },
         },
         resolve: {
+          action: () => 'edit',
           data: ($ngRedux, AppService: AppService, CampsService: CampsService, $stateParams) => {
             'ngInject';
             $ngRedux.dispatch(AppService.setActiveForm('camps'));

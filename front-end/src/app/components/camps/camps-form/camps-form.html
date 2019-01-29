@@ -120,6 +120,36 @@
 
   </row>
 
+  <uib-tabset active="$ctrl.activeTab" id="tabs" ng-if="$ctrl.isEdit()">
+    <uib-tab index="0" heading="Ospiti" select="$ctrl.selectTab('ospiti')" title="Ospiti (ctrl+1)">
+
+      <div class="table-responsive">
+        <table class="table table-striped table-bordered table-hover">
+          <thead>
+            <tr>
+              <th>Nome</th>
+              <th>Cognome</th>
+              <th>Arrivo</th>
+              <th>Partenza</th>
+              <th class="actions"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="r in $ctrl.mockGuests track by r.id">
+              <td>{{ r.nome }}</td>
+              <td>{{ r.cognome }}</td>
+              <td>{{ r.arrivo | date:'dd/MM/yyyy' }}</td>
+              <td>{{ r.partenza | date:'dd/MM/yyyy' }}</td>
+              <td class="actions">
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </uib-tab>
+  </uib-tabset>
+
   <ew-save-button form-dirty="$ctrl.form.$dirty" alt-save="$ctrl.saveAndStay()" floating="true"></ew-save-button>
 </form>
 </div>

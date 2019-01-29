@@ -42,6 +42,7 @@ export const GuestsModule = angular.module('components.guests', [
           },
         },
         resolve: {
+          action: () => 'add',
           data: ($ngRedux, AppService: AppService, GuestsService: GuestsService, $stateParams) => {
             'ngInject';
             $ngRedux.dispatch(AppService.setActiveForm('guests'));
@@ -64,6 +65,7 @@ export const GuestsModule = angular.module('components.guests', [
           },
         },
         resolve: {
+          action: () => 'edit',
           data: ($ngRedux, AppService: AppService, GuestsService: GuestsService, $stateParams) => {
             'ngInject';
             $ngRedux.dispatch(AppService.setActiveForm('guests'));
