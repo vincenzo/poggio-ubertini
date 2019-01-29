@@ -44,8 +44,8 @@
 
             <row style="grid-template-columns: 1fr 140px 160px 120px">
               <ew-text name="fattura_ragione_sociale" label="Intestazione (Ragione sociale / nome cognome)" value="$ctrl.model.fattura_ragione_sociale" on-change="$ctrl.updateModel($event)"></ew-text>
-              <ew-input-cleave name="partita_iva" label="Partita IVA" value="$ctrl.model.partita_iva" on-change="$ctrl.updateModel($event)" options="{ blocks: [11], numericOnly: true }" ></ew-input-cleave>
-              <ew-input-cleave name="codice_fiscale" label="Codice fiscale" value="$ctrl.model.codice_fiscale" on-change="$ctrl.updateModel($event)" options="{ blocks: [16], uppercase: true }"></ew-input-cleave>
+              <ew-input-cleave name="fattura_partita_iva" label="Partita IVA" value="$ctrl.model.fattura_partita_iva" on-change="$ctrl.updateModel($event)" options="{ blocks: [11], numericOnly: true }" ></ew-input-cleave>
+              <ew-input-cleave name="fattura_codice_fiscale" label="Codice fiscale" value="$ctrl.model.fattura_codice_fiscale" on-change="$ctrl.updateModel($event)" options="{ blocks: [16], uppercase: true }"></ew-input-cleave>
               <ew-select name="tipo_documento_fiscale" label="Tipo doc. fiscale" value="$ctrl.model.tipo_documento_fiscale" on-change="$ctrl.updateModel($event)" options="::$ctrl.lookup.Camps.tipo_documento_fiscale"></ew-select>
             </row>
 

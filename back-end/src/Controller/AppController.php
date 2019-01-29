@@ -131,6 +131,8 @@ class AppController extends Controller
         $data['Lookup'] = $this->all2nv($data['Lookup'], [
             'Camps'         => [ 'tipo', 'tipo_documento_fiscale' ],
             'Users'         => [ 'roles' ],
+            'Sesso'         => [ 'list' ],
+            'Guests'        => [ 'documento_tipo', 'documento_rilasciato_ente' ],
         ]);
 
         $years = [];

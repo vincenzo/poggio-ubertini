@@ -24,6 +24,18 @@ return [
         ['name' => 'SI', 'value' => '1'],
         ['name' => 'NO', 'value' => '0'],
       ],
+      'Guests' => [
+        'documento_tipo' => [
+          'CID' => 'Carta d\'identità',
+          'PAS' => 'Passaporto',
+          'PAT' => 'Patente di guida',
+        ],
+        'documento_rilasciato_ente' => [
+          'COM' => 'Comune',
+          'QUE' => 'Questura',
+          'STA' => 'Stato',
+        ]
+      ],
       'Sesso' => [
         'list' => [
           'M' => 'Maschio',
