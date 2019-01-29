@@ -8,12 +8,13 @@
         <span class="icon-bar"></span>
       </button>
       <a class="navbar-brand page-scroll" ui-sref="dashboard">
-      	Poggio<span>Ubertini</span>
+        <img src="/assets/logo.png" alt="Poggio Ubertini">
       </a>
     </div>
     <!-- /.navbar-header -->
 
-    <div id="navbar" class="navbar-collapse navbar-default collapse navbar-responsive-collapse" uib-collapse="$ctrl.navCollapsed" ng-if="!$ctrl.isLoading">
+    <div id="navbar" class="navbar-collapse navbar-default collapse navbar-responsive-collapse" uib-collapse="$ctrl.navCollapsed"
+      ng-if="!$ctrl.isLoading">
 
       <div class="nav navbar-nav ">
         <ew-menu-item ng-repeat="item in $ctrl.menu track by item.state" item="item"></ew-menu-item>
@@ -23,7 +24,8 @@
 
         <li ng-class="{ active: $ctrl.$state.is('user') }">
           <a ui-sref="profile({ userId: $ctrl.auth.user.id })" class="user-avatar">
-            <img alt="Avatar {{ $ctrl.auth.user.username }}" ng-src="{{ $ctrl.getGravatar($ctrl.auth.user.email) }}" class="img-circle" width="30" height="30"> {{ $ctrl.auth.user.username }}
+            <img alt="Avatar {{ $ctrl.auth.user.username }}" ng-src="{{ $ctrl.getGravatar($ctrl.auth.user.email) }}"
+              class="img-circle" width="30" height="30"> {{ $ctrl.auth.user.username }}
           </a>
         </li>
 

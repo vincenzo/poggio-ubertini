@@ -18,6 +18,24 @@ class ReservationsTable extends Table
         $this->setPrimaryKey('id');
 
         $this->addBehavior('Timestamp');
+
+        $this->belongsTo('Camps', [
+          'foreignKey' => 'camp_id',
+          'joinType' => 'LEFT',
+          'dependent' => true,
+        ]);
+
+        $this->belongsTo('Guests', [
+          'foreignKey' => 'guest_id',
+          'joinType' => 'LEFT',
+          'dependent' => true,
+        ]);
+
+        $this->belongsTo('Rooms', [
+          'foreignKey' => 'room_id',
+          'joinType' => 'LEFT',
+          'dependent' => true,
+        ]);
     }
 
     public function validationDefault(Validator $validator)

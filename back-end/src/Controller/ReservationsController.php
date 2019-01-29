@@ -13,7 +13,7 @@ class ReservationsController extends AppController
         'limit' => 25,
         'maxLimit' => 250,
         'fields' => [
-            'id',
+            'id', 'data_in', 'data_out', 'Camps.nome', 'Guests.nome', 'Guests.cognome', 'Rooms.numero'
         ],
         'sortWhitelist' => [
             'id',
@@ -30,6 +30,9 @@ class ReservationsController extends AppController
     {
         $q = $this->Reservations
             ->find('all')
+            ->contain('Camps')
+            ->contain('Guests')
+            ->contain('Rooms')
             ;
 
         $this->filterPaginate($q);

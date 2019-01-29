@@ -3,77 +3,59 @@ import { defaultConfig } from '../../vendors/ew-angularjs-utils/common/default-c
 function camps() {
   return {
     actions: [
-      // {
-      //   action: 'camps.edit',
-      //   class: 'fa-pencil-square-o',
-      //   label: 'Modifica utente',
-      // },
     ],
     columns: [
       {
-        label: 'Nome utente',
-        field: 'username',
-        // field: model => `
-        // <ew-intra-link
-        //   icon="${false}"
-        //   params="{ userId: ${model.id} }"
-        //   state="camps.edit"
-        //   text="${model.username}"
-        //   uib-tooltip="Modifica utente">
-        // </ew-intra-link>`,
+        label: 'N',
+        field: 'n_scheda',
         filter: {
-          field: 'Camps.username',
+          field: 'Camps.n_scheda',
           type: 'like',
         },
         sort: {
-          field: 'username',
+          field: 'n_scheda',
         },
       },
       {
-        label: 'Email',
-        field: 'email',
-        filter: {
-          field: 'Camps.email',
-          type: 'like',
-        },
-        sort: {
-          field: 'email',
-        },
+        label: 'Data scheda',
+        field: `data_scheda | date:'dd/MM/yyyy'`,
       },
       {
-        label: 'Ruolo',
-        field: 'role',
-        filter: {
-          field: 'Camps.role',
-          type: 'like',
-        },
-        sort: {
-          field: 'role',
-        },
+        label: 'Capogruppo',
+        field: 'capogruppo_id',
       },
       {
-        label: 'Attivo',
-        filter: {
-          field: 'Camps.active',
-          type: 'boolean',
-        },
+        label: 'Nome',
+        field: 'nome',
+      },
+      {
+        label: 'Inizio',
+        field: `data_inizio | date:'dd/MM/yyyy'`,
+      },
+      {
+        label: 'Fine',
+        field: `data_fine | date:'dd/MM/yyyy'`,
+      },
+      {
+        label: 'Tipo',
+        field: `tipo`,
+      },
+      {
+        label: 'Chiuso',
         field: model => {
-          return model.active ?
-            '<b class="text-success"><i class="far fa-check"></i> SI</b>' :
-            '<b class="text-danger"><i class="far fa-times"></i> NO</b>';
-        },
-        sort: {
-          field: 'active',
+          const label = model.chiuso ? 'success' : 'danger';
+          const text = model.chiuso ? 'SI' : 'NO';
+          return `<p class="label label-${label}">${text}</p>`;
         },
       },
     ],
-    rapidFilters: {
-      activeButtons: [
-        { label: 'Attivi', value: '1' },
-        { label: 'Inattivi', value: '0' },
-        { label: 'Tutti', value: '' },
-      ],
-    },
+    // rapidFilters: {
+    //   activeButtons: [
+    //     { label: 'Attivi', value: '1' },
+    //     { label: 'Inattivi', value: '0' },
+    //     { label: 'Tutti', value: '' },
+    //   ],
+    // },
   };
 }
 

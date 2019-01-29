@@ -36,12 +36,10 @@ export const CampsModule = angular.module('components.camps', [
       })
       .state('camps.add', {
         url: '/add',
-        onEnter: ($state, ModalService) => {
-          return ModalService.open({
-            name: 'campsForm',
-            preCloseCallback: (value) => ModalService.preCloseCallbackDefault(value, 'camps'),
-            template: '<camps-form action="add"></camps-form>',
-          });
+        views: {
+          '@app': {
+            component: 'campsForm',
+          },
         },
         resolve: {
           data: ($ngRedux, AppService: AppService, CampsService: CampsService, $stateParams) => {
@@ -60,12 +58,10 @@ export const CampsModule = angular.module('components.camps', [
       })
       .state('camps.edit', {
         url: '/edit/:id',
-        onEnter: ($state, ModalService) => {
-          return ModalService.open({
-            name: 'campsForm',
-            preCloseCallback: (value) => ModalService.preCloseCallbackDefault(value, 'camps'),
-            template: '<camps-form action="edit"></camps-form>',
-          });
+        views: {
+          '@app': {
+            component: 'campsForm',
+          },
         },
         resolve: {
           data: ($ngRedux, AppService: AppService, CampsService: CampsService, $stateParams) => {

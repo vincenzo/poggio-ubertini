@@ -13,7 +13,7 @@ class GuestsController extends AppController
         'limit' => 25,
         'maxLimit' => 250,
         'fields' => [
-            'id',
+            'id', 'nome', 'cognome', 'codice_fiscale', 'data_nascita', 'citta_nascita', 'provincia_nascita', 'nazione_nascita', 'privacy', 'genere',
         ],
         'sortWhitelist' => [
             'id',

@@ -1,30 +1,157 @@
-<div class='page-header' id="top">
-  <h1>{{ $ctrl.title }}</h1>
-</div>
+<ew-page-header id="top" size="compact" on-action="$ctrl.onAction(action, value)" header-title="Contratto #{{::$ctrl.model.id}}">
+  <next-title></next-title>
 
-<div>
-  <form ng-submit="$ctrl.submit($ctrl.model)" class="action-{{$ctrl.action}}" name="$ctrl.form" novalidate>
+  <right-side>
+    <button ng-if="$ctrl.isEdit()" class="btn btn-sm btn-default btn-flat btn-condensed pull-right" type="button"
+      ng-click="$ctrl.stateReload($ctrl.router.currentState.name)">
+      <i class="far fa-sync fa-fw text-primary"></i> Ricarica dati
+    </button>
+  </right-side>
+</ew-page-header>
 
-    <row style="grid-template-columns: 2fr 2fr 3fr">
-      <ew-text name="username" label="Nome utente" value="$ctrl.model.username" on-change="$ctrl.updateModel($event)" focus="true" required="true">
-      </ew-text>
+<div class="container">
 
-      <ew-text name="password" label="Password" type="password" value="$ctrl.model.password" on-change="$ctrl.updateModel($event)">
-      </ew-text>
+  <row style="grid-template-columns: 3fr 1fr">
+    <div>
+      <form ng-submit="$ctrl.submit($ctrl.model)" name="$ctrl.form" novalidate>
+        <ew-ibox>
+          <ibox-title>
+            <h5>Contratto {{ $ctrl.model.tipo_pc === 'P' ? 'Privato' : 'Concessionario' }}</h5>
+          </ibox-title>
 
-      <ew-text name="email" label="Email" type="email" value="$ctrl.model.email" on-change="$ctrl.updateModel($event)">
-      </ew-text>
+          <ibox-content>
 
-      <ew-select name="role" label="Ruolo" value="$ctrl.model.role" on-change="$ctrl.updateModel($event)" options="::$ctrl.lookup.Users.roles">
-      </ew-select>
+            <row style="grid-template-columns: 1fr 3fr 3fr 3fr 3fr">
+              <div>
+                <label>Numero</label>
+                <p>{{ $ctrl.model.id }}</p>
+              </div>
+              <div>
+                <label>Creato</label>
+                <p>{{ $ctrl.model.created | date:'dd/MM/yyyy HH:mm' }}</p>
+              </div>
+              <div>
+                <ew-select name="user_id" label="Venditore" value="$ctrl.model.user_id" on-change="$ctrl.updateModel($event)"
+                  options="::$ctrl.lookup.Users.list"></ew-select>
+              </div>
+              <div>
+                <ew-select name="tipo_una" label="Tipo" value="$ctrl.model.tipo_una" on-change="$ctrl.updateModel($event)"
+                  options="::$ctrl.lookup.Contracts.tipo_una"></ew-select>
+              </div>
+              <div>
+                <ew-select name="pagamento" label="Pagamento" value="$ctrl.model.pagamento" on-change="$ctrl.updateModel($event)"
+                  options="::$ctrl.lookup.Contracts.pagamento"></ew-select>
+              </div>
+            </row>
 
-      <ew-checkbox name="active" label="Attivo" value="$ctrl.model.active" on-change="$ctrl.updateModel($event)"></ew-checkbox>
-    </row>
+            <hr>
 
-    <div class="text-right mar-top-1">
-      <button class="btn btn-success" type="submit" ng-disabled="$ctrl.users.isLoading">
-        <i class="far fa-check fa-lg"></i> Salva
-      </button>
+            <row style="grid-template-columns: 1fr 1fr">
+              <contract-people field="intestatario" label="Fattura a" contract="$ctrl.model" autocomplete="$ctrl.queryPeople($event)"
+                on-unlink="$ctrl.unlink($event)" root-state="contracts.edit">
+              </contract-people>
+              <contract-people field="contraente" label="Contraente" contract="$ctrl.model" autocomplete="$ctrl.queryPeople($event)"
+                on-unlink="$ctrl.unlink($event)" root-state="contracts.edit">
+              </contract-people>
+              <contract-people field="cointestatario" label="Cointestatario" contract="$ctrl.model" autocomplete="$ctrl.queryPeople($event)"
+                on-unlink="$ctrl.unlink($event)" root-state="contracts.edit">
+              </contract-people>
+              <contract-people field="locatario" label="Locatario" contract="$ctrl.model" autocomplete="$ctrl.queryPeople($event)"
+                ng-show="$ctrl.model.pagamento === 'LEA'" on-unlink="$ctrl.unlink($event)" root-state="contracts.edit">
+              </contract-people>
+            </row>
+
+            <row style="grid-template-columns: 1fr 1fr 3fr" ng-if="$ctrl.model.tipo_una === 'V'">
+              <div>
+                <label>Inizio conto vendita</label>
+                <p>{{ $ctrl.model.data_inizio_conto_vendita | date:'dd/MM/yyyy' }}</p>
+              </div>
+              <div>
+                <span ng-if="$ctrl.model.data_fine_conto_vendita">
+                  <label>Fine conto vendita</label>
+                  <p>{{ $ctrl.model.data_fine_conto_vendita | date:'dd/MM/yyyy' }}</p>
+                </span>
+                <span ng-if="!$ctrl.model.data_fine_conto_vendita">
+                  <button class='btn btn-warning' ng-click="$ctrl.endsContoVendita()">Chiudi conto vedita</button>
+                </span>
+              </div>
+            </row>
+
+            <hr>
+
+            <ew-save-button is-loading="$ctrl.contracts.isLoading" form-dirty="$ctrl.form.$dirty" modified="$ctrl.model.modified"
+              alt-save="$ctrl.saveAndStay()">
+            </ew-save-button>
+
+          </ibox-content>
+        </ew-ibox>
+      </form>
     </div>
-  </form>
+
+    <div>
+      <ew-ibox>
+        <ibox-title>
+          <h5>Documentazione contratto</h5>
+        </ibox-title>
+        <ibox-content>
+          <a class="btn" href="/api/contracts/printPdf/{{ $ctrl.model.id }}.pdf?token={{ $ctrl.auth.token }}" target="_blank">
+            <i class="far fa-fw fa-print fa-lg"></i> Stampa contratto
+          </a>
+          <a class="btn" ng-if="$ctrl.model.intestatario" ui-sref="contracts.mandate({ id: $ctrl.model.id })">
+            <i class="far fa-fw fa-file-alt fa-lg"></i> Mandato agenzia
+          </a>
+          <p class="btn" ng-if="!$ctrl.model.intestatario" uib-tooltip="Intestatario non specificato">
+            <i class="far fa-fw fa-file-alt fa-lg"></i> Mandato agenzia
+          </p>
+        </ibox-content>
+      </ew-ibox>
+    </div>
+
+  </row>
+
+  <div ng-if="['U', 'N'].includes($ctrl.model.tipo_una)">
+    <contract-cars lookup="$ctrl.lookup" model="$ctrl.model" on-contabilizza="$ctrl.onContabilizzaCar($event)"
+      on-delete="$ctrl.deleteCar($event)" on-deliver-car="$ctrl.onDeliverCar($event)" on-emit-invoice="$ctrl.onEmitInvoice($event)"
+      on-query="$ctrl.queryCar($event)" on-select="$ctrl.selectCar($event)" type="vendite">
+    </contract-cars>
+  </div>
+  <div>
+    <contract-cars lookup="$ctrl.lookup" model="$ctrl.model" on-contabilizza="$ctrl.onContabilizzaCar($event)"
+      on-delete="$ctrl.deleteCar($event)" on-query="$ctrl.queryCar($event)" on-retire-car="$ctrl.onRetireCar($event)"
+      on-select="$ctrl.selectCar($event)" type="permute">
+    </contract-cars>
+  </div>
+
+  <div id="tabs">
+    <uib-tabset active="$ctrl.activeTab" ng-if="$ctrl.isEdit()">
+
+      <uib-tab index="0" heading="Prima nota ({{ $ctrl.model.cashflows.length || '0' }})" select="$ctrl.selectTab('prima-nota')"
+        title="Prima nota (ctrl+1)">
+        <contract-cashflows lookup="$ctrl.lookup" on-delete="$ctrl.onDeleteCashflow($event)" on-edit="$ctrl.onEditCashflow($event)"
+          on-save="$ctrl.onAddCashflow($event)" contract="$ctrl.model" on-delete="$ctrl.deleteCashflow({ id })" ng-if="$ctrl.model.tipo_una !== 'V'">
+        </contract-cashflows>
+      </uib-tab>
+
+      <uib-tab index="1" heading="Effetti ({{ $ctrl.model.scheduled_payments.length || '0' }})" select="$ctrl.selectTab('effetti')"
+        title="Effetti (ctrl+2)">
+        <contract-payments on-delete="$ctrl.onDeletePayment($event)" on-edit="$ctrl.onEditPayment($event)" on-save="$ctrl.onAddPayment($event)"
+          contract="$ctrl.model" lookup="$ctrl.lookup" on-delete="$ctrl.deletePayment({ id })" ng-if="$ctrl.model.tipo_una !== 'V'">
+        </contract-payments>
+      </uib-tab>
+
+      <uib-tab index="2" heading="Documenti ({{ $ctrl.model.uploads.CONTRATTO.length || '0' }})" select="$ctrl.selectTab('documenti')"
+        title="Documenti (ctrl+3)">
+        <contracts-documents id="doc_contratto" box-title="Doc." documents="$ctrl.model.uploads.CONTRATTO" grid=""
+          lookup="$ctrl.lookup.Clients.tipo_documento" after-upload-change="$ctrl.afterUploadChange()" on-save="$ctrl.onSaveDocument($event)">
+          <inputs></inputs>
+        </contracts-documents>
+      </uib-tab>
+
+      <uib-tab index="3" heading="Note ({{ $ctrl.model.notes.length || '0' }})" select="$ctrl.selectTab('note')" title="Note (ctrl+4)">
+        <contract-notes notes="$ctrl.model.notes" on-delete="$ctrl.onDeleteNote($event)" on-save="$ctrl.onAddNote($event)">
+        </contract-notes>
+      </uib-tab>
+
+    </uib-tabset>
+  </div>
 </div>

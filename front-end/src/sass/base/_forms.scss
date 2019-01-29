@@ -110,9 +110,9 @@ label {
 }
 
 .searchable {
-	
+
 	position: relative;
-	
+
 	input {
 		background-color: #f7fbff;
 	}
@@ -158,13 +158,13 @@ label {
 .low-impact .form-control {
 	background-color: #fbfbfb;
 	border: none;
-	border-bottom: 1px solid #337ab7;
+	border-bottom: 1px solid #487000;
 	border-radius: 0;
 	-webkit-box-shadow: none;
 	box-shadow: none;
 
 	&:hover {
-		outline: #337ab7;
+		outline: #487000;
 	}
 
 	&:disabled {
@@ -233,7 +233,7 @@ label {
 .inline-action-button {
 	position: relative;
 	top: 22px;
-	
+
 	&.no-label {
 		top: 0;
 	}

@@ -68,27 +68,27 @@ export class NavController {
         },
         {
           title: 'Campi',
-          icon: 'list-alt',
+          icon: 'suitcase',
           state: 'camps',
         },
         {
           title: 'Ospiti',
-          icon: 'columns',
+          icon: 'users',
           state: 'guests',
         },
         {
           title: 'Prenotazioni',
-          icon: 'users',
+          icon: 'book',
           state: 'reservations'
         },
         {
           title: 'Camere',
-          icon: 'users',
+          icon: 'bed',
           state: 'rooms'
         },
         {
           title: 'Strutture',
-          icon: 'users',
+          icon: 'hotel',
           state: 'structures'
         },
       ],
