@@ -34,7 +34,9 @@ services:
       - network
 
   mysqlhost:
-    image: mysql
+    image: mysql:5.7
+    # questa riga deve stare qui
+    # Since you seem to be running on OSX or Windows, add in a user: 1000:50. It defaults to running as the mysql user which is not able to access folders mounted from OSX/Windows.
     user: "1000:50"
     ports:
       - "3110:3306"
@@ -43,8 +45,9 @@ services:
       MYSQL_DATABASE: xpoggioubertini
     networks:
       - network
+    command: --innodb-flush-method=O_DSYNC --innodb-use-native-aio=0
     volumes:
-      - ~/Databases/poggioubertini:/var/lib/mysql:delegated
+      - ~/Databases/poggioubertini:/var/lib/mysql
 
 networks:
   network:
