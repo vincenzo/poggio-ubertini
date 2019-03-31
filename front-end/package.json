@@ -55,7 +55,7 @@
     "reselect": "3.0.1",
     "rxjs": "6.3.3",
     "selectize": "0.12.*",
-    "sweetalert2": "7.12.3",
+    "sweetalert2": "8.0.3",
     "tableexport.jquery.plugin": "1.9.8",
     "ui-select": "0.19.8"
   },
