@@ -1,18 +1,11 @@
 import * as jQuery from 'jquery';
 import ngRedux from 'ng-redux';
-import { ModalService } from '../../../vendors/ew-angularjs-utils/components/modal/modal.service';
 import { scrollToElement } from '../../../vendors/ew-angularjs-utils/utils/scroll-to-top';
 import { stateGo } from 'redux-ui-router';
-import {
-  getLookup,
-  getModelForm,
-  getModelState,
-  getRouterState,
-} from '../camps.selectors';
 
 import { CampsService } from '../camps.service';
 
-export class CampsFormComponentController {
+export class CampFormComponentController {
 
   action: string;
   activeTab: number;
@@ -21,6 +14,7 @@ export class CampsFormComponentController {
   // FIXME: mock per mostrare qualcosa in test
   mockGuests: any[];
   hasError: any;
+  model: any;
   resetModel: Function;
   router: any;
   save: Function;
@@ -28,13 +22,13 @@ export class CampsFormComponentController {
   tabs: Array<any>;
   title: string;
   unsubscribe: Function;
+  updateModel: Function;
 
   constructor(
     private $ngRedux: ngRedux.INgRedux,
     private $timeout: ng.ITimeoutService,
     private hotkeys,
     private CampsService: CampsService,
-    private ModalService: ModalService,
   ) {
     'ngInject';
     this.unsubscribe = this.$ngRedux.connect(
@@ -80,18 +74,29 @@ export class CampsFormComponentController {
     }, 50);
   }
 
-  submit(model) {
+  saveAndStay() {
+    this.submit(this.model, true);
+  }
+
+  submit(model, stay) {
     if (this.form.$valid) {
       return this.save(model)
         .then(() => this.get())
-        .then(() => this._dismissModal())
+        .then(() => !stay ? this.stateGo('camps') : null)
         .then(() => this.CampsService.toaster.success('Campo salvato'));
     }
 
     this.CampsService.toaster.error('Sono presenti degli errori. Controlla e riprova.');
-    const el: any = jQuery('#campsform-dialog input.ng-invalid:first, select.ng-invalid:first');
+    const el: any = jQuery('#campform-dialog input.ng-invalid:first, select.ng-invalid:first');
     el.focus();
     scrollToElement(el, 80);
+  }
+
+  updateMarca(event) {
+    return this.updateModel({
+      name: event.name,
+      value: event.value.value,
+    })
   }
 
   /**
@@ -112,10 +117,6 @@ export class CampsFormComponentController {
 
   private _deleteTabsHotkeys(tab, index) {
     this.hotkeys.del([`ctrl+${index + 1}`, `mod+${index + 1}`]);
-  }
-
-  private _dismissModal() {
-    this.ModalService.close('campsForm');
   }
 
   private _mapStateToThis(state) {
