@@ -44,9 +44,9 @@ export class CampsComponentController {
       case 'camps.delete':
         return this.deleteItem(value.id).then(() => this.get());
       case 'row.click':
-      case 'camps.edit':
+      case 'camps.view':
         $event.stopPropagation();
-        return this.stateGo('camps.edit', { id: value.id });
+        return this.stateGo('camps.view', { id: value.id });
     }
   }
 
