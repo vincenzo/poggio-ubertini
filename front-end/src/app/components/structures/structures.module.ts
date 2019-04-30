@@ -39,6 +39,7 @@ export const StructuresModule = angular.module('components.structures', [
         onEnter: ($state, ModalService) => {
           return ModalService.open({
             name: 'structuresForm',
+            className: 'ngdialog-xsmall',
             preCloseCallback: (value) => ModalService.preCloseCallbackDefault(value, 'structures'),
             template: '<structures-form action="add"></structures-form>',
           });
@@ -63,6 +64,7 @@ export const StructuresModule = angular.module('components.structures', [
         onEnter: ($state, ModalService) => {
           return ModalService.open({
             name: 'structuresForm',
+            className: 'ngdialog-xsmall',
             preCloseCallback: (value) => ModalService.preCloseCallbackDefault(value, 'structures'),
             template: '<structures-form action="edit"></structures-form>',
           });
