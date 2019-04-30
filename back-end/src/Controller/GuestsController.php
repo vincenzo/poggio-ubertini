@@ -23,7 +23,7 @@ class GuestsController extends AppController
 
     public $filterWhitelist = [
         'Guests' => [
-            'capogruppo'
+            'capogruppo' => 'boolean',
         ],
     ];
 

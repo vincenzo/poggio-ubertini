@@ -57,13 +57,13 @@ function camps() {
         },
       },
     ],
-    // rapidFilters: {
-    //   activeButtons: [
-    //     { label: 'Attivi', value: '1' },
-    //     { label: 'Inattivi', value: '0' },
-    //     { label: 'Tutti', value: '' },
-    //   ],
-    // },
+    rapidFilters: {
+      stateButtons: [
+        { label: 'Aperti', value: '0' },
+        { label: 'Chiusi', value: '1' },
+        { label: 'Tutti', value: '' },
+      ],
+    },
   };
 }
 

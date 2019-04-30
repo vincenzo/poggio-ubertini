@@ -16,6 +16,10 @@ const INITIAL_STATE = fromJS({
       active: false,
       value: null,
     },
+    'Camps.chiuso': {
+      active: true,
+      value: '0',
+    },
   },
   filterPanel: {
     focusedField: '',

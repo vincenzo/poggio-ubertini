@@ -23,6 +23,7 @@ class CampsController extends AppController
 
     public $filterWhitelist = [
         'Camps' => [
+            'chiuso' => 'boolean',
         ],
     ];
 
