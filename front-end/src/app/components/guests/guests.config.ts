@@ -7,7 +7,7 @@ function guests() {
     columns: [
       {
         label: '',
-        class: 'w_xs',
+        class: 'w_md',
         field: model => {
           let ret = [];
           const gender = model.genere === 'M' ? 'male' : 'female';
@@ -16,11 +16,11 @@ function guests() {
           const privacyLabel = model.privacy ? 'Privacy firmata' : 'Privacy non firmata';
 
           if (model.capogruppo) {
-            ret.push(`<i class="far fa-user-shiedl" uib-tooltip="Capogruppo"></i>`);
+            ret.push(`<i class="far fa-fw fa-user-shield" uib-tooltip="Capogruppo"></i>`);
           }
 
-          ret.push(`<i class="far fa-${gender}" uib-tooltip="${genderLabel}"></i>`);
-          ret.push(`<i class="far fa-${privacy}" uib-tooltip="${privacyLabel}"></i>`);
+          ret.push(`<i class="far fa-fw fa-${gender}" uib-tooltip="${genderLabel}"></i>`);
+          ret.push(`<i class="far fa-fw fa-${privacy}" uib-tooltip="${privacyLabel}"></i>`);
           return ret.join(' ');
         }
       },
