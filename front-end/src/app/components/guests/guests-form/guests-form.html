@@ -98,12 +98,15 @@
 
             <ew-textarea name="note" label="Note / Allergie" value="$ctrl.model.note" rows="3"
               on-change="$ctrl.updateModel($event)"></ew-textarea>
-            <ew-checkbox name="privacy" label="Lettera per la privacy" value="$ctrl.model.privacy"
-              on-change="$ctrl.updateModel($event)"></ew-checkbox>
-            <ew-checkbox name="socio" label="Socio" value="$ctrl.model.socio" on-change="$ctrl.updateModel($event)">
-            </ew-checkbox>
-            <ew-checkbox name="disabile" label="Diversamente abile" value="$ctrl.model.disabile"
-              on-change="$ctrl.updateModel($event)"></ew-checkbox>
+              
+            <div class="group--compact">
+              <ew-checkbox name="privacy" label="Lettera per la privacy" value="$ctrl.model.privacy"
+                on-change="$ctrl.updateModel($event)"></ew-checkbox>
+              <ew-checkbox name="socio" label="Socio" value="$ctrl.model.socio" on-change="$ctrl.updateModel($event)">
+              </ew-checkbox>
+              <ew-checkbox name="disabile" label="Diversamente abile" value="$ctrl.model.disabile"
+                on-change="$ctrl.updateModel($event)"></ew-checkbox>
+            </div>
 
             <!--
   `allergie` varchar(255) DEFAULT NULL,
