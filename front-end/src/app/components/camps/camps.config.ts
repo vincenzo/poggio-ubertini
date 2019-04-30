@@ -48,6 +48,14 @@ function camps() {
           return `<p class="label label-${label}">${text}</p>`;
         },
       },
+      {
+        label: '',
+        class: 'actions',
+        disableRowClick: true,
+        field: model => {
+          return `<a ui-sref="camps.view({ id: row.id })" uib-tooltip="Dettaglio"><i class="far fa-info"></i></a>`;
+        },
+      },
     ],
     // rapidFilters: {
     //   activeButtons: [

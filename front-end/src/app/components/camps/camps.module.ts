@@ -1,7 +1,8 @@
 import * as angular from 'angular';
 
 import { CampsComponent } from './camps.component';
-import { CampsFormComponent } from './camps-form/camps-form.component';
+import { CampFormComponent } from './camp-form/camp-form.component';
+import { CampViewComponent } from './camp-view/camp-view.component';
 
 import { AppService } from '../../common/app/app.service';
 import { CampsService } from './camps.service';
@@ -38,7 +39,7 @@ export const CampsModule = angular.module('components.camps', [
         url: '/add',
         views: {
           '@app': {
-            component: 'campsForm',
+            component: 'campForm',
           },
         },
         resolve: {
@@ -61,7 +62,7 @@ export const CampsModule = angular.module('components.camps', [
         url: '/edit/:id',
         views: {
           '@app': {
-            component: 'campsForm',
+            component: 'campForm',
           },
         },
         resolve: {
@@ -79,9 +80,33 @@ export const CampsModule = angular.module('components.camps', [
             admin: true,
           },
         },
-      });
+      })
+      .state('camps.view', {
+        url: '/view/:id',
+        views: {
+          '@app': {
+            component: 'campView',
+          },
+        },
+        resolve: {
+          data: ($ngRedux, AppService: AppService, CampsService: CampsService, $stateParams) => {
+            'ngInject';
+            $ngRedux.dispatch(AppService.setActiveForm('camps'));
+            return $ngRedux.dispatch(CampsService.getFormData($stateParams.id));
+          }
+        },
+        data: {
+          form: true,
+          requiredAuth: true,
+          roles: {
+            admin: true,
+          },
+        },
+      })
+      ;
   })
   .component('camps', CampsComponent)
-  .component('campsForm', CampsFormComponent)
+  .component('campForm', CampFormComponent)
+  .component('campView', CampViewComponent)
   .service('CampsService', CampsService)
   .name;

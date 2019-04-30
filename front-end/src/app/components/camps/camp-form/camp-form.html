@@ -1,0 +1,143 @@
+<ew-page-header id="top" size="compact" on-action="$ctrl.onAction(action, value)" header-title="{{::$ctrl.title}}">
+  <next-title></next-title>
+
+  <right-side>
+    <button ng-if="$ctrl.isEdit()" class="btn btn-sm btn-default btn-flat btn-condensed pull-right" type="button"
+      ng-click="$ctrl.stateReload($ctrl.router.currentState.name)">
+      <i class="far fa-sync fa-fw text-primary"></i> Ricarica dati
+    </button>
+  </right-side>
+</ew-page-header>
+
+<div class="container">
+  <form ng-submit="$ctrl.submit($ctrl.model)" name="$ctrl.form" novalidate>
+
+    <row style="grid-template-columns: 1fr 360px">
+      <div>
+        <ew-ibox>
+          <ibox-title>
+            <h5>Dati Campo</h5>
+          </ibox-title>
+
+          <ibox-content>
+            <row style="grid-template-columns: 120px 300px 1fr">
+              <ew-numeric name="n_scheda" label="N. scheda" value="$ctrl.model.n_scheda"
+                on-change="$ctrl.updateModel($event)"></ew-numeric>
+              <ew-text name="nome" label="Nome campo" value="$ctrl.model.nome" on-change="$ctrl.updateModel($event)">
+              </ew-text>
+              <ew-text name="note" label="Descrizione (uso interno)" value="$ctrl.model.note"
+                on-change="$ctrl.updateModel($event)"></ew-text>
+            </row>
+
+            <row style="grid-template-columns: 120px 120px 170px">
+              <ew-datepicker name="data_inizio" label="Data inizio" value="$ctrl.model.data_inizio"
+                on-change="$ctrl.updateModel($event)"></ew-datepicker>
+              <ew-datepicker name="data_fine" label="Data fine" value="$ctrl.model.data_fine"
+                on-change="$ctrl.updateModel($event)"></ew-datepicker>
+              <ew-select name="tipo" label="Tipo" value="$ctrl.model.tipo" on-change="$ctrl.updateModel($event)"
+                options="::$ctrl.lookup.Camps.tipo"></ew-select>
+            </row>
+
+          </ibox-content>
+        </ew-ibox>
+
+        <ew-ibox>
+          <ibox-title>
+            <h5>Dati documento fiscale</h5>
+          </ibox-title>
+
+          <ibox-content>
+
+            <row style="grid-template-columns: 1fr 140px 160px 120px">
+              <ew-text name="fattura_ragione_sociale" label="Intestazione (Ragione sociale / nome cognome)"
+                value="$ctrl.model.fattura_ragione_sociale" on-change="$ctrl.updateModel($event)"></ew-text>
+              <ew-input-cleave name="fattura_partita_iva" label="Partita IVA" value="$ctrl.model.fattura_partita_iva"
+                on-change="$ctrl.updateModel($event)" options="{ blocks: [11], numericOnly: true }"></ew-input-cleave>
+              <ew-input-cleave name="fattura_codice_fiscale" label="Codice fiscale"
+                value="$ctrl.model.fattura_codice_fiscale" on-change="$ctrl.updateModel($event)"
+                options="{ blocks: [16], uppercase: true }"></ew-input-cleave>
+              <ew-select name="tipo_documento_fiscale" label="Tipo doc. fiscale"
+                value="$ctrl.model.tipo_documento_fiscale" on-change="$ctrl.updateModel($event)"
+                options="::$ctrl.lookup.Camps.tipo_documento_fiscale"></ew-select>
+            </row>
+
+            <row style="grid-template-columns: 1fr 180px 120px 120px 90px">
+              <ew-text name="fattura_indirizzo" label="Indirizzo" value="$ctrl.model.fattura_indirizzo"
+                on-change="$ctrl.updateModel($event)"></ew-text>
+              <ew-text name="fattura_citta" label="Città" value="$ctrl.model.fattura_citta"
+                on-change="$ctrl.updateModel($event)"></ew-text>
+              <ew-select name="fattura_nazione" label="Nazione" value="$ctrl.model.fattura_nazione"
+                on-change="$ctrl.updateModel($event)" options="::$ctrl.lookup.Countries"></ew-select>
+              <ew-text name="fattura_provincia" label="Provincia" value="$ctrl.model.fattura_provincia"
+                on-change="$ctrl.updateModel($event)"></ew-text>
+              <ew-text name="fattura_cap" label="CAP" value="$ctrl.model.fattura_cap"
+                on-change="$ctrl.updateModel($event)"></ew-text>
+            </row>
+
+          </ibox-content>
+        </ew-ibox>
+      </div>
+
+      <div>
+        <ew-ibox>
+          <ibox-title>
+            <h5>Capogruppo</h5>
+          </ibox-title>
+          <ibox-content>
+            <ew-text name="capogruppo_id" label="Capogruppo" value="$ctrl.model.capogruppo_id"
+              on-change="$ctrl.updateModel($event)"></ew-text>
+          </ibox-content>
+        </ew-ibox>
+
+        <ew-ibox>
+          <ibox-title>
+            <h5>Contatori</h5>
+          </ibox-title>
+          <ibox-content>
+            <section class="input--inline low-impact" id="contatori">
+              <row style="grid-template-columns: 1fr 100px 100px; margin-bottom: 8px">
+                <b></b>
+                <b class="text-center">Ingresso</b>
+                <b class="text-center">Uscita</b>
+              </row>
+
+              <row style="grid-template-columns: 1fr 100px 100px">
+                <label>ACQUA</label>
+                <ew-numeric name="in" value="$ctrl.model.in1" on-change="$ctrl.updateModel($event)"></ew-numeric>
+                <ew-numeric name="out" value="$ctrl.model.out1" on-change="$ctrl.updateModel($event)"></ew-numeric>
+              </row>
+
+              <row style="grid-template-columns: 1fr 100px 100px">
+                <label>ENEL segreteria</label>
+                <ew-numeric name="in" value="$ctrl.model.in2" on-change="$ctrl.updateModel($event)"></ew-numeric>
+                <ew-numeric name="out" value="$ctrl.model.out2" on-change="$ctrl.updateModel($event)"></ew-numeric>
+              </row>
+
+              <row style="grid-template-columns: 1fr 100px 100px">
+                <label>ENEL parco</label>
+                <ew-numeric name="in" value="$ctrl.model.in3" on-change="$ctrl.updateModel($event)"></ew-numeric>
+                <ew-numeric name="out" value="$ctrl.model.out3" on-change="$ctrl.updateModel($event)"></ew-numeric>
+              </row>
+
+              <row style="grid-template-columns: 1fr 100px 100px">
+                <label>ENEL locali</label>
+                <ew-numeric name="in" value="$ctrl.model.in4" on-change="$ctrl.updateModel($event)"></ew-numeric>
+                <ew-numeric name="out" value="$ctrl.model.out4" on-change="$ctrl.updateModel($event)"></ew-numeric>
+              </row>
+
+              <row style="grid-template-columns: 1fr 100px 100px">
+                <label>GAS</label>
+                <ew-numeric name="in" value="$ctrl.model.in5" on-change="$ctrl.updateModel($event)"></ew-numeric>
+                <ew-numeric name="out" value="$ctrl.model.out5" on-change="$ctrl.updateModel($event)"></ew-numeric>
+              </row>
+
+            </section>
+          </ibox-content>
+        </ew-ibox>
+      </div>
+
+    </row>
+
+    <ew-save-button form-dirty="$ctrl.form.$dirty" alt-save="$ctrl.saveAndStay()"></ew-save-button>
+  </form>
+</div>
