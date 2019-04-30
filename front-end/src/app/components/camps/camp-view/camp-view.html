@@ -1,4 +1,4 @@
-<ew-page-header id="top" size="compact" on-action="$ctrl.onAction(action, value)" header-title="{{::$ctrl.title}}">
+<ew-page-header id="top" size="compact" on-action="$ctrl.onAction(action, value)" header-title="{{::$ctrl.model.nome}}">
   <next-title></next-title>
 
   <right-side>
@@ -19,44 +19,39 @@
         </ibox-title>
 
         <ibox-content>
-          <row style="grid-template-columns: 120px 300px 1fr">
-            <ew-readonly-input label="N. scheda" value="$ctrl.model.n_scheda"></ew-readonly-input>
-            <ew-readonly-input label="Nome campo" value="$ctrl.model.nome"></ew-readonly-input>
-            <ew-readonly-input label="Descrizione (uso interno)" value="$ctrl.model.note"></ew-readonly-input>
-          </row>
+          <div class="low-impact">
 
-          <row style="grid-template-columns: 120px 120px 170px">
-            <ew-readonly-input label="Data inizio" value="$ctrl.model.data_inizio" type="date"></ew-readonly-input>
-            <ew-readonly-input label="Data fine" value="$ctrl.model.data_fine" type="date"></ew-readonly-input>
-            <ew-readonly-input label="Tipo" value="$ctrl.model.tipo"></ew-readonly-input>
-          </row>
+            <row style="grid-template-columns: 70px 220px 1fr 1fr">
+              <ew-readonly-input label="N. scheda" value="$ctrl.model.n_scheda"></ew-readonly-input>
+              <ew-readonly-input label="Nome campo" value="$ctrl.model.nome"></ew-readonly-input>
+              <ew-readonly-input label="Descrizione (uso interno)" value="$ctrl.model.note"></ew-readonly-input>
+              <ew-readonly-input label="Capogruppo" value="$ctrl.model.capogruppo.cognome_nome"></ew-readonly-input>
+            </row>
 
-        </ibox-content>
-      </ew-ibox>
+            <row style="grid-template-columns: 120px 120px 170px">
+              <ew-readonly-input label="Data inizio" value="$ctrl.model.data_inizio" type="date"></ew-readonly-input>
+              <ew-readonly-input label="Data fine" value="$ctrl.model.data_fine" type="date"></ew-readonly-input>
+              <ew-readonly-input label="Tipo" value="$ctrl.model.tipo"></ew-readonly-input>
+            </row>
 
-      <ew-ibox>
-        <ibox-title>
-          <h5>Dati documento fiscale</h5>
-        </ibox-title>
+            <h5>Dati documento fiscale</h5>
 
-        <ibox-content>
+            <row style="grid-template-columns: 1fr 140px 160px 120px">
+              <ew-readonly-input label="Intestazione (Ragione sociale / nome cognome)"
+                value="$ctrl.model.fattura_ragione_sociale"></ew-readonly-input>
+              <ew-readonly-input label="Partita IVA" value="$ctrl.model.fattura_partita_iva"></ew-readonly-input>
+              <ew-readonly-input label="Codice fiscale" value="$ctrl.model.fattura_codice_fiscale"></ew-readonly-input>
+              <ew-readonly-input label="Tipo doc. fiscale" value="$ctrl.model.tipo_documento_fiscale"></ew-readonly-input>
+            </row>
 
-          <row style="grid-template-columns: 1fr 140px 160px 120px">
-            <ew-readonly-input label="Intestazione (Ragione sociale / nome cognome)"
-              value="$ctrl.model.fattura_ragione_sociale"></ew-readonly-input>
-            <ew-readonly-input label="Partita IVA" value="$ctrl.model.fattura_partita_iva"></ew-readonly-input>
-            <ew-readonly-input label="Codice fiscale" value="$ctrl.model.fattura_codice_fiscale"></ew-readonly-input>
-            <ew-readonly-input label="Tipo doc. fiscale" value="$ctrl.model.tipo_documento_fiscale"></ew-readonly-input>
-          </row>
-
-          <row style="grid-template-columns: 1fr 180px 120px 120px 90px">
-            <ew-readonly-input label="Indirizzo" value="$ctrl.model.fattura_indirizzo"></ew-readonly-input>
-            <ew-readonly-input label="Città" value="$ctrl.model.fattura_citta"></ew-readonly-input>
-            <ew-readonly-input label="Nazione" value="$ctrl.model.fattura_nazione"></ew-readonly-input>
-            <ew-readonly-input label="Provincia" value="$ctrl.model.fattura_provincia"></ew-readonly-input>
-            <ew-readonly-input label="CAP" value="$ctrl.model.fattura_cap"></ew-readonly-input>
-          </row>
-
+            <row style="grid-template-columns: 1fr 180px 120px 120px 90px">
+              <ew-readonly-input label="Indirizzo" value="$ctrl.model.fattura_indirizzo"></ew-readonly-input>
+              <ew-readonly-input label="Città" value="$ctrl.model.fattura_citta"></ew-readonly-input>
+              <ew-readonly-input label="Nazione" value="$ctrl.model.fattura_nazione"></ew-readonly-input>
+              <ew-readonly-input label="Provincia" value="$ctrl.model.fattura_provincia"></ew-readonly-input>
+              <ew-readonly-input label="CAP" value="$ctrl.model.fattura_cap"></ew-readonly-input>
+            </row>
+          </div>
         </ibox-content>
       </ew-ibox>
     </div>
@@ -64,19 +59,10 @@
     <div>
       <ew-ibox>
         <ibox-title>
-          <h5>Capogruppo</h5>
-        </ibox-title>
-        <ibox-content>
-          <ew-readonly-input label="Capogruppo" value="$ctrl.model.capogruppo.cognome_nome"></ew-readonly-input>
-        </ibox-content>
-      </ew-ibox>
-
-      <ew-ibox>
-        <ibox-title>
           <h5>Contatori</h5>
         </ibox-title>
         <ibox-content>
-          <section class="input--inline low-impact" id="contatori">
+          <section class="low-impact" id="contatori">
             <row style="grid-template-columns: 1fr 100px 100px; margin-bottom: 8px">
               <b></b>
               <b class="text-center">Ingresso</b>
@@ -112,42 +98,44 @@
               <ew-readonly-input value="$ctrl.model.in5" type="numeric"></ew-readonly-input>
               <ew-readonly-input value="$ctrl.model.out5" type="numeric"></ew-readonly-input>
             </row>
-
           </section>
+
         </ibox-content>
       </ew-ibox>
     </div>
 
   </row>
 
-  <uib-tabset active="$ctrl.activeTab" id="tabs">
-    <uib-tab index="0" heading="Ospiti" select="$ctrl.selectTab('ospiti')" title="Ospiti (ctrl+1)">
+<ew-ibox>
+  <ibox-title>
+    <h5>Ospiti</h5>
+  </ibox-title>
+  <ibox-content>
+    <div class="table-responsive">
+      <table class="table table-striped table-bordered table-hover">
+        <thead>
+          <tr>
+            <th>Nome</th>
+            <th>Cognome</th>
+            <th>Arrivo</th>
+            <th>Partenza</th>
+            <th class="actions"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="r in $ctrl.mockGuests track by r.id">
+            <td>{{ r.nome }}</td>
+            <td>{{ r.cognome }}</td>
+            <td>{{ r.arrivo | date:'dd/MM/yyyy' }}</td>
+            <td>{{ r.partenza | date:'dd/MM/yyyy' }}</td>
+            <td class="actions">
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </ibox-content>
+</ew-ibox>
 
-      <div class="table-responsive">
-        <table class="table table-striped table-bordered table-hover">
-          <thead>
-            <tr>
-              <th>Nome</th>
-              <th>Cognome</th>
-              <th>Arrivo</th>
-              <th>Partenza</th>
-              <th class="actions"></th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr ng-repeat="r in $ctrl.mockGuests track by r.id">
-              <td>{{ r.nome }}</td>
-              <td>{{ r.cognome }}</td>
-              <td>{{ r.arrivo | date:'dd/MM/yyyy' }}</td>
-              <td>{{ r.partenza | date:'dd/MM/yyyy' }}</td>
-              <td class="actions">
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-    </uib-tab>
-  </uib-tabset>
 
 </div>
