@@ -10,10 +10,10 @@
 </ew-page-header>
 
 <div class="container">
-<form ng-submit="$ctrl.submit($ctrl.model)" name="$ctrl.form" novalidate>
+  <form ng-submit="$ctrl.submit($ctrl.model)" name="$ctrl.form" novalidate>
 
-  <row style="grid-template-columns: 1fr 360px">
-    <div>
+    <row style="grid-template-columns: 1fr 360px">
+      <div>
         <ew-ibox>
           <ibox-title>
             <h5>Dati anagrafici</h5>
@@ -21,84 +21,115 @@
 
           <ibox-content>
             <row style="grid-template-columns: 1fr 1fr 100px 160px">
-              <ew-text name="cognome" label="Cognome" value="$ctrl.model.cognome" on-change="$ctrl.updateModel($event)"></ew-text>
-              <ew-text name="nome" label="Nome" value="$ctrl.model.nome" on-change="$ctrl.updateModel($event)"></ew-text>
-              <ew-select name="genere" label="Genere" value="$ctrl.model.genere" on-change="$ctrl.updateModel($event)" options="::$ctrl.lookup.Sesso.list"></ew-select>
-              <ew-input-cleave name="codice_fiscale" label="Codice fiscale" value="$ctrl.model.codice_fiscale" on-change="$ctrl.updateModel($event)" options="{ blocks: [16], uppercase: true }"></ew-input-cleave>
+              <ew-text name="cognome" label="Cognome" value="$ctrl.model.cognome" on-change="$ctrl.updateModel($event)">
+              </ew-text>
+              <ew-text name="nome" label="Nome" value="$ctrl.model.nome" on-change="$ctrl.updateModel($event)">
+              </ew-text>
+              <ew-select name="genere" label="Genere" value="$ctrl.model.genere" on-change="$ctrl.updateModel($event)"
+                options="::$ctrl.lookup.Sesso.list"></ew-select>
+              <ew-input-cleave name="codice_fiscale" label="Codice fiscale" value="$ctrl.model.codice_fiscale"
+                on-change="$ctrl.updateModel($event)" options="{ blocks: [16], uppercase: true }"></ew-input-cleave>
             </row>
+
+            <ew-checkbox name="capogruppo" label="Capogruppo" value="$ctrl.model.capogruppo"
+              on-change="$ctrl.updateModel($event)"></ew-checkbox>
 
             <hr>
 
             <row style="grid-template-columns: 120px 1fr 140px 40px">
-              <ew-datepicker name="data_nascita" label="Data di nascita" value="$ctrl.model.data_nascita" on-change="$ctrl.updateModel($event)"></ew-datepicker>
-              <ew-autocomplete
-                name="citta_nascita"
-                placeholder="Cerca un comune..."
-                label="Città di nascita"
-                label-prop="comune"
-                model="$ctrl.model.citta_nascita"
-                on-query="$ctrl.queryCity($event)"
-                on-select="$ctrl.selectCittaNascita($event)"
-                required="true">
+              <ew-datepicker name="data_nascita" label="Data di nascita" value="$ctrl.model.data_nascita"
+                on-change="$ctrl.updateModel($event)"></ew-datepicker>
+              <ew-autocomplete name="citta_nascita" placeholder="Cerca un comune..." label="Città di nascita"
+                label-prop="comune" model="$ctrl.model.citta_nascita" on-query="$ctrl.queryCity($event)"
+                on-select="$ctrl.selectCittaNascita($event)" required="true">
               </ew-autocomplete>
-              <ew-select name="nazione_nascita" label="Nazione" value="$ctrl.model.nazione_nascita" on-change="$ctrl.updateModel($event)" options="::$ctrl.lookup.Countries"></ew-select>
-              <ew-text name="provincia_nascita" label="Prov." value="$ctrl.model.provincia_nascita" on-change="$ctrl.updateModel($event)"></ew-text>
+              <ew-select name="nazione_nascita" label="Nazione" value="$ctrl.model.nazione_nascita"
+                on-change="$ctrl.updateModel($event)" options="::$ctrl.lookup.Countries.list"></ew-select>
+              <ew-text name="provincia_nascita" label="Prov." value="$ctrl.model.provincia_nascita"
+                on-change="$ctrl.updateModel($event)"></ew-text>
             </row>
 
-            <ew-checkbox name="cittadinanza_italiana" label="Cittadinanza italiano (se nato all'estero, ma cittadino italiano spuntare la casella)" value="$ctrl.model.cittadinanza_italiana" on-change="$ctrl.updateModel($event)"></ew-checkbox>
+            <ew-checkbox name="cittadinanza_italiana"
+              label="Cittadinanza italiano (se nato all'estero, ma cittadino italiano spuntare la casella)"
+              value="$ctrl.model.cittadinanza_italiana" on-change="$ctrl.updateModel($event)"></ew-checkbox>
 
             <hr>
 
 
             <row style="grid-template-columns: 130px 120px 120px 120px 110px 1fr">
-              <ew-select name="documento_tipo" label="Tipo documento" value="$ctrl.model.documento_tipo" on-change="$ctrl.updateModel($event)" options="::$ctrl.lookup.Guests.documento_tipo"></ew-select>
-              <ew-text name="documento_numero" label="Numero" value="$ctrl.model.documento_numero" on-change="$ctrl.updateModel($event)"></ew-text>
-              <ew-datepicker name="documento_data_rilascio" label="Data rilascio" value="$ctrl.model.documento_data_rilascio" on-change="$ctrl.updateModel($event)"></ew-datepicker>
-              <ew-datepicker name="documento_data_scadenza" label="Data scadenza" value="$ctrl.model.documento_data_scadenza" on-change="$ctrl.updateModel($event)"></ew-datepicker>
-              <ew-select name="documento_rilasciato_ente" label="Rilasciato da" value="$ctrl.model.documento_rilasciato_ente" on-change="$ctrl.updateModel($event)" options="::$ctrl.lookup.Guests.documento_rilasciato_ente"></ew-select>
-              <ew-text name="documento_rilasciato_comune" label="Comune di rilascio" value="$ctrl.model.documento_rilasciato_comune" on-change="$ctrl.updateModel($event)"></ew-text>
+              <ew-select name="documento_tipo" label="Tipo documento" value="$ctrl.model.documento_tipo"
+                on-change="$ctrl.updateModel($event)" options="::$ctrl.lookup.Guests.documento_tipo"></ew-select>
+              <ew-text name="documento_numero" label="Numero" value="$ctrl.model.documento_numero"
+                on-change="$ctrl.updateModel($event)"></ew-text>
+              <ew-datepicker name="documento_data_rilascio" label="Data rilascio"
+                value="$ctrl.model.documento_data_rilascio" on-change="$ctrl.updateModel($event)"></ew-datepicker>
+              <ew-datepicker name="documento_data_scadenza" label="Data scadenza"
+                value="$ctrl.model.documento_data_scadenza" on-change="$ctrl.updateModel($event)"></ew-datepicker>
+              <ew-select name="documento_rilasciato_ente" label="Rilasciato da"
+                value="$ctrl.model.documento_rilasciato_ente" on-change="$ctrl.updateModel($event)"
+                options="::$ctrl.lookup.Guests.documento_rilasciato_ente"></ew-select>
+              <ew-text name="documento_rilasciato_comune" label="Comune di rilascio"
+                value="$ctrl.model.documento_rilasciato_comune" on-change="$ctrl.updateModel($event)"></ew-text>
             </row>
 
-            <ew-checkbox name="documento_italiano" label="Documento italiano" value="$ctrl.model.documento_italiano" on-change="$ctrl.updateModel($event)"></ew-checkbox>
+            <ew-checkbox name="documento_italiano" label="Documento italiano" value="$ctrl.model.documento_italiano"
+              on-change="$ctrl.updateModel($event)"></ew-checkbox>
 
             <hr>
 
             <row style="grid-template-columns: 3fr 2fr 120px 40px 80px">
-              <ew-text name="indirizzo" label="Indirizzo" value="$ctrl.model.indirizzo" on-change="$ctrl.updateModel($event)"></ew-text>
-              <ew-autocomplete
-                name="citta"
-                placeholder="Cerca un comune..."
-                label="Città"
-                label-prop="comune"
-                model="$ctrl.model.citta"
-                on-query="$ctrl.queryCity($event)"
-                on-select="$ctrl.selectCitta($event)"
+              <ew-text name="indirizzo" label="Indirizzo" value="$ctrl.model.indirizzo"
+                on-change="$ctrl.updateModel($event)"></ew-text>
+              <ew-autocomplete name="citta" placeholder="Cerca un comune..." label="Città" label-prop="comune"
+                model="$ctrl.model.citta" on-query="$ctrl.queryCity($event)" on-select="$ctrl.selectCitta($event)"
                 required="true">
               </ew-autocomplete>
-              <ew-select name="nazione" label="Nazione" value="$ctrl.model.nazione" on-change="$ctrl.updateModel($event)" options="::$ctrl.lookup.Countries"></ew-select>
-              <ew-text name="provincia" label="Prov." value="$ctrl.model.provincia" on-change="$ctrl.updateModel($event)"></ew-text>
+              <ew-select name="nazione" label="Nazione" value="$ctrl.model.nazione"
+                on-change="$ctrl.updateModel($event)" options="::$ctrl.lookup.Countries.list"></ew-select>
+              <ew-text name="provincia" label="Prov." value="$ctrl.model.provincia"
+                on-change="$ctrl.updateModel($event)"></ew-text>
               <ew-text name="cap" label="CAP" value="$ctrl.model.cap" on-change="$ctrl.updateModel($event)"></ew-text>
             </row>
 
-            <ew-checkbox name="residente_montespertoli" label="Residente nel comune di Montespertoli" value="$ctrl.model.residente_montespertoli" on-change="$ctrl.updateModel($event)"></ew-checkbox>
+            <ew-checkbox name="residente_montespertoli" label="Residente nel comune di Montespertoli"
+              value="$ctrl.model.residente_montespertoli" on-change="$ctrl.updateModel($event)"></ew-checkbox>
 
             <hr>
 
-            <ew-textarea name="note" label="Note / Allergie" value="$ctrl.model.note" rows="3" on-change="$ctrl.updateModel($event)"></ew-textarea>
-            <ew-checkbox name="privacy" label="Lettera per la privacy" value="$ctrl.model.privacy" on-change="$ctrl.updateModel($event)"></ew-checkbox>
-            <ew-checkbox name="socio" label="Socio" value="$ctrl.model.socio" on-change="$ctrl.updateModel($event)"></ew-checkbox>
-            <ew-checkbox name="disabile" label="Diversamente abile" value="$ctrl.model.disabile" on-change="$ctrl.updateModel($event)"></ew-checkbox>
+            <ew-textarea name="note" label="Note / Allergie" value="$ctrl.model.note" rows="3"
+              on-change="$ctrl.updateModel($event)"></ew-textarea>
+            <ew-checkbox name="privacy" label="Lettera per la privacy" value="$ctrl.model.privacy"
+              on-change="$ctrl.updateModel($event)"></ew-checkbox>
+            <ew-checkbox name="socio" label="Socio" value="$ctrl.model.socio" on-change="$ctrl.updateModel($event)">
+            </ew-checkbox>
+            <ew-checkbox name="disabile" label="Diversamente abile" value="$ctrl.model.disabile"
+              on-change="$ctrl.updateModel($event)"></ew-checkbox>
 
-<!--
+            <!--
   `allergie` varchar(255) DEFAULT NULL,
  -->
             <ew-save-button form-dirty="$ctrl.form.$dirty" alt-save="$ctrl.saveAndStay()"></ew-save-button>
           </ibox-content>
         </ew-ibox>
 
-    </div>
+      </div>
 
-    <div>
+      <div>
+        <ew-ibox ng-if="$ctrl.model.capogruppo">
+          <ibox-title>
+            <h5>Accesso utente</h5>
+          </ibox-title>
+
+          <ibox-content>
+            <ew-text name="user.username" label="Nome utente" value="$ctrl.model.user.username"
+              on-change="$ctrl.updateModel($event)"></ew-text>
+            <ew-text name="user.password" label="Password" value="$ctrl.model.user.password"
+              on-change="$ctrl.updateModel($event)"></ew-text>
+            <ew-text name="user.conferma_password" label="Conferma password" value="$ctrl.model.user.conferma_password"
+              on-change="$ctrl.updateModel($event)"></ew-text>
+          </ibox-content>
+        </ew-ibox>
+
         <ew-ibox>
           <ibox-title>
             <h5>Campi</h5>
@@ -108,9 +139,9 @@
 
           </ibox-content>
         </ew-ibox>
-    </div>
+      </div>
 
-  </row>
+    </row>
 
-</form>
+  </form>
 </div>

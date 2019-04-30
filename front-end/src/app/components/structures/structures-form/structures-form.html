@@ -5,7 +5,7 @@
 <div>
   <form ng-submit="$ctrl.submit($ctrl.model)" class="action-{{$ctrl.action}}" name="$ctrl.form" novalidate>
 
-    <row style="grid-template-columns: 2fr 2fr 3fr">
+    <row style="grid-template-columns: 1fr">
       <ew-text name="nome" label="Nome" value="$ctrl.model.nome" on-change="$ctrl.updateModel($event)" focus="true" required="true">
       </ew-text>
     </row>

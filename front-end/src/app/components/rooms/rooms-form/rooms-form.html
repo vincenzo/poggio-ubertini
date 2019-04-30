@@ -5,17 +5,20 @@
 <div>
   <form ng-submit="$ctrl.submit($ctrl.model)" class="action-{{$ctrl.action}}" name="$ctrl.form" novalidate>
 
-    <row style="grid-template-columns: 120px 100px 100px 1fr">
+    <row style="grid-template-columns: 1fr 100px 100px">
+      <ew-select name="structure_id" label="Struttura" value="$ctrl.model.structure_id"
+        on-change="$ctrl.updateModel($event)" options="::$ctrl.lookup.Structures.list"></ew-select>
 
-      <ew-select name="structure_id" label="Struttura" value="$ctrl.model.structure_id" on-change="$ctrl.updateModel($event)" options="::$ctrl.lookup.Structures.list"></ew-select>
-
-      <ew-text name="numero" label="Numero" value="$ctrl.model.numero" on-change="$ctrl.updateModel($event)" focus="true" required="true">
+      <ew-text name="numero" label="Numero" value="$ctrl.model.numero" on-change="$ctrl.updateModel($event)"
+        focus="true" required="true">
       </ew-text>
 
-      <ew-numeric name="posti_letto" label="Posti letto" value="$ctrl.model.posti_letto" on-change="$ctrl.updateModel($event)"></ew-numeric>
-
-      <ew-checkbox name="servizi" label="Servizi" class="checkbox--align-center" value="$ctrl.model.servizi" on-change="$ctrl.updateModel($event)"></ew-checkbox>
+      <ew-numeric name="posti_letto" label="Posti letto" value="$ctrl.model.posti_letto"
+        on-change="$ctrl.updateModel($event)"></ew-numeric>
     </row>
+
+    <ew-checkbox name="servizi" label="Servizi" class="checkbox--align-center" value="$ctrl.model.servizi"
+      on-change="$ctrl.updateModel($event)"></ew-checkbox>
 
     <div class="text-right mar-top-1">
       <button class="btn btn-success" type="submit" ng-disabled="$ctrl.rooms.isLoading">

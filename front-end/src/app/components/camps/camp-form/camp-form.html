@@ -67,7 +67,7 @@
               <ew-text name="fattura_citta" label="Città" value="$ctrl.model.fattura_citta"
                 on-change="$ctrl.updateModel($event)"></ew-text>
               <ew-select name="fattura_nazione" label="Nazione" value="$ctrl.model.fattura_nazione"
-                on-change="$ctrl.updateModel($event)" options="::$ctrl.lookup.Countries"></ew-select>
+                on-change="$ctrl.updateModel($event)" options="::$ctrl.lookup.Countries.list"></ew-select>
               <ew-text name="fattura_provincia" label="Provincia" value="$ctrl.model.fattura_provincia"
                 on-change="$ctrl.updateModel($event)"></ew-text>
               <ew-text name="fattura_cap" label="CAP" value="$ctrl.model.fattura_cap"

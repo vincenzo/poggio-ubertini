@@ -53,7 +53,7 @@ function camps() {
         class: 'actions',
         disableRowClick: true,
         field: model => {
-          return `<a ui-sref="camps.view({ id: row.id })" uib-tooltip="Dettaglio"><i class="far fa-info"></i></a>`;
+          return `<a ui-sref="camps.edit({ id: row.id })" uib-tooltip="Modifica campo"><i class="far fa-edit"></i></a>`;
         },
       },
     ],

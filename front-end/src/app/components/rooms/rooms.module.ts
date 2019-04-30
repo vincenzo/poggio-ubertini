@@ -39,6 +39,7 @@ export const RoomsModule = angular.module('components.rooms', [
         onEnter: ($state, ModalService) => {
           return ModalService.open({
             name: 'roomsForm',
+            className: 'ngdialog-small',
             preCloseCallback: (value) => ModalService.preCloseCallbackDefault(value, 'rooms'),
             template: '<rooms-form action="add"></rooms-form>',
           });
@@ -63,6 +64,7 @@ export const RoomsModule = angular.module('components.rooms', [
         onEnter: ($state, ModalService) => {
           return ModalService.open({
             name: 'roomsForm',
+            className: 'ngdialog-small',
             preCloseCallback: (value) => ModalService.preCloseCallbackDefault(value, 'rooms'),
             template: '<rooms-form action="edit"></rooms-form>',
           });
