@@ -4,7 +4,6 @@
 
 var path = require('path');
 var webpack = require('webpack');
-var HappyPack = require('happypack');
 
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var CleanWebpackPlugin = require('clean-webpack-plugin');
@@ -25,8 +24,8 @@ var gitRevisionPlugin = new GitRevisionPlugin();
 
 module.exports = {
   entry: {
-  	vendor: "./src/app/vendor.ts",
-  	main: "./src/app/root.module.ts",
+    vendor: "./src/app/vendor.ts",
+    main: "./src/app/root.module.ts",
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
@@ -40,7 +39,31 @@ module.exports = {
       {
         test: /\.ts(x?)$/,
         exclude: [/node_modules/],
-        use: 'happypack/loader?id=ts'
+        use: [
+          { loader: 'cache-loader' },
+          {
+              loader: 'thread-loader',
+              options: {
+                  // there should be 1 cpu for the fork-ts-checker-webpack-plugin
+                  workers: require('os').cpus().length - 1,
+                  poolTimeout: Infinity // set this to Infinity in watch mode - see https://github.com/webpack-contrib/thread-loader
+              },
+          },
+          { 
+              loader: 'babel-loader?cacheDirectory',
+              options: {
+                presets: ['@babel/preset-env'],
+                plugins: ['angularjs-annotate']
+              }
+          },
+          {
+              loader: 'ts-loader',
+              options: {
+                  transpileOnly: true,
+                  happyPackMode: true // IMPORTANT! use happyPackMode mode to speed-up compilation and reduce errors reported to webpack
+              }
+          }
+      ]
       },
       {
         test: /\.html$/,
@@ -51,14 +74,14 @@ module.exports = {
         ],
       },
       {
-      	test: /\.(sa|sc|c)ss$/,
-      	use: [
+        test: /\.(sa|sc|c)ss$/,
+        use: [
           'style-loader',
           // MiniCssExtractPlugin.loader, // Per una migliore leggibilità in shell DEV si può anche disabilitare
-      	  // devMode ? 'style-loader' : MiniCssExtractPlugin.loader,
-      	  'css-loader',
-      	  'sass-loader',
-      	],
+          // devMode ? 'style-loader' : MiniCssExtractPlugin.loader,
+          'css-loader',
+          'sass-loader',
+        ],
       },
       {
         test: /\.(eot|svg|otf|ttf|woff|woff2)$/,
@@ -81,23 +104,9 @@ module.exports = {
 
     new webpack.DefinePlugin({
        'VERSION': JSON.stringify(gitRevisionPlugin.version()),
-       'TEST': 'aaaa',
      }),
 
     // new webpack.HashedModuleIdsPlugin(),
-
-    new HappyPack({
-      id: 'ts',
-      threads: 3,
-      loaders: [
-        'ng-annotate-loader',
-        'babel-loader',
-        {
-          path: 'ts-loader',
-          query: { happyPackMode: true }
-        }
-      ]
-    }),
 
     new ForkTsCheckerWebpackPlugin(),
 

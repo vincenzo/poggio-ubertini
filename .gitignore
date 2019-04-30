@@ -22,6 +22,8 @@ back-end/config/env.php
 front-end/node_modules
 front-end/src/app/vendors/ew-angularjs-utils
 front-end/yarn.lock
+front-end/build.tar.gz
+front-end/config/local-config.js
 
 # npm debug
 front-end/npm-debug.log
@@ -32,10 +34,9 @@ front-end/src/**/*.js
 front-end/src/**/*.js.map
 
 # Distribution directory
+front-end/build
 front-end/dist
 
 # Code Coverage Report
 front-end/coverage
-
-# Webpack local configuration file
-front-end/Webpack/local-config.js
+front-end/.cache-loader
