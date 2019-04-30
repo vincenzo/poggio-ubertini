@@ -126,11 +126,20 @@ class AppController extends Controller
 
         $data['Lookup']['Countries']['list'] = \Cake\ORM\TableRegistry::get('Countries')->find('all')
             ->select(['name' => 'descrizione', 'value' => 'descrizione'])
-            ->order(['descrizione' => 'ASC']);
+            ->order(['descrizione' => 'ASC'])
+            ->enableHydration(false);
 
         $data['Lookup']['Structures']['list'] = \Cake\ORM\TableRegistry::get('Structures')->find('all')
             ->select(['name' => 'nome', 'value' => 'id'])
-            ->order(['nome' => 'ASC']);
+            ->order(['nome' => 'ASC'])
+            ->enableHydration(false);
+
+        $q = \Cake\ORM\TableRegistry::get('Guests')->find('all');
+        $data['Lookup']['Guests']['capigruppo'] = $q
+            ->where(['capogruppo' => true])
+            ->select(['name' => $q->func()->concat(['nome' => 'literal', ' ', 'cognome' => 'literal']), 'value' => 'id'])
+            ->order(['cognome' => 'ASC'])
+            ->enableHydration(false);
 
         $data['Lookup'] = $this->all2nv($data['Lookup'], [
             'Camps'         => [ 'tipo', 'tipo_documento_fiscale' ],
