@@ -1,4 +1,13 @@
-<ew-page-header add-button="{ action: 'rooms.add' }" on-action="$ctrl.onAction(action, value)" header-title="Camere"></ew-page-header>
+<ew-page-header add-button="{ action: 'rooms.add' }" size="compact" on-action="$ctrl.onAction(action, value)" header-title="Camere">
+  <next-title></next-title>
+
+  <right-side>
+    <button class="btn btn-sm btn-default btn-flat btn-condensed pull-right" type="button"
+      ng-click="$ctrl.stateReload($ctrl.router.currentState.name)">
+      <i class="far fa-sync fa-fw text-primary"></i> Ricarica dati
+    </button>
+  </right-side>
+</ew-page-header>
 
 <div class="container">
   <row style="grid-template-columns: repeat(9, 1fr)">
