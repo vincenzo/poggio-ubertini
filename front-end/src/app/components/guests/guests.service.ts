@@ -19,6 +19,7 @@ export class GuestsService extends EwCommonService {
       { name: 'user_id', type: 'number' },
       { name: 'nome', type: 'string' },
       { name: 'cognome', type: 'string' },
+      { name: 'capogruppo', type: 'boolean' },
       { name: 'documento_italiano', type: 'boolean' },
       { name: 'documento_tipo', type: 'string' },
       { name: 'documento_numero', type: 'string' },
