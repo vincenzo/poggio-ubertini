@@ -84,8 +84,9 @@
             <h5>Capogruppo</h5>
           </ibox-title>
           <ibox-content>
-            <ew-text name="capogruppo_id" label="Capogruppo" value="$ctrl.model.capogruppo_id"
-              on-change="$ctrl.updateModel($event)"></ew-text>
+            <ew-ui-select name="capogruppo_id" label="Capogruppo" on-change="$ctrl.updateCapogruppo($event)"
+              options="::$ctrl.lookup.Guests.capigruppo" placeholder="Cerca capogruppo..." value="$ctrl.model.capogruppo_id">
+            </ew-ui-select>
           </ibox-content>
         </ew-ibox>
 

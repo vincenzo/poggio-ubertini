@@ -22,6 +22,7 @@ export class CampFormComponentController {
   tabs: Array<any>;
   title: string;
   unsubscribe: Function;
+  updateModel: Function;
 
   constructor(
     private $ngRedux: ngRedux.INgRedux,
@@ -89,6 +90,13 @@ export class CampFormComponentController {
     const el: any = jQuery('#campform-dialog input.ng-invalid:first, select.ng-invalid:first');
     el.focus();
     scrollToElement(el, 80);
+  }
+
+  updateMarca(event) {
+    return this.updateModel({
+      name: event.name,
+      value: event.value.value,
+    })
   }
 
   /**
