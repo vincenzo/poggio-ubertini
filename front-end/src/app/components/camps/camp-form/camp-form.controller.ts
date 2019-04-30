@@ -92,10 +92,10 @@ export class CampFormComponentController {
     scrollToElement(el, 80);
   }
 
-  updateMarca(event) {
+  updateCapogruppo(event) {
     return this.updateModel({
       name: event.name,
-      value: event.value.value,
+      value: event.value.id,
     })
   }
 
