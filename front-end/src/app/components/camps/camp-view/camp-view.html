@@ -41,7 +41,8 @@
                 value="$ctrl.model.fattura_ragione_sociale"></ew-readonly-input>
               <ew-readonly-input label="Partita IVA" value="$ctrl.model.fattura_partita_iva"></ew-readonly-input>
               <ew-readonly-input label="Codice fiscale" value="$ctrl.model.fattura_codice_fiscale"></ew-readonly-input>
-              <ew-readonly-input label="Tipo doc. fiscale" value="$ctrl.model.tipo_documento_fiscale"></ew-readonly-input>
+              <ew-readonly-input label="Tipo doc. fiscale" value="$ctrl.model.tipo_documento_fiscale">
+              </ew-readonly-input>
             </row>
 
             <row style="grid-template-columns: 1fr 180px 120px 120px 90px">
@@ -106,36 +107,45 @@
 
   </row>
 
-<ew-ibox>
-  <ibox-title>
-    <h5>Ospiti</h5>
-  </ibox-title>
-  <ibox-content>
-    <div class="table-responsive">
-      <table class="table table-striped table-bordered table-hover">
-        <thead>
-          <tr>
-            <th>Nome</th>
-            <th>Cognome</th>
-            <th>Arrivo</th>
-            <th>Partenza</th>
-            <th class="actions"></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr ng-repeat="r in $ctrl.mockGuests track by r.id">
-            <td>{{ r.nome }}</td>
-            <td>{{ r.cognome }}</td>
-            <td>{{ r.arrivo | date:'dd/MM/yyyy' }}</td>
-            <td>{{ r.partenza | date:'dd/MM/yyyy' }}</td>
-            <td class="actions">
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </ibox-content>
-</ew-ibox>
+  <row style="grid-template-columns: repeat(6, 1fr)" class="mar-top-2 mar-bottom-3">
+    <button type="button" class="btn btn-danger">Chiudi campo</button>
+    <button type="button" class="btn btn-primary">Aggiungi iscritto</button>
+    <button type="button" class="btn btn-success">Ipotesi di spesa</button>
+    <button type="button" class="btn btn-warning">Camere campo</button>
+    <button type="button" class="btn btn-default">Stampa lista utenti campo</button>
+    <button type="button" class="btn btn-default">Stampa lista utenti questura</button>
+  </row>
+
+  <ew-ibox>
+    <ibox-title>
+      <h5>Ospiti</h5>
+    </ibox-title>
+    <ibox-content>
+      <div class="table-responsive">
+        <table class="table table-striped table-bordered table-hover">
+          <thead>
+            <tr>
+              <th>Nome</th>
+              <th>Cognome</th>
+              <th>Arrivo</th>
+              <th>Partenza</th>
+              <th class="actions"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="r in $ctrl.mockGuests track by r.id">
+              <td>{{ r.nome }}</td>
+              <td>{{ r.cognome }}</td>
+              <td>{{ r.arrivo | date:'dd/MM/yyyy' }}</td>
+              <td>{{ r.partenza | date:'dd/MM/yyyy' }}</td>
+              <td class="actions">
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </ibox-content>
+  </ew-ibox>
 
 
 </div>
