@@ -13,7 +13,7 @@ class GuestsController extends AppController
         'limit' => 25,
         'maxLimit' => 250,
         'fields' => [
-            'id', 'nome', 'cognome', 'codice_fiscale', 'data_nascita', 'citta_nascita', 'provincia_nascita', 'nazione_nascita', 'privacy', 'genere',
+            'id', 'nome', 'cognome', 'capogruppo', 'codice_fiscale', 'data_nascita', 'citta_nascita', 'provincia_nascita', 'nazione_nascita', 'privacy', 'genere',
         ],
         'sortWhitelist' => [
             'id',
@@ -23,6 +23,7 @@ class GuestsController extends AppController
 
     public $filterWhitelist = [
         'Guests' => [
+            'capogruppo'
         ],
     ];
 

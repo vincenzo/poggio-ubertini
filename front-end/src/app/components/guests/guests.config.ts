@@ -14,6 +14,11 @@ function guests() {
           const genderLabel = model.genere === 'M' ? 'Maschio' : 'Femmina';
           const privacy = model.privacy ? 'check-square' : 'square';
           const privacyLabel = model.privacy ? 'Privacy firmata' : 'Privacy non firmata';
+
+          if (model.capogruppo) {
+            ret.push(`<i class="far fa-user-shiedl" uib-tooltip="Capogruppo"></i>`);
+          }
+
           ret.push(`<i class="far fa-${gender}" uib-tooltip="${genderLabel}"></i>`);
           ret.push(`<i class="far fa-${privacy}" uib-tooltip="${privacyLabel}"></i>`);
           return ret.join(' ');
@@ -72,11 +77,11 @@ function guests() {
       },
     ],
     rapidFilters: {
-      // activeButtons: [
-      //   { label: 'Attivi', value: '1' },
-      //   { label: 'Inattivi', value: '0' },
-      //   { label: 'Tutti', value: '' },
-      // ],
+      userTypeButtons: [
+        { label: 'Capigruppo', value: '1' },
+        { label: 'Utenti', value: '0' },
+        { label: 'Tutti', value: '' },
+      ],
     },
   };
 }

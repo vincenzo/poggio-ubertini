@@ -16,6 +16,10 @@ const INITIAL_STATE = fromJS({
       active: false,
       value: null,
     },
+    'Guests.capogruppo': {
+      active: true,
+      value: '',
+    },
   },
   filterPanel: {
     focusedField: '',
