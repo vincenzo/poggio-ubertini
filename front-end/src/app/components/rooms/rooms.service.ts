@@ -1,4 +1,3 @@
-import { roomsConfig } from './rooms.config';
 import { EwServerService } from '../../vendors/ew-angularjs-utils/components/server/server.service';
 import { EwCommonService } from '../../vendors/ew-angularjs-utils/common/common-service';
 
@@ -12,30 +11,15 @@ export class RoomsService extends EwCommonService {
   ) {
     'ngInject';
 
-    super('rooms', roomsConfig, EwServerService);
+    super('rooms', {}, EwServerService);
 
     this.dbFields = [
       { name: 'id', type: 'number' },
-      { name: 'capogruppo_id', type: 'number' },
-      { name: 'n_scheda', type: 'number' },
-      { name: 'data_scheda', type: 'date' },
-      { name: 'nome', type: 'string' },
-      { name: 'data_inizio', type: 'date' },
-      { name: 'data_fine', type: 'date' },
-      { name: 'tipo', type: 'string' },
-      { name: 'fattura_ragione_sociale', type: 'string' },
-      { name: 'fattura_codice_fiscale', type: 'string' },
-      { name: 'fattura_partita_iva', type: 'string' },
-      { name: 'fattura_indirizzo', type: 'string' },
-      { name: 'fattura_citta', type: 'string' },
-      { name: 'fattura_nazione', type: 'string' },
-      { name: 'fattura_provincia', type: 'string' },
-      { name: 'fattura_cap', type: 'number' },
-      { name: 'tipo_documento_fiscale', type: 'string' },
-      { name: 'note', type: 'string' },
-      { name: 'chiuso', type: 'boolean' },
-      { name: 'created', type: 'date' },
-      { name: 'modified', type: 'date' },
+      { name: 'structure_id', type: 'number' },
+      { name: 'numero', type: 'string' },
+      { name: 'posti_letto', type: 'number' },
+      { name: 'posti_liberi', type: 'number' },
+      { name: 'servizi', type: 'boolean' },
     ];
 
     this.ignoreFieldsOnSave = ['created', 'modified'];

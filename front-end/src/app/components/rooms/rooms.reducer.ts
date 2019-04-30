@@ -30,13 +30,13 @@ const INITIAL_STATE = fromJS({
     current_page: 1,
     has_next_page: false,
     has_prev_page: false,
-    limit: 50,
+    limit: 100,
     page_count: 0,
   },
   sort: {
-    default: 'id',
-    direction: 'DESC',
-    field: 'id',
+    default: 'numero',
+    direction: 'ASC',
+    field: 'numero',
   },
 });
 

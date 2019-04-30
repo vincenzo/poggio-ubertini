@@ -124,11 +124,11 @@ class AppController extends Controller
             'Lookup' => \Cake\Core\Configure::read('Lookup'),
         ];
 
-        $data['Lookup']['Countries'] = \Cake\ORM\TableRegistry::get('Countries')->find('all')
+        $data['Lookup']['Countries']['list'] = \Cake\ORM\TableRegistry::get('Countries')->find('all')
             ->select(['name' => 'descrizione', 'value' => 'descrizione'])
             ->order(['descrizione' => 'ASC']);
 
-        $data['Lookup']['Structures'] = \Cake\ORM\TableRegistry::get('Structures')->find('all')
+        $data['Lookup']['Structures']['list'] = \Cake\ORM\TableRegistry::get('Structures')->find('all')
             ->select(['name' => 'nome', 'value' => 'id'])
             ->order(['nome' => 'ASC']);
 

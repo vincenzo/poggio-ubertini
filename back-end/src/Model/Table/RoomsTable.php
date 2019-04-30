@@ -18,17 +18,42 @@ class RoomsTable extends Table
         $this->setPrimaryKey('id');
 
         $this->belongsTo('Structures');
+        $this->hasMany('Reservations', [
+            'dependent' => true,
+        ]);
 
         $this->addBehavior('Timestamp');
     }
 
-    public function validationDefault(Validator $validator)
+    public function findOccupazione(Query $query, array $options)
     {
-        $validator
-            ->integer('id')
-            ->allowEmpty('id', 'create');
+        $prenotazioni = $this->Reservations->find()
+            ->where([
+                'data_in  >=' => $options['data'],
+                'data_out <=' => $options['data'],
+            ])
+            ->select(['data_in', 'data_out', 'room_id'])
+            ->contain([
+                'Guests' => function($q){ return $q->select(['nome', 'cognome']); },
+            ])
+            ->groupBy('room_id')
+        ;
+        logd($prenotazioni);
 
-        return $validator;
+        return $query
+            ->formatResults(function ($results){
+                return $results->map(function ($row) {
+                    // TODO
+                    $row->posti_occupati = 0;
+                    $row->posti_liberi = $row->posti_letto - $row->posti_occupati;
+                    $row->perc_occupazione = round($row->posti_occupati / $row->posti_letto * 100, 2);
+                    if($row->perc_occupazione > 100)
+                        $row->perc_occupazione = 100;
+                    return $row;
+                });
+            })
+        ;
     }
+        
 
 }
