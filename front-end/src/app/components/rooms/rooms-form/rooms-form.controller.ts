@@ -38,7 +38,7 @@ export class RoomsFormComponentController {
   }
 
   $onInit() {
-    this.title = (this.isEdit() ? 'Modifica ' : 'Aggiungi ') + 'utente';
+    this.title = (this.isEdit() ? 'Modifica ' : 'Aggiungi ') + 'stanza';
   }
 
   $onDestroy() {
@@ -58,7 +58,7 @@ export class RoomsFormComponentController {
       return this.save(model)
         .then(() => this.get())
         .then(() => this._dismissModal())
-        .then(() => this.RoomsService.toaster.success('Utente salvato.'));
+        .then(() => this.RoomsService.toaster.success('Stanza salvata'));
     }
 
     this.RoomsService.toaster.error('Sono presenti degli errori. Controlla e riprova.');

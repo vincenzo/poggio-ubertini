@@ -30,7 +30,7 @@
         "league/flysystem-aws-s3-v3": "^1.0",
         "intervention/image": "^2.3",
         "lsolesen/pel": "0.9.*",
-        "friendsofcake/CakePdf": "^3.2",
+        "friendsofcake/cakepdf": "^3.2",
         "connehito/cake-sentry": "^1.0",
         "dereuromark/cakephp-queue": "dev-master",
         "cakemanager/cakephp-utils": "dev-master",

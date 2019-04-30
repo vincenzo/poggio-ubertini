@@ -11,8 +11,8 @@ $db = [
     'className' => 'Cake\Database\Connection',
     'driver' => 'Cake\Database\Driver\Mysql',
     'persistent' => true,
-    'host' => '192.168.99.100',
-    'port' => '3110',
+    'host' => 'mysqlhost',
+    'port' => '3306',
     'username' => 'root',
     'password' => 'secret',
     'database' => 'xpoggioubertini',
@@ -23,9 +23,7 @@ $db = [
     // 'log' => true,
 ];
 
-$fullBaseUrl = 'http://192.168.99.100:8110/';
 $testDB = $db; $testDB['database'] = 'test';
-$error = E_ALL & ~E_DEPRECATED; // Mostra warning di deprecazione
 
 // DB prod - aggiorno solo i valori che cambiano rispetto alla config dev
 if(APP_ENV != 'dev')
@@ -37,7 +35,14 @@ if(APP_ENV != 'dev')
     $db['password'] = 'fixme';
 
     $fullBaseUrl = 'https://poggioubertini.entheosweb.it/';
+    $pdfFullBaseUrl = $fullBaseUrl;
     $error = E_ALL ^ E_USER_DEPRECATED; // Nasconde warning di deprecazione
+}
+else
+{
+    $fullBaseUrl = DEV_FULLBASE_URL;
+    $pdfFullBaseUrl = PDF_DEV_FULLBASE_URL;
+    $error = E_ALL & ~E_DEPRECATED; // Mostra warning di deprecazione
 }
 
 ini_set('intl.default_locale', 'it_IT');
@@ -55,6 +60,7 @@ return [
         'wwwRoot' => WWW_ROOT,
         // 'baseUrl' => env('SCRIPT_NAME'),
         'fullBaseUrl' => $fullBaseUrl,
+        'pdfFullBaseUrl' => $pdfFullBaseUrl,
         'imageBaseUrl' => 'img/',
         'cssBaseUrl' => 'css/',
         'jsBaseUrl' => 'js/',

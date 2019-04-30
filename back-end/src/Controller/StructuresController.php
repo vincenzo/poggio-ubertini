@@ -13,12 +13,12 @@ class StructuresController extends AppController
         'limit' => 25,
         'maxLimit' => 250,
         'fields' => [
-            'id',
+            'id', 'nome',
         ],
         'sortWhitelist' => [
             'id',
         ],
-        'order'  => ['id' => 'DESC'],
+        'order'  => ['nome' => 'ASC'],
     ];
 
     public $filterWhitelist = [

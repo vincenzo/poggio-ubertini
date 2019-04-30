@@ -124,9 +124,13 @@ class AppController extends Controller
             'Lookup' => \Cake\Core\Configure::read('Lookup'),
         ];
 
-        $data['Lookup']['Countries'] = \Cake\ORM\TableRegistry::get('Countries')->find('all')
+        $data['Lookup']['Countries']['list'] = \Cake\ORM\TableRegistry::get('Countries')->find('all')
             ->select(['name' => 'descrizione', 'value' => 'descrizione'])
             ->order(['descrizione' => 'ASC']);
+
+        $data['Lookup']['Structures']['list'] = \Cake\ORM\TableRegistry::get('Structures')->find('all')
+            ->select(['name' => 'nome', 'value' => 'id'])
+            ->order(['nome' => 'ASC']);
 
         $data['Lookup'] = $this->all2nv($data['Lookup'], [
             'Camps'         => [ 'tipo', 'tipo_documento_fiscale' ],

@@ -9,4 +9,15 @@ class Room extends Entity
         '*' => true,
         'id' => false
     ];
+
+    protected $_virtual = [
+    	'display_name',
+    ];
+
+    protected function _getDisplayName()
+    {
+    	if(empty($this->structure))
+    		return;
+    	return $this->structure->nome.$this->numero;
+    }
 }

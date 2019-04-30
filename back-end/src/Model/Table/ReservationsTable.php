@@ -21,20 +21,18 @@ class ReservationsTable extends Table
 
         $this->belongsTo('Camps', [
           'foreignKey' => 'camp_id',
-          'joinType' => 'LEFT',
-          'dependent' => true,
         ]);
 
         $this->belongsTo('Guests', [
           'foreignKey' => 'guest_id',
-          'joinType' => 'LEFT',
-          'dependent' => true,
         ]);
 
         $this->belongsTo('Rooms', [
           'foreignKey' => 'room_id',
-          'joinType' => 'LEFT',
-          'dependent' => true,
+        ]);
+
+        $this->belongsTo('Reservations', [
+          'foreignKey' => 'reservation_id',
         ]);
     }
 

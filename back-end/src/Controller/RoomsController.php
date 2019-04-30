@@ -8,17 +8,18 @@ use Entheos\Utils\Exception\ErrorException;
 
 class RoomsController extends AppController
 {
+    // Restituiamo sempre tutto, non usiamo il paginate
     public $paginate = [
         'page' => 1,
-        'limit' => 25,
+        'limit' => 250,
         'maxLimit' => 250,
         'fields' => [
-            'id',
+            'id', 'structure_id', 'Structures.nome', 'numero', 'servizi', 'posti_letto'
         ],
         'sortWhitelist' => [
             'id',
         ],
-        'order'  => ['id' => 'DESC'],
+        'order'  => ['numero' => 'ASC'],
     ];
 
     public $filterWhitelist = [
@@ -28,8 +29,13 @@ class RoomsController extends AppController
 
     public function index()
     {
+        $data = $this->request->getData('data');
+
         $q = $this->Rooms
             ->find('all')
+            ->find('occupazione', ['data' => $data])
+            ->contain('Structures')
+            // ->groupBy('structure_id')
             ;
 
         $this->filterPaginate($q);
@@ -41,6 +47,8 @@ class RoomsController extends AppController
      * @return Query
      */
     public function _entityQuery($query, $id){
-        return $query;
+        return $query
+            ->contain('Structures')
+        ;
     }
 }
