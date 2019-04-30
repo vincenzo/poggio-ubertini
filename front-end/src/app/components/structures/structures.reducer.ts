@@ -34,9 +34,9 @@ const INITIAL_STATE = fromJS({
     page_count: 0,
   },
   sort: {
-    default: 'id',
-    direction: 'DESC',
-    field: 'id',
+    default: 'nome',
+    direction: 'ASC',
+    field: 'nome',
   },
 });
 

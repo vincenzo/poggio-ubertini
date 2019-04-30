@@ -128,6 +128,10 @@ class AppController extends Controller
             ->select(['name' => 'descrizione', 'value' => 'descrizione'])
             ->order(['descrizione' => 'ASC']);
 
+        $data['Lookup']['Structures'] = \Cake\ORM\TableRegistry::get('Structures')->find('all')
+            ->select(['name' => 'nome', 'value' => 'id'])
+            ->order(['nome' => 'ASC']);
+
         $data['Lookup'] = $this->all2nv($data['Lookup'], [
             'Camps'         => [ 'tipo', 'tipo_documento_fiscale' ],
             'Users'         => [ 'roles' ],

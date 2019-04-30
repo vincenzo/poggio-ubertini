@@ -38,7 +38,7 @@ export class StructuresFormComponentController {
   }
 
   $onInit() {
-    this.title = (this.isEdit() ? 'Modifica ' : 'Aggiungi ') + 'utente';
+    this.title = (this.isEdit() ? 'Modifica ' : 'Aggiungi ') + 'struttura';
   }
 
   $onDestroy() {
@@ -58,7 +58,7 @@ export class StructuresFormComponentController {
       return this.save(model)
         .then(() => this.get())
         .then(() => this._dismissModal())
-        .then(() => this.StructuresService.toaster.success('Utente salvato.'));
+        .then(() => this.StructuresService.toaster.success('Struttura salvata'));
     }
 
     this.StructuresService.toaster.error('Sono presenti degli errori. Controlla e riprova.');
