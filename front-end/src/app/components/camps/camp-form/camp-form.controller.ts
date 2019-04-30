@@ -80,9 +80,14 @@ export class CampFormComponentController {
 
   submit(model, stay) {
     if (this.form.$valid) {
+      let response = null;
       return this.save(model)
+        .then((res) => response = res.value.data)
         .then(() => this.get())
+        // se clicco salva, rimando sempre alla index
         .then(() => !stay ? this.stateGo('camps') : null)
+        // se clicco salva e resta ho 2 casi: 1- sono in add e quindi rimando alla edit, 2- sono in edit e quindi resto dove sono
+        .then(() => stay && this.isAdd() ? this.stateGo('camps.edit', ({ id: response.id })) : null)
         .then(() => this.CampsService.toaster.success('Campo salvato'));
     }
 
