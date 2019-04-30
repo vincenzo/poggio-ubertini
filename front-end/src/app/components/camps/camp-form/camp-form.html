@@ -138,6 +138,12 @@
 
     </row>
 
-    <ew-save-button form-dirty="$ctrl.form.$dirty" alt-save="$ctrl.saveAndStay()"></ew-save-button>
+    <ew-save-button form-dirty="$ctrl.form.$dirty" alt-save="$ctrl.saveAndStay()">
+      <buttons>
+        <a class="btn btn-default btn-sm" ui-sref="camps.view({ id: $ctrl.model.id })" uib-tooltip="Dettagli campo">
+          <i class="far fa-fw fa-info"></i> DETTAGLI
+        </a>
+      </buttons>
+    </ew-save-button>
   </form>
 </div>
