@@ -1,3 +1,4 @@
+import { LookupService } from './../../../vendors/ew-angularjs-utils/components/lookup/lookup.service';
 import { CitiesService } from './../../cities/cities.service';
 import * as jQuery from 'jquery';
 import ngRedux from 'ng-redux';
@@ -18,6 +19,7 @@ export class GuestsFormComponentController {
   action: string;
   form: ng.IFormController;
   get: Function;
+  getLookup: Function;
   hasError: any;
   resetModel: Function;
   router: any;
@@ -31,6 +33,7 @@ export class GuestsFormComponentController {
     private $ngRedux: ngRedux.INgRedux,
     private CitiesService: CitiesService,
     private GuestsService: GuestsService,
+    private LookupService: LookupService,
     private ModalService: ModalService,
   ) {
     'ngInject';
@@ -131,7 +134,8 @@ export class GuestsFormComponentController {
       return this.save(model)
         .then(() => this.get())
         .then(() => this._dismissModal())
-        .then(() => this.GuestsService.toaster.success('Utente salvato.'));
+        .then(() => this.GuestsService.toaster.success('Utente salvato.'))
+        .then(() => this.getLookup());
     }
 
     this.GuestsService.toaster.error('Sono presenti degli errori. Controlla e riprova.');
@@ -153,6 +157,8 @@ export class GuestsFormComponentController {
   }
 
   private _mapDispatchToThis = dispatch => {
-    return this.GuestsService.mapDispatchToThisForm()(dispatch);
+    return this.GuestsService.mapDispatchToThisForm({
+      getLookup: () => dispatch(this.LookupService.getLookup()),
+    })(dispatch);
   };
 }
