@@ -1,7 +1,7 @@
+import { LookupService } from './../../../vendors/ew-angularjs-utils/components/lookup/lookup.service';
 import { CitiesService } from './../../cities/cities.service';
 import * as jQuery from 'jquery';
 import ngRedux from 'ng-redux';
-import { ModalService } from '../../../vendors/ew-angularjs-utils/components/modal/modal.service';
 import { scrollToElement } from '../../../vendors/ew-angularjs-utils/utils/scroll-to-top';
 import { stateGo } from 'redux-ui-router';
 import {
@@ -18,7 +18,9 @@ export class GuestsFormComponentController {
   action: string;
   form: ng.IFormController;
   get: Function;
+  getLookup: Function;
   hasError: any;
+  model: any;
   resetModel: Function;
   router: any;
   save: Function;
@@ -31,7 +33,7 @@ export class GuestsFormComponentController {
     private $ngRedux: ngRedux.INgRedux,
     private CitiesService: CitiesService,
     private GuestsService: GuestsService,
-    private ModalService: ModalService,
+    private LookupService: LookupService,
   ) {
     'ngInject';
     this.unsubscribe = this.$ngRedux.connect(
@@ -126,12 +128,17 @@ export class GuestsFormComponentController {
     setTimeout(() => jQuery('guests-form #se-nazione_nascita').focus(), 10);
   }
 
-  submit(model) {
+  saveAndStay() {
+    this.submit(this.model, true);
+  }
+
+  submit(model, stay) {
     if (this.form.$valid) {
       return this.save(model)
         .then(() => this.get())
-        .then(() => this._dismissModal())
-        .then(() => this.GuestsService.toaster.success('Utente salvato.'));
+        .then(() => !stay ? this.stateGo('guests') : null)
+        .then(() => this.GuestsService.toaster.success('Utente salvato.'))
+        .then(() => this.getLookup());
     }
 
     this.GuestsService.toaster.error('Sono presenti degli errori. Controlla e riprova.');
@@ -144,15 +151,13 @@ export class GuestsFormComponentController {
    * PRIVATES
    */
 
-  private _dismissModal() {
-    this.ModalService.close('guestsForm');
-  }
-
   private _mapStateToThis(state) {
     return this.GuestsService.mapStateToThisForm()(state);
   }
 
   private _mapDispatchToThis = dispatch => {
-    return this.GuestsService.mapDispatchToThisForm()(dispatch);
+    return this.GuestsService.mapDispatchToThisForm({
+      getLookup: () => dispatch(this.LookupService.getLookup()),
+    })(dispatch);
   };
 }
