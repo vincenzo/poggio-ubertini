@@ -1,6 +1,4 @@
-<ew-page-header id="top" size="compact" on-action="$ctrl.onAction(action, value)" header-title="{{::$ctrl.model.nome}}">
-  <next-title></next-title>
-
+<ew-page-header id="top" size="compact" on-action="$ctrl.onAction(action, value)" header-title="Visualizza campo">
   <right-side>
     <button ng-if="$ctrl.isEdit()" class="btn btn-sm btn-default btn-flat btn-condensed pull-right" type="button"
       ng-click="$ctrl.stateReload($ctrl.router.currentState.name)">
