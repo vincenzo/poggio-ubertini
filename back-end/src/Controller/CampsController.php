@@ -44,4 +44,5 @@ class CampsController extends AppController
     public function _entityQuery($query, $id){
         return $query;
     }
+
 }

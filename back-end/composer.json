@@ -32,7 +32,7 @@
         "lsolesen/pel": "0.9.*",
         "friendsofcake/cakepdf": "^3.2",
         "connehito/cake-sentry": "^1.0",
-        "dereuromark/cakephp-queue": "dev-master",
+        "dereuromark/cakephp-queue": "3.16.2",
         "cakemanager/cakephp-utils": "dev-master",
         "mfrascati/utils" : "master"
     },
