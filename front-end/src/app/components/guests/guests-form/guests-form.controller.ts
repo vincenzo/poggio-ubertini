@@ -2,7 +2,6 @@ import { LookupService } from './../../../vendors/ew-angularjs-utils/components/
 import { CitiesService } from './../../cities/cities.service';
 import * as jQuery from 'jquery';
 import ngRedux from 'ng-redux';
-import { ModalService } from '../../../vendors/ew-angularjs-utils/components/modal/modal.service';
 import { scrollToElement } from '../../../vendors/ew-angularjs-utils/utils/scroll-to-top';
 import { stateGo } from 'redux-ui-router';
 import {
@@ -21,6 +20,7 @@ export class GuestsFormComponentController {
   get: Function;
   getLookup: Function;
   hasError: any;
+  model: any;
   resetModel: Function;
   router: any;
   save: Function;
@@ -34,7 +34,6 @@ export class GuestsFormComponentController {
     private CitiesService: CitiesService,
     private GuestsService: GuestsService,
     private LookupService: LookupService,
-    private ModalService: ModalService,
   ) {
     'ngInject';
     this.unsubscribe = this.$ngRedux.connect(
@@ -129,11 +128,15 @@ export class GuestsFormComponentController {
     setTimeout(() => jQuery('guests-form #se-nazione_nascita').focus(), 10);
   }
 
-  submit(model) {
+  saveAndStay() {
+    this.submit(this.model, true);
+  }
+
+  submit(model, stay) {
     if (this.form.$valid) {
       return this.save(model)
         .then(() => this.get())
-        .then(() => this._dismissModal())
+        .then(() => !stay ? this.stateGo('guests') : null)
         .then(() => this.GuestsService.toaster.success('Utente salvato.'))
         .then(() => this.getLookup());
     }
@@ -147,10 +150,6 @@ export class GuestsFormComponentController {
   /**
    * PRIVATES
    */
-
-  private _dismissModal() {
-    this.ModalService.close('guestsForm');
-  }
 
   private _mapStateToThis(state) {
     return this.GuestsService.mapStateToThisForm()(state);
