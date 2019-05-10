@@ -32,7 +32,7 @@ if(APP_ENV != 'dev')
     $db['host'] = 'localhost';
     $db['database'] = 'xpoggioubertini';
     $db['username'] = 'poggioubertini-usr';
-    $db['password'] = 'fixme';
+    $db['password'] = 'Fr$hy674%4';
 
     $fullBaseUrl = 'https://poggioubertini.entheosweb.it/';
     $pdfFullBaseUrl = $fullBaseUrl;
