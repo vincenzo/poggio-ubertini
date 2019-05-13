@@ -14,6 +14,7 @@ RUN apt-get update && \
         php7.2-xml \
         libxrender1 \
         libfontconfig1 \
+        fontconfig xfonts-75dpi xfonts-base \
         php-imagick \
         git \
         zip \
@@ -38,9 +39,10 @@ COPY ./.htaccess /var/www/html
 # Update the default apache site with the config we created.
 ADD apache-config.conf /etc/apache2/sites-available/000-default.conf
 
-# Copia wkhtmltopdf
-ADD http://massimofrascati.it/static/wkhtmltopdf.zip /tmp
-RUN unzip /tmp/wkhtmltopdf.zip -d /usr/bin && chmod +x /usr/bin/wkhtmltopdf && rm /tmp/wkhtmltopdf.zip
+# Installa wkhtmltopdf
+ADD https://downloads.wkhtmltopdf.org/0.12/0.12.5/wkhtmltox_0.12.5-1.bionic_amd64.deb ./
+RUN dpkg -i wkhtmltox_0.12.5-1.bionic_amd64.deb
+RUN apt install -f 
 
 # Genera locale IT
 RUN locale-gen it_IT.UTF-8
