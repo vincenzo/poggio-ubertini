@@ -59,8 +59,6 @@ export class ReservationsComponentController {
   }
 
   private _mapDispatchToThis = dispatch => {
-    return this.ReservationsService.mapDispatchToThisIndex({
-      filterActive: model => dispatch(this.ReservationsService.filterActive(model)),
-    })(dispatch);
+    return this.ReservationsService.mapDispatchToThisIndex()(dispatch);
   };
 }

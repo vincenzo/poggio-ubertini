@@ -1,25 +1,43 @@
 import { EwCommonController } from '../../../vendors/ew-angularjs-utils/common/common-controller';
 
+import { ReservationsService } from './../../reservations/reservations.service';
 import { LookupService } from './../../../vendors/ew-angularjs-utils/components/lookup/lookup.service';
 import { CitiesService } from './../../cities/cities.service';
 import { GuestsService } from '../guests.service';
 
 export class GuestsFormComponentController extends EwCommonController {
 
+  saveReservation: Function;
+
   constructor(
     $ngRedux,
     private GuestsService: GuestsService,
+    private ReservationsService: ReservationsService,
     private CitiesService: CitiesService,
     private LookupService: LookupService,
   ) {
     'ngInject';
     super($ngRedux, GuestsService);
-    console.log('fromParent', this.fromParent);
+    this.config = {
+      formId: '#guests-form',
+      parentIdParam: 'id',
+      parentRoute: 'guests',
+      saveError: 'Sono presenti degli errori. Controlla e riprova.',
+      saveSuccess: 'Ospite salvato.',
+      titleEntity: 'ospite',
+    };
   }
 
-  $onInit() {
-    super.$onInit();
-    console.log('faccio anche il mio');
+  afterGet(stay: any, model: any, response: any) {
+    if (!this.fromParent) {
+      return super.afterGet(stay, model, response);
+    }
+
+    return this.saveReservation({
+      camp_id: this.parentId,
+      guest_id: response.id,
+    })
+      .then(() => !stay ? this.stateGo('camps.view') : null);
   }
 
   afterSubmit() {
@@ -101,9 +119,9 @@ export class GuestsFormComponentController extends EwCommonController {
   }
 
   getMapDispatchToThisParams(dispatch) {
-    console.log('sovrascrivo le azioni passando un oggetto aggiornato');
     return {
       getLookup: () => dispatch(this.LookupService.getLookup()),
+      saveReservation: model => dispatch(this.ReservationsService.save(model)),
     };
   }
 

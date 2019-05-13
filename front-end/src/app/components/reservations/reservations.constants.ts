@@ -2,10 +2,10 @@ import { generateConstants } from '../../vendors/ew-angularjs-utils/utils/genera
 
 const domain = 'RESERVATIONS';
 const custom = {
-  TOGGLE_ACTIVE: `${domain}/TOGGLE_ACTIVE`,
-  TOGGLE_ACTIVE_FULFILLED: `${domain}/TOGGLE_ACTIVE_FULFILLED`,
-  TOGGLE_ACTIVE_PENDING: `${domain}/TOGGLE_ACTIVE_PENDING`,
-  TOGGLE_ACTIVE_REJECTED: `${domain}/TOGGLE_ACTIVE_REJECTED`,
+  MULTI_ACTIONS: `${domain}/MULTI_ACTIONS`,
+  MULTI_ACTIONS_FULFILLED: `${domain}/MULTI_ACTIONS_FULFILLED`,
+  MULTI_ACTIONS_PENDING: `${domain}/MULTI_ACTIONS_PENDING`,
+  MULTI_ACTIONS_REJECTED: `${domain}/MULTI_ACTIONS_REJECTED`,
 };
 const constants = generateConstants(domain, custom);
 

@@ -21,7 +21,7 @@
 
           <ibox-content>
             <row style="grid-template-columns: 1fr 1fr 100px 160px">
-              <ew-text name="cognome" label="Cognome" value="$ctrl.model.cognome" on-change="$ctrl.updateModel($event)">
+              <ew-text name="cognome" label="Cognome" value="$ctrl.model.cognome" on-change="$ctrl.updateModel($event)" focus="true">
               </ew-text>
               <ew-text name="nome" label="Nome" value="$ctrl.model.nome" on-change="$ctrl.updateModel($event)">
               </ew-text>
@@ -38,7 +38,7 @@
 
             <row style="grid-template-columns: 120px 1fr 140px 40px">
               <ew-datepicker name="data_nascita" label="Data di nascita" value="$ctrl.model.data_nascita"
-                on-change="$ctrl.updateModel($event)"></ew-datepicker>
+                on-change="$ctrl.updateModel($event)" required="true"></ew-datepicker>
               <ew-autocomplete name="citta_nascita" placeholder="Cerca un comune..." label="Città di nascita"
                 label-prop="comune" model="$ctrl.model.citta_nascita" on-query="$ctrl.queryCity($event)"
                 on-select="$ctrl.selectCittaNascita($event)" required="true">

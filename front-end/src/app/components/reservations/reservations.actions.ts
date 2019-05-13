@@ -12,6 +12,7 @@ export const {
   getAction,
   getFormDataAction,
   openFiltersPanelAction,
+  promiseAction,
   resetFiltersAction,
   resetModelAction,
   resetSortAction,

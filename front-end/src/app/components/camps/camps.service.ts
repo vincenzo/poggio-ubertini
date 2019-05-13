@@ -36,9 +36,66 @@ export class CampsService extends EwCommonService {
       { name: 'chiuso', type: 'boolean' },
       { name: 'created', type: 'date' },
       { name: 'modified', type: 'date' },
+      {
+        name: 'reservations',
+        type: 'array',
+        fields: [
+          { name: 'id', type: 'number' },
+          { name: 'camp_id', type: 'number' },
+          { name: 'guest_id', type: 'number' },
+          { name: 'room_id', type: 'number' },
+          { name: 'data_in', type: 'date' },
+          { name: 'data_out', type: 'date' },
+          { name: 'flag_in', type: 'boolean' },
+          { name: 'flag_out', type: 'boolean' },
+          { name: 'tipo_tariffa', type: 'string' },
+          { name: 'lenzuola', type: 'number' },
+          { name: 'asciugamani', type: 'number' },
+          { name: 'responsabile', type: 'boolean' },
+          { name: 'created', type: 'date' },
+          { name: 'modified', type: 'date' },
+          {
+            name: 'guest',
+            type: 'object',
+            fields: [
+              { name: 'id', type: 'number' },
+              { name: 'user_id', type: 'number' },
+              { name: 'nome', type: 'string' },
+              { name: 'cognome', type: 'string' },
+              { name: 'capogruppo', type: 'string' },
+              { name: 'documento_italiano', type: 'string' },
+              { name: 'documento_tipo', type: 'string' },
+              { name: 'documento_numero', type: 'string' },
+              { name: 'documento_data_rilascio', type: 'string' },
+              { name: 'documento_data_scadenza', type: 'date' },
+              { name: 'documento_rilasciato_ente', type: 'string' },
+              { name: 'documento_rilasciato_comune', type: 'string' },
+              { name: 'data_nascita', type: 'date' },
+              { name: 'citta_nascita', type: 'string' },
+              { name: 'nazione_nascita', type: 'string' },
+              { name: 'provincia_nascita', type: 'string' },
+              { name: 'cittadinanza_italiana', type: 'string' },
+              { name: 'indirizzo', type: 'string' },
+              { name: 'citta', type: 'string' },
+              { name: 'nazione', type: 'string' },
+              { name: 'cap', type: 'string' },
+              { name: 'provincia', type: 'string' },
+              { name: 'residente_montespertoli', type: 'boolean' },
+              { name: 'codice_fiscale', type: 'string' },
+              { name: 'genere', type: 'string' },
+              { name: 'privacy', type: 'boolean' },
+              { name: 'socio', type: 'boolean' },
+              { name: 'disabile', type: 'boolean' },
+              { name: 'note', type: 'string' },
+              { name: 'created', type: 'date' },
+              { name: 'modified', type: 'date' },
+            ]
+          }
+        ]
+      }
     ];
 
-    this.ignoreFieldsOnSave = ['created', 'modified'];
+    this.ignoreFieldsOnSave = ['created', 'modified', 'reservations'];
   }
 
   filterActive = value => {
