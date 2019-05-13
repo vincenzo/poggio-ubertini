@@ -1,4 +1,6 @@
+import { GuestsService } from './../guests/guests.service';
 import * as angular from 'angular';
+import ngRedux from 'ng-redux';
 
 import { CampsComponent } from './camps.component';
 import { CampFormComponent } from './camp-form/camp-form.component';
@@ -6,7 +8,7 @@ import { CampViewComponent } from './camp-view/camp-view.component';
 
 import { AppService } from '../../common/app/app.service';
 import { CampsService } from './camps.service';
-import { StateProvider } from '@uirouter/angularjs';
+import { StateProvider, StateParams } from '@uirouter/angularjs';
 
 import { CampsFiltersModule } from './camps-filters/camps-filters.module';
 
@@ -102,6 +104,62 @@ export const CampsModule = angular.module('components.camps', [
             admin: true,
           },
         },
+      })
+
+      /**
+       * OSPITI
+       */
+      .state('camps.view.guests', {
+        url: '/guests',
+        redirectTo: 'camps.view.guests.add',
+      })
+      .state('camps.view.guests.add', {
+        url: '/add',
+        views: {
+          '@app': {
+            component: 'guestsForm',
+          },
+        },
+        resolve: {
+          action: () => 'add',
+          data: ($ngRedux: ngRedux.INgRedux, AppService, GuestsService: GuestsService, $stateParams: StateParams) => {
+            'ngInject';
+            $ngRedux.dispatch(AppService.setActiveForm('guests'));
+            return $ngRedux.dispatch(GuestsService.getFormData(null, {}));
+          }
+        },
+        data: {
+          form: true,
+          scrollToTop: false,
+          requiredAuth: true,
+          roles: {
+            admin: true,
+          },
+        }
+      })
+      .state('camps.view.guests.edit', {
+        url: '/edit/:guestId',
+        views: {
+          '@app': {
+            component: 'guestsForm',
+          },
+        },
+        resolve: {
+          action: () => 'edit',
+          data: ($ngRedux: ngRedux.INgRedux, AppService, GuestsService: GuestsService, $stateParams: StateParams) => {
+            'ngInject';
+            $ngRedux.dispatch(AppService.setActiveForm('guests'));
+            return $ngRedux.dispatch(GuestsService.getFormData($stateParams.guestId));
+          }
+        },
+        data: {
+          form: true,
+          scrollToTop: false,
+          requiredAuth: true,
+          roles: {
+            admin: true,
+          },
+        }
       })
       ;
   })

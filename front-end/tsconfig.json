@@ -4,14 +4,19 @@
     "target": "ESNext",
     "noImplicitAny": false,
     "removeComments": true,
-    "lib": ["es2015", "es2017", "dom"],
+    "lib": [
+      "es2015",
+      "es2017",
+      "dom"
+    ],
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "sourceMap": true,
     "jsx": "react",
     "moduleResolution": "node",
     "noEmitHelpers": true,
-    "importHelpers": true
+    "importHelpers": true,
+    // "strict": true
   },
   "compileOnSave": false,
   "include": [
