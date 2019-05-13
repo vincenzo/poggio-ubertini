@@ -11,7 +11,7 @@ export class RoomsService extends EwCommonService {
   ) {
     'ngInject';
 
-    super('rooms', {}, EwServerService);
+    super('rooms', null, EwServerService);
 
     this.dbFields = [
       { name: 'id', type: 'number' },
@@ -24,10 +24,6 @@ export class RoomsService extends EwCommonService {
 
     this.ignoreFieldsOnSave = ['created', 'modified'];
   }
-
-  filterActive = value => {
-    // return this.addFilterOnField('Rooms.active', value);
-  };
 
   /**
    * PRIVATES

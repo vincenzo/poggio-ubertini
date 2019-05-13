@@ -59,8 +59,6 @@ export class RoomsComponentController {
   }
 
   private _mapDispatchToThis = dispatch => {
-    return this.RoomsService.mapDispatchToThisIndex({
-      filterActive: model => dispatch(this.RoomsService.filterActive(model)),
-    })(dispatch);
+    return this.RoomsService.mapDispatchToThisIndex()(dispatch);
   };
 }

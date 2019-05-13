@@ -16,6 +16,10 @@ const INITIAL_STATE = fromJS({
       active: false,
       value: null,
     },
+    'Rooms.data': {
+      active: true,
+      value: new Date(),
+    },
   },
   filterPanel: {
     focusedField: '',
