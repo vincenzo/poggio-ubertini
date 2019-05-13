@@ -17,6 +17,10 @@ class CampsTable extends Table
         $this->setDisplayField('id');
         $this->setPrimaryKey('id');
 
+        $this->hasMany('Reservations', [
+            'dependent' => true,
+        ]);
+
         $this->addBehavior('Timestamp');
     }
 
