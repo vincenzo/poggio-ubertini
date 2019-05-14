@@ -103,7 +103,13 @@
               </row>
 
               <row style="grid-template-columns: 1fr 100px 100px">
-                <label>ACQUA</label>
+                <label>ACQUA pozzo</label>
+                <ew-numeric name="in" value="$ctrl.model.in1" on-change="$ctrl.updateModel($event)"></ew-numeric>
+                <ew-numeric name="out" value="$ctrl.model.out1" on-change="$ctrl.updateModel($event)"></ew-numeric>
+              </row>
+
+              <row style="grid-template-columns: 1fr 100px 100px">
+                <label>ACQUA comune</label>
                 <ew-numeric name="in" value="$ctrl.model.in1" on-change="$ctrl.updateModel($event)"></ew-numeric>
                 <ew-numeric name="out" value="$ctrl.model.out1" on-change="$ctrl.updateModel($event)"></ew-numeric>
               </row>

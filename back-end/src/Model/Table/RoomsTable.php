@@ -21,6 +21,9 @@ class RoomsTable extends Table
         $this->hasMany('Reservations', [
             'dependent' => true,
         ]);
+        $this->hasMany('RoomAvailabilities', [
+            'dependent' => true,
+        ]);
 
         $this->addBehavior('Timestamp');
     }
@@ -38,11 +41,12 @@ class RoomsTable extends Table
             ])
             ->groupBy('room_id')
         ;
-        logd($prenotazioni);
+        // logd($prenotazioni);
 
         return $query
             ->formatResults(function ($results){
                 return $results->map(function ($row) {
+                    logd($row);
                     // TODO
                     $row->posti_occupati = 0;
                     $row->posti_liberi = $row->posti_letto - $row->posti_occupati;
