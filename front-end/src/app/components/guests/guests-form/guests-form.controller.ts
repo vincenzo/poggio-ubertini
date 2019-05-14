@@ -37,6 +37,7 @@ export class GuestsFormComponentController extends EwCommonController {
       camp_id: this.parentId,
       guest_id: response.id,
     })
+      .then(() => this.getFormData(this.model.id))
       .then(() => !stay ? this.stateGo('camps.view') : null);
   }
 
