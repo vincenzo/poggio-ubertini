@@ -1,5 +1,6 @@
 import * as jQuery from 'jquery';
 import ngRedux from 'ng-redux';
+import { LookupService } from './../../../vendors/ew-angularjs-utils/components/lookup/lookup.service';
 import { ModalService } from '../../../vendors/ew-angularjs-utils/components/modal/modal.service';
 import { scrollToElement } from '../../../vendors/ew-angularjs-utils/utils/scroll-to-top';
 import { stateGo } from 'redux-ui-router';
@@ -17,6 +18,7 @@ export class StructuresFormComponentController {
   action: string;
   form: ng.IFormController;
   get: Function;
+  getLookup: Function;
   hasError: any;
   resetModel: Function;
   router: any;
@@ -29,6 +31,7 @@ export class StructuresFormComponentController {
     private $ngRedux: ngRedux.INgRedux,
     private StructuresService: StructuresService,
     private ModalService: ModalService,
+    private LookupService: LookupService,
   ) {
     'ngInject';
     this.unsubscribe = this.$ngRedux.connect(
@@ -57,6 +60,7 @@ export class StructuresFormComponentController {
     if (this.form.$valid) {
       return this.save(model)
         .then(() => this.get())
+        .then(() => this.getLookup())
         .then(() => this._dismissModal())
         .then(() => this.StructuresService.toaster.success('Struttura salvata'));
     }
@@ -80,6 +84,8 @@ export class StructuresFormComponentController {
   }
 
   private _mapDispatchToThis = dispatch => {
-    return this.StructuresService.mapDispatchToThisForm()(dispatch);
+    return this.StructuresService.mapDispatchToThisForm({
+      getLookup: () => dispatch(this.LookupService.getLookup()),
+    })(dispatch);
   };
 }
