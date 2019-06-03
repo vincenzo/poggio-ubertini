@@ -28,6 +28,16 @@ class RoomsTable extends Table
         $this->addBehavior('Timestamp');
     }
 
+    public function findDisponibile(Query $query, array $options){
+        return $query
+        ->contain('RoomAvailabilities', function($q) use ($options){
+            return $q->where([
+                'RoomAvailabilities.data_da >=' => $options['data_da'],
+                'RoomAvailabilities.data_a <='  => $options['data_a'],
+            ]);
+        });
+    }
+
     public function findOccupazione(Query $query, array $options)
     {
         $prenotazioni = $this->Reservations->find()
