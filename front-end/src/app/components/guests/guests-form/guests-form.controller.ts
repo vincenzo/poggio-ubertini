@@ -1,11 +1,11 @@
-import { EwCommonController } from '../../../vendors/ew-angularjs-utils/common/common-controller';
+import { EwCommonFormController } from '../../../vendors/ew-angularjs-utils/common/common-form-controller';
 
 import { ReservationsService } from './../../reservations/reservations.service';
 import { LookupService } from './../../../vendors/ew-angularjs-utils/components/lookup/lookup.service';
 import { CitiesService } from './../../cities/cities.service';
 import { GuestsService } from '../guests.service';
 
-export class GuestsFormComponentController extends EwCommonController {
+export class GuestsFormComponentController extends EwCommonFormController {
 
   saveReservation: Function;
 
@@ -19,7 +19,9 @@ export class GuestsFormComponentController extends EwCommonController {
     'ngInject';
     super($ngRedux, GuestsService);
     this.config = {
+      deleteSuccess: 'Ospite cancellato correttamente',
       formId: '#guests-form',
+      isModal: false,
       parentIdParam: 'id',
       parentRoute: 'guests',
       saveError: 'Sono presenti degli errori. Controlla e riprova.',

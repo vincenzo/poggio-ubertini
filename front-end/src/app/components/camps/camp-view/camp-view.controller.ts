@@ -1,9 +1,9 @@
 import * as moment from 'moment';
-import { EwCommonController } from '../../../vendors/ew-angularjs-utils/common/common-controller';
+import { EwCommonFormController } from '../../../vendors/ew-angularjs-utils/common/common-form-controller';
 import { CampsService } from '../camps.service';
 import { ReservationsService } from './../../reservations/reservations.service';
 
-export class CampViewComponentController extends EwCommonController {
+export class CampViewComponentController extends EwCommonFormController {
 
   multiActions: (action: 'check' | 'assignRoom', ids: number[], params) => Promise<any>;
 
@@ -16,7 +16,9 @@ export class CampViewComponentController extends EwCommonController {
     'ngInject';
     super($ngRedux, CampsService);
     this.config = {
+      deleteSuccess: 'Campo cancellato correttamente',
       formId: '#camps-form',
+      isModal: false,
       parentIdParam: 'id',
       parentRoute: 'camps',
       saveError: 'Sono presenti degli errori. Controlla e riprova.',
