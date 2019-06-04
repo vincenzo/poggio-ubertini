@@ -33,6 +33,8 @@
 
             <ew-checkbox name="capogruppo" label="Capogruppo" value="$ctrl.model.capogruppo"
               on-change="$ctrl.updateModel($event)"></ew-checkbox>
+              
+            <ew-text name="email" label="Email" value="$ctrl.model.email" ng-if="$ctrl.model.capogruppo" on-change="$ctrl.updateModel($event)"></ew-text>
 
             <hr>
 
