@@ -101,15 +101,26 @@
 
         </ibox-content>
       </ew-ibox>
+
+      <ew-ibox>
+        <ibox-title>
+          <h5>Ipotesi di spesa</h5>
+        </ibox-title>
+        <ibox-content>
+          <form name="$ctrl.form" novalidate>
+            <ew-readonly-input label="Spesa" value="$ctrl.model.ipotesi_spesa" type="money"></ew-readonly-input>
+            <upload-edit-row action="{{ $ctrl.action }}" can-delete="false" upload="$ctrl.model.upload">
+            </upload-edit-row>
+          </form>
+        </ibox-content>
+      </ew-ibox>
     </div>
 
   </row>
 
-  <row style="grid-template-columns: repeat(6, 1fr)" class="mar-top-2 mar-bottom-3">
+  <row style="grid-template-columns: repeat(4, 1fr)" class="mar-top-2 mar-bottom-3">
     <button type="button" class="btn btn-danger">Chiudi campo</button>
     <button type="button" class="btn btn-primary" ui-sref="camps.view.guests.add">Aggiungi iscritto</button>
-    <button type="button" class="btn btn-success">Ipotesi di spesa</button>
-    <button type="button" class="btn btn-warning">Camere campo</button>
     <button type="button" class="btn btn-default">Stampa lista utenti campo</button>
     <button type="button" class="btn btn-default">Stampa lista utenti questura</button>
   </row>
@@ -165,15 +176,21 @@
         </ew-ibox>
       </uib-tab>
 
-      <uib-tab index="1" heading="SPP ({{ $ctrl.model.spp.length }})" select="$ctrl.selectTab('spp')"
-        title="SPP (ctrl+2)">
-        <clients-spp-items after-upload-change="$ctrl.afterUploadChange()" on-delete="$ctrl.deleteSppItem($event)"
-          on-edit="$ctrl.editSppItem($event)" on-save="$ctrl.onAddItemSpp($event)"
-          on-set-missing-spp="$ctrl.onSetMissingSpp()" consultants="$ctrl.lookup.Consultants.list"
-          employees="$ctrl.model.employees" items="$ctrl.model.spp" items-missing="$ctrl.model.spp_missing"
-          items-incompleti="$ctrl.model.spp_incompleti" items-options="$ctrl.lookup.Items['4']"
-          is-auth="$ctrl.isAuthorized('spp')">
-        </clients-spp-items>
+      <uib-tab index="1" heading="Camere" select="$ctrl.selectTab('camere')" title="Camere (ctrl+2)">
+        <form name="$ctrl.form" novalidate>
+          <ew-search-input on-search="$ctrl.search($event)"></ew-search-input>
+          <ew-datepicker name="data_disponibilita" label="Data inizio" value="$ctrl.model.data_disponibilita"
+            on-change="$ctrl.updateModel($event)"></ew-datepicker>
+        </form>
+
+        <div class="table-responsive">
+          <p>Mostro le camere con un componente a griglia, come per la index.</p>
+          <p>Le mostro tutte, colorando in verde quelle assegnate al campo e grigine quelle non assegnate (rosse quelle
+            occupate?).</p>
+        </div>
+      </uib-tab>
+
+      <uib-tab index="2" heading="Documenti" select="$ctrl.selectTab('documenti')" title="Documenti (ctrl+3)">
       </uib-tab>
 
     </uib-tabset>

@@ -26,6 +26,14 @@ export class CampViewComponentController extends EwCommonFormController {
       title: 'Dati campo',
       titleEntity: 'campo',
     };
+
+    // FIXME: rimuovere il mock quando funziona il resto
+    this.model.upload = {
+      id: 1,
+      public_filename: 'prova',
+      presigned_url: 'http://eliagentili.it',
+      created: new Date(),
+    };
   }
 
   getMapDispatchToThisParams(dispatch) {
