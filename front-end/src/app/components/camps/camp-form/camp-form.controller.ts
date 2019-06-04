@@ -1,16 +1,19 @@
 import * as jQuery from 'jquery';
 import ngRedux from 'ng-redux';
 import { scrollToElement } from '../../../vendors/ew-angularjs-utils/utils/scroll-to-top';
+import { UploadsService } from '../../../vendors/ew-angularjs-utils/components/uploads/uploads.service';
 import { stateGo } from 'redux-ui-router';
 
 import { CampsService } from '../camps.service';
 
 export class CampFormComponentController {
 
+  auth: any;
   action: string;
   activeTab: number;
   form: ng.IFormController;
   get: Function;
+  getFormData: Function;
   // FIXME: mock per mostrare qualcosa in test
   mockGuests: any[];
   hasError: any;
@@ -23,12 +26,14 @@ export class CampFormComponentController {
   title: string;
   unsubscribe: Function;
   updateModel: Function;
+  uploadFile: Function;
 
   constructor(
     private $ngRedux: ngRedux.INgRedux,
     private $timeout: ng.ITimeoutService,
     private hotkeys,
     private CampsService: CampsService,
+    private UploadsService: UploadsService,
   ) {
     'ngInject';
     this.unsubscribe = this.$ngRedux.connect(
@@ -63,8 +68,26 @@ export class CampFormComponentController {
     return this.action === 'add';
   }
 
+  isAuthorized(element: string) {
+    switch (element) {
+      case 'ipotesiSpesa':
+        return ['admin'].indexOf(this.auth.user.role) > -1;
+      default:
+        return false;
+    }
+  }
+
   isEdit() {
     return this.action === 'edit';
+  }
+
+  onUploadFile(event) {
+    return this._uploadFile(event.value);
+  }
+
+  reloadFormData() {
+    return this.updateModel({ name: 'upload', value: null, skipHash: true })
+      .then(() => this.getFormData(this.model.id));
   }
 
   selectTab(tabName: string) {
@@ -129,6 +152,30 @@ export class CampFormComponentController {
   }
 
   private _mapDispatchToThis = dispatch => {
-    return this.CampsService.mapDispatchToThisForm()(dispatch);
+    return this.CampsService.mapDispatchToThisForm({
+      uploadFile: model => dispatch(this.UploadsService.upload(model)),
+    })(dispatch);
   };
+
+  private _uploadFile(file) {
+
+    // console.log('modelName', modelName);
+    // console.log('file', file);
+    // console.log('entity', entity);
+
+    if (!file) {
+      return Promise.resolve(this.model);
+    }
+
+    this.uploadFile({
+      categoria: 'ipotesi_spesa',
+      file: file,
+      model_id: this.model.id,
+      model_name: 'Camps',
+    })
+      .then(({ sameRoute, upload }) => sameRoute && this.updateModel({ name: 'upload', value: upload, skipHash: true }))
+      .then(() => this.getFormData(this.model.id));
+
+    return Promise.resolve(this.model);
+  }
 }

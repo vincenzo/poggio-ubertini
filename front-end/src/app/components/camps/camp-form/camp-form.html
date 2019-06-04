@@ -85,7 +85,8 @@
           </ibox-title>
           <ibox-content>
             <ew-ui-select name="capogruppo_id" label="Capogruppo" on-change="$ctrl.updateCapogruppo($event)"
-              options="::$ctrl.lookup.Guests.capigruppo" placeholder="Cerca capogruppo..." value="$ctrl.model.capogruppo_id">
+              options="::$ctrl.lookup.Guests.capigruppo" placeholder="Cerca capogruppo..."
+              value="$ctrl.model.capogruppo_id">
             </ew-ui-select>
           </ibox-content>
         </ew-ibox>
@@ -141,13 +142,29 @@
             </section>
           </ibox-content>
         </ew-ibox>
+
+        <ew-ibox ng-if="$ctrl.isEdit() && $ctrl.isAuthorized('ipotesiSpesa')">
+          <ibox-title>
+            <h5>Ipotesi di spesa</h5>
+          </ibox-title>
+          <ibox-content>
+            <ew-money name="ipotesi_spesa" label="Spesa" value="$ctrl.model.ipotesi_spesa"
+              on-change="$ctrl.updateModel($event)">
+            </ew-money>
+
+            <upload-edit-row action="{{ $ctrl.action }}" on-reload-form-data="$ctrl.reloadFormData()"
+              on-upload-file="$ctrl.onUploadFile($event)" required="false" upload="$ctrl.model.upload">
+            </upload-edit-row>
+          </ibox-content>
+        </ew-ibox>
       </div>
 
     </row>
 
     <ew-save-button form-dirty="$ctrl.form.$dirty" alt-save="$ctrl.saveAndStay()">
       <buttons>
-        <a class="btn btn-default btn-sm" ui-sref="camps.view({ id: $ctrl.model.id })" uib-tooltip="Dettagli campo" ng-if="$ctrl.isEdit()">
+        <a class="btn btn-default btn-sm" ui-sref="camps.view({ id: $ctrl.model.id })" uib-tooltip="Dettagli campo"
+          ng-if="$ctrl.isEdit()">
           <i class="far fa-fw fa-info"></i> DETTAGLI
         </a>
       </buttons>
