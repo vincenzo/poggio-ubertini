@@ -114,50 +114,69 @@
     <button type="button" class="btn btn-default">Stampa lista utenti questura</button>
   </row>
 
-  <ew-ibox>
-    <ibox-title>
-      <h5>Ospiti</h5>
-    </ibox-title>
-    <ibox-content>
-      <div class="table-responsive">
-        <table class="table table-striped table-bordered table-hover">
-          <thead>
-            <tr>
-              <th class="w_xs text-center">
-                <input type="checkbox">
-              </th>
-              <th>Nome</th>
-              <th>Cognome</th>
-              <th>Arrivo</th>
-              <th>Partenza</th>
-              <th class="actions"></th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr ng-repeat="r in $ctrl.model.reservations track by r.id">
-              <td class="w_xs text-center">
-                <input type="checkbox">
-              </td>
-              <td>{{ r.guest.nome }}</td>
-              <td>{{ r.guest.cognome }}</td>
-              <td>
-                <span ng-if="!r.data_in"><label><input type="checkbox" ng-model="r.flag_in"
-                      ng-change="$ctrl.checkIn(r)"> Check in</label></span>
-                <span ng-if="r.data_in">{{ r.data_in | date:'dd/MM/yyyy' }}</span>
-              </td>
-              <td>
-                <span ng-if="!r.data_out"><label><input type="checkbox" ng-disabled="!r.data_in" ng-model="r.flag_out"
-                      ng-change="$ctrl.checkOut(r)"> Check out</label></span>
-                <span ng-if="r.data_out">{{ r.data_out | date:'dd/MM/yyyy' }}</span>
-              </td>
-              <td class="actions">
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </ibox-content>
-  </ew-ibox>
+  <div id="tabs">
+    <uib-tabset active="$ctrl.activeTab">
+
+      <uib-tab index="0" heading="Ospiti ({{ $ctrl.model.reservations.length }})" select="$ctrl.selectTab('ospiti')"
+        title="Ospiti (ctrl+1)">
+        <ew-ibox>
+          <ibox-title>
+            <h5>Ospiti</h5>
+          </ibox-title>
+          <ibox-content>
+            <div class="table-responsive">
+              <table class="table table-striped table-bordered table-hover">
+                <thead>
+                  <tr>
+                    <th class="w_xs text-center">
+                      <input type="checkbox">
+                    </th>
+                    <th>Nome</th>
+                    <th>Cognome</th>
+                    <th>Arrivo</th>
+                    <th>Partenza</th>
+                    <th class="actions"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr ng-repeat="r in $ctrl.model.reservations track by r.id">
+                    <td class="w_xs text-center">
+                      <input type="checkbox">
+                    </td>
+                    <td>{{ r.guest.nome }}</td>
+                    <td>{{ r.guest.cognome }}</td>
+                    <td>
+                      <span ng-if="!r.data_in"><label><input type="checkbox" ng-model="r.flag_in"
+                            ng-change="$ctrl.checkIn(r)"> Check in</label></span>
+                      <span ng-if="r.data_in">{{ r.data_in | date:'dd/MM/yyyy' }}</span>
+                    </td>
+                    <td>
+                      <span ng-if="!r.data_out"><label><input type="checkbox" ng-disabled="!r.data_in"
+                            ng-model="r.flag_out" ng-change="$ctrl.checkOut(r)"> Check out</label></span>
+                      <span ng-if="r.data_out">{{ r.data_out | date:'dd/MM/yyyy' }}</span>
+                    </td>
+                    <td class="actions">
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </ibox-content>
+        </ew-ibox>
+      </uib-tab>
+
+      <uib-tab index="1" heading="SPP ({{ $ctrl.model.spp.length }})" select="$ctrl.selectTab('spp')"
+        title="SPP (ctrl+2)">
+        <clients-spp-items after-upload-change="$ctrl.afterUploadChange()" on-delete="$ctrl.deleteSppItem($event)"
+          on-edit="$ctrl.editSppItem($event)" on-save="$ctrl.onAddItemSpp($event)"
+          on-set-missing-spp="$ctrl.onSetMissingSpp()" consultants="$ctrl.lookup.Consultants.list"
+          employees="$ctrl.model.employees" items="$ctrl.model.spp" items-missing="$ctrl.model.spp_missing"
+          items-incompleti="$ctrl.model.spp_incompleti" items-options="$ctrl.lookup.Items['4']"
+          is-auth="$ctrl.isAuthorized('spp')">
+        </clients-spp-items>
+      </uib-tab>
+
+    </uib-tabset>
 
 
-</div>
+  </div>
