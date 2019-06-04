@@ -23,15 +23,9 @@ class UploadsTable extends Table
 
         $this->addBehavior('Timestamp');
 
-        $this->belongsTo('BuyDocuments', [
+        $this->belongsTo('Camps', [
             'foreignKey' => 'model_id',
-            'conditions' => ['model_name' => 'BuyDocuments'],
-            'joinType' => 'INNER'
-        ]);
-
-        $this->belongsTo('EmployeeDocuments', [
-            'foreignKey' => 'model_id',
-            'conditions' => ['model_name' => 'EmployeeDocuments'],
+            'conditions' => ['model_name' => 'Camps'],
             'joinType' => 'INNER'
         ]);
     }
