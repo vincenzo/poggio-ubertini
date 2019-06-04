@@ -37,7 +37,6 @@ export class GuestsService extends EwCommonService {
       { name: 'nazione', type: 'string' },
       { name: 'cap', type: 'number' },
       { name: 'provincia', type: 'string' },
-      { name: 'residente_montespertoli', type: 'string' },
       { name: 'codice_fiscale', type: 'string' },
       { name: 'genere', type: 'string' },
       { name: 'privacy', type: 'boolean' },
