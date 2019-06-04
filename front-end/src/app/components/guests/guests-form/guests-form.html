@@ -33,6 +33,8 @@
 
             <ew-checkbox name="capogruppo" label="Capogruppo" value="$ctrl.model.capogruppo"
               on-change="$ctrl.updateModel($event)"></ew-checkbox>
+              
+            <ew-text name="email" label="Email" value="$ctrl.model.email" ng-if="$ctrl.model.capogruppo" on-change="$ctrl.updateModel($event)"></ew-text>
 
             <hr>
 
@@ -90,10 +92,7 @@
                 on-change="$ctrl.updateModel($event)"></ew-text>
               <ew-text name="cap" label="CAP" value="$ctrl.model.cap" on-change="$ctrl.updateModel($event)"></ew-text>
             </row>
-
-            <ew-checkbox name="residente_montespertoli" label="Residente nel comune di Montespertoli"
-              value="$ctrl.model.residente_montespertoli" on-change="$ctrl.updateModel($event)"></ew-checkbox>
-
+            
             <hr>
 
             <ew-textarea name="note" label="Note / Allergie" value="$ctrl.model.note" rows="3"

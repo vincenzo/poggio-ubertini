@@ -53,30 +53,13 @@ class Upload extends Entity
     public function generateFileDir()
     {
         $folderName = [
-            'EmployeeContracts' => 'Contratti',
-            'EmployeeCus'       => 'CU',
-            'EmployeeDocuments' => 'Documenti',
-            'EmployeePaychecks' => 'BustePaga',
-            'EmployeesCerts'    => 'Certificazioni',
+            'Camps' => 'Campi',
         ];
 
         switch($this->model_name)
         {
-            case 'BuyDocuments':
-                $this->file_dir = 'DocumentiAcquisto' . DS . date('Y') . DS . date('m');
-                break;
-            case 'Invoices':
-                $this->file_dir = 'Fatture' . DS . date('Y') . DS . date('m');
-                break;
-            case 'EmployeeContracts':
-            case 'EmployeeCus':
-            case 'EmployeeDocuments':
-            case 'EmployeePaychecks':
-            case 'EmployeesCerts':
-                if(empty($this->extra_data['employee_id']))
-                    throw new ErrorException("Non ho l'employee id in extra data");
-
-                $this->file_dir = 'Dipendenti' . DS . $this->extra_data['employee_id'] . DS . $folderName[$this->model_name];
+            case 'Camps':
+                $this->file_dir = 'Campi' . DS . date('Y') . DS . date('m');
                 break;
             default:
                 throw new ErrorException("Gestisci questo model in UploadEntity->generateFileDir!");
@@ -92,36 +75,10 @@ class Upload extends Entity
         $pinfo = pathinfo($oldName);
         $this->estensione = strtolower($pinfo['extension']);
 
-        if($this->model_name[0] == 'E')
-        {
-            $contain = array_merge(['Employees'], ($this->model_name == 'EmployeesCerts' ? ['Items'] : []));
-            $e = \Cake\ORM\TableRegistry::get($this->model_name)->findById($this->model_id)->contain($contain)->first();
-            $now = date('Y-m-d');
-            $dipendente = $e->employee->cognome_nome;
-        }
-
         switch($this->model_name)
         {
-            case 'BuyDocuments':
+            case 'Camps':
                 $this->base_name = $pinfo['filename'];
-                break;
-            case 'Invoices':
-                $this->base_name = $pinfo['filename'];
-                break;
-            case 'EmployeeContracts':
-                $this->base_name = sprintf("Contratto %s %s %s", $e->tipo_contratto, $dipendente, $now);
-                break;
-            case 'EmployeeCus':
-                $this->base_name = sprintf("UNICO %d %s", $e->y, $dipendente);
-                break;
-            case 'EmployeeDocuments':
-                $this->base_name = sprintf("%s %s", $e->tipo, $dipendente);
-                break;
-            case 'EmployeePaychecks':
-                $this->base_name = sprintf("BP %s %d-%s", $dipendente, $e->y, $e->mese);
-                break;
-            case 'EmployeesCerts':
-                $this->base_name = sprintf("%s %s %s", $e->item->descrizione, $dipendente, $e->data->format('Y-m-d'));
                 break;
             default:
                 throw new ErrorException("Gestisci questo model in UploadEntity->generateFileName!");

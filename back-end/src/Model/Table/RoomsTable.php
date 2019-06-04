@@ -21,8 +21,21 @@ class RoomsTable extends Table
         $this->hasMany('Reservations', [
             'dependent' => true,
         ]);
+        $this->hasMany('RoomAvailabilities', [
+            'dependent' => true,
+        ]);
 
         $this->addBehavior('Timestamp');
+    }
+
+    public function findDisponibile(Query $query, array $options){
+        return $query
+        ->contain('RoomAvailabilities', function($q) use ($options){
+            return $q->where([
+                'RoomAvailabilities.data_da >=' => $options['data_da'],
+                'RoomAvailabilities.data_a <='  => $options['data_a'],
+            ]);
+        });
     }
 
     public function findOccupazione(Query $query, array $options)
@@ -38,11 +51,12 @@ class RoomsTable extends Table
             ])
             ->groupBy('room_id')
         ;
-        logd($prenotazioni);
+        // logd($prenotazioni);
 
         return $query
             ->formatResults(function ($results){
                 return $results->map(function ($row) {
+                    logd($row);
                     // TODO
                     $row->posti_occupati = 0;
                     $row->posti_liberi = $row->posti_letto - $row->posti_occupati;
