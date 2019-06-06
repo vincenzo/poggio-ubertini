@@ -4,6 +4,7 @@ import {
 } from '../../vendors/ew-angularjs-utils/common/redux-reducers-utilities';
 import { CAMPS } from './camps.constants';
 import { RESERVATIONS } from '../reservations/reservations.constants';
+import { ROOMS } from '../rooms/rooms.constants';
 import { fromJS } from 'immutable';
 
 /**
@@ -38,6 +39,11 @@ const INITIAL_STATE = fromJS({
     limit: 50,
     page_count: 0,
   },
+  rooms: {
+    hasError: false,
+    isLoading: false,
+    list: [],
+  },
   sort: {
     default: 'id',
     direction: 'DESC',
@@ -57,10 +63,38 @@ function multiActionsRejected(state, action) {
   return state.set('isLoading', false);
 }
 
+function getDisponibilitaFulfilled(state, action) {
+  return state
+    .setIn(['rooms', 'hasError'], false)
+    .setIn(['rooms', 'isLoading'], false)
+    .setIn(['rooms', 'list'], action.payload.data)
+    ;
+}
+
+function getDisponibilitaPending(state, action) {
+  return state
+    .setIn(['rooms', 'hasError'], false)
+    .setIn(['rooms', 'isLoading'], true)
+    .setIn(['rooms', 'list'], [])
+    ;
+}
+
+function getDisponibilitaRejected(state, action) {
+  return state
+    .setIn(['rooms', 'hasError'], true)
+    .setIn(['rooms', 'isLoading'], false)
+    .setIn(['rooms', 'list'], [])
+    ;
+}
+
 const customActions = {
   [RESERVATIONS.MULTI_ACTIONS_FULFILLED]: multiActionsFulfilled,
   [RESERVATIONS.MULTI_ACTIONS_PENDING]: multiActionsPending,
   [RESERVATIONS.MULTI_ACTIONS_REJECTED]: multiActionsRejected,
+
+  [ROOMS.GET_DISPONIBILITA_FULFILLED]: getDisponibilitaFulfilled,
+  [ROOMS.GET_DISPONIBILITA_PENDING]: getDisponibilitaPending,
+  [ROOMS.GET_DISPONIBILITA_REJECTED]: getDisponibilitaRejected,
 };
 const enables = ['all'];
 const reducer = getReducer(constants, INITIAL_STATE, enables, customActions);

@@ -53,6 +53,24 @@
           </div>
         </ibox-content>
       </ew-ibox>
+
+      <ew-ibox>
+        <ibox-title>
+          <h5>Ipotesi di spesa</h5>
+        </ibox-title>
+        <ibox-content>
+          <form name="$ctrl.form" novalidate>
+            <row style="grid-template-columns: 150px 1fr">
+              <ew-readonly-input label="Spesa" value="$ctrl.model.ipotesi_spesa" type="money"></ew-readonly-input>
+              <div>
+                <label>File</label>
+                <upload-edit-row action="{{ $ctrl.action }}" can-delete="false" upload="$ctrl.model.upload">
+                </upload-edit-row>
+              </div>
+            </row>
+          </form>
+        </ibox-content>
+      </ew-ibox>
     </div>
 
     <div>
@@ -104,25 +122,14 @@
 
       <ew-ibox>
         <ibox-title>
-          <h5>Ipotesi di spesa</h5>
+          <h5>Operazioni campo</h5>
         </ibox-title>
         <ibox-content>
-          <form name="$ctrl.form" novalidate>
-            <ew-readonly-input label="Spesa" value="$ctrl.model.ipotesi_spesa" type="money"></ew-readonly-input>
-            <upload-edit-row action="{{ $ctrl.action }}" can-delete="false" upload="$ctrl.model.upload">
-            </upload-edit-row>
-          </form>
+          <button type="button" class="btn btn-success">Consuntivo</button>
+          <button type="button" class="btn btn-danger">Chiudi campo</button>
         </ibox-content>
       </ew-ibox>
     </div>
-
-  </row>
-
-  <row style="grid-template-columns: repeat(4, 1fr)" class="mar-top-2 mar-bottom-3">
-    <button type="button" class="btn btn-danger">Chiudi campo</button>
-    <button type="button" class="btn btn-primary" ui-sref="camps.view.guests.add">Aggiungi iscritto</button>
-    <button type="button" class="btn btn-default">Stampa lista utenti campo</button>
-    <button type="button" class="btn btn-default">Stampa lista utenti questura</button>
   </row>
 
   <div id="tabs">
@@ -130,67 +137,81 @@
 
       <uib-tab index="0" heading="Ospiti ({{ $ctrl.model.reservations.length }})" select="$ctrl.selectTab('ospiti')"
         title="Ospiti (ctrl+1)">
-        <ew-ibox>
-          <ibox-title>
-            <h5>Ospiti</h5>
-          </ibox-title>
-          <ibox-content>
-            <div class="table-responsive">
-              <table class="table table-striped table-bordered table-hover">
-                <thead>
-                  <tr>
-                    <th class="w_xs text-center">
-                      <input type="checkbox">
-                    </th>
-                    <th>Nome</th>
-                    <th>Cognome</th>
-                    <th>Arrivo</th>
-                    <th>Partenza</th>
-                    <th class="actions"></th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr ng-repeat="r in $ctrl.model.reservations track by r.id">
-                    <td class="w_xs text-center">
-                      <input type="checkbox">
-                    </td>
-                    <td>{{ r.guest.nome }}</td>
-                    <td>{{ r.guest.cognome }}</td>
-                    <td>
-                      <span ng-if="!r.data_in">
-                        <button type="button" class="btn btn-primary" ng-click="$ctrl.checkIn(r)"
-                          ladda="$ctrl.camps.isLoading">Check in</button>
-                      </span>
-                      <span ng-if="r.data_in">{{ r.data_in | date:'dd/MM/yyyy' }}</span>
-                    </td>
-                    <td>
-                      <span ng-if="!r.data_out">
-                        <button type="button" class="btn btn-primary" ng-click="$ctrl.checkOut(r)"
-                          ladda="$ctrl.camps.isLoading">Check out</button>
-                      </span>
-                      <span ng-if="r.data_out">{{ r.data_out | date:'dd/MM/yyyy' }}</span>
-                    </td>
-                    <td class="actions">
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </ibox-content>
-        </ew-ibox>
+
+        <row style="grid-template-columns: repeat(3, 220px)">
+          <button type="button" class="btn btn-primary" ui-sref="camps.view.guests.add">Aggiungi iscritto</button>
+          <button type="button" class="btn btn-default">Stampa lista utenti campo</button>
+          <button type="button" class="btn btn-default">Stampa lista utenti questura</button>
+        </row>
+
+        <div class="table-responsive mar-top-1">
+          <table class="table table-striped table-bordered table-hover">
+            <thead>
+              <tr>
+                <th class="w_xs text-center">
+                  <input type="checkbox">
+                </th>
+                <th>Nome</th>
+                <th>Cognome</th>
+                <th>Arrivo</th>
+                <th>Partenza</th>
+                <th class="actions"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="r in $ctrl.model.reservations track by r.id">
+                <td class="w_xs text-center">
+                  <input type="checkbox">
+                </td>
+                <td>{{ r.guest.nome }}</td>
+                <td>{{ r.guest.cognome }}</td>
+                <td>
+                  <span ng-if="!r.data_in">
+                    <button type="button" class="btn btn-primary" ng-click="$ctrl.checkIn(r)"
+                      ladda="$ctrl.camps.isLoading">Check in</button>
+                  </span>
+                  <span ng-if="r.data_in">{{ r.data_in | date:'dd/MM/yyyy' }}</span>
+                </td>
+                <td>
+                  <span ng-if="!r.data_out">
+                    <button type="button" class="btn btn-primary" ng-click="$ctrl.checkOut(r)"
+                      ladda="$ctrl.camps.isLoading">Check out</button>
+                  </span>
+                  <span ng-if="r.data_out">{{ r.data_out | date:'dd/MM/yyyy' }}</span>
+                </td>
+                <td class="actions">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </uib-tab>
 
       <uib-tab index="1" heading="Camere" select="$ctrl.selectTab('camere')" title="Camere (ctrl+2)">
         <form name="$ctrl.form" novalidate>
-          <ew-search-input on-search="$ctrl.search($event)"></ew-search-input>
-          <ew-datepicker name="data_disponibilita" label="Data inizio" value="$ctrl.model.data_disponibilita"
-            on-change="$ctrl.updateModel($event)"></ew-datepicker>
+          <row style="grid-template-columns: 250px 120px 180px">
+            <div>
+              <label>Cerca</label>
+              <ew-search-input on-search="$ctrl.search($event)"></ew-search-input>
+            </div>
+            <ew-datepicker name="data_disponibilita" label="Data inizio" value="$ctrl.model.data_disponibilita"
+              on-change="$ctrl.updateModel($event)"></ew-datepicker>
+            <button type="button" class="btn btn-primary" style="height: 32px; margin-top: 22px;"
+              ng-click="$ctrl.getAvailability()" ng-disabled="!$ctrl.model.data_disponibilita"
+              ladda="$ctrl.camps.rooms.isLoading">Mostra
+              disponibilità</button>
+          </row>
         </form>
 
-        <div class="table-responsive">
-          <p>Mostro le camere con un componente a griglia, come per la index.</p>
-          <p>Le mostro tutte, colorando in verde quelle assegnate al campo e grigine quelle non assegnate (rosse quelle
-            occupate?).</p>
+        <div class="rooms mar-top-1">
+          <row style="grid-template-columns: repeat(9, 1fr)">
+            <div class="room" ng-repeat="r in $ctrl.camps.rooms.list">
+              <h3>{{ r.display_name }}</h3>
+              <h4>{{ r.posti_liberi }} / <span>{{ r.posti_letto }}</span></h4>
+              <div class="occupazione" style="height: {{ r.perc_occupazione }}%"></div>
+              <i class="has-servizi far fa-restroom" ng-if="r.servizi"></i>
+            </div>
+          </row>
         </div>
       </uib-tab>
 

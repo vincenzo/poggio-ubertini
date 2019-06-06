@@ -1,6 +1,8 @@
 import { EwServerService } from '../../vendors/ew-angularjs-utils/components/server/server.service';
 import { EwCommonService } from '../../vendors/ew-angularjs-utils/common/common-service';
 
+import { promiseAction } from './rooms.actions';
+
 export class RoomsService extends EwCommonService {
 
   apiPath: string;
@@ -25,7 +27,17 @@ export class RoomsService extends EwCommonService {
     this.ignoreFieldsOnSave = ['created', 'modified'];
   }
 
+  getDisponibilita = (dataDa: string, dataA?: string) => dispatch => {
+    return dispatch(promiseAction('GET_DISPONIBILITA', this._getDisponibilita(dataDa, dataA)));
+  }
+
   /**
    * PRIVATES
    */
+
+  private _getDisponibilita(data_da: string, data_a?: string) {
+    data_a = data_a || data_da;
+    return this.serverService.post(this.apiPath + '/getDisponibilita', { data_da, data_a })
+      .then((response: any) => response.data);
+  }
 }

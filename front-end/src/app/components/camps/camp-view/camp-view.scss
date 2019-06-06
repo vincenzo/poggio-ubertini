@@ -1,10 +1,61 @@
 camp-view {
-	#contatori {
-		label {
-			margin-top: 7px;
-		}
-		ew-readonly-input label {
-		    display: none;
-		}
-	}
+    #contatori {
+        label {
+            margin-top: 7px;
+        }
+
+        ew-readonly-input label {
+            display: none;
+        }
+    }
+
+    .rooms {
+        .room {
+            height: 8rem;
+            border: 2px solid #388E3C;
+            background-color: #4CAF50;
+            border-radius: 5px;
+            position: relative;
+
+            .occupazione {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                width: 100%;
+                background-color: #8BC34A;
+                z-index: 100;
+            }
+
+            .has-servizi {
+                position: absolute;
+                bottom: 6px;
+                right: 6px;
+                color: #FFEB3B;
+            }
+
+            h3,
+            h4 {
+                position: relative;
+                color: #FFF;
+                margin: 0;
+                text-align: center;
+                z-index: 101;
+            }
+
+            h3 {
+                font-size: 1.6rem;
+                margin-top: 1.6rem;
+                font-weight: normal;
+            }
+
+            h4 {
+                font-size: 1.6rem;
+
+                span {
+                    font-size: 2.4rem;
+                }
+            }
+
+        }
+    }
 }

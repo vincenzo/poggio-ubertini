@@ -1,3 +1,4 @@
+import { RoomsService } from './../../rooms/rooms.service';
 import * as moment from 'moment';
 import { EwCommonFormController } from '../../../vendors/ew-angularjs-utils/common/common-form-controller';
 import { CampsService } from '../camps.service';
@@ -5,12 +6,14 @@ import { ReservationsService } from './../../reservations/reservations.service';
 
 export class CampViewComponentController extends EwCommonFormController {
 
+  getDisponibilita: (dataDa: string, dataA?: string) => Promise<any>;
   multiActions: (action: 'check' | 'assignRoom', ids: number[], params) => Promise<any>;
 
   constructor(
     $ngRedux,
     hotkeys,
     CampsService: CampsService,
+    private RoomsService: RoomsService,
     private ReservationsService: ReservationsService,
   ) {
     'ngInject';
@@ -28,6 +31,7 @@ export class CampViewComponentController extends EwCommonFormController {
     };
 
     // FIXME: rimuovere il mock quando funziona il resto
+    this.model.ipotesi_spesa = 12343;
     this.model.upload = {
       id: 1,
       public_filename: 'prova',
@@ -38,6 +42,7 @@ export class CampViewComponentController extends EwCommonFormController {
 
   getMapDispatchToThisParams(dispatch) {
     return {
+      getDisponibilita: (dataDa, dataA?) => dispatch(this.RoomsService.getDisponibilita(dataDa, dataA)),
       multiActions: (a, i, p) => dispatch(this.ReservationsService.multiActions(a, i, p)),
     };
   }
@@ -60,6 +65,14 @@ export class CampViewComponentController extends EwCommonFormController {
       value: date || moment().format('YYYY-MM-DD'),
     };
     return this._check([reservation.id], params);
+  }
+
+  getAvailability() {
+    if (!this.model.data_disponibilita) {
+      return;
+    }
+
+    return this.getDisponibilita(this.model.data_disponibilita);
   }
 
   /**
