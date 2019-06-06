@@ -1,3 +1,4 @@
+import { CampsService } from './../../camps/camps.service';
 import { EwCommonFormController } from '../../../vendors/ew-angularjs-utils/common/common-form-controller';
 
 import { ReservationsService } from './../../reservations/reservations.service';
@@ -7,11 +8,13 @@ import { GuestsService } from '../guests.service';
 
 export class GuestsFormComponentController extends EwCommonFormController {
 
+  getCampFormData: Function;
   saveReservation: Function;
 
   constructor(
     $ngRedux,
     private GuestsService: GuestsService,
+    private CampsService: CampsService,
     private ReservationsService: ReservationsService,
     private CitiesService: CitiesService,
     private LookupService: LookupService,
@@ -40,7 +43,9 @@ export class GuestsFormComponentController extends EwCommonFormController {
       guest_id: response.id,
     })
       .then(() => this.getFormData(this.model.id))
-      .then(() => !stay ? this.stateGo('camps.view') : null);
+      .then(() => this.getCampFormData(this.parentId))
+      .then(() => !stay ? this.stateGo('camps.view') : null)
+      ;
   }
 
   afterSubmit() {
@@ -123,6 +128,7 @@ export class GuestsFormComponentController extends EwCommonFormController {
 
   getMapDispatchToThisParams(dispatch) {
     return {
+      getCampFormData: (id) => dispatch(this.CampsService.getFormData(id)),
       getLookup: () => dispatch(this.LookupService.getLookup()),
       saveReservation: model => dispatch(this.ReservationsService.save(model)),
     };
