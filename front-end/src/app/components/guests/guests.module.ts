@@ -2,6 +2,7 @@ import * as angular from 'angular';
 
 import { GuestsComponent } from './guests.component';
 import { GuestsFormComponent } from './guests-form/guests-form.component';
+import { GuestsMultipleAddComponent } from './guests-multiple-add/guests-multiple-add.component';
 
 import { AppService } from '../../common/app/app.service';
 import { GuestsService } from './guests.service';
@@ -79,9 +80,34 @@ export const GuestsModule = angular.module('components.guests', [
             admin: true,
           },
         },
-      });
+      })
+      .state('guests.multipleAdd', {
+        url: '/multiple',
+        views: {
+          '@app': {
+            component: 'guestsMultipleAdd',
+          },
+        },
+        resolve: {
+          action: () => 'edit',
+          data: ($ngRedux, AppService: AppService, GuestsService: GuestsService, $stateParams) => {
+            'ngInject';
+            $ngRedux.dispatch(AppService.setActiveForm('guests'));
+            return $ngRedux.dispatch(GuestsService.getFormData(null));
+          }
+        },
+        data: {
+          form: true,
+          requiredAuth: true,
+          roles: {
+            admin: true,
+          },
+        },
+      })
+      ;
   })
   .component('guests', GuestsComponent)
   .component('guestsForm', GuestsFormComponent)
+  .component('guestsMultipleAdd', GuestsMultipleAddComponent)
   .service('GuestsService', GuestsService)
   .name;
