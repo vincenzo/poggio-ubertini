@@ -157,13 +157,17 @@
                     <td>{{ r.guest.nome }}</td>
                     <td>{{ r.guest.cognome }}</td>
                     <td>
-                      <span ng-if="!r.data_in"><label><input type="checkbox" ng-model="r.flag_in"
-                            ng-change="$ctrl.checkIn(r)"> Check in</label></span>
+                      <span ng-if="!r.data_in">
+                        <button type="button" class="btn btn-primary" ng-click="$ctrl.checkIn(r)"
+                          ladda="$ctrl.camps.isLoading">Check in</button>
+                      </span>
                       <span ng-if="r.data_in">{{ r.data_in | date:'dd/MM/yyyy' }}</span>
                     </td>
                     <td>
-                      <span ng-if="!r.data_out"><label><input type="checkbox" ng-disabled="!r.data_in"
-                            ng-model="r.flag_out" ng-change="$ctrl.checkOut(r)"> Check out</label></span>
+                      <span ng-if="!r.data_out">
+                        <button type="button" class="btn btn-primary" ng-click="$ctrl.checkOut(r)"
+                          ladda="$ctrl.camps.isLoading">Check out</button>
+                      </span>
                       <span ng-if="r.data_out">{{ r.data_out | date:'dd/MM/yyyy' }}</span>
                     </td>
                     <td class="actions">

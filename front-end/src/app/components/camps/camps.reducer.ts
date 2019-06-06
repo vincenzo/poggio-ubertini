@@ -3,6 +3,7 @@ import {
   getReducer,
 } from '../../vendors/ew-angularjs-utils/common/redux-reducers-utilities';
 import { CAMPS } from './camps.constants';
+import { RESERVATIONS } from '../reservations/reservations.constants';
 import { fromJS } from 'immutable';
 
 /**
@@ -44,7 +45,22 @@ const INITIAL_STATE = fromJS({
   },
 });
 
+function multiActionsFulfilled(state, action) {
+  return state.set('isLoading', false);
+}
+
+function multiActionsPending(state, action) {
+  return state.set('isLoading', true);
+}
+
+function multiActionsRejected(state, action) {
+  return state.set('isLoading', false);
+}
+
 const customActions = {
+  [RESERVATIONS.MULTI_ACTIONS_FULFILLED]: multiActionsFulfilled,
+  [RESERVATIONS.MULTI_ACTIONS_PENDING]: multiActionsPending,
+  [RESERVATIONS.MULTI_ACTIONS_REJECTED]: multiActionsRejected,
 };
 const enables = ['all'];
 const reducer = getReducer(constants, INITIAL_STATE, enables, customActions);

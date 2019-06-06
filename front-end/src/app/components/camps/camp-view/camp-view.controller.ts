@@ -67,6 +67,7 @@ export class CampViewComponentController extends EwCommonFormController {
    */
 
   private _check(ids: number[], params: { type: string, value: string }) {
-    return this.multiActions('check', ids, params);
+    return this.multiActions('check', ids, params)
+      .then(() => this.getFormData(this.model.id));
   }
 }
