@@ -28,7 +28,7 @@ const INITIAL_STATE = fromJS({
       active: false,
       value: null,
     },
-    'Users.active': {
+    'Users.attivo': {
       active: true,
       value: '1',
     },

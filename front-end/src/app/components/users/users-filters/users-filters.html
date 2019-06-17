@@ -1,16 +1,13 @@
-<ew-filters-sidebar
-  field="{{ $ctrl.filterPanel.focusedField }}"
-  filters="$ctrl.filters"
-  is-open="$ctrl.filterPanel.isOpen"
-  on-change="$ctrl.updateModel($event)"
-  on-close="$ctrl.closeFiltersPanel()"
-  on-open="$ctrl.openFiltersPanel($ctrl.filterPanel.defaultField)"
-  on-reset="$ctrl.resetFiltersAndUpdate()"
+<ew-filters-sidebar field="{{ $ctrl.filterPanel.focusedField }}" filters="$ctrl.filters"
+  is-open="$ctrl.filterPanel.isOpen" on-change="$ctrl.updateModel($event)" on-close="$ctrl.closeFiltersPanel()"
+  on-open="$ctrl.openFiltersPanel($ctrl.filterPanel.defaultField)" on-reset="$ctrl.resetFiltersAndUpdate()"
   on-search="$ctrl.submit($ctrl.model)">
   <fields>
     <ew-filter-text label="Nome utente" name="Users.username"></ew-filter-text>
     <ew-filter-text label="Email" name="Users.email"></ew-filter-text>
-    <ew-filter-select label="Ruolo" name="Users.role" placeholder="TUTTI" options="::$ctrl.lookup.Users.roles"></ew-filter-select>
-    <ew-filter-select label="Attivo" name="Users.active" empty-value="false" placeholder="TUTTI" options="::$ctrl.lookup.App.BooleanWithAll"></ew-filter-select>
+    <ew-filter-select label="Ruolo" name="Users.role" placeholder="TUTTI" options="::$ctrl.lookup.Users.roles">
+    </ew-filter-select>
+    <ew-filter-select label="Attivo" name="Users.attivo" empty-value="false" placeholder="TUTTI"
+      options="::$ctrl.lookup.App.BooleanWithAll"></ew-filter-select>
   </fields>
 </ew-filters-sidebar>

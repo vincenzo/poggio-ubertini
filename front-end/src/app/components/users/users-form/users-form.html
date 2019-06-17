@@ -6,19 +6,23 @@
   <form ng-submit="$ctrl.submit($ctrl.model)" class="action-{{$ctrl.action}}" name="$ctrl.form" novalidate>
 
     <row style="grid-template-columns: 2fr 2fr 3fr">
-      <ew-text name="username" label="Nome utente" value="$ctrl.model.username" on-change="$ctrl.updateModel($event)" focus="true" required="true">
+      <ew-text name="username" label="Nome utente" value="$ctrl.model.username" on-change="$ctrl.updateModel($event)"
+        focus="true" required="true">
       </ew-text>
 
-      <ew-text name="password" label="Password" type="password" value="$ctrl.model.password" on-change="$ctrl.updateModel($event)">
+      <ew-text name="password" label="Password" type="password" value="$ctrl.model.password"
+        on-change="$ctrl.updateModel($event)">
       </ew-text>
 
       <ew-text name="email" label="Email" type="email" value="$ctrl.model.email" on-change="$ctrl.updateModel($event)">
       </ew-text>
 
-      <ew-select name="role" label="Ruolo" value="$ctrl.model.role" on-change="$ctrl.updateModel($event)" options="::$ctrl.lookup.Users.roles">
+      <ew-select name="role" label="Ruolo" value="$ctrl.model.role" on-change="$ctrl.updateModel($event)"
+        options="::$ctrl.lookup.Users.roles">
       </ew-select>
 
-      <ew-checkbox name="active" label="Attivo" value="$ctrl.model.active" on-change="$ctrl.updateModel($event)"></ew-checkbox>
+      <ew-checkbox name="attivo" label="Attivo" value="$ctrl.model.attivo" on-change="$ctrl.updateModel($event)">
+      </ew-checkbox>
     </row>
 
     <div class="text-right mar-top-1">

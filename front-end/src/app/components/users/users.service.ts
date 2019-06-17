@@ -20,12 +20,12 @@ export class UsersService extends EwCommonService {
       { name: 'password', type: 'password' },
       { name: 'email', type: 'string' },
       { name: 'role', type: 'string' },
-      { name: 'active', type: 'boolean' },
+      { name: 'attivo', type: 'boolean' },
     ];
   }
 
   filterActive = value => {
-    // return this.addFilterOnField('Users.active', value);
+    // return this.addFilterOnField('Users.attivo', value);
   };
 
   // getFilterSidebarFields() {
@@ -36,7 +36,7 @@ export class UsersService extends EwCommonService {
   //       { name: '-- TUTTI --', value: '' },
   //       { name: 'admin', value: 'admin' },
   //     ]),
-  //     inputSelect('Users.active', 'Attivo', '', [
+  //     inputSelect('Users.attivo', 'Attivo', '', [
   //       { name: '-- TUTTE --', value: '' },
   //       { name: 'SI', value: '1' },
   //       { name: 'NO', value: '0' },

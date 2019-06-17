@@ -54,16 +54,16 @@ function users() {
       {
         label: 'Attivo',
         filter: {
-          field: 'Users.active',
+          field: 'Users.attivo',
           type: 'boolean',
         },
         field: model => {
-          return model.active ?
+          return model.attivo ?
             '<b class="text-success"><i class="far fa-check"></i> SI</b>' :
             '<b class="text-danger"><i class="far fa-times"></i> NO</b>';
         },
         sort: {
-          field: 'active',
+          field: 'attivo',
         },
       },
     ],
