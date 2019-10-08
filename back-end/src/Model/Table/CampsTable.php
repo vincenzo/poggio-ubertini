@@ -21,6 +21,11 @@ class CampsTable extends Table
             'dependent' => true,
         ]);
 
+        $this->hasOne('UploadIpotesiSpesa', [
+            'className' => 'Uploads',
+            'conditions' => ['tipo' => 'ipotesi_spesa']
+        ]);
+
         $this->addBehavior('Timestamp');
     }
 

@@ -78,7 +78,7 @@ class Upload extends Entity
         switch($this->model_name)
         {
             case 'Camps':
-                $this->base_name = $pinfo['filename'];
+                $this->base_name = $this->id . '-' . $pinfo['filename'];
                 break;
             default:
                 throw new ErrorException("Gestisci questo model in UploadEntity->generateFileName!");
