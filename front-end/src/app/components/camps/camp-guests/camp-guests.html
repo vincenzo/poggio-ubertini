@@ -109,23 +109,24 @@
   name="$ctrl.form"
   novalidate
   id="guests-form"
+  style="max-width: 800px"
 >
   <ew-ibox id="add-guest" open="false">
     <ibox-title>
-      <h5>Agigungi ospite</h5>
+      <h5>Aggiungi ospite</h5>
     </ibox-title>
 
     <ibox-content>
       <label
         >Italiano
         <ew-ui-switch
-          model="$ctrl.model.incendio_furto"
-          on-change="$ctrl.changeSwitch('incencdio_furto', $event)"
+          model="$ctrl.model.cittadinanza_italiana"
+          on-change="$ctrl.changeSwitch('cittadinanza_italiana', $event)"
         >
         </ew-ui-switch>
       </label>
 
-      <row style="grid-template-columns: 1fr 1fr 100px 160px">
+      <row style="grid-template-columns: 1fr 1fr 130px 160px">
         <ew-text
           name="cognome"
           label="Cognome"
@@ -149,6 +150,7 @@
           options="::$ctrl.lookup.Sesso.list"
         ></ew-select>
         <ew-input-cleave
+          ng-if="$ctrl.model.cittadinanza_italiana"
           name="codice_fiscale"
           label="Codice fiscale"
           value="$ctrl.model.codice_fiscale"
@@ -157,25 +159,9 @@
         ></ew-input-cleave>
       </row>
 
-      <ew-checkbox
-        name="capogruppo"
-        label="Capogruppo"
-        value="$ctrl.model.capogruppo"
-        on-change="$ctrl.updateModel($event)"
-      ></ew-checkbox>
-
-      <ew-text
-        name="email"
-        label="Email"
-        value="$ctrl.model.email"
-        ng-if="$ctrl.model.capogruppo"
-        required="$ctrl.model.capogruppo"
-        on-change="$ctrl.updateModel($event)"
-      ></ew-text>
-
       <hr />
 
-      <row style="grid-template-columns: 120px 1fr 140px 40px">
+      <row ng-if="$ctrl.model.cittadinanza_italiana" style="grid-template-columns: 120px 1fr 140px 40px">
         <ew-datepicker
           name="data_nascita"
           label="Data di nascita"
@@ -209,16 +195,23 @@
         ></ew-text>
       </row>
 
-      <ew-checkbox
-        name="cittadinanza_italiana"
-        label="Cittadinanza italiano (se nato all'estero, ma cittadino italiano spuntare la casella)"
-        value="$ctrl.model.cittadinanza_italiana"
-        on-change="$ctrl.updateModel($event)"
-      ></ew-checkbox>
-
       <hr />
 
-      <row style="grid-template-columns: 130px 120px 120px 120px 110px 1fr">
+      <row ng-if="!$ctrl.model.cittadinanza_italiana" style="grid-template-columns: 120px 1fr 130px 120px 120px 120px">
+        <ew-datepicker
+          name="data_nascita"
+          label="Data di nascita"
+          value="$ctrl.model.data_nascita"
+          on-change="$ctrl.updateModel($event)"
+          required="true"
+        ></ew-datepicker>
+        <ew-select
+          name="nazione_nascita"
+          label="Nazione nascita"
+          value="$ctrl.model.nazione_nascita"
+          on-change="$ctrl.updateModel($event)"
+          options="::$ctrl.lookup.Countries.list"
+        ></ew-select>
         <ew-select
           name="documento_tipo"
           label="Tipo documento"
@@ -244,7 +237,7 @@
           value="$ctrl.model.documento_data_scadenza"
           on-change="$ctrl.updateModel($event)"
         ></ew-datepicker>
-        <ew-select
+        <!-- <ew-select
           name="documento_rilasciato_ente"
           label="Rilasciato da"
           value="$ctrl.model.documento_rilasciato_ente"
@@ -253,18 +246,11 @@
         ></ew-select>
         <ew-text
           name="documento_rilasciato_comune"
-          label="Comune di rilascio"
+          label="Presso"
           value="$ctrl.model.documento_rilasciato_comune"
           on-change="$ctrl.updateModel($event)"
-        ></ew-text>
+        ></ew-text> -->
       </row>
-
-      <ew-checkbox
-        name="documento_italiano"
-        label="Documento italiano"
-        value="$ctrl.model.documento_italiano"
-        on-change="$ctrl.updateModel($event)"
-      ></ew-checkbox>
 
       <hr />
 
@@ -313,12 +299,12 @@
         name="note"
         label="Note / Allergie"
         value="$ctrl.model.note"
-        rows="3"
+        rows="2"
         on-change="$ctrl.updateModel($event)"
       ></ew-textarea>
 
       <div class="group--compact">
-        <ew-checkbox
+        <!-- <ew-checkbox
           name="privacy"
           label="Lettera per la privacy"
           value="$ctrl.model.privacy"
@@ -330,7 +316,7 @@
           value="$ctrl.model.socio"
           on-change="$ctrl.updateModel($event)"
         >
-        </ew-checkbox>
+        </ew-checkbox> -->
         <ew-checkbox
           name="disabile"
           label="Diversamente abile"
