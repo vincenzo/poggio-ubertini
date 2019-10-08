@@ -56,7 +56,7 @@
     "rxjs": "6.3.3",
     "selectize": "0.12.*",
     "sweetalert2": "8.2.3",
-    "tableexport.jquery.plugin": "1.9.8",
+    "tableexport": "^5.2.0",
     "ui-select": "0.19.8"
   },
   "devDependencies": {

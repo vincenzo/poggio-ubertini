@@ -187,7 +187,7 @@
 
             <!-- <div ng-if="$ctrl.isAuthorized('ipotesiSpesa')"> -->
             <div>
-              <hr>
+              <hr />
               <row style="grid-template-columns: 1fr 100px">
                 <label>Ipotesi di spesa</label>
                 <ew-readonly-input
@@ -198,11 +198,23 @@
               <div>
                 <!-- <label>File</label> -->
                 <upload-edit-row
+                  enable="{}"
                   action="{{ $ctrl.action }}"
                   can-delete="false"
                   upload="$ctrl.model.upload"
                 >
                 </upload-edit-row>
+                <form ng-submit="" name="$ctrl.fileForm" novalidate id="file-form">
+                  <ew-upload-button
+                    name="file_ipotesi_spesa"
+                    label="Ipotesi di spesa"
+                    value="$ctrl.modelFileIpotesiSpesa"
+                    on-change="$ctrl.uploadFile($event)"
+                    accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+                    pattern=".xlsx"
+                  >
+                  </ew-upload-button>
+                </form>
               </div>
             </div>
           </section>

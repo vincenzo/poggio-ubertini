@@ -96,9 +96,16 @@ export class CampGuestsComponentController extends EwCommonFormController {
     return ["camps.view"];
   }
 
-  onMultipleOptionsSelectChange(reservations) {
-    console.log("opzione: ", this.multipleOptionsSelect);
-    console.log(reservations);
+  multipleCheckIn() {
+    console.log('checkin multiplo');
+  }
+
+  multipleCheckOut() {
+    console.log('checkin multiplo');
+  }
+
+  multipleToom() {
+    console.log('assegnazione stanze multipla');
   }
 
   queryCity(event) {

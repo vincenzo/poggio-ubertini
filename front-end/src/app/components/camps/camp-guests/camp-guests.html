@@ -1,30 +1,24 @@
 <div class="mar-top-1">
-  <row style="grid-template-columns: 160px 150px repeat(3, 120px)">
-    <div>
-      <label for="multipleOptionsSelect"> Azioni: </label><br />
-      <select
-        name="multipleOptionsSelect"
-        ng-model="$ctrl.multipleOptionsSelect"
-      >
-        <option value="">--- Seleziona ----</option>
-        <option value="option-1">Opzione 1</option>
-        <option value="option-2">Opzione 2</option>
-      </select>
-    </div>
+  <row style="grid-template-columns: repeat(3, 120px)">
     <button
       type="button"
       class="btn btn-primary"
-      ng-click="$ctrl.onMultipleOptionsSelectChange($ctrl.reservations)"
+      ng-click="$ctrl.multipleCheckIn()"
     >
-      Applica
-    </button>
-    <button type="button" class="btn btn-primary">
       Check-in
     </button>
-    <button type="button" class="btn btn-primary">
+    <button
+      type="button"
+      class="btn btn-primary"
+      ng-click="$ctrl.multipleCheckOut()"
+    >
       Check-out
     </button>
-    <button type="button" class="btn btn-primary">
+    <button
+      type="button"
+      class="btn btn-primary"
+      ng-click="$ctrl.multipleRoom()"
+    >
       Assegna stanza
     </button>
   </row>
@@ -62,9 +56,9 @@
         <td>
           <span ng-if="!r.data_in">
             <a
+              href=""
               class="link-check"
-              ng-click="$ctrl.checkIn(r)"
-              ng-disabled="$ctrl.camps.isLoading"
+              ng-click="!$ctrl.camps.isLoading && $ctrl.checkIn(r)"
             >
               Check-in
             </a>
@@ -74,12 +68,14 @@
         <td>
           <span ng-if="!r.data_out">
             <a
+              href=""
               class="link-check"
-              ng-click="$ctrl.checkOut(r)"
-              ng-disabled="$ctrl.camps.isLoading"
+              ng-click="!$ctrl.camps.isLoading && $ctrl.checkOut(r)"
+              ng-if="r.data_in"
             >
               Check-out
             </a>
+            <span ng-if="!r.data_in">Check-out</span>
           </span>
           <span ng-if="r.data_out">{{ r.data_out | date: "dd/MM/yyyy" }}</span>
         </td>
@@ -161,7 +157,10 @@
 
       <hr />
 
-      <row ng-if="$ctrl.model.cittadinanza_italiana" style="grid-template-columns: 120px 1fr 140px 40px">
+      <row
+        ng-if="$ctrl.model.cittadinanza_italiana"
+        style="grid-template-columns: 120px 1fr 140px 40px"
+      >
         <ew-datepicker
           name="data_nascita"
           label="Data di nascita"
@@ -197,7 +196,10 @@
 
       <hr />
 
-      <row ng-if="!$ctrl.model.cittadinanza_italiana" style="grid-template-columns: 120px 1fr 130px 120px 120px 120px">
+      <row
+        ng-if="!$ctrl.model.cittadinanza_italiana"
+        style="grid-template-columns: 120px 1fr 130px 120px 120px 120px"
+      >
         <ew-datepicker
           name="data_nascita"
           label="Data di nascita"
