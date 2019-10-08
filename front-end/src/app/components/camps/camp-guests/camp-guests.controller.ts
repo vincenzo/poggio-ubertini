@@ -1,5 +1,6 @@
 import * as moment from "moment";
 import * as jquery from "jquery";
+import swal from "sweetalert2";
 
 import { EwCommonFormController } from "../../../vendors/ew-angularjs-utils/common/common-form-controller";
 import { GuestsService } from "../../guests/guests.service";
@@ -97,15 +98,73 @@ export class CampGuestsComponentController extends EwCommonFormController {
   }
 
   multipleCheckIn() {
-    console.log('checkin multiplo');
+    const ids = this.reservations.filter(r => r.selected).map(r => r.id);
+    if (!ids.length) {
+      return this.service.toaster.info("Seleziona almeno un ospite!");
+    }
+    swal
+      .fire({
+        title: "Data Check-in",
+        input: "text",
+        inputValue: moment().format("DD/MM/YYYY"),
+        inputPlaceholder: "gg/mm/aaaa",
+        inputValidator: value => {
+          if (!value) {
+            return "Campo obbligatorio!";
+          }
+          const momentdate = moment(value, "DD/MM/YYYY", true);
+          if (!momentdate.isValid()) {
+            return "Formato data non valido!";
+          }
+        }
+      })
+      .then(({ value: data }) => {
+        if (data) {
+          return this.multiActions("check", ids, {
+            type: "in",
+            value: moment(data, "DD/MM/YYYY").format("YYYY-MM-DD")
+          });
+        }
+      })
+      .then(() => this.getCampFormData(this.parentId))
+      .then(() => (this.selectAll = false));
   }
 
   multipleCheckOut() {
-    console.log('checkin multiplo');
+    const ids = this.reservations.filter(r => r.selected).map(r => r.id);
+    if (!ids.length) {
+      return this.service.toaster.info("Seleziona almeno un ospite!");
+    }
+    swal
+      .fire({
+        title: "Data Check-out",
+        input: "text",
+        inputValue: moment().format("DD/MM/YYYY"),
+        inputPlaceholder: "gg/mm/aaaa",
+        inputValidator: value => {
+          if (!value) {
+            return "Campo obbligatorio!";
+          }
+          const momentdate = moment(value, "DD/MM/YYYY", true);
+          if (!momentdate.isValid()) {
+            return "Formato data non valido!";
+          }
+        }
+      })
+      .then(({ value: data }) => {
+        if (data) {
+          return this.multiActions("check", ids, {
+            type: "out",
+            value: moment(data, "DD/MM/YYYY").format("YYYY-MM-DD")
+          });
+        }
+      })
+      .then(() => this.getCampFormData(this.parentId))
+      .then(() => (this.selectAll = false));
   }
 
   multipleToom() {
-    console.log('assegnazione stanze multipla');
+    console.log("assegnazione stanze multipla");
   }
 
   queryCity(event) {
@@ -192,8 +251,8 @@ export class CampGuestsComponentController extends EwCommonFormController {
         jquery("#guests-table tbody")
           .find("input[type=checkbox]")
           .click()
-          // .prop("checked", value)
-          // .triggerHandler("click")
+      // .prop("checked", value)
+      // .triggerHandler("click")
       // .trigger("input")
     );
   }
