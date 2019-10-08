@@ -7,7 +7,6 @@ import { ReservationsService } from './../../reservations/reservations.service';
 export class CampViewComponentController extends EwCommonFormController {
 
   getDisponibilita: (dataDa: string, dataA?: string) => Promise<any>;
-  multiActions: (action: 'check' | 'assignRoom', ids: number[], params) => Promise<any>;
 
   constructor(
     $ngRedux,
@@ -43,28 +42,11 @@ export class CampViewComponentController extends EwCommonFormController {
   getMapDispatchToThisParams(dispatch) {
     return {
       getDisponibilita: (dataDa, dataA?) => dispatch(this.RoomsService.getDisponibilita(dataDa, dataA)),
-      multiActions: (a, i, p) => dispatch(this.ReservationsService.multiActions(a, i, p)),
     };
   }
 
   selectTab(tabName: string) {
     this.focusOnField('#focused_input_' + tabName);
-  }
-
-  checkIn(reservation: any, date?: string) {
-    const params = {
-      type: 'in',
-      value: date || moment().format('YYYY-MM-DD'),
-    };
-    return this._check([reservation.id], params);
-  }
-
-  checkOut(reservation: any, date?: string) {
-    const params = {
-      type: 'out',
-      value: date || moment().format('YYYY-MM-DD'),
-    };
-    return this._check([reservation.id], params);
   }
 
   getAvailability() {
@@ -79,8 +61,5 @@ export class CampViewComponentController extends EwCommonFormController {
    * PRIVATES
    */
 
-  private _check(ids: number[], params: { type: string, value: string }) {
-    return this.multiActions('check', ids, params)
-      .then(() => this.getFormData(this.model.id));
-  }
+  
 }

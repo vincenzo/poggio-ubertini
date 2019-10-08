@@ -1,9 +1,39 @@
+<div class="mar-top-1">
+  <row style="grid-template-columns: 160px 150px">
+    <div>
+      <label for="multipleOptionsSelect"> Azioni: </label><br />
+      <select
+        name="multipleOptionsSelect"
+        ng-model="$ctrl.multipleOptionsSelect"
+      >
+        <option value="">--- Seleziona ----</option>
+        <option value="option-1">Opzione 1</option>
+        <option value="option-2">Opzione 2</option>
+      </select>
+    </div>
+    <button
+      type="button"
+      class="btn btn-primary"
+      ng-click="$ctrl.onMultipleOptionsSelectChange($ctrl.reservations)"
+    >
+      Applica
+    </button>
+  </row>
+</div>
+
 <div class="table-responsive mar-top-1">
-  <table class="table table-striped table-bordered table-hover">
+  <table
+    class="table table-striped table-bordered table-hover"
+    id="guests-table"
+  >
     <thead>
       <tr>
         <th class="w_xs text-center">
-          <input type="checkbox" />
+          <input
+            type="checkbox"
+            ng-click="$ctrl.toggleCheck($ctrl.selectAll)"
+            ng-model="$ctrl.selectAll"
+          />
         </th>
         <th>Nome</th>
         <th>Cognome</th>
@@ -15,12 +45,12 @@
     <tbody>
       <tr ng-repeat="r in $ctrl.reservations track by r.id">
         <td class="w_xs text-center">
-          <input type="checkbox" />
+          <input type="checkbox" ng-model="r.selected" />
         </td>
         <td>{{ r.guest.nome }}</td>
         <td>{{ r.guest.cognome }}</td>
         <td>
-          <span ng-if="!r.data_in">
+          <span ng-if="!r.dable_in">
             <button
               type="button"
               class="btn btn-primary"

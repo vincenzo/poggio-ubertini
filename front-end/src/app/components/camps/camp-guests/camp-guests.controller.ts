@@ -1,3 +1,6 @@
+import * as moment from "moment";
+import * as jquery from "jquery";
+
 import { EwCommonFormController } from "../../../vendors/ew-angularjs-utils/common/common-form-controller";
 import { GuestsService } from "../../guests/guests.service";
 import { CampsService } from "./../../camps/camps.service";
@@ -7,9 +10,17 @@ import { CitiesService } from "./../../cities/cities.service";
 export class CampGuestsComponentController extends EwCommonFormController {
   reservations: any[];
   modelFileOspiti: any;
+  multipleOptionsSelect: any;
   addFromFile: Function;
   getCampFormData: Function;
   saveReservation: Function;
+  selectAll: boolean;
+
+  multiActions: (
+    action: "check" | "assignRoom",
+    ids: number[],
+    params
+  ) => Promise<any>;
 
   constructor(
     $ngRedux,
@@ -49,16 +60,45 @@ export class CampGuestsComponentController extends EwCommonFormController {
       .then(() => this.resetModel());
   }
 
+  checkIn(reservation: any, date?: string) {
+    const params = {
+      type: "in",
+      value: date || moment().format("YYYY-MM-DD")
+    };
+    return this._check([reservation.id], params);
+  }
+
+  checkOut(reservation: any, date?: string) {
+    const params = {
+      type: "out",
+      value: date || moment().format("YYYY-MM-DD")
+    };
+    return this._check([reservation.id], params);
+  }
+
   getMapDispatchToThisParams(dispatch) {
     return {
       addFromFile: data => dispatch(this.service.addFromFile(data)),
       getCampFormData: id => dispatch(this.CampsService.getFormData(id)),
+      multiActions: (a, i, p) =>
+        dispatch(this.ReservationsService.multiActions(a, i, p)),
       saveReservation: model => dispatch(this.ReservationsService.save(model))
+    };
+  }
+
+  getMapStateToThisParams(state) {
+    return {
+      camps: state.camps.toJS()
     };
   }
 
   getParentRoutes() {
     return ["camps.view"];
+  }
+
+  onMultipleOptionsSelectChange(reservations) {
+    console.log("opzione: ", this.multipleOptionsSelect);
+    console.log(reservations);
   }
 
   queryCity(event) {
@@ -139,17 +179,35 @@ export class CampGuestsComponentController extends EwCommonFormController {
     this.focusOnField(`${this.config.formId} #se-nazione_nascita`);
   }
 
+  toggleCheck(value) {
+    setTimeout(
+      () =>
+        jquery("#guests-table tbody")
+          .find("input[type=checkbox]")
+          .click()
+          // .prop("checked", value)
+          // .triggerHandler("click")
+      // .trigger("input")
+    );
+  }
+
   uploadFile(event) {
     console.log("event", event);
     return this.addFromFile({
       file: event.value
     })
       .then(() => this.getCampFormData(this.parentId))
-      .then(() => console.log('ora'))
-      .then(() => this.modelFileOspiti = null);
+      .then(() => console.log("ora"))
+      .then(() => (this.modelFileOspiti = null));
   }
 
   /**
    * PRIVATES
    */
+
+  private _check(ids: number[], params: { type: string; value: string }) {
+    return this.multiActions("check", ids, params).then(() =>
+      this.getCampFormData(this.parentId)
+    );
+  }
 }
