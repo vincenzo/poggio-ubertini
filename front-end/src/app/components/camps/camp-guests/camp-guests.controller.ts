@@ -6,6 +6,8 @@ import { CitiesService } from "./../../cities/cities.service";
 
 export class CampGuestsComponentController extends EwCommonFormController {
   reservations: any[];
+  modelFileOspiti: any;
+  addFromFile: Function;
   getCampFormData: Function;
   saveReservation: Function;
 
@@ -39,10 +41,6 @@ export class CampGuestsComponentController extends EwCommonFormController {
   }
 
   afterGet(stay: any, model: any, response: any) {
-    if (!this.fromParent) {
-      return super.afterGet(stay, model, response);
-    }
-
     return this.saveReservation({
       camp_id: this.parentId,
       guest_id: response.id
@@ -53,6 +51,7 @@ export class CampGuestsComponentController extends EwCommonFormController {
 
   getMapDispatchToThisParams(dispatch) {
     return {
+      addFromFile: data => dispatch(this.service.addFromFile(data)),
       getCampFormData: id => dispatch(this.CampsService.getFormData(id)),
       saveReservation: model => dispatch(this.ReservationsService.save(model))
     };
@@ -138,6 +137,16 @@ export class CampGuestsComponentController extends EwCommonFormController {
       value: ""
     });
     this.focusOnField(`${this.config.formId} #se-nazione_nascita`);
+  }
+
+  uploadFile(event) {
+    console.log("event", event);
+    return this.addFromFile({
+      file: event.value
+    })
+      .then(() => this.getCampFormData(this.parentId))
+      .then(() => console.log('ora'))
+      .then(() => this.modelFileOspiti = null);
   }
 
   /**
