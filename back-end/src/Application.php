@@ -56,6 +56,7 @@ class Application extends BaseApplication
         $this->addPlugin('Entheos/Utils');
         $this->addPlugin('ADmad/JwtAuth', []);
         $this->addPlugin('Queue');
+        $this->addPlugin('Robotusers/Excel', ['bootstrap' => true]);
     }
 
     /**

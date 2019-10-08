@@ -66,18 +66,18 @@ export class GuestsService extends EwCommonService {
    */
 
   private _addFromFile(data) {
-    return new Promise((resolve, reject) => {
-      setTimeout(() => resolve(console.log(data)), 3000);
-    });
+    // return new Promise((resolve, reject) => {
+    //   setTimeout(() => resolve(console.log(data)), 3000);
+    // });
     
-    // return this.Upload.upload({
-    //   ignoreLoadingBar: true,
-    //   url: "/api" + this.apiPath + "/addGuestsFromFile",
-    //   data: data,
-    //   headers: {
-    //     Accept: "application/json"
-    //   },
-    //   timeout: 10000
-    // }).then(resp => resp.data);
+    return this.Upload.upload({
+      ignoreLoadingBar: true,
+      url: "/api/camps/addManyGuests",
+      data: data,
+      headers: {
+        Accept: "application/json"
+      },
+      timeout: 10000
+    }).then(resp => resp.data);
   }
 }

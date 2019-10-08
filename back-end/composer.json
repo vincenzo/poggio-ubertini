@@ -16,6 +16,10 @@
         {
             "type": "git",
             "url": "https://github.com/mfrascati/cakephp-utils"
+        },
+        {
+            "type": "git",
+            "url": "https://github.com/mfrascati/cakephp-excel"
         }
     ],
     "require": {
@@ -34,7 +38,8 @@
         "connehito/cake-sentry": "^1.0",
         "dereuromark/cakephp-queue": "3.16.2",
         "cakemanager/cakephp-utils": "dev-master",
-        "mfrascati/utils" : "master"
+        "robotusers/cakephp-excel": "dev-master",
+        "mfrascati/utils": "master"
     },
     "require-dev": {
         "psy/psysh": "@stable",
