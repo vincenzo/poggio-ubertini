@@ -5,6 +5,7 @@ import ngRedux from 'ng-redux';
 import { CampsComponent } from './camps.component';
 import { CampFormComponent } from './camp-form/camp-form.component';
 import { CampViewComponent } from './camp-view/camp-view.component';
+import { CampGuestsComponent } from './camp-guests/camp-guests.component';
 
 import { AppService } from '../../common/app/app.service';
 import { CampsService } from './camps.service';
@@ -166,5 +167,6 @@ export const CampsModule = angular.module('components.camps', [
   .component('camps', CampsComponent)
   .component('campForm', CampFormComponent)
   .component('campView', CampViewComponent)
+  .component('campGuests', CampGuestsComponent)
   .service('CampsService', CampsService)
   .name;

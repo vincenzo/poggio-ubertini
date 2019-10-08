@@ -1,14 +1,22 @@
-<ew-page-header id="top" size="compact" on-action="$ctrl.onAction(action, value)" header-title="Visualizza campo">
+<ew-page-header
+  id="top"
+  size="compact"
+  on-action="$ctrl.onAction(action, value)"
+  header-title="Visualizza campo"
+>
   <right-side>
-    <button ng-if="$ctrl.isEdit()" class="btn btn-sm btn-default btn-flat btn-condensed pull-right" type="button"
-      ng-click="$ctrl.stateReload($ctrl.router.currentState.name)">
+    <button
+      ng-if="$ctrl.isEdit()"
+      class="btn btn-sm btn-default btn-flat btn-condensed pull-right"
+      type="button"
+      ng-click="$ctrl.stateReload($ctrl.router.currentState.name)"
+    >
       <i class="far fa-sync fa-fw text-primary"></i> Ricarica dati
     </button>
   </right-side>
 </ew-page-header>
 
 <div class="container">
-
   <row style="grid-template-columns: 1fr 360px">
     <div>
       <ew-ibox>
@@ -18,37 +26,85 @@
 
         <ibox-content>
           <div class="low-impact">
-
             <row style="grid-template-columns: 70px 220px 1fr 1fr">
-              <ew-readonly-input label="N. scheda" value="$ctrl.model.n_scheda"></ew-readonly-input>
-              <ew-readonly-input label="Nome campo" value="$ctrl.model.nome"></ew-readonly-input>
-              <ew-readonly-input label="Descrizione (uso interno)" value="$ctrl.model.note"></ew-readonly-input>
-              <ew-readonly-input label="Capogruppo" value="$ctrl.model.capogruppo.cognome_nome"></ew-readonly-input>
+              <ew-readonly-input
+                label="N. scheda"
+                value="$ctrl.model.n_scheda"
+              ></ew-readonly-input>
+              <ew-readonly-input
+                label="Nome campo"
+                value="$ctrl.model.nome"
+              ></ew-readonly-input>
+              <ew-readonly-input
+                label="Descrizione (uso interno)"
+                value="$ctrl.model.note"
+              ></ew-readonly-input>
+              <ew-readonly-input
+                label="Capogruppo"
+                value="$ctrl.model.capogruppo.cognome_nome"
+              ></ew-readonly-input>
             </row>
 
             <row style="grid-template-columns: 120px 120px 170px">
-              <ew-readonly-input label="Data inizio" value="$ctrl.model.data_inizio" type="date"></ew-readonly-input>
-              <ew-readonly-input label="Data fine" value="$ctrl.model.data_fine" type="date"></ew-readonly-input>
-              <ew-readonly-input label="Tipo" value="$ctrl.model.tipo"></ew-readonly-input>
+              <ew-readonly-input
+                label="Data inizio"
+                value="$ctrl.model.data_inizio"
+                type="date"
+              ></ew-readonly-input>
+              <ew-readonly-input
+                label="Data fine"
+                value="$ctrl.model.data_fine"
+                type="date"
+              ></ew-readonly-input>
+              <ew-readonly-input
+                label="Tipo"
+                value="$ctrl.model.tipo"
+              ></ew-readonly-input>
             </row>
 
             <h5>Dati documento fiscale</h5>
 
             <row style="grid-template-columns: 1fr 140px 160px 120px">
-              <ew-readonly-input label="Intestazione (Ragione sociale / nome cognome)"
-                value="$ctrl.model.fattura_ragione_sociale"></ew-readonly-input>
-              <ew-readonly-input label="Partita IVA" value="$ctrl.model.fattura_partita_iva"></ew-readonly-input>
-              <ew-readonly-input label="Codice fiscale" value="$ctrl.model.fattura_codice_fiscale"></ew-readonly-input>
-              <ew-readonly-input label="Tipo doc. fiscale" value="$ctrl.model.tipo_documento_fiscale">
+              <ew-readonly-input
+                label="Intestazione (Ragione sociale / nome cognome)"
+                value="$ctrl.model.fattura_ragione_sociale"
+              ></ew-readonly-input>
+              <ew-readonly-input
+                label="Partita IVA"
+                value="$ctrl.model.fattura_partita_iva"
+              ></ew-readonly-input>
+              <ew-readonly-input
+                label="Codice fiscale"
+                value="$ctrl.model.fattura_codice_fiscale"
+              ></ew-readonly-input>
+              <ew-readonly-input
+                label="Tipo doc. fiscale"
+                value="$ctrl.model.tipo_documento_fiscale"
+              >
               </ew-readonly-input>
             </row>
 
             <row style="grid-template-columns: 1fr 180px 120px 120px 90px">
-              <ew-readonly-input label="Indirizzo" value="$ctrl.model.fattura_indirizzo"></ew-readonly-input>
-              <ew-readonly-input label="Città" value="$ctrl.model.fattura_citta"></ew-readonly-input>
-              <ew-readonly-input label="Nazione" value="$ctrl.model.fattura_nazione"></ew-readonly-input>
-              <ew-readonly-input label="Provincia" value="$ctrl.model.fattura_provincia"></ew-readonly-input>
-              <ew-readonly-input label="CAP" value="$ctrl.model.fattura_cap"></ew-readonly-input>
+              <ew-readonly-input
+                label="Indirizzo"
+                value="$ctrl.model.fattura_indirizzo"
+              ></ew-readonly-input>
+              <ew-readonly-input
+                label="Città"
+                value="$ctrl.model.fattura_citta"
+              ></ew-readonly-input>
+              <ew-readonly-input
+                label="Nazione"
+                value="$ctrl.model.fattura_nazione"
+              ></ew-readonly-input>
+              <ew-readonly-input
+                label="Provincia"
+                value="$ctrl.model.fattura_provincia"
+              ></ew-readonly-input>
+              <ew-readonly-input
+                label="CAP"
+                value="$ctrl.model.fattura_cap"
+              ></ew-readonly-input>
             </row>
           </div>
         </ibox-content>
@@ -61,10 +117,18 @@
         <ibox-content>
           <form name="$ctrl.form" novalidate>
             <row style="grid-template-columns: 150px 1fr">
-              <ew-readonly-input label="Spesa" value="$ctrl.model.ipotesi_spesa" type="money"></ew-readonly-input>
+              <ew-readonly-input
+                label="Spesa"
+                value="$ctrl.model.ipotesi_spesa"
+                type="money"
+              ></ew-readonly-input>
               <div>
                 <label>File</label>
-                <upload-edit-row action="{{ $ctrl.action }}" can-delete="false" upload="$ctrl.model.upload">
+                <upload-edit-row
+                  action="{{ $ctrl.action }}"
+                  can-delete="false"
+                  upload="$ctrl.model.upload"
+                >
                 </upload-edit-row>
               </div>
             </row>
@@ -80,7 +144,9 @@
         </ibox-title>
         <ibox-content>
           <section class="low-impact" id="contatori">
-            <row style="grid-template-columns: 1fr 100px 100px; margin-bottom: 8px">
+            <row
+              style="grid-template-columns: 1fr 100px 100px; margin-bottom: 8px"
+            >
               <b></b>
               <b class="text-center">Ingresso</b>
               <b class="text-center">Uscita</b>
@@ -88,35 +154,64 @@
 
             <row style="grid-template-columns: 1fr 100px 100px">
               <label>ACQUA</label>
-              <ew-readonly-input value="$ctrl.model.in1" type="numeric"></ew-readonly-input>
-              <ew-readonly-input value="$ctrl.model.out1" type="numeric"></ew-readonly-input>
+              <ew-readonly-input
+                value="$ctrl.model.in1"
+                type="numeric"
+              ></ew-readonly-input>
+              <ew-readonly-input
+                value="$ctrl.model.out1"
+                type="numeric"
+              ></ew-readonly-input>
             </row>
 
             <row style="grid-template-columns: 1fr 100px 100px">
               <label>ENEL segreteria</label>
-              <ew-readonly-input value="$ctrl.model.in2" type="numeric"></ew-readonly-input>
-              <ew-readonly-input value="$ctrl.model.out2" type="numeric"></ew-readonly-input>
+              <ew-readonly-input
+                value="$ctrl.model.in2"
+                type="numeric"
+              ></ew-readonly-input>
+              <ew-readonly-input
+                value="$ctrl.model.out2"
+                type="numeric"
+              ></ew-readonly-input>
             </row>
 
             <row style="grid-template-columns: 1fr 100px 100px">
               <label>ENEL parco</label>
-              <ew-readonly-input value="$ctrl.model.in3" type="numeric"></ew-readonly-input>
-              <ew-readonly-input value="$ctrl.model.out3" type="numeric"></ew-readonly-input>
+              <ew-readonly-input
+                value="$ctrl.model.in3"
+                type="numeric"
+              ></ew-readonly-input>
+              <ew-readonly-input
+                value="$ctrl.model.out3"
+                type="numeric"
+              ></ew-readonly-input>
             </row>
 
             <row style="grid-template-columns: 1fr 100px 100px">
               <label>ENEL locali</label>
-              <ew-readonly-input value="$ctrl.model.in4" type="numeric"></ew-readonly-input>
-              <ew-readonly-input value="$ctrl.model.out4" type="numeric"></ew-readonly-input>
+              <ew-readonly-input
+                value="$ctrl.model.in4"
+                type="numeric"
+              ></ew-readonly-input>
+              <ew-readonly-input
+                value="$ctrl.model.out4"
+                type="numeric"
+              ></ew-readonly-input>
             </row>
 
             <row style="grid-template-columns: 1fr 100px 100px">
               <label>GAS</label>
-              <ew-readonly-input value="$ctrl.model.in5" type="numeric"></ew-readonly-input>
-              <ew-readonly-input value="$ctrl.model.out5" type="numeric"></ew-readonly-input>
+              <ew-readonly-input
+                value="$ctrl.model.in5"
+                type="numeric"
+              ></ew-readonly-input>
+              <ew-readonly-input
+                value="$ctrl.model.out5"
+                type="numeric"
+              ></ew-readonly-input>
             </row>
           </section>
-
         </ibox-content>
       </ew-ibox>
 
@@ -134,72 +229,54 @@
 
   <div id="tabs">
     <uib-tabset active="$ctrl.activeTab">
-
-      <uib-tab index="0" heading="Ospiti ({{ $ctrl.model.reservations.length }})" select="$ctrl.selectTab('ospiti')"
-        title="Ospiti (ctrl+1)">
-
+      <uib-tab
+        index="0"
+        heading="Ospiti ({{ $ctrl.model.reservations.length }})"
+        select="$ctrl.selectTab('ospiti')"
+        title="Ospiti (ctrl+1)"
+      >
         <row style="grid-template-columns: repeat(3, 220px)">
-          <button type="button" class="btn btn-primary" ui-sref="camps.view.guests.add">Aggiungi iscritto</button>
-          <button type="button" class="btn btn-default">Stampa lista utenti campo</button>
-          <button type="button" class="btn btn-default">Stampa lista utenti questura</button>
+          <button type="button" class="btn btn-default">
+            Stampa lista utenti campo
+          </button>
+          <button type="button" class="btn btn-default">
+            Stampa lista utenti questura
+          </button>
         </row>
 
-        <div class="table-responsive mar-top-1">
-          <table class="table table-striped table-bordered table-hover">
-            <thead>
-              <tr>
-                <th class="w_xs text-center">
-                  <input type="checkbox">
-                </th>
-                <th>Nome</th>
-                <th>Cognome</th>
-                <th>Arrivo</th>
-                <th>Partenza</th>
-                <th class="actions"></th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr ng-repeat="r in $ctrl.model.reservations track by r.id">
-                <td class="w_xs text-center">
-                  <input type="checkbox">
-                </td>
-                <td>{{ r.guest.nome }}</td>
-                <td>{{ r.guest.cognome }}</td>
-                <td>
-                  <span ng-if="!r.data_in">
-                    <button type="button" class="btn btn-primary" ng-click="$ctrl.checkIn(r)"
-                      ladda="$ctrl.camps.isLoading">Check in</button>
-                  </span>
-                  <span ng-if="r.data_in">{{ r.data_in | date:'dd/MM/yyyy' }}</span>
-                </td>
-                <td>
-                  <span ng-if="!r.data_out">
-                    <button type="button" class="btn btn-primary" ng-click="$ctrl.checkOut(r)"
-                      ladda="$ctrl.camps.isLoading">Check out</button>
-                  </span>
-                  <span ng-if="r.data_out">{{ r.data_out | date:'dd/MM/yyyy' }}</span>
-                </td>
-                <td class="actions">
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+        <camp-guests reservations="$ctrl.model.reservations"></camp-guests>
       </uib-tab>
 
-      <uib-tab index="1" heading="Camere" select="$ctrl.selectTab('camere')" title="Camere (ctrl+2)">
+      <uib-tab
+        index="1"
+        heading="Camere"
+        select="$ctrl.selectTab('camere')"
+        title="Camere (ctrl+2)"
+      >
         <form name="$ctrl.form" novalidate>
           <row style="grid-template-columns: 250px 120px 180px">
             <div>
               <label>Cerca</label>
-              <ew-search-input on-search="$ctrl.search($event)"></ew-search-input>
+              <ew-search-input
+                on-search="$ctrl.search($event)"
+              ></ew-search-input>
             </div>
-            <ew-datepicker name="data_disponibilita" label="Data inizio" value="$ctrl.model.data_disponibilita"
-              on-change="$ctrl.updateModel($event)"></ew-datepicker>
-            <button type="button" class="btn btn-primary" style="height: 32px; margin-top: 22px;"
-              ng-click="$ctrl.getAvailability()" ng-disabled="!$ctrl.model.data_disponibilita"
-              ladda="$ctrl.camps.rooms.isLoading">Mostra
-              disponibilità</button>
+            <ew-datepicker
+              name="data_disponibilita"
+              label="Data inizio"
+              value="$ctrl.model.data_disponibilita"
+              on-change="$ctrl.updateModel($event)"
+            ></ew-datepicker>
+            <button
+              type="button"
+              class="btn btn-primary"
+              style="height: 32px; margin-top: 22px;"
+              ng-click="$ctrl.getAvailability()"
+              ng-disabled="!$ctrl.model.data_disponibilita"
+              ladda="$ctrl.camps.rooms.isLoading"
+            >
+              Mostra disponibilità
+            </button>
           </row>
         </form>
 
@@ -207,18 +284,26 @@
           <row style="grid-template-columns: repeat(9, 1fr)">
             <div class="room" ng-repeat="r in $ctrl.camps.rooms.list">
               <h3>{{ r.display_name }}</h3>
-              <h4>{{ r.posti_liberi }} / <span>{{ r.posti_letto }}</span></h4>
-              <div class="occupazione" style="height: {{ r.perc_occupazione }}%"></div>
+              <h4>
+                {{ r.posti_liberi }} / <span>{{ r.posti_letto }}</span>
+              </h4>
+              <div
+                class="occupazione"
+                style="height: {{ r.perc_occupazione }}%"
+              ></div>
               <i class="has-servizi far fa-restroom" ng-if="r.servizi"></i>
             </div>
           </row>
         </div>
       </uib-tab>
 
-      <uib-tab index="2" heading="Documenti" select="$ctrl.selectTab('documenti')" title="Documenti (ctrl+3)">
+      <uib-tab
+        index="2"
+        heading="Documenti"
+        select="$ctrl.selectTab('documenti')"
+        title="Documenti (ctrl+3)"
+      >
       </uib-tab>
-
     </uib-tabset>
-
-
   </div>
+</div>
