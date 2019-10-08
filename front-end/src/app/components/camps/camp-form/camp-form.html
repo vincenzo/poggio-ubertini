@@ -93,7 +93,7 @@
 
         <ew-ibox>
           <ibox-title>
-            <h5>Contatori</h5>
+            <h5>Contatori e spesa</h5>
           </ibox-title>
           <ibox-content>
             <section class="input--inline low-impact" id="contatori">
@@ -139,22 +139,18 @@
                 <ew-numeric name="out" value="$ctrl.model.out5" on-change="$ctrl.updateModel($event)"></ew-numeric>
               </row>
 
+              <div ng-if="$ctrl.isAuthorized('ipotesiSpesa')">
+                <hr>
+                <ew-money name="ipotesi_spesa" label="Ipotesi di Spesa" value="$ctrl.model.ipotesi_spesa"
+                  on-change="$ctrl.updateModel($event)">
+                </ew-money>
+
+                <upload-edit-row action="{{ $ctrl.action }}" on-reload-form-data="$ctrl.reloadFormData()"
+                  on-upload-file="$ctrl.onUploadFile($event)" required="false" upload="$ctrl.model.upload">
+                </upload-edit-row>
+              </div>
+
             </section>
-          </ibox-content>
-        </ew-ibox>
-
-        <ew-ibox ng-if="$ctrl.isEdit() && $ctrl.isAuthorized('ipotesiSpesa')">
-          <ibox-title>
-            <h5>Ipotesi di spesa</h5>
-          </ibox-title>
-          <ibox-content>
-            <ew-money name="ipotesi_spesa" label="Spesa" value="$ctrl.model.ipotesi_spesa"
-              on-change="$ctrl.updateModel($event)">
-            </ew-money>
-
-            <upload-edit-row action="{{ $ctrl.action }}" on-reload-form-data="$ctrl.reloadFormData()"
-              on-upload-file="$ctrl.onUploadFile($event)" required="false" upload="$ctrl.model.upload">
-            </upload-edit-row>
           </ibox-content>
         </ew-ibox>
       </div>

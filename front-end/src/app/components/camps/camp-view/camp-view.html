@@ -109,38 +109,11 @@
           </div>
         </ibox-content>
       </ew-ibox>
-
-      <ew-ibox>
-        <ibox-title>
-          <h5>Ipotesi di spesa</h5>
-        </ibox-title>
-        <ibox-content>
-          <form name="$ctrl.form" novalidate>
-            <row style="grid-template-columns: 150px 1fr">
-              <ew-readonly-input
-                label="Spesa"
-                value="$ctrl.model.ipotesi_spesa"
-                type="money"
-              ></ew-readonly-input>
-              <div>
-                <label>File</label>
-                <upload-edit-row
-                  action="{{ $ctrl.action }}"
-                  can-delete="false"
-                  upload="$ctrl.model.upload"
-                >
-                </upload-edit-row>
-              </div>
-            </row>
-          </form>
-        </ibox-content>
-      </ew-ibox>
     </div>
-
     <div>
       <ew-ibox>
         <ibox-title>
-          <h5>Contatori</h5>
+          <h5>Contatori e spesa</h5>
         </ibox-title>
         <ibox-content>
           <section class="low-impact" id="contatori">
@@ -211,6 +184,27 @@
                 type="numeric"
               ></ew-readonly-input>
             </row>
+
+            <!-- <div ng-if="$ctrl.isAuthorized('ipotesiSpesa')"> -->
+            <div>
+              <hr>
+              <row style="grid-template-columns: 1fr 100px">
+                <label>Ipotesi di spesa</label>
+                <ew-readonly-input
+                  value="$ctrl.model.ipotesi_spesa"
+                  type="numeric"
+                ></ew-readonly-input>
+              </row>
+              <div>
+                <!-- <label>File</label> -->
+                <upload-edit-row
+                  action="{{ $ctrl.action }}"
+                  can-delete="false"
+                  upload="$ctrl.model.upload"
+                >
+                </upload-edit-row>
+              </div>
+            </div>
           </section>
         </ibox-content>
       </ew-ibox>
