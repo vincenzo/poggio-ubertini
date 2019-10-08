@@ -1,5 +1,5 @@
 <div class="mar-top-1">
-  <row style="grid-template-columns: 160px 150px">
+  <row style="grid-template-columns: 160px 150px repeat(3, 120px)">
     <div>
       <label for="multipleOptionsSelect"> Azioni: </label><br />
       <select
@@ -17,6 +17,15 @@
       ng-click="$ctrl.onMultipleOptionsSelectChange($ctrl.reservations)"
     >
       Applica
+    </button>
+    <button type="button" class="btn btn-primary">
+      Check-in
+    </button>
+    <button type="button" class="btn btn-primary">
+      Check-out
+    </button>
+    <button type="button" class="btn btn-primary">
+      Assegna stanza
     </button>
   </row>
 </div>
@@ -37,8 +46,9 @@
         </th>
         <th>Nome</th>
         <th>Cognome</th>
-        <th>Arrivo</th>
-        <th>Partenza</th>
+        <th class="w_md">Arrivo</th>
+        <th class="w_md">Partenza</th>
+        <th class="w_md">Stanza</th>
         <th class="actions"></th>
       </tr>
     </thead>
@@ -50,30 +60,31 @@
         <td>{{ r.guest.nome }}</td>
         <td>{{ r.guest.cognome }}</td>
         <td>
-          <span ng-if="!r.dable_in">
-            <button
-              type="button"
-              class="btn btn-primary"
+          <span ng-if="!r.data_in">
+            <a
+              class="link-check"
               ng-click="$ctrl.checkIn(r)"
-              ladda="$ctrl.camps.isLoading"
+              ng-disabled="$ctrl.camps.isLoading"
             >
-              Check in
-            </button>
+              Check-in
+            </a>
           </span>
           <span ng-if="r.data_in">{{ r.data_in | date: "dd/MM/yyyy" }}</span>
         </td>
         <td>
           <span ng-if="!r.data_out">
-            <button
-              type="button"
-              class="btn btn-primary"
+            <a
+              class="link-check"
               ng-click="$ctrl.checkOut(r)"
-              ladda="$ctrl.camps.isLoading"
+              ng-disabled="$ctrl.camps.isLoading"
             >
-              Check out
-            </button>
+              Check-out
+            </a>
           </span>
           <span ng-if="r.data_out">{{ r.data_out | date: "dd/MM/yyyy" }}</span>
+        </td>
+        <td>
+          -
         </td>
         <td class="actions"></td>
       </tr>

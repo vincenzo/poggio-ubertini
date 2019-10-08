@@ -1,2 +1,9 @@
 camp-guests {
+    .link-check {
+        border-bottom: 1px dotted #254f73;
+        cursor: pointer;
+        &:hover {
+            text-decoration: none;
+        }
+    }
 }
