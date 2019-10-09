@@ -79,7 +79,7 @@ return [
         // 'timestamp' => true,
     ],
 
-    'Extensions' => ['png', 'jpg', 'jpeg', 'pdf', 'zip', 'rar', 'html', 'htm'],
+    'Extensions' => ['png', 'jpg', 'jpeg', 'pdf', 'zip', 'rar', 'html', 'htm', 'xls', 'xlsx', 'doc', 'docx'],
 
     'Cache' => [
         'default' => [
