@@ -62,12 +62,7 @@ export class CampViewComponentController extends EwCommonFormController {
       categoria: "ipotesi_spesa"
     };
 
-    return this._uploadFile(data)
-      .then(() => this.getFormData(this.model.id))
-      .then(() => this.service.toaster.success("File caricato correttamente"))
-      .catch(() =>
-        this.service.toaster.error("Errore durante il caricamento del file")
-      );
+    return this._uploadFile(data);
   }
 
   /**

@@ -198,10 +198,12 @@
               <div>
                 <!-- <label>File</label> -->
                 <upload-edit-row
-                  enable="{}"
+                  can-delete="true"
+                  enable="{ download: true }"
                   action="{{ $ctrl.action }}"
                   can-delete="false"
-                  upload="$ctrl.model.ipotesi_spesa"
+                  on-reload-form-data="$ctrl.getFormData($ctrl.model.id)"
+                  upload="$ctrl.model.upload_ipotesi_spesa"
                 >
                 </upload-edit-row>
                 <form
@@ -209,6 +211,7 @@
                   name="$ctrl.fileForm"
                   novalidate
                   id="file-form"
+                  ng-if="!$ctrl.model.upload_ipotesi_spesa"
                 >
                   <ew-upload-button
                     name="file_ipotesi_spesa"
