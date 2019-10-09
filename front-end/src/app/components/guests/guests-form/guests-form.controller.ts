@@ -1,3 +1,4 @@
+import { getLookup } from './../../../vendors/ew-angularjs-utils/components/lookup/lookup.actions';
 import { CampsService } from './../../camps/camps.service';
 import { EwCommonFormController } from '../../../vendors/ew-angularjs-utils/common/common-form-controller';
 
@@ -8,6 +9,7 @@ import { GuestsService } from '../guests.service';
 
 export class GuestsFormComponentController extends EwCommonFormController {
 
+  getLookup: Function;
   getCampFormData: Function;
   saveReservation: Function;
 
