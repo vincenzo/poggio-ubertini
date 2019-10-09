@@ -201,17 +201,23 @@
                   enable="{}"
                   action="{{ $ctrl.action }}"
                   can-delete="false"
-                  upload="$ctrl.model.upload"
+                  upload="$ctrl.model.ipotesi_spesa"
                 >
                 </upload-edit-row>
-                <form ng-submit="" name="$ctrl.fileForm" novalidate id="file-form">
+                <form
+                  ng-submit=""
+                  name="$ctrl.fileForm"
+                  novalidate
+                  id="file-form"
+                >
                   <ew-upload-button
                     name="file_ipotesi_spesa"
                     label="Ipotesi di spesa"
                     value="$ctrl.modelFileIpotesiSpesa"
-                    on-change="$ctrl.uploadFile($event)"
+                    on-change="$ctrl.upload($event)"
                     accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
                     pattern=".xlsx"
+                    max-size="5"
                   >
                   </ew-upload-button>
                 </form>

@@ -3,15 +3,17 @@ import * as moment from "moment";
 import { EwCommonFormController } from "../../../vendors/ew-angularjs-utils/common/common-form-controller";
 import { CampsService } from "../camps.service";
 import { ReservationsService } from "./../../reservations/reservations.service";
+import { UploadsService } from "../../../vendors/ew-angularjs-utils/components/uploads/uploads.service";
 
 export class CampViewComponentController extends EwCommonFormController {
   getDisponibilita: (dataDa: string, dataA?: string) => Promise<any>;
+  uploadFile: Function;
 
   constructor(
     $ngRedux,
     hotkeys,
     CampsService: CampsService,
-    private Upload,
+    private UploadsService: UploadsService,
     private RoomsService: RoomsService,
     private ReservationsService: ReservationsService
   ) {
@@ -33,7 +35,8 @@ export class CampViewComponentController extends EwCommonFormController {
   getMapDispatchToThisParams(dispatch) {
     return {
       getDisponibilita: (dataDa, dataA?) =>
-        dispatch(this.RoomsService.getDisponibilita(dataDa, dataA))
+        dispatch(this.RoomsService.getDisponibilita(dataDa, dataA)),
+      uploadFile: model => dispatch(this.UploadsService.upload(model))
     };
   }
 
@@ -49,21 +52,31 @@ export class CampViewComponentController extends EwCommonFormController {
     return this.getDisponibilita(this.model.data_disponibilita);
   }
 
-  uploadFile(event) {
-    console.log("event", event);
+  upload(file) {
+    // console.log("file", file);
 
-    // return this.Upload.upload({
-    //   ignoreLoadingBar: true,
-    //   url: "/api" + this.apiPath + "/addGuestsFromFile",
-    //   data: data,
-    //   headers: {
-    //     Accept: "application/json"
-    //   },
-    //   timeout: 10000
-    // }).then(resp => resp.data);
+    const data = {
+      file: file.value,
+      model_name: "Camps",
+      model_id: this.model.id,
+      tipo: "ipotesi_spesa"
+    };
+
+    return this._uploadFile(data)
+      .then(() => this.getFormData(this.model.id))
+      .then(() => this.service.toaster.success("File caricato correttamente"))
+      .catch(() =>
+        this.service.toaster.error("Errore durante il caricamento del file")
+      );
   }
 
   /**
    * PRIVATES
    */
+
+  private _uploadFile(upload) {
+    return this.uploadFile(upload).then(
+      ({ sameRoute, upload }) => sameRoute && this.getFormData(this.model.id)
+    );
+  }
 }
