@@ -59,7 +59,7 @@ export class CampViewComponentController extends EwCommonFormController {
       file: file.value,
       model_name: "Camps",
       model_id: this.model.id,
-      tipo: "ipotesi_spesa"
+      categoria: "ipotesi_spesa"
     };
 
     return this._uploadFile(data)

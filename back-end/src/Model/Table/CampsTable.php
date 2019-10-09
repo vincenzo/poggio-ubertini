@@ -23,7 +23,7 @@ class CampsTable extends Table
 
         $this->hasOne('UploadIpotesiSpesa', [
             'className' => 'Uploads',
-            'conditions' => ['tipo' => 'ipotesi_spesa']
+            'conditions' => ['categoria' => 'ipotesi_spesa']
         ]);
 
         $this->addBehavior('Timestamp');
