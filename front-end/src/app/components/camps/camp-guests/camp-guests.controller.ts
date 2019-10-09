@@ -53,12 +53,26 @@ export class CampGuestsComponentController extends EwCommonFormController {
   }
 
   afterGet(stay: any, model: any, response: any) {
+    const cittadinanzaItaliana = this.model.cittadinanza_italiana;
     return this.saveReservation({
       camp_id: this.parentId,
       guest_id: response.id
     })
       .then(() => this.getCampFormData(this.parentId))
-      .then(() => this.resetModel());
+      .then(() => this.resetModel())
+      .then(() =>
+        this.updateModel({
+          name: "cittadinanza_italiana",
+          value: cittadinanzaItaliana
+        })
+      );
+  }
+
+  changeSwitch(field, value) {
+    return this.updateModel({
+      name: field,
+      value: value
+    });
   }
 
   checkIn(reservation: any, date?: string) {
@@ -262,9 +276,11 @@ export class CampGuestsComponentController extends EwCommonFormController {
       file: event.value
     })
       .then(() => this.getCampFormData(this.parentId))
-      .then(() => this.service.toaster.success('Ospiti aggiunti correttamente'))
+      .then(() => this.service.toaster.success("Ospiti aggiunti correttamente"))
       .then(() => (this.modelFileOspiti = null))
-      .catch(() => this.service.toaster.error('Errore durante il caricamento degli ospiti'));
+      .catch(() =>
+        this.service.toaster.error("Errore durante il caricamento degli ospiti")
+      );
   }
 
   /**
