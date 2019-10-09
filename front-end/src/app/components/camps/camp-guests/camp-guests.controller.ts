@@ -12,7 +12,7 @@ export class CampGuestsComponentController extends EwCommonFormController {
   reservations: any[];
   modelFileOspiti: any;
   multipleOptionsSelect: any;
-  addFromFile: Function;
+  addManyGuests: Function;
   getCampFormData: Function;
   saveReservation: Function;
   selectAll: boolean;
@@ -79,7 +79,7 @@ export class CampGuestsComponentController extends EwCommonFormController {
 
   getMapDispatchToThisParams(dispatch) {
     return {
-      addFromFile: data => dispatch(this.service.addFromFile(data)),
+      addManyGuests: data => dispatch(this.CampsService.addManyGuests(data)),
       getCampFormData: id => dispatch(this.CampsService.getFormData(id)),
       multiActions: (a, i, p) =>
         dispatch(this.ReservationsService.multiActions(a, i, p)),
@@ -258,13 +258,13 @@ export class CampGuestsComponentController extends EwCommonFormController {
   }
 
   uploadFile(event) {
-    console.log("event", event);
-    return this.addFromFile({
+    return this.addManyGuests({
       file: event.value
     })
       .then(() => this.getCampFormData(this.parentId))
-      .then(() => console.log("ora"))
-      .then(() => (this.modelFileOspiti = null));
+      .then(() => this.service.toaster.success('Ospiti aggiunti correttamente'))
+      .then(() => (this.modelFileOspiti = null))
+      .catch(() => this.service.toaster.error('Errore durante il caricamento degli ospiti'));
   }
 
   /**

@@ -2,13 +2,11 @@ import { guestsConfig } from "./guests.config";
 import { EwServerService } from "../../vendors/ew-angularjs-utils/components/server/server.service";
 import { EwCommonService } from "../../vendors/ew-angularjs-utils/common/common-service";
 
-import { promiseAction } from "./guests.actions";
-
 export class GuestsService extends EwCommonService {
   apiPath: string;
   dbFields: Array<any>;
 
-  constructor(private EwServerService: EwServerService, private Upload) {
+  constructor(private EwServerService: EwServerService) {
     "ngInject";
 
     super("guests", guestsConfig, EwServerService);
@@ -51,12 +49,6 @@ export class GuestsService extends EwCommonService {
     this.ignoreFieldsOnSave = ["created", "modified"];
   }
 
-  addFromFile = data => dispatch => {
-    return dispatch(
-      promiseAction("ADD_GUESTS_FROM_FILE", this._addFromFile(data))
-    );
-  };
-
   filterActive = value => {
     // return this.addFilterOnField('Guests.active', value);
   };
@@ -64,20 +56,4 @@ export class GuestsService extends EwCommonService {
   /**
    * PRIVATES
    */
-
-  private _addFromFile(data) {
-    // return new Promise((resolve, reject) => {
-    //   setTimeout(() => resolve(console.log(data)), 3000);
-    // });
-    
-    return this.Upload.upload({
-      ignoreLoadingBar: true,
-      url: "/api/camps/addManyGuests",
-      data: data,
-      headers: {
-        Accept: "application/json"
-      },
-      timeout: 10000
-    }).then(resp => resp.data);
-  }
 }
