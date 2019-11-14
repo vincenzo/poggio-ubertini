@@ -37,6 +37,19 @@ class RoomsController extends AppController
         $this->_setJson(true, $all);
     }
 
+    public function getDisponibilitaCampo()
+    {
+        $this->requireFields(['data_da', 'data_a', 'camp_id']);
+        $all = $this->Rooms->find()
+            ->find('occupazione', [
+                'data_da' => $this->request->getData('data_da'),
+                'data_a'  => $this->request->getData('data_a'),
+                'camp_id' => $this->request->getData('camp_id'),
+            ]);
+
+        $this->_setJson(true, $all);
+    }
+
     /**
      * Imposta le stanze come prenotate
      *
