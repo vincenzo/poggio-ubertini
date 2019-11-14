@@ -1,4 +1,5 @@
-import { ModalService } from './../../../vendors/ew-angularjs-utils/components/modal/modal.service';
+import { RoomsService } from "./../../rooms/rooms.service";
+import { ModalService } from "./../../../vendors/ew-angularjs-utils/components/modal/modal.service";
 import * as moment from "moment";
 import * as jquery from "jquery";
 import swal from "sweetalert2";
@@ -10,11 +11,11 @@ import { ReservationsService } from "./../../reservations/reservations.service";
 import { CitiesService } from "./../../cities/cities.service";
 
 export class CampGuestsComponentController extends EwCommonFormController {
-  reservations: any[];
   modelFileOspiti: any;
   multipleOptionsSelect: any;
   addManyGuests: Function;
   getCampFormData: Function;
+  getDisponibilitaCampo: Function;
   saveReservation: Function;
   selectAll: boolean;
 
@@ -31,8 +32,9 @@ export class CampGuestsComponentController extends EwCommonFormController {
     public ModalService: ModalService,
     private CampsService: CampsService,
     private ReservationsService: ReservationsService,
+    private RoomsService: RoomsService,
     private CitiesService: CitiesService
-    ) {
+  ) {
     "ngInject";
     super($ngRedux, GuestsService);
     this.config = {
@@ -46,12 +48,6 @@ export class CampGuestsComponentController extends EwCommonFormController {
       title: "Ospiti campo",
       titleEntity: "ospite"
     };
-  }
-
-  $onChanges(changes) {
-    if (changes.reservations) {
-      this.reservations = [...this.reservations];
-    }
   }
 
   afterGet(stay: any, model: any, response: any) {
@@ -78,10 +74,24 @@ export class CampGuestsComponentController extends EwCommonFormController {
   }
 
   assignRoom() {
-    return this.ModalService.open({
-      name: 'assignRoomForm',
-      preCloseCallback: (value) => this.ModalService.preCloseCallbackDefault(value, 'camps.view'),
-      template: '<camp-assign-room></camp-assign-room>',
+    return this.getDisponibilitaCampo({
+      camp_id: this.model.id,
+      data_da: moment(this.model.data_inizio).format('YYYY-MM-DD'),
+      data_a: moment(this.model.data_fine).format('YYYY-MM-DD'),
+    }).then(rooms => {
+      console.log("rooms", rooms);
+      
+      return this.ModalService.open({
+        name: "assignRoomForm",
+        preCloseCallback: value =>
+          this.ModalService.preCloseCallbackDefault(value, "camps.view"),
+        template: `<camp-assign-room reservations="$ctrl.reservations"></camp-assign-room>`,
+        controller: () => {
+          return {
+            reservations: this.model.reservations
+          };
+        },
+      });
     });
   }
 
@@ -105,6 +115,8 @@ export class CampGuestsComponentController extends EwCommonFormController {
     return {
       addManyGuests: data => dispatch(this.CampsService.addManyGuests(data)),
       getCampFormData: id => dispatch(this.CampsService.getFormData(id)),
+      getDisponibilitaCampo: data =>
+        dispatch(this.RoomsService.getDisponibilitaCampo(data)),
       multiActions: (a, i, p) =>
         dispatch(this.ReservationsService.multiActions(a, i, p)),
       saveReservation: model => dispatch(this.ReservationsService.save(model))
@@ -122,7 +134,7 @@ export class CampGuestsComponentController extends EwCommonFormController {
   }
 
   multipleCheckIn() {
-    const ids = this.reservations.filter(r => r.selected).map(r => r.id);
+    const ids = this.model.reservations.filter(r => r.selected).map(r => r.id);
     if (!ids.length) {
       return this.service.toaster.info("Seleziona almeno un ospite!");
     }
@@ -155,7 +167,7 @@ export class CampGuestsComponentController extends EwCommonFormController {
   }
 
   multipleCheckOut() {
-    const ids = this.reservations.filter(r => r.selected).map(r => r.id);
+    const ids = this.model.reservations.filter(r => r.selected).map(r => r.id);
     if (!ids.length) {
       return this.service.toaster.info("Seleziona almeno un ospite!");
     }

@@ -47,7 +47,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr ng-repeat="r in $ctrl.reservations track by r.id">
+      <tr ng-repeat="r in $ctrl.model.reservations track by r.id">
         <td class="w_xs text-center">
           <input type="checkbox" ng-model="r.selected" />
         </td>

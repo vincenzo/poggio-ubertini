@@ -4,7 +4,7 @@ import './camp-guests.scss';
 
 export const CampGuestsComponent = {
   bindings: {
-    reservations: '<',
+    model: '<',
   },
   controller: CampGuestsComponentController,
   templateUrl: require('./camp-guests.html'),
