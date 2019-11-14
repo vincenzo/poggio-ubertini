@@ -6,6 +6,7 @@ import { CampsComponent } from './camps.component';
 import { CampFormComponent } from './camp-form/camp-form.component';
 import { CampViewComponent } from './camp-view/camp-view.component';
 import { CampGuestsComponent } from './camp-guests/camp-guests.component';
+import { CampAssignRoomComponent } from './camp-assign-room/camp-assign-room.component';
 
 import { AppService } from '../../common/app/app.service';
 import { CampsService } from './camps.service';
@@ -168,5 +169,6 @@ export const CampsModule = angular.module('components.camps', [
   .component('campForm', CampFormComponent)
   .component('campView', CampViewComponent)
   .component('campGuests', CampGuestsComponent)
+  .component('campAssignRoom', CampAssignRoomComponent)
   .service('CampsService', CampsService)
   .name;

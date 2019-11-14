@@ -1,3 +1,4 @@
+import { ModalService } from './../../../vendors/ew-angularjs-utils/components/modal/modal.service';
 import * as moment from "moment";
 import * as jquery from "jquery";
 import swal from "sweetalert2";
@@ -27,10 +28,11 @@ export class CampGuestsComponentController extends EwCommonFormController {
     $ngRedux,
     hotkeys,
     GuestsService: GuestsService,
+    public ModalService: ModalService,
     private CampsService: CampsService,
     private ReservationsService: ReservationsService,
     private CitiesService: CitiesService
-  ) {
+    ) {
     "ngInject";
     super($ngRedux, GuestsService);
     this.config = {
@@ -72,6 +74,14 @@ export class CampGuestsComponentController extends EwCommonFormController {
     return this.updateModel({
       name: field,
       value: value
+    });
+  }
+
+  assignRoom() {
+    return this.ModalService.open({
+      name: 'assignRoomForm',
+      preCloseCallback: (value) => this.ModalService.preCloseCallbackDefault(value, 'camps.view'),
+      template: '<camp-assign-room></camp-assign-room>',
     });
   }
 
