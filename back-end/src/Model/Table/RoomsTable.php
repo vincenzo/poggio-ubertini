@@ -67,6 +67,7 @@ class RoomsTable extends Table
 
                         // Cerco quanti fanno check in, out e quanti permangono
                         $day = [
+                            'date' => $dataDa->addDays($giornoIdx),
                             'in'   => $baseQuery->where(['data_previsto_in' => $dataDa])->count(),
                             'out'  => $baseQuery->where(['data_previsto_out' => $dataA])->count(),
                             'stay' => $baseQuery->where(['data_previsto_in <' => $dataDa, 'data_previsto_out >' => $dataA])->count(),
@@ -82,10 +83,11 @@ class RoomsTable extends Table
                         // Aggiorno la disponibilità per il periodo
                         if($day['disponibilita'] == 'parziale')
                             $disponibilitaPeriodo = 'parziale';
-                        elseif($day['disponibita'] == 'occupata' && $disponibilitaPeriodo == 'libera')
+                        elseif($day['disponibilita'] == 'occupata' && $disponibilitaPeriodo == 'libera')
                             $disponibilitaPeriodo = 'occupata';
                     }
                     $row->days = $days;
+                    $row->disponibilita = $disponibilitaPeriodo;
                     // logd($row); 
                     // TODO
                     $row->posti_occupati = 0;
