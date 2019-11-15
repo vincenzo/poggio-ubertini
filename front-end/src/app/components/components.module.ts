@@ -10,28 +10,28 @@
  *
  */
 
-import * as angular from 'angular';
+import * as angular from "angular";
 
-import { AuthModule } from './auth/auth.module';
-import { CampsModule } from './camps/camps.module';
-import { CitiesModule } from './cities/cities.module';
-import { DashboardModule } from './dashboard/dashboard.module';
-import { GuestsModule } from './guests/guests.module';
-import { ReservationsModule } from './reservations/reservations.module';
-import { RoomsModule } from './rooms/rooms.module';
-import { StructuresModule } from './structures/structures.module';
-import { UsersModule } from './users/users.module';
+import { AuthModule } from "./auth/auth.module";
+import { CampsModule } from "./camps/camps.module";
+import { CitiesModule } from "./cities/cities.module";
+import { DashboardModule } from "./dashboard/dashboard.module";
+import { GuestsModule } from "./guests/guests.module";
+import { ReservationsModule } from "./reservations/reservations.module";
+import { RoomsModule } from "./rooms/rooms.module";
+import { StructuresModule } from "./structures/structures.module";
+import { StructureOccupancyModule } from "./structure-occupancy/structure-occupancy.module";
+import { UsersModule } from "./users/users.module";
 
-export const ComponentsModule = angular
-  .module('root.components', [
-    AuthModule,
-    CampsModule,
-    CitiesModule,
-    DashboardModule,
-    GuestsModule,
-    ReservationsModule,
-    RoomsModule,
-    StructuresModule,
-    UsersModule,
-  ])
-  .name;
+export const ComponentsModule = angular.module("root.components", [
+  AuthModule,
+  CampsModule,
+  CitiesModule,
+  DashboardModule,
+  GuestsModule,
+  ReservationsModule,
+  RoomsModule,
+  StructuresModule,
+  StructureOccupancyModule,
+  UsersModule
+]).name;

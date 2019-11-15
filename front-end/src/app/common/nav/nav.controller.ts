@@ -91,6 +91,11 @@ export class NavController {
           icon: 'hotel',
           state: 'structures'
         },
+        {
+          title: 'Occupazione',
+          icon: 'hotel',
+          state: 'structureOccupancy'
+        },
       ],
       capogruppo: [
         {
