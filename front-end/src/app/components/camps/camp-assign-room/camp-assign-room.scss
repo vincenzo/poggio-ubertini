@@ -12,6 +12,10 @@ camp-assign-room {
         border: 3px solid transparent;
         cursor: pointer;
 
+        &:disabled {
+            cursor: not-allowed;
+        }
+
         &:hover {
             border-color: #f0ff0c;
         }
