@@ -235,8 +235,8 @@
           <h5>Operazioni campo</h5>
         </ibox-title>
         <ibox-content>
-          <button type="button" class="btn btn-success">Consuntivo</button>
-          <button type="button" class="btn btn-danger">Chiudi campo</button>
+          <button type="button" class="btn btn-success" ng-click="$ctrl.consuntivo($ctrl.model.id)" ng-if="$ctrl.model.chiuso">Visualizza Consuntivo</button>
+          <button type="button" class="btn btn-danger" ng-click="$ctrl.chiudi($ctrl.model.id)" ng-if="!$ctrl.model.chiuso">Chiudi campo</button>
         </ibox-content>
       </ew-ibox>
     </div>

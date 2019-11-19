@@ -1,17 +1,18 @@
-import { campsConfig } from "./camps.config";
 import { EwServerService } from "../../vendors/ew-angularjs-utils/components/server/server.service";
 import { EwCommonService } from "../../vendors/ew-angularjs-utils/common/common-service";
 
-import { promiseAction } from "./camps.actions";
+import { promiseAction } from "./consuntivo.actions";
 
-export class CampsService extends EwCommonService {
+export class ConsuntivoService extends EwCommonService {
   apiPath: string;
   dbFields: Array<any>;
 
-  constructor(private EwServerService: EwServerService, private Upload) {
+  constructor(private EwServerService: EwServerService) {
     "ngInject";
 
-    super("camps", campsConfig, EwServerService);
+    super("consuntivo", null, EwServerService);
+
+    this.apiPath = "/camps";
 
     this.dbFields = [
       { name: "id", type: "number" },
@@ -119,41 +120,5 @@ export class CampsService extends EwCommonService {
     ];
 
     this.ignoreFieldsOnSave = ["created", "modified", "reservations"];
-  }
-
-  chiudi(id) {
-    return this.serverService
-      .post(this.apiPath + "/chiudi", { id })
-      .then((response: any) => response.data);
-  }
-
-  filterActive = value => {
-    // return this.addFilterOnField('Camps.active', value);
-  };
-
-  addManyGuests = data => dispatch => {
-    return dispatch(
-      promiseAction("ADD_MANY_GUESTS", this._addManyGuests(data))
-    );
-  };
-
-  /**
-   * PRIVATES
-   */
-
-  private _addManyGuests(data) {
-    // return new Promise((resolve, reject) => {
-    //   setTimeout(() => resolve(console.log(data)), 3000);
-    // });
-
-    return this.Upload.upload({
-      ignoreLoadingBar: true,
-      url: "/api/camps/addManyGuests",
-      data: data,
-      headers: {
-        Accept: "application/json"
-      },
-      timeout: 10000
-    }).then(resp => resp.data);
   }
 }

@@ -32,6 +32,19 @@ export class CampViewComponentController extends EwCommonFormController {
     };
   }
 
+  chiudi(id) {
+    var answer = confirm("Confermi di voler chiudere il campo?");
+    if (answer) {
+      return this.service.chiudi(id).then(response => {
+        console.log(response);
+      });
+    }
+  }
+
+  consuntivo(id) {
+    return this.stateGo("consuntivo", { id });
+  }
+
   getMapDispatchToThisParams(dispatch) {
     return {
       getDisponibilita: (dataDa, dataA?) =>
