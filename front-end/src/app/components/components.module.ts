@@ -15,6 +15,7 @@ import * as angular from "angular";
 import { AuthModule } from "./auth/auth.module";
 import { CampsModule } from "./camps/camps.module";
 import { CitiesModule } from "./cities/cities.module";
+import { ConsuntivoModule } from "./consuntivo/consuntivo.module";
 import { DashboardModule } from "./dashboard/dashboard.module";
 import { GuestsModule } from "./guests/guests.module";
 import { ReservationsModule } from "./reservations/reservations.module";
@@ -27,6 +28,7 @@ export const ComponentsModule = angular.module("root.components", [
   AuthModule,
   CampsModule,
   CitiesModule,
+  ConsuntivoModule,
   DashboardModule,
   GuestsModule,
   ReservationsModule,

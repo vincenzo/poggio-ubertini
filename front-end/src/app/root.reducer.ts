@@ -3,6 +3,7 @@ import { combineReducers } from "redux";
 import { AppReducer } from "./common/app/app.reducer";
 import { AuthReducer } from "./components/auth/auth.reducer";
 import { CampsReducer } from "./components/camps/camps.reducer";
+import { ConsuntivoReducer } from "./components/consuntivo/consuntivo.reducer";
 import { DashboardReducer } from "./components/dashboard/dashboard.reducer";
 import { GuestsReducer } from "./components/guests/guests.reducer";
 import { ReservationsReducer } from "./components/reservations/reservations.reducer";
@@ -20,6 +21,7 @@ export const rootReducer = combineReducers({
   app: AppReducer,
   auth: AuthReducer,
   camps: CampsReducer,
+  consuntivo: ConsuntivoReducer,
   dashboard: DashboardReducer,
   guests: GuestsReducer,
   lookup: LookupReducer,

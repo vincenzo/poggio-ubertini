@@ -1,4 +1,3 @@
-import { CampsService } from "./../camps.service";
 import { RoomsService } from "./../../rooms/rooms.service";
 import * as moment from "moment";
 import { EwCommonFormController } from "../../../vendors/ew-angularjs-utils/common/common-form-controller";
@@ -40,6 +39,10 @@ export class CampViewComponentController extends EwCommonFormController {
         console.log(response);
       });
     }
+  }
+
+  consuntivo(id) {
+    return this.stateGo("consuntivo", { id });
   }
 
   getMapDispatchToThisParams(dispatch) {
