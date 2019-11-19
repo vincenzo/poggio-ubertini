@@ -95,6 +95,14 @@ class CampsController extends AppController
         $this->_setJson(true, []);
     }
 
+    public function chiudi()
+    {
+        $r = $this->Camps->get($this->request->getData('id'));
+        $r->chiuso = true;
+        $this->save($r);
+        $this->_setJson(true, true);
+    }
+
     /**
      * Metodo comume per l'arricchimento della query, per funzioni view e add/edit post save
      * @param Query $query la query con già impostata la ricerca per ottenere il record
