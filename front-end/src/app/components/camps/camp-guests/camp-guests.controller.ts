@@ -48,6 +48,8 @@ export class CampGuestsComponentController extends EwCommonFormController {
       title: "Ospiti campo",
       titleEntity: "ospite"
     };
+
+    setTimeout(() => this.assignRoom(), 400);
   }
 
   afterGet(stay: any, model: any, response: any) {
@@ -81,9 +83,10 @@ export class CampGuestsComponentController extends EwCommonFormController {
     }).then(rooms => {
       return this.ModalService.open({
         name: "assignRoomForm",
+        className: 'ngdialog-large ngdialog-tall',
         // preCloseCallback: value =>
         //   this.ModalService.preCloseCallbackDefault(value, "camps.view"),
-        template: `<camp-assign-room reservations="$ctrl.reservations" rooms="$ctrl.rooms"></camp-assign-room>`,
+        template: `<camp-assign-room reservations="$ctrl.reservations" rooms="$ctrl.rooms.data"></camp-assign-room>`,
         controller: () => {
           return {
             reservations: this.model.reservations,

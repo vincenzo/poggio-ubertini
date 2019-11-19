@@ -41,6 +41,7 @@ class RoomsController extends AppController
     {
         $this->requireFields(['data_da', 'data_a', 'camp_id']);
         $all = $this->Rooms->find()
+            ->find('structures')
             ->find('occupazione', [
                 'data_da' => $this->request->getData('data_da'),
                 'data_a'  => $this->request->getData('data_a'),

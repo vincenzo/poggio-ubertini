@@ -29,6 +29,12 @@ class RoomsTable extends Table
         $this->addBehavior('Timestamp');
     }
 
+    public function findStructures(Query $query, array $options){
+        return $query->contain(['Structures' => function($q){
+            return $q->select(['nome']);
+        }]);
+    }
+
     public function findDisponibile(Query $query, array $options){
         return $query
         ->contain('RoomAvailabilities', function($q) use ($options){

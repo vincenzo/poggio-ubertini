@@ -1,5 +1,29 @@
-<h1>MODAL</h1>
+<h1>Assegna a stanze</h1>
 
-<pre>{{ $ctrl.reservations | json }}</pre>
-
-<pre>{{ $ctrl.rooms | json }}</pre>
+<row style="grid-template-columns: 200px 1fr">
+    <section>
+        <!-- <pre>{{ $ctrl.reservations | json }}</pre> -->
+        <h3>Seleziona ospiti</h3>
+        <div ng-repeat="res in $ctrl.reservations track by res.id">
+            <label ng-if="!res.room_id">
+                <input type="checkbox" /> {{ res.guest.nome }} {{ res.guest.cognome }}
+            </label>
+        </div>
+    </section>
+    <section id="rooms">
+        <!-- <pre>{{ $ctrl.rooms | json }}</pre> -->
+        <row style="grid-template-columns: repeat(10, 70px)">
+            <div ng-repeat="room in $ctrl.rooms track by room.id" class="room" ng-class="'color--' + room.disponibilita">
+                <h2>{{ room.display_name }}</h2>
+                <span 
+                    class="room-daily"
+                    ng-repeat="(k, day) in room.days track by k"
+                    ng-class="'color--' + day.disponibilita" 
+                    >
+                    <!-- + ng-class ".too-small" se room.posti_liberi < al numero di ospiti flaggati con checkbox -->
+                    
+                </span>
+            </div>
+        </row>
+    </section>
+</row>

@@ -1,1 +1,59 @@
-camp-assign-room {}
+camp-assign-room {
+    h1 {
+        padding-bottom: 10px;
+    }
+
+    .room {
+        display: block;
+        height: 70px;
+        width: 70px;
+        padding: 2px;
+        background-color: #333;
+        border: 3px solid transparent;
+        cursor: pointer;
+
+        &:hover {
+            border-color: #f0ff0c;
+        }
+
+        h2 {
+            color: #fff;
+            font-size: 1.2rem;
+            line-height: 1.2rem;
+            text-align: center;
+            margin: 0;
+            padding: 15px 0;
+        }
+
+        &.too-small {
+            background-color: #999;
+        }
+    }
+
+    .room-daily {
+        display: inline-block;
+        height: 5px;
+        width: 5px;
+        border-radius: 50%;
+        margin-left: 1px;
+    }
+
+    .color--libera {
+        background-color: green;
+        .color--libera {
+            background-color: #fff;
+        }
+    }
+    .color--parziale {
+        background-color: orange;
+        .color--parziale {
+            background-color: #fff;
+        }
+    }
+    .color--occupata {
+        background-color: red;
+        .color--occupata {
+            background-color: #fff;
+        }
+    }
+}
