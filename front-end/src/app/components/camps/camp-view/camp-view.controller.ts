@@ -1,3 +1,4 @@
+import { CampsService } from "./../camps.service";
 import { RoomsService } from "./../../rooms/rooms.service";
 import * as moment from "moment";
 import { EwCommonFormController } from "../../../vendors/ew-angularjs-utils/common/common-form-controller";
@@ -30,6 +31,15 @@ export class CampViewComponentController extends EwCommonFormController {
       title: "Dati campo",
       titleEntity: "campo"
     };
+  }
+
+  chiudi(id) {
+    var answer = confirm("Confermi di voler chiudere il campo?");
+    if (answer) {
+      return this.service.chiudi(id).then(response => {
+        console.log(response);
+      });
+    }
   }
 
   getMapDispatchToThisParams(dispatch) {

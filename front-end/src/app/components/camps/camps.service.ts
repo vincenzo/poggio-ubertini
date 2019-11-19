@@ -121,6 +121,12 @@ export class CampsService extends EwCommonService {
     this.ignoreFieldsOnSave = ["created", "modified", "reservations"];
   }
 
+  chiudi(id) {
+    return this.serverService
+      .post(this.apiPath + "/chiudi", { id })
+      .then((response: any) => response.data);
+  }
+
   filterActive = value => {
     // return this.addFilterOnField('Camps.active', value);
   };
