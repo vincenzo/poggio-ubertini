@@ -30,17 +30,8 @@ export class RoomsService extends EwCommonService {
     );
   };
 
-  getDisponibilitaCampo = (data: {
-    camp_id: number;
-    data_data: string;
-    data_a: string;
-  }) => dispatch => {
-    return dispatch(
-      promiseAction(
-        "GET_DISPONIBILITA_CAMPO",
-        this._getDisponibilitaCampo(data)
-      )
-    );
+  getDisponibilitaCampo = data => {
+    return this._getDisponibilitaCampo(data);
   };
 
   /**

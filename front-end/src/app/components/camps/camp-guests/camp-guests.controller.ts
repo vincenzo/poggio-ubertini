@@ -73,27 +73,26 @@ export class CampGuestsComponentController extends EwCommonFormController {
     });
   }
 
-  assignRoom() {
-    return this.getDisponibilitaCampo({
+  assignRoom = () => {
+    return this.RoomsService.getDisponibilitaCampo({
       camp_id: this.model.id,
-      data_da: moment(this.model.data_inizio).format('YYYY-MM-DD'),
-      data_a: moment(this.model.data_fine).format('YYYY-MM-DD'),
+      data_da: moment(this.model.data_inizio).format("YYYY-MM-DD"),
+      data_a: moment(this.model.data_fine).format("YYYY-MM-DD")
     }).then(rooms => {
-      console.log("rooms", rooms);
-      
       return this.ModalService.open({
         name: "assignRoomForm",
-        preCloseCallback: value =>
-          this.ModalService.preCloseCallbackDefault(value, "camps.view"),
-        template: `<camp-assign-room reservations="$ctrl.reservations"></camp-assign-room>`,
+        // preCloseCallback: value =>
+        //   this.ModalService.preCloseCallbackDefault(value, "camps.view"),
+        template: `<camp-assign-room reservations="$ctrl.reservations" rooms="$ctrl.rooms"></camp-assign-room>`,
         controller: () => {
           return {
-            reservations: this.model.reservations
+            reservations: this.model.reservations,
+            rooms: rooms
           };
-        },
+        }
       });
     });
-  }
+  };
 
   checkIn(reservation: any, date?: string) {
     const params = {
@@ -115,8 +114,6 @@ export class CampGuestsComponentController extends EwCommonFormController {
     return {
       addManyGuests: data => dispatch(this.CampsService.addManyGuests(data)),
       getCampFormData: id => dispatch(this.CampsService.getFormData(id)),
-      getDisponibilitaCampo: data =>
-        dispatch(this.RoomsService.getDisponibilitaCampo(data)),
       multiActions: (a, i, p) =>
         dispatch(this.ReservationsService.multiActions(a, i, p)),
       saveReservation: model => dispatch(this.ReservationsService.save(model))
