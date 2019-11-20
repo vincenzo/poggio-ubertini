@@ -4,7 +4,8 @@
   <section>
     <!-- <pre>{{ $ctrl.reservations | json }}</pre> -->
     <h3>Seleziona ospiti</h3>
-    <div ng-repeat="res in $ctrl.reservations track by res.id">
+    <input type="text" placeholder="Cerca ospite..." ng-model="$ctrl.search" />
+    <div ng-repeat="res in $ctrl.reservations | filter: $ctrl.search track by res.id">
       <label ng-if="!res.room_id">
         <input
           type="checkbox"
