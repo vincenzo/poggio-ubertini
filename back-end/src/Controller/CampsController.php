@@ -110,7 +110,7 @@ class CampsController extends AppController
      */
     public function _entityQuery($query, $id){
         return $query
-            ->contain(['Reservations', 'Reservations.Guests', 'UploadIpotesiSpesa']);
+            ->contain(['Reservations.Rooms', 'Reservations.Rooms.Structures', 'Reservations', 'Reservations.Guests', 'UploadIpotesiSpesa']);
     }
     
 

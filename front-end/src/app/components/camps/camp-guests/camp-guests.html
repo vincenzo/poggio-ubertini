@@ -14,11 +14,7 @@
     >
       Check-out
     </button>
-    <button
-      type="button"
-      class="btn btn-primary"
-      ng-click="$ctrl.assignRoom()"
-    >
+    <button type="button" class="btn btn-primary" ng-click="$ctrl.assignRoom()">
       Assegna stanza
     </button>
   </row>
@@ -80,8 +76,18 @@
           <span ng-if="r.data_out">{{ r.data_out | date: "dd/MM/yyyy" }}</span>
         </td>
         <!-- TODO: da cambiare non appena mi includi room nella risposta back -->
-        <td>{{ r.room_id }}</td>
-        <td class="actions"></td>
+        <td>{{ r.room_id ? r.room.display_name : '' }}</td>
+        <td class="actions">
+          <a
+            href=""
+            class="text-warning"
+            ng-click="$ctrl.removeRoom(r.id)"
+            uib-tooltip="Rimuovi assegnazione stanza"
+            ng-disabled="r.room_id"
+          >
+            <i class="far fa-fw fa-unlink"></i>
+          </a>
+        </td>
       </tr>
     </tbody>
   </table>

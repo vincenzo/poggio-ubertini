@@ -113,6 +113,19 @@ export class CampsService extends EwCommonService {
               { name: "created", type: "date" },
               { name: "modified", type: "date" }
             ]
+          },
+          {
+            name: "room",
+            type: "object",
+            fields: [
+              { name: "id", type: "number" },
+              { name: "structure_id", type: "number" },
+              { name: "numero", type: "number" },
+              { name: "ala_vecchia", type: "boolean" },
+              { name: "servizi", type: "boolean" },
+              { name: "posti_letto", type: "number" },
+              { name: "display_name", type: "string" }
+            ]
           }
         ]
       }

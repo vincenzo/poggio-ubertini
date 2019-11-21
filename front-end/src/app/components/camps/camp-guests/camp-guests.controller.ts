@@ -48,8 +48,6 @@ export class CampGuestsComponentController extends EwCommonFormController {
       title: "Ospiti campo",
       titleEntity: "ospite"
     };
-
-    setTimeout(() => this.assignRoom(), 400);
   }
 
   afterGet(stay: any, model: any, response: any) {
@@ -83,7 +81,7 @@ export class CampGuestsComponentController extends EwCommonFormController {
     }).then(rooms => {
       return this.ModalService.open({
         name: "assignRoomForm",
-        className: 'ngdialog-large ngdialog-tall',
+        className: "ngdialog-large ngdialog-tall",
         // preCloseCallback: value =>
         //   this.ModalService.preCloseCallbackDefault(value, "camps.view"),
         template: `<camp-assign-room reservations="$ctrl.reservations" rooms="$ctrl.rooms.data"></camp-assign-room>`,
@@ -303,6 +301,22 @@ export class CampGuestsComponentController extends EwCommonFormController {
       .catch(() =>
         this.service.toaster.error("Errore durante il caricamento degli ospiti")
       );
+  }
+
+  removeRoom(id) {
+    const answer = confirm(
+      "Confermi di voler rimuovere l'assegnazione della camera?"
+    );
+
+    if (!answer) {
+      return;
+    }
+
+    return this.ReservationsService.removeRoom(id)
+      .then(response =>
+        this.service.toaster.success("Assegnazione stanza rimossa")
+      )
+      .then(() => this.getCampFormData(this.parentId));
   }
 
   /**
