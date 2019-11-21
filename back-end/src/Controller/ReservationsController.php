@@ -44,7 +44,21 @@ class ReservationsController extends AppController
      * @return Query
      */
     public function _entityQuery($query, $id){
-        return $query;
+        return $query->contain(['Rooms', 'Rooms.Structures']);
+    }
+
+    /**
+     * Rimuove il room_id da una prenotazione
+     *
+     * @return void
+     */
+    public function removeRoom()
+    {
+        $this->requireFields(['id']);
+        $r = $this->Reservations->get($this->request->getData('id'));
+        $r->room_id = null;
+        $success = $this->Reservations->save($r);
+        $this->_setJson($success, null);
     }
 
     /**
