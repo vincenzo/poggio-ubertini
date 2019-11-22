@@ -61,11 +61,11 @@ export class NavController {
   getMenuConfig(role) {
     let menuConfigs = {
       admin: [
-        {
-          title: '',
-          icon: 'tachometer-alt',
-          state: 'dashboard',
-        },
+        // {
+        //   title: '',
+        //   icon: 'tachometer-alt',
+        //   state: 'dashboard',
+        // },
         {
           title: 'Campi',
           icon: 'suitcase',
@@ -76,26 +76,26 @@ export class NavController {
           icon: 'users',
           state: 'guests',
         },
-        {
-          title: 'Prenotazioni',
-          icon: 'book',
-          state: 'reservations'
-        },
-        {
-          title: 'Camere',
-          icon: 'bed',
-          state: 'rooms'
-        },
-        {
-          title: 'Strutture',
-          icon: 'hotel',
-          state: 'structures'
-        },
-        {
-          title: 'Occupazione',
-          icon: 'hotel',
-          state: 'structureOccupancy'
-        },
+        // {
+        //   title: 'Prenotazioni',
+        //   icon: 'book',
+        //   state: 'reservations'
+        // },
+        // {
+        //   title: 'Camere',
+        //   icon: 'bed',
+        //   state: 'rooms'
+        // },
+        // {
+        //   title: 'Strutture',
+        //   icon: 'hotel',
+        //   state: 'structures'
+        // },
+        // {
+        //   title: 'Occupazione',
+        //   icon: 'hotel',
+        //   state: 'structureOccupancy'
+        // },
         {
           title: 'Calendario occupazione',
           icon: 'calendar',
