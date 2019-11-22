@@ -3,5 +3,16 @@
 </ew-page-header>
 
 <div class="container">
-  <pre>{{ $ctrl.calendario | json }}</pre>
+  <!-- <pre>{{ $ctrl.calendario | json }}</pre> -->
+  <table class="table table-striped">
+    <tr>
+      <th></th>
+    </tr>
+    <tr ng-repeat="(idxMese, mese) in $ctrl.calendario track by idxMese">
+      <td>{{ idxMese+1 }}</td>
+      <td ng-repeat="(idxGiorno, giorno) in mese track by idxGiorno">
+        {{ giorno | json }}
+      </td>
+    </tr>
+  </table>
 </div>

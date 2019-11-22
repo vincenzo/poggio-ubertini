@@ -30,7 +30,7 @@ export class RoomsCalendarioComponentController {
 
   private _mapStateToThis(state) {
     return this.RoomsCalendarioService.mapStateToThisIndex({
-      calendario: state.roomsCalendario.toJS(),
+      calendario: state.roomsCalendario.toJS().calendario.data,
     })(state);
   }
 

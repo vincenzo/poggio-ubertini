@@ -117,10 +117,27 @@ class RoomsTable extends Table
 
     public function getCalendario($y)
     {
-        $structures = $this->Structures->find()->combine('id', 'nome')->toArray();
+        // $structures = $this->Structures->find()->combine('id', 'nome')->toArray();
         // debug($structures);
-
-        return [];
+        $dataInizio = new FrozenDate("$y-01-01");
+        $giorni = 0;
+        $data = [];
+        while(($day = $dataInizio->addDays($giorni++))->format('Y') == $y) {
+            $ymd = $day->format('Y-m-d');
+           $query = $this->Reservations->find();
+           $query
+                ->where(['OR' => [
+                    ['data_previsto_in' => $ymd],
+                    ['data_previsto_in <' => $ymd, 'data_previsto_out >' => $ymd]
+                ]])
+                ->contain('Rooms')
+                ->select(['Rooms.structure_id', 'count' => $query->func()->count('*')])
+                ->group(['Rooms.structure_id'])
+            ;
+            $data[$day->format('m')][$day->format('d')] = $query->combine('room.structure_id', 'count');
+        }
+        $data = array_map(function($r){ return array_values($r); }, $data);
+        return array_values($data);
     }
 
     private function __getDisponibilita($postiLetto, $postiDisponibli)
