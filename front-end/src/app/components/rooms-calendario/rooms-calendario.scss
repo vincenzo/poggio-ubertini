@@ -1,1 +1,18 @@
-rooms-calendario {}
+rooms-calendario {
+    .cal-day {
+        height: 20px;
+        width: 20px;
+        background: #fafafa;
+        -webkit-print-color-adjust: exact;
+
+        &.cal-s-1 {
+            background: linear-gradient(to left bottom, #fafafa 50%, #d92222 50%) !important;
+        }
+        &.cal-s-2 {
+            background: linear-gradient(to left bottom, #212531 50%, #fafafa 50%) !important;
+        }
+        &.cal-s-12 {
+            background: linear-gradient(to left bottom, #212531 50%, #d92222 50%) !important;
+        }
+    }
+}

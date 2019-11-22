@@ -124,8 +124,8 @@ class RoomsTable extends Table
         $data = [];
         while(($day = $dataInizio->addDays($giorni++))->format('Y') == $y) {
             $ymd = $day->format('Y-m-d');
-           $query = $this->Reservations->find();
-           $query
+            $query = $this->Reservations->find();
+            $query
                 ->where(['OR' => [
                     ['data_previsto_in' => $ymd],
                     ['data_previsto_in <' => $ymd, 'data_previsto_out >' => $ymd]
@@ -134,7 +134,8 @@ class RoomsTable extends Table
                 ->select(['Rooms.structure_id', 'count' => $query->func()->count('*')])
                 ->group(['Rooms.structure_id'])
             ;
-            $data[$day->format('m')][$day->format('d')] = $query->combine('room.structure_id', 'count');
+            $t = join('', array_keys($query->combine('room.structure_id', 'count')->toArray()));
+            $data[$day->format('m')][$day->format('d')] = $t ? "s-$t" : '';
         }
         $data = array_map(function($r){ return array_values($r); }, $data);
         return array_values($data);

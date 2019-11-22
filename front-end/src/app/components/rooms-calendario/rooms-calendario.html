@@ -7,12 +7,12 @@
   <table class="table table-striped">
     <tr>
       <th></th>
-      <th ng-repeat="x in [].constructor(31) track by $index"></th>
+      <th ng-repeat="x in [].constructor(31) track by $index">{{ $index+1 }}</th>
     </tr>
     <tr ng-repeat="(idxMese, mese) in $ctrl.calendario track by idxMese">
       <td>{{ $ctrl.lookup.Mesi[idxMese+1] }}</td>
       <td ng-repeat="(idxGiorno, giorno) in mese track by idxGiorno">
-        {{ giorno | json }}
+        <div class="cal-day" ng-class="['cal-' + giorno]"></div>
       </td>
     </tr>
   </table>
