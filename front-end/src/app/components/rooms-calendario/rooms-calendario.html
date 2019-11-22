@@ -1,35 +1,7 @@
-<ew-page-header add-button="{ action: 'rooms.add' }" size="compact" on-action="$ctrl.onAction(action, value)"
-  header-title="Camere">
+<ew-page-header size="compact"  header-title="Calendario occupazione">
   <next-title></next-title>
-
-  <right-side>
-    <button class="btn btn-sm btn-default btn-flat btn-condensed pull-right" type="button"
-      ng-click="$ctrl.stateReload($ctrl.router.currentState.name)">
-      <i class="far fa-sync fa-fw text-primary"></i> Ricarica dati
-    </button>
-  </right-side>
-
-  <under-title>
-    <row style="grid-template-columns: 1fr 120px">
-      <span></span>
-      <form novalidate>
-        <ew-datepicker name="Rooms.data" on-change="$ctrl.addFilterOnFields([$event])"
-          value="$ctrl.rooms.filters['Rooms.data'].value">
-        </ew-datepicker>
-      </form>
-    </row>
-  </under-title>
 </ew-page-header>
 
 <div class="container">
-  <row style="grid-template-columns: repeat(9, 1fr)">
-    <div class="room" ng-repeat="r in $ctrl.list">
-      <h3>{{ r.display_name }}</h3>
-      <h4>{{ r.posti_liberi }} / <span>{{ r.posti_letto }}</span></h4>
-      <div class="occupazione" style="height: {{ r.perc_occupazione }}%"></div>
-      <i class="has-servizi far fa-restroom" ng-if="r.servizi"></i>
-    </div>
-  </row>
-
-  <!-- <pre>{{ $ctrl.list | json }}</pre> -->
+  <pre>{{ $ctrl.calendario | json }}</pre>
 </div>

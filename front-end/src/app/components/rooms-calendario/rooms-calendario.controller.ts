@@ -29,7 +29,9 @@ export class RoomsCalendarioComponentController {
    */
 
   private _mapStateToThis(state) {
-    return this.RoomsCalendarioService.mapStateToThisIndex()(state);
+    return this.RoomsCalendarioService.mapStateToThisIndex({
+      calendario: state.calendario.toJS(),
+    })(state);
   }
 
   private _mapDispatchToThis = dispatch => {
