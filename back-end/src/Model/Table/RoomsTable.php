@@ -4,6 +4,7 @@ namespace App\Model\Table;
 use Cake\I18n\Date;
 use Cake\ORM\Query;
 use Cake\ORM\Table;
+use Cake\I18n\FrozenDate;
 use Cake\ORM\RulesChecker;
 use Cake\Validation\Validator;
 
@@ -59,13 +60,13 @@ class RoomsTable extends Table
         return $query
             ->formatResults(function ($results) use ($options) {
                 return $results->map(function ($row) use ($options) {
-                    $dataDa = new Date($options['data_da']);
-                    $dataA  = new Date($options['data_a']);
+                    $dataDa = new FrozenDate($options['data_da']);
+                    $dataA  = new FrozenDate($options['data_a']);
                     $days = [];
                     $disponibilitaPeriodo = 'libera';
                     // Loop per giorni
                     $giornoIdx = 0;
-                    while($dataDa->addDays($giornoIdx) <= $dataA)
+                    while(($d = $dataDa->addDays($giornoIdx)) <= $dataA)
                     {
                         // TODO Ottimizzare facendo una count per ogni situazione in/ou/stay e anziché filtrare per room_ids
                         // raggruppare per room_id, così da avere solo 3 query anziché 300, e portare questo loop fuori dal map
@@ -77,13 +78,13 @@ class RoomsTable extends Table
 
                         // Cerco quanti fanno check in, out e quanti permangono
                         $day = [
-                            'date' => $dataDa->addDays($giornoIdx),
+                            'date' => $d,
                             'in'   
-                                => $baseQuery->where($conditions + ['data_previsto_in' => $dataDa], [], Query::OVERWRITE)->count(),
+                                => $baseQuery->where($conditions + ['data_previsto_in' => $d], [], Query::OVERWRITE)->count(),
                             'out'  
-                                => $baseQuery->where($conditions + ['data_previsto_out' => $dataA], [], Query::OVERWRITE)->count(),
+                                => $baseQuery->where($conditions + ['data_previsto_out' => $d], [], Query::OVERWRITE)->count(),
                             'stay' 
-                                => $baseQuery->where($conditions + ['data_previsto_in <' => $dataDa, 'data_previsto_out >' => $dataA], [], Query::OVERWRITE)->count(),
+                                => $baseQuery->where($conditions + ['data_previsto_in <' => $d, 'data_previsto_out >' => $d], [], Query::OVERWRITE)->count(),
                         ];
                         // TODO Valutare se inserire qua anche la valutazione di prenotazione RoomAvailabilities
 
