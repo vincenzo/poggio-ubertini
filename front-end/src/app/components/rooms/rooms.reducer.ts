@@ -1,3 +1,4 @@
+import * as moment from 'moment';
 import {
   createReducer,
   getReducer,
@@ -16,9 +17,13 @@ const INITIAL_STATE = fromJS({
       active: false,
       value: null,
     },
-    'Rooms.data': {
+    'Rooms.data_da': {
       active: true,
-      value: new Date(),
+      value: moment(new Date()).format('YYYY-MM-DD'),
+    },
+    'Rooms.data_a': {
+      active: true,
+      value: moment(new Date()).format('YYYY-MM-DD'),
     },
   },
   filterPanel: {
