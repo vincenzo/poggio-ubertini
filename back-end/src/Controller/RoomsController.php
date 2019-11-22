@@ -77,6 +77,13 @@ class RoomsController extends AppController
         $this->_setJson(true, []);
     }
 
+    public function getCalendario()
+    {
+        $y = $this->request->getData('anno');
+        $data = $this->Rooms->getCalendario($y);
+        $this->_setJson(true, $data);
+    }
+
     /**
      * Metodo comume per l'arricchimento della query, per funzioni view e add/edit post save
      * @param Query $query la query con già impostata la ricerca per ottenere il record
