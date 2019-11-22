@@ -15,12 +15,14 @@ class RoomsController extends AppController
      */
     public function index()
     {
-        $data = $this->request->getData('data');
+        $this->requireFields(['data_da', 'data_a']);
+        $dataDa = $this->request->getData('data_da');
+        $dataA = $this->request->getData('data_a');
 
         $q = $this->Rooms
             ->find('all')
-            ->find('occupazione', ['data' => $data])
-            ->find('disponibile', ['data_da' => $data, 'data_a' => $data])
+            ->find('occupazione', ['data_da' => $dataDa, 'data_a' => $dataA])
+            ->find('disponibile', ['data_da' => $dataDa, 'data_a' => $dataA])
             ->contain('Structures')
             // ->groupBy('structure_id')
             ;
