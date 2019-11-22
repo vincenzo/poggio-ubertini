@@ -18,6 +18,9 @@ export class CampGuestsComponentController extends EwCommonFormController {
   getDisponibilitaCampo: Function;
   saveReservation: Function;
   selectAll: boolean;
+  sortColumnName: string;
+  sortReverse: boolean;
+  sortReverseclass: string;
 
   multiActions: (
     action: "check" | "assignRoom",
@@ -318,6 +321,27 @@ export class CampGuestsComponentController extends EwCommonFormController {
       )
       .then(() => this.getCampFormData(this.parentId));
   }
+
+  sortColumn = col => {
+    this.sortColumnName = col;
+
+    if (this.sortReverse) {
+      this.sortReverse = false;
+      this.sortReverseclass = "caret-up";
+    } else {
+      this.sortReverse = true;
+      this.sortReverseclass = "caret-down";
+    }
+  };
+
+  // remove and change class
+  sortClass = col => {
+    if (this.sortColumnName === col) {
+      return this.sortReverseclass;
+    } else {
+      return "";
+    }
+  };
 
   /**
    * PRIVATES

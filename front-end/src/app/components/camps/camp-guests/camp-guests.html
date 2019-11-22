@@ -34,8 +34,20 @@
             ng-model="$ctrl.selectAll"
           />
         </th>
-        <th>Nome</th>
-        <th>Cognome</th>
+        <th
+          class="sortable"
+          ng-click='$ctrl.sortColumn("nome")'
+          ng-class='$ctrl.sortClass("nome")'
+        >
+          Nome
+        </th>
+        <th
+          class="sortable"
+          ng-click='$ctrl.sortColumn("cognome")'
+          ng-class='$ctrl.sortClass("cognome")'
+        >
+          Cognome
+        </th>
         <th class="w_md">Arrivo</th>
         <th class="w_md">Partenza</th>
         <th class="w_md">Stanza</th>
@@ -43,7 +55,9 @@
       </tr>
     </thead>
     <tbody>
-      <tr ng-repeat="r in $ctrl.model.reservations track by r.id">
+      <tr
+        ng-repeat="r in $ctrl.model.reservations | orderBy:$ctrl.sortColumnName:$ctrl.sortReverse track by r.id"
+      >
         <td class="w_xs text-center">
           <input type="checkbox" ng-model="r.selected" />
         </td>
