@@ -1,4 +1,4 @@
-<ew-page-header size="compact"  header-title="Calendario occupazione">
+<ew-page-header size="compact" header-title="Calendario occupazione">
   <next-title></next-title>
 </ew-page-header>
 
@@ -7,9 +7,10 @@
   <table class="table table-striped">
     <tr>
       <th></th>
+      <th ng-repeat="x in [].constructor(31) track by $index"></th>
     </tr>
     <tr ng-repeat="(idxMese, mese) in $ctrl.calendario track by idxMese">
-      <td>{{ idxMese+1 }}</td>
+      <td>{{ $ctrl.lookup.Mesi[idxMese+1] }}</td>
       <td ng-repeat="(idxGiorno, giorno) in mese track by idxGiorno">
         {{ giorno | json }}
       </td>
