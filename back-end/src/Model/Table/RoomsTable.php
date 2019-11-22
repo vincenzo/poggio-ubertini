@@ -115,6 +115,14 @@ class RoomsTable extends Table
         ;
     }
 
+    public function getCalendario($y)
+    {
+        $structures = $this->Structures->find()->combine('id', 'nome')->toArray();
+        // debug($structures);
+
+        return [];
+    }
+
     private function __getDisponibilita($postiLetto, $postiDisponibli)
     {
         if($postiDisponibli == 0)
