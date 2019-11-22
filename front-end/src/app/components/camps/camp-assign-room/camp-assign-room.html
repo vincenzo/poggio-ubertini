@@ -27,11 +27,14 @@
         ng-disabled="room.posti_liberi < $ctrl.countedChecks"
       >
         <h2>{{ room.display_name }}</h2>
-        <span
+        <i><small>{{ room.posti_liberi }}/</small>{{ room.posti_letto }}</i>
+        <div class="room-daily-container">
+          <span
           class="room-daily"
           ng-repeat="(k, day) in room.days track by k"
           ng-class="'color--' + day.disponibilita"
-        >
+          >
+        </div>
         </span>
       </button>
     </row>

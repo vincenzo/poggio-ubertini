@@ -66,7 +66,7 @@ class RoomsTable extends Table
                     $disponibilitaPeriodo = 'libera';
                     // Loop per giorni
                     $giornoIdx = 0;
-                    while(($d = $dataDa->addDays($giornoIdx)) <= $dataA)
+                    while(($d = $dataDa->addDays($giornoIdx)) < $dataA) // < e non <= perché l'ultimo giorno la stanza è libera
                     {
                         // TODO Ottimizzare facendo una count per ogni situazione in/ou/stay e anziché filtrare per room_ids
                         // raggruppare per room_id, così da avere solo 3 query anziché 300, e portare questo loop fuori dal map
@@ -89,7 +89,7 @@ class RoomsTable extends Table
                         // TODO Valutare se inserire qua anche la valutazione di prenotazione RoomAvailabilities
 
                         // Calcolo la disponibilità per il giorno
-                        $day['posti_liberi'] = $row->posti_letto - $day['stay'] - $day['in'] + $day['out'];
+                        $day['posti_liberi'] = $row->posti_letto - $day['stay'] - $day['in'];
                         $day['disponibilita'] = $this->__getDisponibilita($row->posti_letto, $day['posti_liberi']);
                         $days[$giornoIdx] = $day;
                         $giornoIdx++;
@@ -104,8 +104,8 @@ class RoomsTable extends Table
                     $row->disponibilita = $disponibilitaPeriodo;
                     // logd($row); 
                     // TODO
-                    $row->posti_occupati = 0;
-                    $row->posti_liberi = $row->posti_letto - $row->posti_occupati;
+                    $row->posti_liberi = $row->days[0]['posti_liberi'];
+                    $row->posti_occupati = $row->posti_letto;
                     $row->perc_occupazione = round($row->posti_occupati / $row->posti_letto * 100, 2);
                     if($row->perc_occupazione > 100)
                         $row->perc_occupazione = 100;

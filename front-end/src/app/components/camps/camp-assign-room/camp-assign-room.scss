@@ -26,12 +26,26 @@ camp-assign-room {
             line-height: 1.2rem;
             text-align: center;
             margin: 0;
-            padding: 15px 0;
+            padding: 5px 0;
+        }
+
+        i {
+            color: #fff;
+            display: block;
+            text-align: center;
+            padding-top: 5px;
+            font-size: 1.4rem;
         }
 
         &.too-small {
             background-color: #999;
         }
+    }
+
+    .room-daily-container {
+        height: 15px;
+        padding: 0;
+        margin-top: -8px;
     }
 
     .room-daily {
