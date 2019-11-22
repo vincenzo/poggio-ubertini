@@ -17,11 +17,11 @@ const INITIAL_STATE = fromJS({
       active: false,
       value: null,
     },
-    'Rooms.data_da': {
+    'data_da': {
       active: true,
       value: moment(new Date()).format('YYYY-MM-DD'),
     },
-    'Rooms.data_a': {
+    'data_a': {
       active: true,
       value: moment(new Date()).format('YYYY-MM-DD'),
     },
