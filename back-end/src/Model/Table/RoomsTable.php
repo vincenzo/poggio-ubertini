@@ -67,16 +67,23 @@ class RoomsTable extends Table
                     $giornoIdx = 0;
                     while($dataDa->addDays($giornoIdx) <= $dataA)
                     {
-                        $baseQuery = $this->Reservations->find()->where(['room_id' => $row->id]);
+                        // TODO Ottimizzare facendo una count per ogni situazione in/ou/stay e anziché filtrare per room_ids
+                        // raggruppare per room_id, così da avere solo 3 query anziché 300, e portare questo loop fuori dal map
+                        // per poi processare i dati all'interno di questo while che rimane qui
+                        $baseQuery = $this->Reservations->find();
+                        $conditions = ['room_id' => $row->id];
                         if(!empty($options['camp_id']))
-                            $baseQuery = $baseQuery->where(['camp_id' => $options['camp_id']]);
+                            $conditions['camp_id'] = $options['camp_id'];
 
                         // Cerco quanti fanno check in, out e quanti permangono
                         $day = [
                             'date' => $dataDa->addDays($giornoIdx),
-                            'in'   => $baseQuery->where(['data_previsto_in' => $dataDa])->count(),
-                            'out'  => $baseQuery->where(['data_previsto_out' => $dataA])->count(),
-                            'stay' => $baseQuery->where(['data_previsto_in <' => $dataDa, 'data_previsto_out >' => $dataA])->count(),
+                            'in'   
+                                => $baseQuery->where($conditions + ['data_previsto_in' => $dataDa], [], Query::OVERWRITE)->count(),
+                            'out'  
+                                => $baseQuery->where($conditions + ['data_previsto_out' => $dataA], [], Query::OVERWRITE)->count(),
+                            'stay' 
+                                => $baseQuery->where($conditions + ['data_previsto_in <' => $dataDa, 'data_previsto_out >' => $dataA], [], Query::OVERWRITE)->count(),
                         ];
                         // TODO Valutare se inserire qua anche la valutazione di prenotazione RoomAvailabilities
 
