@@ -28,6 +28,11 @@ export class CampAssignRoomComponentController {
   }
 
   assegna(room) {
+
+    if (!Object.keys(this.checks).length) {
+      return this.ReservationsService.toaster.info("Seleziona almeno un ospite");
+    }
+
     this.ModalService.close("assignRoomForm");
     return this.$ngRedux
       .dispatch(
