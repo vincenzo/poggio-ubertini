@@ -8,6 +8,7 @@ import { DashboardReducer } from "./components/dashboard/dashboard.reducer";
 import { GuestsReducer } from "./components/guests/guests.reducer";
 import { ReservationsReducer } from "./components/reservations/reservations.reducer";
 import { RoomsReducer } from "./components/rooms/rooms.reducer";
+import { RoomsCalendarioReducer } from "./components/rooms-calendario/rooms-calendario.reducer";
 import { StructuresReducer } from "./components/structures/structures.reducer";
 import { StructureOccupancyReducer } from "./components/structure-occupancy/structure-occupancy.reducer";
 
@@ -27,6 +28,7 @@ export const rootReducer = combineReducers({
   lookup: LookupReducer,
   reservations: ReservationsReducer,
   rooms: RoomsReducer,
+  roomsCalendario: RoomsCalendarioReducer,
   router,
   structures: StructuresReducer,
   structureOccupancy: StructureOccupancyReducer,

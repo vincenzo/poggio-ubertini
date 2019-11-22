@@ -96,6 +96,11 @@ export class NavController {
           icon: 'hotel',
           state: 'structureOccupancy'
         },
+        {
+          title: 'Calendario occupazione',
+          icon: 'calendar',
+          state: 'roomsCalendario'
+        },
       ],
       capogruppo: [
         {

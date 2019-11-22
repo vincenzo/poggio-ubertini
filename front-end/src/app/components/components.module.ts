@@ -20,6 +20,7 @@ import { DashboardModule } from "./dashboard/dashboard.module";
 import { GuestsModule } from "./guests/guests.module";
 import { ReservationsModule } from "./reservations/reservations.module";
 import { RoomsModule } from "./rooms/rooms.module";
+import { RoomsCalendarioModule } from "./rooms-calendario/rooms-calendario.module";
 import { StructuresModule } from "./structures/structures.module";
 import { StructureOccupancyModule } from "./structure-occupancy/structure-occupancy.module";
 import { UsersModule } from "./users/users.module";
@@ -33,6 +34,7 @@ export const ComponentsModule = angular.module("root.components", [
   GuestsModule,
   ReservationsModule,
   RoomsModule,
+  RoomsCalendarioModule,
   StructuresModule,
   StructureOccupancyModule,
   UsersModule
