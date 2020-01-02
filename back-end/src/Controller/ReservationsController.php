@@ -8,6 +8,8 @@ use Entheos\Utils\Exception\ErrorException;
 
 class ReservationsController extends AppController
 {
+    use \App\Lib\ReservationsReport;
+
     public $paginate = [
         'page' => 1,
         'limit' => 25,
@@ -25,6 +27,13 @@ class ReservationsController extends AppController
         'Reservations' => [
         ],
     ];
+
+    public function initialize()
+    {
+        parent::initialize();
+        if(APP_ENV == 'dev')
+            $this->Auth->allow(['rptTouristTax']);
+    }
 
     public function index()
     {
