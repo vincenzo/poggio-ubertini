@@ -6,11 +6,13 @@ import { CampsReducer } from "./components/camps/camps.reducer";
 import { ConsuntivoReducer } from "./components/consuntivo/consuntivo.reducer";
 import { DashboardReducer } from "./components/dashboard/dashboard.reducer";
 import { GuestsReducer } from "./components/guests/guests.reducer";
+import { ReportsReducer } from "./components/reports/reports.reducer";
 import { ReservationsReducer } from "./components/reservations/reservations.reducer";
 import { RoomsReducer } from "./components/rooms/rooms.reducer";
 import { RoomsCalendarioReducer } from "./components/rooms-calendario/rooms-calendario.reducer";
 import { StructuresReducer } from "./components/structures/structures.reducer";
 import { StructureOccupancyReducer } from "./components/structure-occupancy/structure-occupancy.reducer";
+import { TouristtaxReducer } from "./components/touristtax/touristtax.reducer";
 
 import { LookupReducer } from "./vendors/ew-angularjs-utils/components/lookup/lookup.reducer";
 import { UploadsReducer } from "./vendors/ew-angularjs-utils/components/uploads/uploads.reducer";
@@ -26,12 +28,14 @@ export const rootReducer = combineReducers({
   dashboard: DashboardReducer,
   guests: GuestsReducer,
   lookup: LookupReducer,
+  reports: ReportsReducer,
   reservations: ReservationsReducer,
   rooms: RoomsReducer,
   roomsCalendario: RoomsCalendarioReducer,
   router,
   structures: StructuresReducer,
   structureOccupancy: StructureOccupancyReducer,
+  touristtax: TouristtaxReducer,
   uploads: UploadsReducer,
   users: UsersReducer
 } as any);

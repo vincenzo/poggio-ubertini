@@ -76,6 +76,18 @@ export class NavController {
           icon: 'users',
           state: 'guests',
         },
+        {
+          title: 'Report',
+          icon: 'gears',
+          state: 'reports',
+          submenu: [
+            {
+              title: 'Imposta di soggiorno',
+              icon: 'file',
+              state: 'touristtax'
+            },
+          ],
+        },
         // {
         //   title: 'Prenotazioni',
         //   icon: 'book',

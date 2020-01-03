@@ -18,11 +18,13 @@ import { CitiesModule } from "./cities/cities.module";
 import { ConsuntivoModule } from "./consuntivo/consuntivo.module";
 import { DashboardModule } from "./dashboard/dashboard.module";
 import { GuestsModule } from "./guests/guests.module";
+import { ReportsModule } from "./reports/reports.module";
 import { ReservationsModule } from "./reservations/reservations.module";
 import { RoomsModule } from "./rooms/rooms.module";
 import { RoomsCalendarioModule } from "./rooms-calendario/rooms-calendario.module";
 import { StructuresModule } from "./structures/structures.module";
 import { StructureOccupancyModule } from "./structure-occupancy/structure-occupancy.module";
+import { TouristtaxModule } from "./touristtax/touristtax.module";
 import { UsersModule } from "./users/users.module";
 
 export const ComponentsModule = angular.module("root.components", [
@@ -32,10 +34,12 @@ export const ComponentsModule = angular.module("root.components", [
   ConsuntivoModule,
   DashboardModule,
   GuestsModule,
+  ReportsModule,
   ReservationsModule,
   RoomsModule,
   RoomsCalendarioModule,
   StructuresModule,
   StructureOccupancyModule,
+  TouristtaxModule,
   UsersModule
 ]).name;

@@ -50,6 +50,14 @@ return [
         11	=> 'Novembre',
         12	=> 'Dicembre',
       ],
+      'Reservations' => [
+        'trimestri' => [
+          'tri1' => '1° trimestre',
+          'tri2' => '2° trimestre',
+          'tri3' => '3° trimestre',
+          'tri4' => '4° trimestre',
+        ],
+      ],
       'Sesso' => [
         'list' => [
           'M' => 'Maschio',

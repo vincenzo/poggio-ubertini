@@ -146,6 +146,7 @@ class AppController extends Controller
             'Users'         => [ 'roles' ],
             'Sesso'         => [ 'list' ],
             'Guests'        => [ 'documento_tipo', 'documento_rilasciato_ente' ],
+            'Reservations'  => [ 'trimestri' ],
         ]);
 
         $years = [];
