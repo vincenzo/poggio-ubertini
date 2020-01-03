@@ -11,6 +11,8 @@ import 'ui-select/dist/select.css';
 // import 'ng-tags-input/build/ng-tags-input.bootstrap.css';
 
 // Scripts
+import "core-js/stable";
+import "regenerator-runtime/runtime";
 import '@uirouter/angularjs';
 import 'animate.css';
 import 'angular-animate';
