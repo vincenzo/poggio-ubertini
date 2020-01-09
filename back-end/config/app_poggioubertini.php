@@ -3,6 +3,16 @@
 return [
 
     'Lookup' => [
+      'BooleanWithAll' => [
+        ['name' => '-- TUTTI --', 'value' => ''],
+        ['name' => 'SI', 'value' => '1'],
+        ['name' => 'NO', 'value' => '0'],
+      ],
+      'BooleanWithEmpty' => [
+        ['name' => '-', 'value' => ''],
+        ['name' => 'SI', 'value' => '1'],
+        ['name' => 'NO', 'value' => '0'],
+      ],
       'Camps' => [
         'tipo' => [
           'GEN' => 'Generico',
@@ -13,16 +23,13 @@ return [
           'FAT' => 'Fattura',
           'RIC' => 'Ricevuta',
         ],
-      ],
-      'BooleanWithAll' => [
-        ['name' => '-- TUTTI --', 'value' => ''],
-        ['name' => 'SI', 'value' => '1'],
-        ['name' => 'NO', 'value' => '0'],
-      ],
-      'BooleanWithEmpty' => [
-        ['name' => '-', 'value' => ''],
-        ['name' => 'SI', 'value' => '1'],
-        ['name' => 'NO', 'value' => '0'],
+        'contatori' => [
+          'ACQ' => 'ACQUA',
+          'ELS' => 'ENEL segreteria',
+          'ELP' => 'ENEL parco',
+          'ELL' => 'ENEL locali',
+          'GAS' => 'GAS',
+        ]
       ],
       'Guests' => [
         'documento_tipo' => [

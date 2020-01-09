@@ -45,6 +45,7 @@ class CampsTable extends Table
 
     protected function _initializeSchema(TableSchema $schema)
     {
+        $schema->setColumnType('contatori', 'json');
         $schema->setColumnType('consuntivo', 'json');
         return $schema;
     }
