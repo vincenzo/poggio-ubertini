@@ -18,4 +18,11 @@ class Reservation extends Entity
         $gg = $fine->diffInDays($inizio);
         return $gg > 6 ? 6 : $gg;
     }
+
+    protected function _isGuestUnder16()
+    {
+        if(empty($this->guest->data_nascita) || empty($this->data_in))
+            return false;
+        return $this->guest->data_nascita->addYears(16) < $this->data_in;
+    }
 }

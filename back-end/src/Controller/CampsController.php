@@ -99,7 +99,7 @@ class CampsController extends AppController
     {
         $r = $this->Camps->get($this->request->getData('id'));
         $r->chiuso = true;
-        $this->save($r);
+        $this->Camps->save($r);
         $this->_setJson(true, true);
     }
 
