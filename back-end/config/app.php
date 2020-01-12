@@ -5,6 +5,7 @@ if(!defined('APP_ENV'))     define('APP_ENV', 'prod');
 
 define('UPLOADS_DIR', 'uploads_dir');
 define('PREVIEWS_DIR', 'Previews');
+define('GG_MAX_RATE', 8);
 
 // DB locale
 $db = [

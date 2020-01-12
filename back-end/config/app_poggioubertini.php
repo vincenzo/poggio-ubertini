@@ -29,6 +29,14 @@ return [
           'ELP' => 'ENEL parco',
           'ELL' => 'ENEL locali',
           'GAS' => 'GAS',
+        ],
+        'contatori_costo' => [
+          'ACQ' => 1, // FIXME
+          'ELS' => 0.3,
+          'ELP' => 0.3,
+          'ELL' => 0.3,
+          'GAS' => 1,
+          'fixed_EL' => 5,
         ]
       ],
       'Guests' => [

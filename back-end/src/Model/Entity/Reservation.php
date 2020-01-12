@@ -19,6 +19,13 @@ class Reservation extends Entity
         return $gg > 6 ? 6 : $gg;
     }
 
+    protected function _getNotti()
+    {
+        if(empty($this->data_in) || empty($this->data_out))
+            return null;
+        return $this->data_out->diffInDays($this->data_in);
+    }
+
     protected function _isGuestUnder16()
     {
         if(empty($this->guest->data_nascita) || empty($this->data_in))
