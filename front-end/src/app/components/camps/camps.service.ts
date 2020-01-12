@@ -132,7 +132,7 @@ export class CampsService extends EwCommonService {
       }
     ];
 
-    this.ignoreFieldsOnSave = ["created", "modified", "reservations"];
+    this.ignoreFieldsOnSave = ["created", "modified", "reservations", "upload_ipotesi_spesa"];
   }
 
   chiudi(id) {
