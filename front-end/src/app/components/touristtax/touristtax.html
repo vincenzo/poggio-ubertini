@@ -1,18 +1,36 @@
-<ew-page-header header-title="Imposta di soggiorno">
-</ew-page-header>
+<ew-page-header header-title="Imposta di soggiorno"> </ew-page-header>
 
 <div class="container">
-    <form ng-submit="$ctrl.submit($ctrl.model)" name="$ctrl.form" novalidate>
-  
-      <row style="grid-template-columns: 1fr">
-        <ew-text name="nome" label="Nome" value="$ctrl.model.nome" on-change="$ctrl.updateModel($event)" focus="true" required="true">
-        </ew-text>
-      </row>
-  
-      <div class="text-right mar-top-1">
-        <button class="btn btn-success" type="submit" ng-disabled="$ctrl.structures.isLoading">
-          <i class="far fa-check fa-lg"></i> Salva
-        </button>
-      </div>
-    </form>
-  </div>
+  <form ng-submit="$ctrl.submit($ctrl.model)" name="$ctrl.form" novalidate>
+    <row style="grid-template-columns: 1fr">
+      <ew-select
+        name="y"
+        label="Anno"
+        value="$ctrl.model.y"
+        on-change="$ctrl.updateModel($event)"
+        options="::$ctrl.lookup.Years.list"
+        required="true"
+      ></ew-select>
+      <ew-select
+        name="tri"
+        label="Trimestre"
+        value="$ctrl.model.tri"
+        on-change="$ctrl.updateModel($event)"
+        options="::$ctrl.lookup.Reservations.trimestri"
+        required="true"
+      ></ew-select>
+    </row>
+
+    <pre>{{ $ctrl.model | json }}</pre>
+
+    <div class="text-right mar-top-1">
+      <button
+        class="btn btn-success"
+        type="submit"
+        ng-disabled="$ctrl.structures.isLoading"
+      >
+        <i class="far fa-check fa-lg"></i> Scarica report
+      </button>
+    </div>
+  </form>
+</div>

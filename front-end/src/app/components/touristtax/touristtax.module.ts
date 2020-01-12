@@ -15,12 +15,12 @@ export const TouristtaxModule = angular
       parent: "app",
       url: "/touristtax",
       component: "touristtax",
-      resolve: {
-        touristtax: ($ngRedux, TouristtaxService: TouristtaxService) => {
-          "ngInject";
-          return $ngRedux.dispatch(TouristtaxService.get());
-        }
-      },
+      // resolve: {
+      //   touristtax: ($ngRedux, TouristtaxService: TouristtaxService) => {
+      //     "ngInject";
+      //     return $ngRedux.dispatch(TouristtaxService.get());
+      //   }
+      // },
       data: {
         requiredAuth: true,
         roles: {

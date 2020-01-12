@@ -141,17 +141,18 @@ class AppController extends Controller
             ->order(['cognome' => 'ASC'])
             ->enableHydration(false);
 
+        $years = [];
+        for($i = 2018; $i <= date('Y') + 1; $i++) $years[$i] = $i;
+        $data['Lookup']['Years']['list'] = $years;
+
         $data['Lookup'] = $this->all2nv($data['Lookup'], [
             'Camps'         => [ 'tipo', 'tipo_documento_fiscale', 'contatori' ],
             'Users'         => [ 'roles' ],
             'Sesso'         => [ 'list' ],
             'Guests'        => [ 'documento_tipo', 'documento_rilasciato_ente' ],
             'Reservations'  => [ 'trimestri' ],
+            'Years'         => [ 'list' ],
         ]);
-
-        $years = [];
-        for($i = 2018; $i <= date('Y') + 1; $i++) $years[$i] = $i;
-        $data['Lookup']['Years']['list'] = $years;
 
         $this->_setJson(true, $data);
     }

@@ -8,10 +8,33 @@ export class TouristtaxService extends EwCommonService {
   constructor(private EwServerService: EwServerService) {
     "ngInject";
 
-    super("guests", null, EwServerService);
+    super("touristtax", null, EwServerService);
+
+    this.apiPath = "/reservations";
   }
+
+  report = (data: { y: number; tri: string }) => {
+    return this._report(data);
+  };
 
   /**
    * PRIVATES
    */
+
+  private _report(data) {
+    const config = {
+      responseType: "blob",
+      timeout: 15000
+    };
+    return this.serverService
+      .post(
+        `${this.apiPath}/rptTouristTax`,
+        {
+          y: data.y,
+          trimestre: data.tri
+        },
+        config
+      )
+      .then(res => res.data);
+  }
 }
