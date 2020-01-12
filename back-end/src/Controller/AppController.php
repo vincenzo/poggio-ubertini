@@ -142,7 +142,7 @@ class AppController extends Controller
             ->enableHydration(false);
 
         $data['Lookup'] = $this->all2nv($data['Lookup'], [
-            'Camps'         => [ 'tipo', 'tipo_documento_fiscale' ],
+            'Camps'         => [ 'tipo', 'tipo_documento_fiscale', 'contatori' ],
             'Users'         => [ 'roles' ],
             'Sesso'         => [ 'list' ],
             'Guests'        => [ 'documento_tipo', 'documento_rilasciato_ente' ],

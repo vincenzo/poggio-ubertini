@@ -35,6 +35,7 @@ export class CampsService extends EwCommonService {
       { name: "chiuso", type: "boolean" },
       { name: "created", type: "date" },
       { name: "modified", type: "date" },
+      { name: "contatori", type: "string" },
       {
         name: "upload_ipotesi_spesa",
         type: "object",

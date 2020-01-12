@@ -103,40 +103,10 @@
                 <b class="text-center">Uscita</b>
               </row>
 
-              <row style="grid-template-columns: 1fr 100px 100px">
-                <label>ACQUA pozzo</label>
-                <ew-numeric name="in" value="$ctrl.model.in1" on-change="$ctrl.updateModel($event)"></ew-numeric>
-                <ew-numeric name="out" value="$ctrl.model.out1" on-change="$ctrl.updateModel($event)"></ew-numeric>
-              </row>
-
-              <row style="grid-template-columns: 1fr 100px 100px">
-                <label>ACQUA comune</label>
-                <ew-numeric name="in" value="$ctrl.model.in1" on-change="$ctrl.updateModel($event)"></ew-numeric>
-                <ew-numeric name="out" value="$ctrl.model.out1" on-change="$ctrl.updateModel($event)"></ew-numeric>
-              </row>
-
-              <row style="grid-template-columns: 1fr 100px 100px">
-                <label>ENEL segreteria</label>
-                <ew-numeric name="in" value="$ctrl.model.in2" on-change="$ctrl.updateModel($event)"></ew-numeric>
-                <ew-numeric name="out" value="$ctrl.model.out2" on-change="$ctrl.updateModel($event)"></ew-numeric>
-              </row>
-
-              <row style="grid-template-columns: 1fr 100px 100px">
-                <label>ENEL parco</label>
-                <ew-numeric name="in" value="$ctrl.model.in3" on-change="$ctrl.updateModel($event)"></ew-numeric>
-                <ew-numeric name="out" value="$ctrl.model.out3" on-change="$ctrl.updateModel($event)"></ew-numeric>
-              </row>
-
-              <row style="grid-template-columns: 1fr 100px 100px">
-                <label>ENEL locali</label>
-                <ew-numeric name="in" value="$ctrl.model.in4" on-change="$ctrl.updateModel($event)"></ew-numeric>
-                <ew-numeric name="out" value="$ctrl.model.out4" on-change="$ctrl.updateModel($event)"></ew-numeric>
-              </row>
-
-              <row style="grid-template-columns: 1fr 100px 100px">
-                <label>GAS</label>
-                <ew-numeric name="in" value="$ctrl.model.in5" on-change="$ctrl.updateModel($event)"></ew-numeric>
-                <ew-numeric name="out" value="$ctrl.model.out5" on-change="$ctrl.updateModel($event)"></ew-numeric>
+              <row style="grid-template-columns: 1fr 100px 100px" ng-repeat="c in $ctrl.lookup.Camps.contatori track by c.value">
+                <label>{{ c.name }}</label>
+                <ew-numeric name="contatori.{{ c.value }}.ingresso" value="$ctrl.model[c.value].ingresso" on-change="$ctrl.updateModel($event)"></ew-numeric>
+                <ew-numeric name="contatori.{{ c.value }}.ingresso" value="$ctrl.model[c.value].uscita" on-change="$ctrl.updateModel($event)"></ew-numeric>
               </row>
 
               <div ng-if="$ctrl.isAuthorized('ipotesiSpesa')">

@@ -125,62 +125,17 @@
               <b class="text-center">Uscita</b>
             </row>
 
-            <row style="grid-template-columns: 1fr 100px 100px">
-              <label>ACQUA</label>
+            <row
+              style="grid-template-columns: 1fr 100px 100px"
+              ng-repeat="c in $ctrl.lookup.Camps.contatori track by c.value"
+            >
+              <label>{{ c.name }}</label>
               <ew-readonly-input
-                value="$ctrl.model.in1"
+                value="$ctrl.model.contatori[c.value].ingresso"
                 type="numeric"
               ></ew-readonly-input>
               <ew-readonly-input
-                value="$ctrl.model.out1"
-                type="numeric"
-              ></ew-readonly-input>
-            </row>
-
-            <row style="grid-template-columns: 1fr 100px 100px">
-              <label>ENEL segreteria</label>
-              <ew-readonly-input
-                value="$ctrl.model.in2"
-                type="numeric"
-              ></ew-readonly-input>
-              <ew-readonly-input
-                value="$ctrl.model.out2"
-                type="numeric"
-              ></ew-readonly-input>
-            </row>
-
-            <row style="grid-template-columns: 1fr 100px 100px">
-              <label>ENEL parco</label>
-              <ew-readonly-input
-                value="$ctrl.model.in3"
-                type="numeric"
-              ></ew-readonly-input>
-              <ew-readonly-input
-                value="$ctrl.model.out3"
-                type="numeric"
-              ></ew-readonly-input>
-            </row>
-
-            <row style="grid-template-columns: 1fr 100px 100px">
-              <label>ENEL locali</label>
-              <ew-readonly-input
-                value="$ctrl.model.in4"
-                type="numeric"
-              ></ew-readonly-input>
-              <ew-readonly-input
-                value="$ctrl.model.out4"
-                type="numeric"
-              ></ew-readonly-input>
-            </row>
-
-            <row style="grid-template-columns: 1fr 100px 100px">
-              <label>GAS</label>
-              <ew-readonly-input
-                value="$ctrl.model.in5"
-                type="numeric"
-              ></ew-readonly-input>
-              <ew-readonly-input
-                value="$ctrl.model.out5"
+                value="$ctrl.model.contatori[c.value].uscita"
                 type="numeric"
               ></ew-readonly-input>
             </row>
@@ -235,8 +190,22 @@
           <h5>Operazioni campo</h5>
         </ibox-title>
         <ibox-content>
-          <button type="button" class="btn btn-success" ng-click="$ctrl.consuntivo($ctrl.model.id)" ng-if="$ctrl.model.chiuso">Visualizza Consuntivo</button>
-          <button type="button" class="btn btn-danger" ng-click="$ctrl.chiudi($ctrl.model.id)" ng-if="!$ctrl.model.chiuso">Chiudi campo</button>
+          <button
+            type="button"
+            class="btn btn-success"
+            ng-click="$ctrl.consuntivo($ctrl.model.id)"
+            ng-if="$ctrl.model.chiuso"
+          >
+            Visualizza Consuntivo
+          </button>
+          <button
+            type="button"
+            class="btn btn-danger"
+            ng-click="$ctrl.chiudi($ctrl.model.id)"
+            ng-if="!$ctrl.model.chiuso"
+          >
+            Chiudi campo
+          </button>
         </ibox-content>
       </ew-ibox>
     </div>
@@ -299,9 +268,7 @@
           <row style="grid-template-columns: repeat(9, 1fr)">
             <div class="room" ng-repeat="r in $ctrl.camps.rooms.list">
               <h3>{{ r.display_name }}</h3>
-              <h4>
-                {{ r.posti_liberi }} / <span>{{ r.posti_letto }}</span>
-              </h4>
+              <h4>{{ r.posti_liberi }} / <span>{{ r.posti_letto }}</span></h4>
               <div
                 class="occupazione"
                 style="height: {{ r.perc_occupazione }}%"
