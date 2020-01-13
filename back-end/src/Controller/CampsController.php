@@ -99,6 +99,7 @@ class CampsController extends AppController
     {
         $r = $this->Camps->get($this->request->getData('id'));
         $r->chiuso = true;
+        $r->consuntivo = $this->Camps->generaConsuntivo($r);
         $this->Camps->save($r);
         $this->_setJson(true, true);
     }

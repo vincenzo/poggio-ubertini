@@ -55,9 +55,6 @@ class CampsTable extends Table
     
     public function beforeSave(Event $event, Camp $entity, \ArrayObject $options)
     {
-        if($entity->chiuso == true && $entity->isDirty('chiuso')) {
-            $this->consuntivo = $this->generaConsuntivo($entity);
-        }
         return true;
     }
 
