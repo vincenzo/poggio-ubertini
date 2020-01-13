@@ -24,7 +24,7 @@ export class TouristtaxComponentController {
     const now = new Date();
     this.model = {
       y: now.getFullYear(),
-      tri: "tri" + this._quarterOfTheYear(now)
+      tri: this._quarterOfTheYear(now)
     };
   }
 

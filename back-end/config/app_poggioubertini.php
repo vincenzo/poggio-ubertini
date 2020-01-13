@@ -67,10 +67,10 @@ return [
       ],
       'Reservations' => [
         'trimestri' => [
-          'tri1' => '1° trimestre',
-          'tri2' => '2° trimestre',
-          'tri3' => '3° trimestre',
-          'tri4' => '4° trimestre',
+          1 => '1° trimestre',
+          2 => '2° trimestre',
+          3 => '3° trimestre',
+          4 => '4° trimestre',
         ],
       ],
       'Sesso' => [
