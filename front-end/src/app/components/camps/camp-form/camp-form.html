@@ -105,8 +105,8 @@
 
               <row style="grid-template-columns: 1fr 100px 100px" ng-repeat="c in $ctrl.lookup.Camps.contatori track by c.value">
                 <label>{{ c.name }}</label>
-                <ew-numeric name="contatori.{{ c.value }}.ingresso" value="$ctrl.model[c.value].ingresso" on-change="$ctrl.updateModel($event)"></ew-numeric>
-                <ew-numeric name="contatori.{{ c.value }}.uscita" value="$ctrl.model[c.value].uscita" on-change="$ctrl.updateModel($event)"></ew-numeric>
+                <ew-numeric name="contatori.{{ c.value }}.ingresso" value="$ctrl.model.contatori[c.value].ingresso" on-change="$ctrl.updateModel($event)"></ew-numeric>
+                <ew-numeric name="contatori.{{ c.value }}.uscita" value="$ctrl.model.contatori[c.value].uscita" on-change="$ctrl.updateModel($event)"></ew-numeric>
               </row>
 
               <div ng-if="$ctrl.isAuthorized('ipotesiSpesa')">
