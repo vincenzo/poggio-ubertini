@@ -61,12 +61,11 @@ class CampsTable extends Table
         return true;
     }
 
-    // TODO
     public function generaConsuntivo($e)
     {
         $this->camp = $e;
         $this->costi = [
-            'stanze' => [], // Organizzato per "DMY + RATE ID + CAT" => [ospiti, prezzo]
+            'stanze' => [], // Organizzato per "DMY + CAT + RATE ID" => [ospiti, prezzo]
             'totali_stanze' => [
                 'centro' => 0,
                 'locali' => 0,
@@ -82,8 +81,8 @@ class CampsTable extends Table
         // OK tariffa stanze variabili
         // lenzuola
         // contatori
-        debug($this->costi);
-        return [];
+        // debug($this->costi);
+        return $this->costi;
     }
 
     private function __findGroupedReservations()
