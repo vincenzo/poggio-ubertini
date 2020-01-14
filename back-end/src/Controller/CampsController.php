@@ -100,6 +100,7 @@ class CampsController extends AppController
         $r = $this->Camps->get($this->request->getData('id'));
         $r->chiuso = true;
         $r->consuntivo = $this->Camps->generaConsuntivo($r);
+        $r->setDirty('consuntivo', true);
         $this->Camps->save($r);
         $this->_setJson(true, true);
     }
@@ -111,7 +112,14 @@ class CampsController extends AppController
      */
     public function _entityQuery($query, $id){
         return $query
-            ->contain(['Reservations.Rooms', 'Reservations.Rooms.Structures', 'Reservations', 'Reservations.Guests', 'UploadIpotesiSpesa']);
+            ->contain([
+                'Reservations.Rooms',
+                'Reservations.Rooms.Structures',
+                'Reservations',
+                'Reservations.Guests',
+                'Capogruppo',
+                'UploadIpotesiSpesa',
+            ]);
     }
     
 
