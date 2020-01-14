@@ -15,6 +15,7 @@ use Entheos\Utils\Exception\WarningException;
 
 class CampsTable extends Table
 {
+    use \Entheos\Utils\Lib\IncrementalTrait;
 
     public function initialize(array $config)
     {
@@ -55,6 +56,11 @@ class CampsTable extends Table
     
     public function beforeSave(Event $event, Camp $entity, \ArrayObject $options)
     {
+        if($entity->isNew()) {
+            if(empty($entity->n_scheda)) {
+                $entity->n_scheda = $this->getIncremental(['YEAR(created)' => date('Y')], 'n_scheda');
+            }
+        }
         return true;
     }
 
@@ -190,6 +196,9 @@ class CampsTable extends Table
     {
         $cont = $this->camp->contatori;
         $totale = 0; 
+        if(empty($cont))
+            throw new WarningException("Dati contatori mancanti");
+            
         foreach($cont as $k => $c) {
             $c['tariffa'] = Configure::read('Lookup.Camps.contatori_costo.'.$k, 0);
             $c['diff'] = $c['uscita'] - $c['ingresso'];
