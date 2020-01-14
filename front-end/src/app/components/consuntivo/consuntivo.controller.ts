@@ -18,4 +18,9 @@ export class ConsuntivoComponentController extends EwCommonFormController {
       titleEntity: "consuntivo"
     };
   }
+
+  getName(value) {
+    const find = this.lookup.Camps.contatori.find(e => e.value === value);
+    return find.name;
+  }
 }

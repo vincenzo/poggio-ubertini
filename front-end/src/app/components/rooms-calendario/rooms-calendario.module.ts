@@ -21,7 +21,7 @@ export const RoomsCalendarioModule = angular
           RoomsCalendarioService: RoomsCalendarioService
         ) => {
           "ngInject";
-          return $ngRedux.dispatch(RoomsCalendarioService.getCalendario(2019));
+          return $ngRedux.dispatch(RoomsCalendarioService.getCalendario(2020));
         }
       },
       data: {

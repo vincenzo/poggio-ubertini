@@ -32,7 +32,7 @@
         <td class="text-right">Totale</td>
       </tr>
       <tr ng-repeat="(k, r) in $ctrl.model.consuntivo.contatori" ng-if="r.ingresso">
-        <td>{{ k }}</td>
+        <td>{{ $ctrl.getName(k) }}</td>
         <td class="f_number">{{ r.ingresso }}</td>
         <td class="f_number">{{ r.uscita }}</td>
         <td class="f_number"><span class="b_amount">{{ r.tariffa | currency }}</span></td>
