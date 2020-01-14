@@ -200,6 +200,9 @@ class CampsTable extends Table
             throw new WarningException("Dati contatori mancanti");
             
         foreach($cont as $k => $c) {
+            if(!isset($c['ingresso']) || !isset($c['uscita']))
+                throw new WarningException("Dati contatori incompleti");
+                
             $c['tariffa'] = Configure::read('Lookup.Camps.contatori_costo.'.$k, 0);
             $c['diff'] = $c['uscita'] - $c['ingresso'];
             if($c['diff'] < 0)
