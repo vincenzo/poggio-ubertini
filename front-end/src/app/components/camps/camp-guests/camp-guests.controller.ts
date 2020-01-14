@@ -296,6 +296,7 @@ export class CampGuestsComponentController extends EwCommonFormController {
 
   uploadFile(event) {
     return this.addManyGuests({
+      camp_id: this.model.id,
       file: event.value
     })
       .then(() => this.getCampFormData(this.parentId))
