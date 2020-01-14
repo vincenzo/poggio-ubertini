@@ -29,6 +29,11 @@ class CampsTable extends Table
             'dependent' => true,
         ]);
 
+        $this->belongsTo('Capogruppo', [
+            'className' => 'Guests',
+            'foreignKey' => 'capogruppo_id',
+        ]);
+
         $this->hasOne('UploadIpotesiSpesa', [
             'className' => 'Uploads',
             'conditions' => ['categoria' => 'ipotesi_spesa', 'model_name' => 'Camps'],
@@ -79,6 +84,7 @@ class CampsTable extends Table
         $this->__findGroupedReservations();
         $this->__findCampRates();
         $this->__calcRoomsRate();
+        $this->__expandRoomsDetails();
         $this->__calcContatori();
         // OK tariffa stanze fixed
         // OK tariffa stanze variabili
@@ -156,16 +162,30 @@ class CampsTable extends Table
                 }
             }
         }
-        ksort($this->costi['stanze']);
+        $this->costi['totali_stanze']['totale'] = $this->costi['totali_stanze']['centro'] + $this->costi['totali_stanze']['locali'];
         // if($verbose) debug(sprintf("totale %d", $this->costi['stanze']));
+    }
+
+    private function __expandRoomsDetails()
+    {
+        foreach($this->costi['stanze'] as $k => $r) {
+            $details = explode('+', $k);
+            $this->costi['stanze'][$k] = $r + [
+                'data' => $details[0],
+                'cat'  => $details[1],
+            ];
+        }
+        // Resetta le chiavi per evitare problemi di sort in front
+        ksort($this->costi['stanze']);
+        $this->costi['stanze'] = array_values($this->costi['stanze']);
     }
 
     private function __pushDateCatRateData($date, $cat, $rateId, $guests, $price)
     {
         $idx = "$date+$cat+$rateId";
         if(empty($this->costi['stanze'][$idx]))
-            $this->costi['stanze'][$idx] = ['ospiti' => 0, 'importo' => 0];
-        $this->costi['stanze'][$idx]['importo'] += $price;
+            $this->costi['stanze'][$idx] = ['ospiti' => 0, 'quota' => $price, 'totale' => 0];
+        $this->costi['stanze'][$idx]['totale'] += $price;
         $this->costi['stanze'][$idx]['ospiti'] += $guests;
     }
 
@@ -212,8 +232,12 @@ class CampsTable extends Table
             $cont[$k] = $c;
         }
 
-        $cont['fixed_EL'] = $this->camp->notti * Configure::read('Lookup.Camps.contatori_costo.fixed_EL');
-        $totale += $cont['fixed_EL'];
+        $cont['fixed_EL'] = [
+            'tariffa' => Configure::read('Lookup.Camps.contatori_costo.fixed_EL'),
+            'notti' => $this->camp->notti,
+            'prezzo' => $this->camp->notti * Configure::read('Lookup.Camps.contatori_costo.fixed_EL')
+        ];
+        $totale += $cont['fixed_EL']['prezzo'];
         $this->costi['contatori'] = $cont + ['totale' => $totale];
     }
 

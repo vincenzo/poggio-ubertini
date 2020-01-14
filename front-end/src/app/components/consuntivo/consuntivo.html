@@ -1,7 +1,109 @@
-<ew-page-header id="top" size="compact" header-title="{{::$ctrl.title}}">
-  <under-title>Breadcrumbs per tornare alla view campo</under-title>
-</ew-page-header>
-
 <div class="container">
-  <pre>{{ $ctrl.model | json }}</pre>
+  <h1>Consuntivo - Scheda N° {{ $ctrl.model.n_scheda }}</h1>
+
+  <table class="table table-bordered">
+    <tbody>
+      <tr>
+        <td>Evento:</td>
+        <td><b>{{ $ctrl.model.nome }}</b></td>
+        <td>Arrivo</td>
+        <td>Partenza</td>
+      </tr>
+      <tr>
+        <td>Capogruppo:</td>
+        <td>{{ $ctrl.model.capogruppo }}</td>
+        <td>{{ $ctrl.model.data_inizio | date: "dd/MM/yyyy" }}</td>
+        <td>{{ $ctrl.model.data_fine | date: "dd/MM/yyyy" }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>Consumi</h3>
+  <table class="table table-bordered">
+    <tbody>
+      <tr>
+        <td>Contatore</td>
+        <td class="text-right">Lettura ingresso</td>
+        <td class="text-right">Lettura uscita</td>
+        <td class="text-right">Costo unitario €</td>
+        <td class="w_xxs">&nbsp;</td>
+        <td class="text-right">Differenza</td>
+        <td class="w_xxs">&nbsp;</td>
+        <td class="text-right">Totale</td>
+      </tr>
+      <tr ng-repeat="(k, r) in $ctrl.model.consuntivo.contatori" ng-if="r.ingresso">
+        <td>{{ k }}</td>
+        <td class="f_number">{{ r.ingresso }}</td>
+        <td class="f_number">{{ r.uscita }}</td>
+        <td class="f_number"><span class="b_amount">{{ r.tariffa | currency }}</span></td>
+        <td class="f_sign">x</td class="f_sign">
+        <td class="f_number">{{ r.diff }}</td>
+        <td class="f_sign">=</td>
+        <td class="f_number"><span class="b_amount b_amount--green">{{ r.prezzo | currency }}</td>
+      </tr>
+      <tr>
+        <td colspan="3">Quota fissa elettricità x notti</td>
+        <td class="f_number"><span class="b_amount">{{ $ctrl.model.consuntivo.contatori.fixed_EL.tariffa | currency }}</span></td>
+        <td class="f_sign">x</td class="f_sign">
+        <td class="f_number">{{ $ctrl.model.consuntivo.contatori.fixed_EL.notti }}</td>
+        <td class="f_sign">=</td>
+        <td class="f_number"><span class="b_amount b_amount--green">{{ $ctrl.model.consuntivo.contatori.fixed_EL.prezzo | currency }}</span></td>
+      </tr>
+      <tr>
+        <td colspan="7" class="bold">Totale:</td>
+        <td class="f_number"><span class="b_amount b_amount--green">{{ $ctrl.model.consuntivo.contatori.totale | currency }}</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <table class="table table-bordered">
+    <tbody>
+      <tr>
+        <td class="bold">Totale consumi generali</td class="bold">
+        <td class="f_number"><span class="b_amount b_amount--green">{{ $ctrl.model.consuntivo.contatori.totale | currency }}</span></td>
+      </tr>
+      <tr>
+        <td class="bold">Pernottamento "locali"</td>
+        <td class="f_number"><span class="b_amount b_amount--green">{{ $ctrl.model.consuntivo.totali_stanze.locali | currency }}</span></td>
+      </tr>
+      <tr>
+        <td class="bold">Pernottamento "centro"</td>
+        <td class="f_number"><span class="b_amount b_amount--green">{{ $ctrl.model.consuntivo.totali_stanze.centro | currency }}</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <hr>
+
+  <h2>Consuntivo pernottamento per centro e locali</h2>
+  <p>
+    <b>Evento:</b> {{ $ctrl.model.nome }}
+  </p>
+  <p>
+    <b>Scheda n°:</b> {{ $ctrl.model.n_scheda }}
+  </p>
+  <h3>Pernottamento</h3>
+  <table class="table table-bordered">
+    <tbody>
+      <tr>
+        <th>Data</th>
+        <th class="text-center">Utenti</th>
+        <th class="text-right">Quota</th>
+        <th class="text-center">Tariffa</th>
+        <th class="text-right">Totale</th>
+      </tr>
+      <tr ng-repeat="r in $ctrl.model.consuntivo.stanze">
+        <td>{{ r.data }}</td>
+        <td class="text-center">{{ r.ospiti }}</td>
+        <td class="f_number"><span class="b_amount">{{ r.quota | currency }}</span></td class="f_number">
+        <td class="text-center">{{ r.cat }}</td>
+        <td class="f_number"><span class="b_amount b_amount--green">{{ r.totale | currency }}</span></td>
+      </tr>
+      <tr>
+        <td colspan="4" class="bold">Totale</td>
+        <td class="f_number"><span class="b_amount b_amount--green">{{ $ctrl.model.consuntivo.totali_stanze.totale | currency }}</span></td>
+      </tr>
+    </tbody>
+  </table>
 </div>
+<pre>{{ $ctrl.model | json }}</pre>

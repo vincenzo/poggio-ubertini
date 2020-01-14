@@ -1,1 +1,35 @@
-consuntivo {}
+consuntivo {
+    .container {
+        text-transform: uppercase;
+    }
+    .bold {
+        font-weight: bold;
+    }
+    .w_xxs {
+        width: 20px;
+    }
+    .f_number {
+        text-align: right;
+        padding: 6px 8px !important;
+    }
+    .f_sign {
+        text-align: center;
+    }
+    .b_amount {
+        background-color: #254f73;
+        color: #fff;
+        border-radius: 5px;
+        display: inline-block;
+        padding: 2px 6px;
+        white-space: nowrap;
+        font-weight: bold;
+
+        &.b_amount--green {
+            background-color: #3c766e;
+        }
+
+        &.b_amount--red {
+            background-color: #a94442;
+        }
+    }
+}
