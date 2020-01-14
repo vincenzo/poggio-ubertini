@@ -35,9 +35,9 @@ export class CampViewComponentController extends EwCommonFormController {
   chiudi(id) {
     var answer = confirm("Confermi di voler chiudere il campo?");
     if (answer) {
-      return this.service.chiudi(id).then(response => {
-        console.log(response);
-      });
+      return this.service.chiudi(id)
+        .then(response => this.getFormData(id))
+        .then(() => this.service.toaster.success('Campo chiuso correttamente'));
     }
   }
 
