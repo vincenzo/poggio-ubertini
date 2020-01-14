@@ -36,6 +36,7 @@ export class CampsService extends EwCommonService {
       { name: "created", type: "date" },
       { name: "modified", type: "date" },
       { name: "contatori", type: "string" },
+      { name: "consuntivo", type: "string" },
       {
         name: "upload_ipotesi_spesa",
         type: "object",
@@ -132,7 +133,13 @@ export class CampsService extends EwCommonService {
       }
     ];
 
-    this.ignoreFieldsOnSave = ["created", "modified", "reservations", "upload_ipotesi_spesa"];
+    this.ignoreFieldsOnSave = [
+      "created",
+      "modified",
+      "reservations",
+      "upload_ipotesi_spesa",
+      "consuntivo"
+    ];
   }
 
   chiudi(id) {
