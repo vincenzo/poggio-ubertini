@@ -2,9 +2,11 @@
 namespace App\Model\Table;
 
 use Cake\ORM\Query;
-use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
+use Cake\Event\Event;
+use Cake\ORM\RulesChecker;
 use Cake\Validation\Validator;
+use App\Model\Entity\Reservation;
 
 class ReservationsTable extends Table
 {
@@ -43,6 +45,15 @@ class ReservationsTable extends Table
             ->allowEmpty('id', 'create');
 
         return $validator;
+    }
+
+    public function beforeSave(Event $event, Reservation $entity, \ArrayObject $options)
+    {
+      if(!empty($entity->data_in) && empty($entity->data_previsto_in))
+        $entity->data_previsto_in = $entity->data_in;
+      if(!empty($entity->data_out) && empty($entity->data_previsto_out))
+        $entity->data_previsto_out = $entity->data_out;
+      return true;
     }
 
 }
