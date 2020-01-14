@@ -14,7 +14,7 @@ class CampsController extends AppController
         'limit' => 25,
         'maxLimit' => 250,
         'fields' => [
-            'id', 'n_scheda', 'data_scheda', 'capogruppo_id', 'nome', 'data_inizio', 'data_fine', 'tipo', 'chiuso'
+            'id', 'n_scheda', 'data_scheda', 'capogruppo_id', 'nome', 'data_inizio', 'data_fine', 'tipo', 'chiuso', 'created',
         ],
         'sortWhitelist' => [
             'id',

@@ -18,7 +18,7 @@ function camps() {
       },
       {
         label: 'Data scheda',
-        field: `data_scheda | date:'dd/MM/yyyy'`,
+        field: `created | date:'dd/MM/yyyy'`,
       },
       {
         label: 'Capogruppo',
