@@ -1,16 +1,16 @@
-<div class="container">
+<div class="container" style="max-width: 1000px;">
   <h1>Consuntivo - Scheda N° {{ $ctrl.model.n_scheda }}</h1>
 
   <table class="table table-bordered">
     <tbody>
       <tr>
-        <td>Evento:</td>
-        <td><b>{{ $ctrl.model.nome }}</b></td>
-        <td>Arrivo</td>
-        <td>Partenza</td>
+        <th>Evento:</th>
+        <th><b>{{ $ctrl.model.nome }}</b></th>
+        <th>Arrivo</th>
+        <th>Partenza</th>
       </tr>
       <tr>
-        <td>Capogruppo:</td>
+        <td class="bold">Capogruppo:</td>
         <td>{{ $ctrl.model.capogruppo }}</td>
         <td>{{ $ctrl.model.data_inizio | date: "dd/MM/yyyy" }}</td>
         <td>{{ $ctrl.model.data_fine | date: "dd/MM/yyyy" }}</td>
@@ -22,14 +22,14 @@
   <table class="table table-bordered">
     <tbody>
       <tr>
-        <td>Contatore</td>
-        <td class="text-right">Lettura ingresso</td>
-        <td class="text-right">Lettura uscita</td>
-        <td class="text-right">Costo unitario €</td>
-        <td class="w_xxs">&nbsp;</td>
-        <td class="text-right">Differenza</td>
-        <td class="w_xxs">&nbsp;</td>
-        <td class="text-right">Totale</td>
+        <th>Contatore</th>
+        <th class="text-right">Lettura ingresso</th>
+        <th class="text-right">Lettura uscita</th>
+        <th class="text-right">Costo unitario €</th>
+        <th class="w_xxs">&nbsp;</th>
+        <th class="text-right">Differenza</th>
+        <th class="w_xxs">&nbsp;</th>
+        <th class="w_lg text-right">Totale</th>
       </tr>
       <tr ng-repeat="(k, r) in $ctrl.model.consuntivo.contatori" ng-if="r.ingresso">
         <td>{{ $ctrl.getName(k) }}</td>
@@ -56,19 +56,28 @@
     </tbody>
   </table>
 
+  <h3>Biancheria</h3>
+  <table class="table table-bordered">
+    <tbody>
+      <tr>
+        <th>da fare</th>
+      </tr>
+    </tbody>
+  </table>
+
   <table class="table table-bordered">
     <tbody>
       <tr>
         <td class="bold">Totale consumi generali</td class="bold">
-        <td class="f_number"><span class="b_amount b_amount--green">{{ $ctrl.model.consuntivo.contatori.totale | currency }}</span></td>
+        <td class="w_lg f_number"><span class="b_amount b_amount--green">{{ $ctrl.model.consuntivo.contatori.totale | currency }}</span></td>
       </tr>
       <tr>
         <td class="bold">Pernottamento "locali"</td>
-        <td class="f_number"><span class="b_amount b_amount--green">{{ $ctrl.model.consuntivo.totali_stanze.locali | currency }}</span></td>
+        <td class="w_lg f_number"><span class="b_amount b_amount--green">{{ $ctrl.model.consuntivo.totali_stanze.locali | currency }}</span></td>
       </tr>
       <tr>
         <td class="bold">Pernottamento "centro"</td>
-        <td class="f_number"><span class="b_amount b_amount--green">{{ $ctrl.model.consuntivo.totali_stanze.centro | currency }}</span></td>
+        <td class="w_lg f_number"><span class="b_amount b_amount--green">{{ $ctrl.model.consuntivo.totali_stanze.centro | currency }}</span></td>
       </tr>
     </tbody>
   </table>
@@ -87,10 +96,10 @@
     <tbody>
       <tr>
         <th>Data</th>
-        <th class="text-center">Utenti</th>
-        <th class="text-right">Quota</th>
+        <th class="w_md text-center">Utenti</th>
+        <th class="w_lg text-right">Quota</th>
         <th class="text-center">Tariffa</th>
-        <th class="text-right">Totale</th>
+        <th class="w_lg text-right">Totale</th>
       </tr>
       <tr ng-repeat="r in $ctrl.model.consuntivo.stanze">
         <td>{{ r.data }}</td>
@@ -105,5 +114,14 @@
       </tr>
     </tbody>
   </table>
+
+  <h3>Imposta di soggiorno</h3>
+  <table class="table table-bordered">
+    <tbody>
+      <tr>
+        <th>da fare</th>
+      </tr>
+    </tbody>
+  </table>
 </div>
-<pre>{{ $ctrl.model | json }}</pre>
+<!-- <pre>{{ $ctrl.model | json }}</pre> -->
