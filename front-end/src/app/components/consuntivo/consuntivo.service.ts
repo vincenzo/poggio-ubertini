@@ -38,6 +38,7 @@ export class ConsuntivoService extends EwCommonService {
       { name: "modified", type: "date" },
       { name: "contatori", type: "string" },
       { name: "consuntivo", type: "string" },
+      { name: "ipotesi_spesa", type: "number" },
       {
         name: "upload_ipotesi_spesa",
         type: "object",
