@@ -40,7 +40,7 @@ class CampsController extends AppController
     public function addManyGuests()
     {
         ini_set('memory_limit', '300M');
-        $this->requireFields(['file']);
+        $this->requireFields(['camp_id', 'file']);
         if($this->request->getData('file.error') != 0)
             throw new WarningException("Errore nel caricamento del file");
 
@@ -63,7 +63,7 @@ class CampsController extends AppController
         $reservations = [];
         foreach ($all as $r) {
             $data = [
-                'camp_id' => $this->request->getData('camp_id') ?? 1,
+                'camp_id' => $this->request->getData('camp_id'),
                 'guest' => [
                     'cittadinanza_italiana' => $upTrim($r['A']) == "SI",
                     'cognome' => $r['B'],
