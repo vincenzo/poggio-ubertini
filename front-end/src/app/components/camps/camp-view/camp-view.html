@@ -147,7 +147,7 @@
                 <label>Ipotesi di spesa</label>
                 <ew-readonly-input
                   value="$ctrl.model.ipotesi_spesa"
-                  type="numeric"
+                  type="money"
                 ></ew-readonly-input>
               </row>
               <div>
@@ -187,39 +187,44 @@
     </div>
   </row>
 
-  <div class="save-button--floating">
-    <button
-      type="button"
-      class="btn btn-success"
-      ng-click="$ctrl.consuntivo($ctrl.model.id)"
-      ng-if="$ctrl.model.chiuso"
-    >
-      Visualizza Consuntivo
-    </button>
-    <button
-      type="button"
-      class="btn btn-danger"
-      ng-click="$ctrl.chiudi($ctrl.model.id)"
-      ng-if="!$ctrl.model.chiuso"
-    >
-      Chiudi campo
-    </button>
-    <button
-      type="button"
-      class="btn btn-default"
-      ng-click="$ctrl.chiudi($ctrl.model.id)"
-      ng-if="$ctrl.model.chiuso"
-    >
-      Aggiorna consuntivo
-    </button>
-    <button
-      type="button"
-      class="btn btn-primary"
-      ui-sref="camps.edit({ id: $ctrl.model.id })"
-    >
-      Modifica campo
-    </button>
-  </div>
+  <ew-ibox>
+    <ibox-title>
+      <h5>Operazioni campo</h5>
+    </ibox-title>
+    <ibox-content>
+      <button
+        type="button"
+        class="btn btn-success"
+        ng-click="$ctrl.consuntivo($ctrl.model.id)"
+        ng-if="$ctrl.model.chiuso"
+      >
+        Visualizza Consuntivo
+      </button>
+      <button
+        type="button"
+        class="btn btn-danger"
+        ng-click="$ctrl.chiudi($ctrl.model.id)"
+        ng-if="!$ctrl.model.chiuso"
+      >
+        Chiudi campo
+      </button>
+      <button
+        type="button"
+        class="btn btn-default"
+        ng-click="$ctrl.chiudi($ctrl.model.id)"
+        ng-if="$ctrl.model.chiuso"
+      >
+        Aggiorna consuntivo
+      </button>
+      <button
+        type="button"
+        class="btn btn-primary"
+        ui-sref="camps.edit({ id: $ctrl.model.id })"
+      >
+        Modifica campo
+      </button>
+    </ibox-content>
+  </ew-ibox>
 
   <div id="tabs">
     <uib-tabset active="$ctrl.activeTab">
