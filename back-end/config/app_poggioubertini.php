@@ -43,7 +43,21 @@ return [
           'fixed_EL' => 5,
         ]
       ],
+      'Invoices' => [
+        'ente' => [
+          'PRI' => 'Privato',
+          'ASC' => 'Associazione culturale',
+          'ASR' => 'Associazione religiosa',
+          'ENT' => 'Ente',
+          'SOC' => 'Società',
+          'ALT' => 'Altro',
+        ],
+      ],
       'Guests' => [
+        'nazionalita' => [
+          'ITA' => 'Italiano',
+          'EST' => 'Estero',
+        ],
         'documento_tipo' => [
           'CID' => 'Carta d\'identità',
           'PAS' => 'Passaporto',

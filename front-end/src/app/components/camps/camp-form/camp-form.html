@@ -48,6 +48,13 @@
 
           <ibox-content>
 
+            <row style="grid-template-columns: 1fr 1fr">
+              <ew-select name="fattura_nazione" label="Nazionalità documento" value="$ctrl.model.fattura_nazione" on-change="$ctrl.updateModel($event)"
+                  options="::$ctrl.lookup.Guests.nazionalita"></ew-select>
+              <ew-select name="fattura_ente" label="Fattura emessa a" value="$ctrl.model.fattura_ente" on-change="$ctrl.updateModel($event)"
+                  options="::$ctrl.lookup.Invoices.ente"></ew-select>
+            </row>
+
             <row style="grid-template-columns: 1fr 140px 160px 120px">
               <ew-text name="fattura_ragione_sociale" label="Intestazione (Ragione sociale / nome cognome)"
                 value="$ctrl.model.fattura_ragione_sociale" on-change="$ctrl.updateModel($event)"></ew-text>
@@ -71,6 +78,13 @@
               <ew-text name="fattura_provincia" label="Provincia" value="$ctrl.model.fattura_provincia"
                 on-change="$ctrl.updateModel($event)"></ew-text>
               <ew-text name="fattura_cap" label="CAP" value="$ctrl.model.fattura_cap"
+                on-change="$ctrl.updateModel($event)"></ew-text>
+            </row>
+            
+            <row style="grid-template-columns: 1fr 180px 120px 120px 90px" ng-if="$ctrl.model.fattura_nazione === 'ITA' && !['PRI', 'ENT'].includes($ctrl.model.fattura_ente)">
+              <ew-text name="fattura_sdi" label="SDI" value="$ctrl.model.fattura_sdi"
+                on-change="$ctrl.updateModel($event)"></ew-text>
+              <ew-text name="fattura_pec" label="PEC" value="$ctrl.model.fattura_pec"
                 on-change="$ctrl.updateModel($event)"></ew-text>
             </row>
 

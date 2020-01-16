@@ -149,7 +149,8 @@ class AppController extends Controller
             'Camps'         => [ 'tipo', 'tipo_documento_fiscale', 'contatori' ],
             'Users'         => [ 'roles' ],
             'Sesso'         => [ 'list' ],
-            'Guests'        => [ 'documento_tipo', 'documento_rilasciato_ente' ],
+            'Guests'        => [ 'nazionalita', 'documento_tipo', 'documento_rilasciato_ente' ],
+            'Invoices'      => [ 'ente' ],
             'Reservations'  => [ 'trimestri' ],
             'Years'         => [ 'list' ],
         ]);

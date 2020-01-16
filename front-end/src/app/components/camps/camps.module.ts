@@ -51,7 +51,9 @@ export const CampsModule = angular.module('components.camps', [
           data: ($ngRedux, AppService: AppService, CampsService: CampsService, $stateParams) => {
             'ngInject';
             $ngRedux.dispatch(AppService.setActiveForm('camps'));
-            return $ngRedux.dispatch(CampsService.getFormData(null));
+            return $ngRedux.dispatch(CampsService.getFormData(null, {
+              fattura_nazione: 'ITA',
+            }));
           }
         },
         data: {
