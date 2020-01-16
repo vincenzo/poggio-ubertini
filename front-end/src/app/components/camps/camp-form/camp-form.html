@@ -108,6 +108,20 @@
                 <ew-numeric name="contatori.{{ c.value }}.ingresso" value="$ctrl.model.contatori[c.value].ingresso" on-change="$ctrl.updateModel($event)"></ew-numeric>
                 <ew-numeric name="contatori.{{ c.value }}.uscita" value="$ctrl.model.contatori[c.value].uscita" on-change="$ctrl.updateModel($event)"></ew-numeric>
               </row>
+              
+              <hr>
+              <row style="grid-template-columns: 1fr 100px">
+                <label>Lenzuola singole</label>
+                <ew-numeric name="lenzuola_singole" value="$ctrl.model.lenzuola_singole" on-change="$ctrl.updateModel($event)"></ew-numeric>
+              </row>
+              <row style="grid-template-columns: 1fr 100px">
+                <label>Lenzuola doppie</label>
+                <ew-numeric name="lenzuola_doppie" value="$ctrl.model.lenzuola_doppie" on-change="$ctrl.updateModel($event)"></ew-numeric>
+              </row>
+              <row style="grid-template-columns: 1fr 100px">
+                <label>Asciugamani</label>
+                <ew-numeric name="asciugamani" value="$ctrl.model.asciugamani" on-change="$ctrl.updateModel($event)"></ew-numeric>
+              </row>
 
               <div ng-if="$ctrl.isAuthorized('ipotesiSpesa')">
                 <hr>

@@ -25,17 +25,21 @@ return [
         ],
         'contatori' => [
           'ACQ' => 'ACQUA',
+          'ACP' => 'ACQUA Pozzo',
           'ELS' => 'ENEL segreteria',
           'ELP' => 'ENEL parco',
           'ELL' => 'ENEL locali',
           'GAS' => 'GAS',
+          'GAI' => 'GAS uso interno',
         ],
         'contatori_costo' => [
           'ACQ' => 1, // FIXME
+          'ACP' => 1, // FIXME
           'ELS' => 0.3,
           'ELP' => 0.3,
           'ELL' => 0.3,
           'GAS' => 1,
+          'GAI' => -1, // FIXME
           'fixed_EL' => 5,
         ]
       ],

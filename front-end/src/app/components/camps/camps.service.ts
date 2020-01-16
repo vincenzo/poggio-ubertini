@@ -36,6 +36,9 @@ export class CampsService extends EwCommonService {
       { name: "created", type: "date" },
       { name: "modified", type: "date" },
       { name: "contatori", type: "string" },
+      { name: "lenzuola_singole", type: "number" },
+      { name: "lenzuola_doppie", type: "number" },
+      { name: "asciugamani", type: "number" },
       { name: "consuntivo", type: "string" },
       { name: "ipotesi_spesa", type: "number" },
       {
