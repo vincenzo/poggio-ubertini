@@ -33,14 +33,19 @@ return [
           'GAI' => 'GAS uso interno',
         ],
         'contatori_costo' => [
-          'ACQ' => 1, // FIXME
-          'ACP' => 1, // FIXME
+          'ACQ' => 1, // FIXME Confermare cifra
+          'ACP' => 1, // FIXME Confermare cifra
           'ELS' => 0.3,
           'ELP' => 0.3,
           'ELL' => 0.3,
           'GAS' => 1,
-          'GAI' => -1, // FIXME
+          'GAI' => -1,
           'fixed_EL' => 5,
+        ],
+        'costi_extra' => [
+          'lenzuola_singole' => 5,
+          'lenzuola_doppie' => 6,
+          'asciugamani' => 3,
         ]
       ],
       'Invoices' => [

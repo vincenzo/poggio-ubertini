@@ -60,7 +60,32 @@
   <table class="table table-bordered">
     <tbody>
       <tr>
-        <th>da fare</th>
+        <td>N° coppia lenzuola singolo</td>
+        <td class="f_number">{{ $ctrl.model.consuntivo.biancheria.lenzuola_singole.n || 0 }}</td>
+        <td class="w_xxs f_sign">x</td>
+        <td class="w_lg f_number"><span class="b_amount">{{ $ctrl.model.consuntivo.biancheria.lenzuola_singole.tariffa | currency }}</span></td>
+        <td class="w_xxs f_sign">=</td>
+        <td class="w_lg f_number"><span class="b_amount b_amount--green">{{ $ctrl.model.consuntivo.biancheria.lenzuola_singole.totale | currency }}</span></td>
+      </tr>
+      <tr>
+        <td>N° coppia lenzuola doppie</td>
+        <td class="f_number">{{ $ctrl.model.consuntivo.biancheria.lenzuola_doppie.n || 0 }}</td>
+        <td class="w_xxs f_sign">x</td>
+        <td class="w_lg f_number"><span class="b_amount">{{ $ctrl.model.consuntivo.biancheria.lenzuola_doppie.tariffa | currency }}</span></td>
+        <td class="w_xxs f_sign">=</td>
+        <td class="w_lg f_number"><span class="b_amount b_amount--green">{{ $ctrl.model.consuntivo.biancheria.lenzuola_doppie.totale | currency }}</span></td>
+      </tr>
+      <tr>
+        <td>N° tris asciugamani</td>
+        <td class="f_number">{{ $ctrl.model.consuntivo.biancheria.asciugamani.n || 0 }}</td>
+        <td class="w_xxs f_sign">x</td>
+        <td class="w_lg f_number"><span class="b_amount">{{ $ctrl.model.consuntivo.biancheria.asciugamani.tariffa | currency }}</span></td>
+        <td class="w_xxs f_sign">=</td>
+        <td class="w_lg f_number"><span class="b_amount b_amount--green">{{ $ctrl.model.consuntivo.biancheria.asciugamani.totale | currency }}</span></td>
+      </tr>
+      <tr>
+        <td colspan="5" class="bold">Totale:</td>
+        <td class="f_number"><span class="b_amount b_amount--green">{{ $ctrl.model.consuntivo.biancheria.totale | currency }}</span></td>
       </tr>
     </tbody>
   </table>
@@ -70,6 +95,10 @@
       <tr>
         <td class="bold">Totale consumi generali</td class="bold">
         <td class="w_lg f_number"><span class="b_amount b_amount--green">{{ $ctrl.model.consuntivo.contatori.totale | currency }}</span></td>
+      </tr>
+      <tr>
+        <td class="bold">Totale biancheria</td class="bold">
+        <td class="w_lg f_number"><span class="b_amount b_amount--green">{{ $ctrl.model.consuntivo.biancheria.totale | currency }}</span></td>
       </tr>
       <tr>
         <td class="bold">Pernottamento "unità abitative"</td>

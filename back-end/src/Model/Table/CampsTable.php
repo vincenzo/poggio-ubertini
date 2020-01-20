@@ -79,6 +79,7 @@ class CampsTable extends Table
                 'locali' => 0,
             ],
             'contatori' => [],
+            'biancheria' => [],
             
         ];
         $this->__findGroupedReservations();
@@ -86,10 +87,7 @@ class CampsTable extends Table
         $this->__calcRoomsRate();
         $this->__expandRoomsDetails();
         $this->__calcContatori();
-        // OK tariffa stanze fixed
-        // OK tariffa stanze variabili
-        // lenzuola
-        // contatori
+        $this->__calcBiancheria();
         // debug($this->costi);
         return $this->costi;
     }
@@ -239,6 +237,25 @@ class CampsTable extends Table
         ];
         $totale += $cont['fixed_EL']['prezzo'];
         $this->costi['contatori'] = $cont + ['totale' => $totale];
+    }
+
+    private function __calcBiancheria()
+    {
+        $totale = 0;
+        $res = [];
+        $fields = ['lenzuola_singole', 'lenzuola_doppie', 'asciugamani'];
+        foreach($fields as $field) {
+            $t = Configure::read('Lookup.Camps.costi_extra.'.$field);
+            $tot = $t * $this->camp->{$field};
+            $res[$field] = [
+                'n' => $this->camp->{$field},
+                'tariffa' => $t,
+                'totale' => $tot,
+            ];
+            $totale += $tot;
+        }
+        $res['totale'] = $totale;
+        $this->costi['biancheria'] = $res;
     }
 
 }

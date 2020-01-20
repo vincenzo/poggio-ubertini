@@ -22,7 +22,6 @@ export class CampsService extends EwCommonService {
       { name: "data_inizio", type: "date" },
       { name: "data_fine", type: "date" },
       { name: "tipo", type: "string" },
-      { name: "fattura_nazione", type: "string" },
       { name: "fattura_ente", type: "string" },
       { name: "fattura_ragione_sociale", type: "string" },
       { name: "fattura_codice_fiscale", type: "string" },
