@@ -34,6 +34,7 @@ class RoomsController extends AppController
     {
         $this->requireFields(['data_da', 'data_a']);
         $all = $this->Rooms->find()
+            ->find('structures')
             ->find('disponibile', ['data_da' => $this->request->getData('data_da'), 'data_a' => $this->request->getData('data_a'), ]);
 
         $this->_setJson(true, $all);
