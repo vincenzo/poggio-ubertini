@@ -11,7 +11,9 @@
       </tr>
       <tr>
         <td class="bold">Capogruppo:</td>
-        <td>{{ $ctrl.model.capogruppo }}</td>
+        <td>{{ $ctrl.model.capogruppo.nome_cognome }} 
+          <small ng-if="$ctrl.model.capogruppo.email">({{ $ctrl.model.capogruppo.email }})</small>
+        </td>
         <td>{{ $ctrl.model.data_inizio | date: "dd/MM/yyyy" }}</td>
         <td>{{ $ctrl.model.data_fine | date: "dd/MM/yyyy" }}</td>
       </tr>

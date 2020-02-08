@@ -9,4 +9,13 @@ class Guest extends Entity
         '*' => true,
         'id' => false
     ];
+
+    protected $_virtual = [
+        'nome_cognome'
+    ];
+
+    protected function _getNomeCognome()
+    {
+        return $this->nome . ' ' . $this->cognome;
+    }
 }
