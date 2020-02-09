@@ -101,7 +101,7 @@ export class CampGuestsComponentController extends EwCommonFormController {
   checkIn(reservation: any, date?: string) {
     const params = {
       type: "in",
-      value: date || moment().format("YYYY-MM-DD")
+      value: date || moment().format("YYYY-MM-DD HH:mm")
     };
     return this._check([reservation.id], params);
   }
@@ -109,7 +109,7 @@ export class CampGuestsComponentController extends EwCommonFormController {
   checkOut(reservation: any, date?: string) {
     const params = {
       type: "out",
-      value: date || moment().format("YYYY-MM-DD")
+      value: date || moment().format("YYYY-MM-DD HH:mm")
     };
     return this._check([reservation.id], params);
   }
@@ -144,12 +144,12 @@ export class CampGuestsComponentController extends EwCommonFormController {
         title: "Data Check-in",
         input: "text",
         inputValue: moment().format("DD/MM/YYYY"),
-        inputPlaceholder: "gg/mm/aaaa",
+        inputPlaceholder: "gg/mm/aaaa oo:mm",
         inputValidator: value => {
           if (!value) {
             return "Campo obbligatorio!";
           }
-          const momentdate = moment(value, "DD/MM/YYYY", true);
+          const momentdate = moment(value, "DD/MM/YYYY HH:ii", true);
           if (!momentdate.isValid()) {
             return "Formato data non valido!";
           }

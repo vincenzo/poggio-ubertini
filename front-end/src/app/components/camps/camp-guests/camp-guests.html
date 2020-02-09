@@ -1,9 +1,5 @@
 <div class="mar-top-1">
-  <row style="grid-template-columns: repeat(6, 120px)">
-    <input type="date" />
-
-    <input type="date" />
-
+  <row style="grid-template-columns: repeat(4, 120px)">
     <button
       type="button"
       class="btn btn-primary"
@@ -11,6 +7,7 @@
     >
       Check-in
     </button>
+
     <button
       type="button"
       class="btn btn-primary"
@@ -18,9 +15,11 @@
     >
       Check-out
     </button>
+
     <button type="button" class="btn btn-primary" ng-click="$ctrl.assignRoom()">
       Assegna stanza
     </button>
+
     <a class="btn btn-default" ui-sref="camps.view.guests.add">
       Aggiungi ospite
     </a>
@@ -98,7 +97,9 @@
               Check-in
             </a>
           </span>
-          <span ng-if="r.data_in">{{ r.data_in | date: "dd/MM/yyyy" }}</span>
+          <span ng-if="r.data_in"
+            >{{ r.data_in | date: "dd/MM/yyyy HH:mm" }}</span
+          >
         </td>
         <td>
           <span ng-if="!r.data_out">
@@ -112,7 +113,9 @@
             </a>
             <span ng-if="!r.data_in">Check-out</span>
           </span>
-          <span ng-if="r.data_out">{{ r.data_out | date: "dd/MM/yyyy" }}</span>
+          <span ng-if="r.data_out"
+            >{{ r.data_out | date: "dd/MM/yyyy HH:mm" }}</span
+          >
         </td>
         <!-- TODO: da cambiare non appena mi includi room nella risposta back -->
         <td>{{ r.room_id ? r.room.display_name : '' }}</td>
