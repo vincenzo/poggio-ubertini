@@ -18,6 +18,8 @@ import { CitiesModule } from "./cities/cities.module";
 import { ConsuntivoModule } from "./consuntivo/consuntivo.module";
 import { DashboardModule } from "./dashboard/dashboard.module";
 import { GuestsModule } from "./guests/guests.module";
+import { IstatModule } from "./istat/istat.module";
+import { QuesturaModule } from "./questura/questura.module";
 import { ReportsModule } from "./reports/reports.module";
 import { ReservationsModule } from "./reservations/reservations.module";
 import { RoomsModule } from "./rooms/rooms.module";
@@ -34,6 +36,8 @@ export const ComponentsModule = angular.module("root.components", [
   ConsuntivoModule,
   DashboardModule,
   GuestsModule,
+  IstatModule,
+  QuesturaModule,
   ReportsModule,
   ReservationsModule,
   RoomsModule,

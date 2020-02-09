@@ -6,6 +6,8 @@ import { CampsReducer } from "./components/camps/camps.reducer";
 import { ConsuntivoReducer } from "./components/consuntivo/consuntivo.reducer";
 import { DashboardReducer } from "./components/dashboard/dashboard.reducer";
 import { GuestsReducer } from "./components/guests/guests.reducer";
+import { IstatReducer } from "./components/istat/istat.reducer";
+import { QuesturaReducer } from "./components/questura/questura.reducer";
 import { ReportsReducer } from "./components/reports/reports.reducer";
 import { ReservationsReducer } from "./components/reservations/reservations.reducer";
 import { RoomsReducer } from "./components/rooms/rooms.reducer";
@@ -27,7 +29,9 @@ export const rootReducer = combineReducers({
   consuntivo: ConsuntivoReducer,
   dashboard: DashboardReducer,
   guests: GuestsReducer,
+  istat: IstatReducer,
   lookup: LookupReducer,
+  questura: QuesturaReducer,
   reports: ReportsReducer,
   reservations: ReservationsReducer,
   rooms: RoomsReducer,
