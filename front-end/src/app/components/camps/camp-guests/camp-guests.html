@@ -41,6 +41,7 @@
             ng-model="$ctrl.selectAll"
           />
         </th>
+        <th></th>
         <th
           class="sortable"
           ng-click='$ctrl.sortColumn("nome")'
@@ -67,6 +68,23 @@
       >
         <td class="w_xs text-center">
           <input type="checkbox" ng-model="r.selected" />
+        </td>
+        <td>
+          <i
+            ng-if="r.guest.capogruppo"
+            class="far fa-fw fa-user-shield"
+            uib-tooltip="Capogruppo"
+          ></i>
+          <i
+            class="far fa-fw"
+            ng-class="{ 'fa-male': r.guest.genere === 'M', 'fa-female': r.guest.genere === 'F' }"
+            uib-tooltip="{{ r.guest.genere === 'F' ? 'Femmina' : 'Maschio' }}"
+          ></i>
+          <i
+            class="far fa-fw"
+            ng-class="{ 'fa-check-square': r.guest.privacy, 'fa-square': !r.guest.privacy }"
+            uib-tooltip="{{ r.guest.privacy ? 'Privacy firmata' : 'Privacy non firmata' }}"
+          ></i>
         </td>
         <td>{{ r.guest.nome }}</td>
         <td>{{ r.guest.cognome }}</td>
@@ -120,7 +138,11 @@
   </table>
 </div>
 
-<p>Grazie a questa funzionalità puoi caricare un file excel (CSV) per aggiungere rapidamente tutti gli ospiti al campo. Scarica il modello da compilare dal tab Documenti.</p>
+<p>
+  Grazie a questa funzionalità puoi caricare un file excel (CSV) per aggiungere
+  rapidamente tutti gli ospiti al campo. Scarica il modello da compilare dal tab
+  Documenti.
+</p>
 <form ng-submit="" name="$ctrl.fileForm" novalidate id="file-form">
   <ew-upload-button
     name="file_ospiti"
