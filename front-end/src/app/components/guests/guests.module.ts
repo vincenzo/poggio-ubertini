@@ -1,52 +1,122 @@
-import * as angular from 'angular';
+import * as angular from "angular";
+import ngRedux from "ng-redux";
 
-import { GuestsComponent } from './guests.component';
-import { GuestsFormComponent } from './guests-form/guests-form.component';
-import { GuestsMultipleAddComponent } from './guests-multiple-add/guests-multiple-add.component';
+import { GuestsComponent } from "./guests.component";
+import { GuestsFormComponent } from "./guests-form/guests-form.component";
+import { GuestsMultipleAddComponent } from "./guests-multiple-add/guests-multiple-add.component";
 
-import { AppService } from '../../common/app/app.service';
-import { GuestsService } from './guests.service';
-import { StateProvider } from '@uirouter/angularjs';
+import { AppService } from "../../common/app/app.service";
+import { GuestsService } from "./guests.service";
+import { StateProvider, StateParams } from "@uirouter/angularjs";
 
-import { GuestsFiltersModule } from './guests-filters/guests-filters.module';
+import { GuestsFiltersModule } from "./guests-filters/guests-filters.module";
 
-export const GuestsModule = angular.module('components.guests', [
-  'ui.router',
-  GuestsFiltersModule,
-])
+export const GuestsModule = angular
+  .module("components.guests", ["ui.router", GuestsFiltersModule])
   .config(($stateProvider: StateProvider) => {
-    'ngInject';
+    "ngInject";
 
     $stateProvider
-      .state('guests', {
-        parent: 'app',
-        url: '/guests',
-        component: 'guests',
+      .state("guests", {
+        parent: "app",
+        url: "/guests",
+        component: "guests",
         resolve: {
           guests: ($ngRedux, GuestsService: GuestsService) => {
-            'ngInject';
+            "ngInject";
             return $ngRedux.dispatch(GuestsService.get());
           }
         },
         data: {
           requiredAuth: true,
           roles: {
-            admin: true,
-          },
-        },
+            admin: true
+          }
+        }
       })
-      .state('guests.add', {
-        url: '/add',
-        views: {
-          '@app': {
-            component: 'guestsForm',
-          },
+      .state("guests.add", {
+        url: "/add",
+        onEnter: ($state, ModalService) => {
+          return ModalService.open({
+            name: "guestsForm",
+            className: "ngdialog-large ngdialog-tall",
+            preCloseCallback: value =>
+              ModalService.preCloseCallbackDefault(value, "guests"),
+            template: '<guests-form action="add"></guests-form>'
+          });
         },
         resolve: {
-          action: () => 'add',
-          data: ($ngRedux, AppService: AppService, GuestsService: GuestsService, $stateParams) => {
-            'ngInject';
-            $ngRedux.dispatch(AppService.setActiveForm('guests'));
+          data: (
+            $ngRedux: ngRedux.INgRedux,
+            AppService: AppService,
+            GuestsService: GuestsService,
+            $stateParams: StateParams
+          ) => {
+            "ngInject";
+            $ngRedux.dispatch(AppService.setActiveForm("guests"));
+            return $ngRedux.dispatch(GuestsService.getFormData(null));
+          }
+        },
+        data: {
+          form: true,
+          scrollToTop: false,
+          requiredAuth: true,
+          roles: {
+            admin: true
+          }
+        }
+      })
+      .state("guests.edit", {
+        url: "/edit/:guestId",
+        onEnter: ($state, ModalService) => {
+          return ModalService.open({
+            name: "guestsForm",
+            className: "ngdialog-large ngdialog-tall",
+            preCloseCallback: value =>
+              ModalService.preCloseCallbackDefault(value, "guests"),
+            template: '<guests-form action="edit"></guests-form>'
+          });
+        },
+        resolve: {
+          data: (
+            $ngRedux: ngRedux.INgRedux,
+            AppService: AppService,
+            GuestsService: GuestsService,
+            $stateParams: StateParams
+          ) => {
+            "ngInject";
+            $ngRedux.dispatch(AppService.setActiveForm("guests"));
+            return $ngRedux.dispatch(
+              GuestsService.getFormData($stateParams.guestId)
+            );
+          }
+        },
+        data: {
+          form: true,
+          scrollToTop: false,
+          requiredAuth: true,
+          roles: {
+            admin: true
+          }
+        }
+      })
+      .state("guests.multipleAdd", {
+        url: "/multiple",
+        views: {
+          "@app": {
+            component: "guestsMultipleAdd"
+          }
+        },
+        resolve: {
+          action: () => "edit",
+          data: (
+            $ngRedux,
+            AppService: AppService,
+            GuestsService: GuestsService,
+            $stateParams
+          ) => {
+            "ngInject";
+            $ngRedux.dispatch(AppService.setActiveForm("guests"));
             return $ngRedux.dispatch(GuestsService.getFormData(null));
           }
         },
@@ -54,60 +124,12 @@ export const GuestsModule = angular.module('components.guests', [
           form: true,
           requiredAuth: true,
           roles: {
-            admin: true,
-          },
-        },
-      })
-      .state('guests.edit', {
-        url: '/edit/:id',
-        views: {
-          '@app': {
-            component: 'guestsForm',
-          },
-        },
-        resolve: {
-          action: () => 'edit',
-          data: ($ngRedux, AppService: AppService, GuestsService: GuestsService, $stateParams) => {
-            'ngInject';
-            $ngRedux.dispatch(AppService.setActiveForm('guests'));
-            return $ngRedux.dispatch(GuestsService.getFormData($stateParams.id));
+            admin: true
           }
-        },
-        data: {
-          form: true,
-          requiredAuth: true,
-          roles: {
-            admin: true,
-          },
-        },
-      })
-      .state('guests.multipleAdd', {
-        url: '/multiple',
-        views: {
-          '@app': {
-            component: 'guestsMultipleAdd',
-          },
-        },
-        resolve: {
-          action: () => 'edit',
-          data: ($ngRedux, AppService: AppService, GuestsService: GuestsService, $stateParams) => {
-            'ngInject';
-            $ngRedux.dispatch(AppService.setActiveForm('guests'));
-            return $ngRedux.dispatch(GuestsService.getFormData(null));
-          }
-        },
-        data: {
-          form: true,
-          requiredAuth: true,
-          roles: {
-            admin: true,
-          },
-        },
-      })
-      ;
+        }
+      });
   })
-  .component('guests', GuestsComponent)
-  .component('guestsForm', GuestsFormComponent)
-  .component('guestsMultipleAdd', GuestsMultipleAddComponent)
-  .service('GuestsService', GuestsService)
-  .name;
+  .component("guests", GuestsComponent)
+  .component("guestsForm", GuestsFormComponent)
+  .component("guestsMultipleAdd", GuestsMultipleAddComponent)
+  .service("GuestsService", GuestsService).name;

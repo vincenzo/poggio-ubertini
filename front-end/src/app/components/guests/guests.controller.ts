@@ -46,7 +46,7 @@ export class GuestsComponentController {
       case 'row.click':
       case 'guests.edit':
         $event.stopPropagation();
-        return this.stateGo('guests.edit', { id: value.id });
+        return this.stateGo('guests.edit', { guestId: value.id });
     }
   }
 

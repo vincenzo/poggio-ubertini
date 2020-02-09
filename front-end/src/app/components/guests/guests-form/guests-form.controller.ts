@@ -25,8 +25,8 @@ export class GuestsFormComponentController extends EwCommonFormController {
     super($ngRedux, GuestsService);
     this.config = {
       deleteSuccess: 'Ospite cancellato correttamente',
-      formId: '#guests-form',
-      isModal: false,
+      formId: '#guestsForm',
+      isModal: true,
       parentIdParam: 'id',
       parentRoute: 'guests',
       saveError: 'Sono presenti degli errori. Controlla e riprova.',

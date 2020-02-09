@@ -1,9 +1,8 @@
 <div class="mar-top-1">
-  <row style="grid-template-columns: repeat(5, 120px)">
+  <row style="grid-template-columns: repeat(6, 120px)">
+    <input type="date" />
 
-    <input type="date">
-    
-    <input type="date">
+    <input type="date" />
 
     <button
       type="button"
@@ -22,6 +21,9 @@
     <button type="button" class="btn btn-primary" ng-click="$ctrl.assignRoom()">
       Assegna stanza
     </button>
+    <a class="btn btn-default" ui-sref="camps.view.guests.add">
+      Aggiungi ospite
+    </a>
   </row>
 </div>
 
@@ -98,6 +100,12 @@
         <td>{{ r.room_id ? r.room.display_name : '' }}</td>
         <td class="actions">
           <a
+            ui-sref="camps.view.guests.edit({ guestId: r.guest_id })"
+            uib-tooltip="Modifica ospite"
+          >
+            <i class="far fa-fw fa-edit"></i>
+          </a>
+          <a
             href=""
             class="text-warning"
             ng-click="$ctrl.removeRoom(r.id)"
@@ -123,4 +131,3 @@
   >
   </ew-upload-button>
 </form>
-
