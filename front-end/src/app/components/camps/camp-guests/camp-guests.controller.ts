@@ -139,32 +139,46 @@ export class CampGuestsComponentController extends EwCommonFormController {
     if (!ids.length) {
       return this.service.toaster.info("Seleziona almeno un ospite!");
     }
-    swal
-      .fire({
-        title: "Data Check-in",
-        input: "text",
-        inputValue: moment().format("DD/MM/YYYY"),
-        inputPlaceholder: "gg/mm/aaaa oo:mm",
-        inputValidator: value => {
-          if (!value) {
-            return "Campo obbligatorio!";
-          }
-          const momentdate = moment(value, "DD/MM/YYYY HH:ii", true);
-          if (!momentdate.isValid()) {
-            return "Formato data non valido!";
-          }
-        }
-      })
-      .then(({ value: data }) => {
-        if (data) {
-          return this.multiActions("check", ids, {
-            type: "in",
-            value: moment(data, "DD/MM/YYYY").format("YYYY-MM-DD")
-          });
-        }
-      })
-      .then(() => this.getCampFormData(this.parentId))
-      .then(() => (this.selectAll = false));
+
+    return this.ModalService.open({
+      name: "checkInOutForm",
+      className: "ngdialog-small ngdialog-tall",
+      // preCloseCallback: value =>
+      //   this.ModalService.preCloseCallbackDefault(value, "camps.view"),
+      template: `<camp-checkinout reservations="$ctrl.reservations" title="Check In"></camp-checkinout>`,
+      controller: () => {
+        return {
+          reservations: ids
+        };
+      }
+    });
+
+    // swal
+    //   .fire({
+    //     title: "Data Check-in",
+    //     input: "text",
+    //     inputValue: moment().format("DD/MM/YYYY"),
+    //     inputPlaceholder: "gg/mm/aaaa oo:mm",
+    //     inputValidator: value => {
+    //       if (!value) {
+    //         return "Campo obbligatorio!";
+    //       }
+    //       const momentdate = moment(value, "DD/MM/YYYY HH:ii", true);
+    //       if (!momentdate.isValid()) {
+    //         return "Formato data non valido!";
+    //       }
+    //     }
+    //   })
+    //   .then(({ value: data }) => {
+    //     if (data) {
+    //       return this.multiActions("check", ids, {
+    //         type: "in",
+    //         value: moment(data, "DD/MM/YYYY").format("YYYY-MM-DD")
+    //       });
+    //     }
+    //   })
+    //   .then(() => this.getCampFormData(this.parentId))
+    //   .then(() => (this.selectAll = false));
   }
 
   multipleCheckOut() {
@@ -172,32 +186,46 @@ export class CampGuestsComponentController extends EwCommonFormController {
     if (!ids.length) {
       return this.service.toaster.info("Seleziona almeno un ospite!");
     }
-    swal
-      .fire({
-        title: "Data Check-out",
-        input: "text",
-        inputValue: moment().format("DD/MM/YYYY"),
-        inputPlaceholder: "gg/mm/aaaa",
-        inputValidator: value => {
-          if (!value) {
-            return "Campo obbligatorio!";
-          }
-          const momentdate = moment(value, "DD/MM/YYYY", true);
-          if (!momentdate.isValid()) {
-            return "Formato data non valido!";
-          }
-        }
-      })
-      .then(({ value: data }) => {
-        if (data) {
-          return this.multiActions("check", ids, {
-            type: "out",
-            value: moment(data, "DD/MM/YYYY").format("YYYY-MM-DD")
-          });
-        }
-      })
-      .then(() => this.getCampFormData(this.parentId))
-      .then(() => (this.selectAll = false));
+
+    return this.ModalService.open({
+      name: "checkInOutForm",
+      className: "ngdialog-small ngdialog-tall",
+      // preCloseCallback: value =>
+      //   this.ModalService.preCloseCallbackDefault(value, "camps.view"),
+      template: `<camp-checkinout reservations="$ctrl.reservations" title="Check Out"></camp-checkinout>`,
+      controller: () => {
+        return {
+          reservations: ids
+        };
+      }
+    });
+
+    // swal
+    //   .fire({
+    //     title: "Data Check-out",
+    //     input: "text",
+    //     inputValue: moment().format("DD/MM/YYYY"),
+    //     inputPlaceholder: "gg/mm/aaaa",
+    //     inputValidator: value => {
+    //       if (!value) {
+    //         return "Campo obbligatorio!";
+    //       }
+    //       const momentdate = moment(value, "DD/MM/YYYY", true);
+    //       if (!momentdate.isValid()) {
+    //         return "Formato data non valido!";
+    //       }
+    //     }
+    //   })
+    //   .then(({ value: data }) => {
+    //     if (data) {
+    //       return this.multiActions("check", ids, {
+    //         type: "out",
+    //         value: moment(data, "DD/MM/YYYY").format("YYYY-MM-DD")
+    //       });
+    //     }
+    //   })
+    //   .then(() => this.getCampFormData(this.parentId))
+    //   .then(() => (this.selectAll = false));
   }
 
   multipleToom() {

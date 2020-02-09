@@ -1,0 +1,36 @@
+<h1>Data {{ $ctrl.title }}</h1>
+
+<form
+  ng-submit="$ctrl.submit($ctrl.model)"
+  class="action-{{$ctrl.action}}"
+  name="$ctrl.form"
+  autocomplete="off"
+  novalidate
+>
+  <ew-datepicker
+    name="data.date"
+    label="Data"
+    value="$ctrl.model.data.date"
+    on-change="$ctrl.updateModel($event)"
+    required="true"
+  ></ew-datepicker>
+  <ew-timepicker
+    name="data.time"
+    label="Ora"
+    value="$ctrl.model.data.time"
+    on-change="$ctrl.updateModel($event)"
+    required="true"
+  ></ew-timepicker>
+  
+  <hr />
+
+  <ew-save-button
+    is-authorized="$ctrl.isAuthorized('form')"
+    form-dirty="$ctrl.form.$dirty"
+    modified="$ctrl.model.modified"
+    on-close="$ctrl.closeForm()"
+    alt-save="$ctrl.saveAndStay()"
+    is-loading="$ctrl.clients.isLoading"
+  >
+  </ew-save-button>
+</form>
