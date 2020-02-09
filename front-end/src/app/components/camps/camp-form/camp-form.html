@@ -1,9 +1,18 @@
-<ew-page-header id="top" size="compact" on-action="$ctrl.onAction(action, value)" header-title="{{::$ctrl.title}}">
+<ew-page-header
+  id="top"
+  size="compact"
+  on-action="$ctrl.onAction(action, value)"
+  header-title="{{::$ctrl.title}}"
+>
   <next-title></next-title>
 
   <right-side>
-    <button ng-if="$ctrl.isEdit()" class="btn btn-sm btn-default btn-flat btn-condensed pull-right" type="button"
-      ng-click="$ctrl.stateReload($ctrl.router.currentState.name)">
+    <button
+      ng-if="$ctrl.isEdit()"
+      class="btn btn-sm btn-default btn-flat btn-condensed pull-right"
+      type="button"
+      ng-click="$ctrl.stateReload($ctrl.router.currentState.name)"
+    >
       <i class="far fa-sync fa-fw text-primary"></i> Ricarica dati
     </button>
   </right-side>
@@ -11,7 +20,6 @@
 
 <div class="container">
   <form ng-submit="$ctrl.submit($ctrl.model)" name="$ctrl.form" novalidate>
-
     <row style="grid-template-columns: 1fr 360px">
       <div>
         <ew-ibox>
@@ -23,21 +31,42 @@
             <row style="grid-template-columns: 300px 1fr">
               <!-- <ew-numeric name="n_scheda" label="N. scheda" value="$ctrl.model.n_scheda"
                 on-change="$ctrl.updateModel($event)"></ew-numeric> -->
-              <ew-text name="nome" label="Nome campo" value="$ctrl.model.nome" on-change="$ctrl.updateModel($event)">
+              <ew-text
+                name="nome"
+                label="Nome campo"
+                value="$ctrl.model.nome"
+                on-change="$ctrl.updateModel($event)"
+              >
               </ew-text>
-              <ew-text name="note" label="Descrizione (uso interno)" value="$ctrl.model.note"
-                on-change="$ctrl.updateModel($event)"></ew-text>
+              <ew-text
+                name="note"
+                label="Descrizione (uso interno)"
+                value="$ctrl.model.note"
+                on-change="$ctrl.updateModel($event)"
+              ></ew-text>
             </row>
 
             <row style="grid-template-columns: 120px 120px 170px">
-              <ew-datepicker name="data_inizio" label="Data inizio" value="$ctrl.model.data_inizio"
-                on-change="$ctrl.updateModel($event)"></ew-datepicker>
-              <ew-datepicker name="data_fine" label="Data fine" value="$ctrl.model.data_fine"
-                on-change="$ctrl.updateModel($event)"></ew-datepicker>
-              <ew-select name="tipo" label="Tipo" value="$ctrl.model.tipo" on-change="$ctrl.updateModel($event)"
-                options="::$ctrl.lookup.Camps.tipo"></ew-select>
+              <ew-datepicker
+                name="data_inizio"
+                label="Data inizio"
+                value="$ctrl.model.data_inizio"
+                on-change="$ctrl.updateModel($event)"
+              ></ew-datepicker>
+              <ew-datepicker
+                name="data_fine"
+                label="Data fine"
+                value="$ctrl.model.data_fine"
+                on-change="$ctrl.updateModel($event)"
+              ></ew-datepicker>
+              <ew-select
+                name="tipo"
+                label="Tipo"
+                value="$ctrl.model.tipo"
+                on-change="$ctrl.updateModel($event)"
+                options="::$ctrl.lookup.Camps.tipo"
+              ></ew-select>
             </row>
-
           </ibox-content>
         </ew-ibox>
 
@@ -47,47 +76,99 @@
           </ibox-title>
 
           <ibox-content>
-
             <row style="grid-template-columns: 1fr">
-              <ew-select name="fattura_ente" label="Fattura emessa a" value="$ctrl.model.fattura_ente" on-change="$ctrl.updateModel($event)"
-                  options="::$ctrl.lookup.Invoices.ente"></ew-select>
+              <ew-select
+                name="fattura_ente"
+                label="Fattura emessa a"
+                value="$ctrl.model.fattura_ente"
+                on-change="$ctrl.updateModel($event)"
+                options="::$ctrl.lookup.Invoices.ente"
+              ></ew-select>
             </row>
 
             <section ng-if="$ctrl.model.fattura_ente">
               <row style="grid-template-columns: 1fr 140px 160px 120px">
-                <ew-text name="fattura_ragione_sociale" label="Intestazione (Ragione sociale / nome cognome)"
-                  value="$ctrl.model.fattura_ragione_sociale" on-change="$ctrl.updateModel($event)"></ew-text>
-                <ew-input-cleave name="fattura_partita_iva" label="Partita IVA" value="$ctrl.model.fattura_partita_iva"
-                  on-change="$ctrl.updateModel($event)" options="{ blocks: [11], numericOnly: true }"></ew-input-cleave>
-                <ew-input-cleave name="fattura_codice_fiscale" label="Codice fiscale"
-                  value="$ctrl.model.fattura_codice_fiscale" on-change="$ctrl.updateModel($event)"
-                  options="{ blocks: [16], uppercase: true }"></ew-input-cleave>
-                <ew-select name="tipo_documento_fiscale" label="Tipo doc. fiscale"
-                  value="$ctrl.model.tipo_documento_fiscale" on-change="$ctrl.updateModel($event)"
-                  options="::$ctrl.lookup.Camps.tipo_documento_fiscale"></ew-select>
+                <ew-text
+                  name="fattura_ragione_sociale"
+                  label="Intestazione (Ragione sociale / nome cognome)"
+                  value="$ctrl.model.fattura_ragione_sociale"
+                  on-change="$ctrl.updateModel($event)"
+                ></ew-text>
+                <ew-input-cleave
+                  name="fattura_partita_iva"
+                  label="Partita IVA"
+                  value="$ctrl.model.fattura_partita_iva"
+                  on-change="$ctrl.updateModel($event)"
+                  options="{ blocks: [11], numericOnly: true }"
+                ></ew-input-cleave>
+                <ew-input-cleave
+                  name="fattura_codice_fiscale"
+                  label="Codice fiscale"
+                  value="$ctrl.model.fattura_codice_fiscale"
+                  on-change="$ctrl.updateModel($event)"
+                  options="{ blocks: [16], uppercase: true }"
+                ></ew-input-cleave>
+                <ew-select
+                  name="tipo_documento_fiscale"
+                  label="Tipo doc. fiscale"
+                  value="$ctrl.model.tipo_documento_fiscale"
+                  on-change="$ctrl.updateModel($event)"
+                  options="::$ctrl.lookup.Camps.tipo_documento_fiscale"
+                ></ew-select>
               </row>
 
               <row style="grid-template-columns: 1fr 180px 120px 120px 90px">
-                <ew-text name="fattura_indirizzo" label="Indirizzo" value="$ctrl.model.fattura_indirizzo"
-                  on-change="$ctrl.updateModel($event)"></ew-text>
-                <ew-text name="fattura_citta" label="Città" value="$ctrl.model.fattura_citta"
-                  on-change="$ctrl.updateModel($event)"></ew-text>
-                <ew-select name="fattura_nazione" label="Nazione" value="$ctrl.model.fattura_nazione"
-                  on-change="$ctrl.updateModel($event)" options="::$ctrl.lookup.Countries.list"></ew-select>
-                <ew-text name="fattura_provincia" label="Provincia" value="$ctrl.model.fattura_provincia"
-                  on-change="$ctrl.updateModel($event)"></ew-text>
-                <ew-text name="fattura_cap" label="CAP" value="$ctrl.model.fattura_cap"
-                  on-change="$ctrl.updateModel($event)"></ew-text>
+                <ew-text
+                  name="fattura_indirizzo"
+                  label="Indirizzo"
+                  value="$ctrl.model.fattura_indirizzo"
+                  on-change="$ctrl.updateModel($event)"
+                ></ew-text>
+                <ew-text
+                  name="fattura_citta"
+                  label="Città"
+                  value="$ctrl.model.fattura_citta"
+                  on-change="$ctrl.updateModel($event)"
+                ></ew-text>
+                <ew-select
+                  name="fattura_nazione"
+                  label="Nazione"
+                  value="$ctrl.model.fattura_nazione"
+                  on-change="$ctrl.updateModel($event)"
+                  options="::$ctrl.lookup.Countries.list"
+                ></ew-select>
+                <ew-text
+                  name="fattura_provincia"
+                  label="Provincia"
+                  value="$ctrl.model.fattura_provincia"
+                  on-change="$ctrl.updateModel($event)"
+                ></ew-text>
+                <ew-text
+                  name="fattura_cap"
+                  label="CAP"
+                  value="$ctrl.model.fattura_cap"
+                  on-change="$ctrl.updateModel($event)"
+                ></ew-text>
               </row>
-              
-              <row style="grid-template-columns: 1fr 180px 120px 120px 90px" ng-if="$ctrl.model.fattura_nazione === 'ITA' && !['PRI', 'ENT'].includes($ctrl.model.fattura_ente)">
-                <ew-text name="fattura_sdi" label="SDI" value="$ctrl.model.fattura_sdi"
-                  on-change="$ctrl.updateModel($event)"></ew-text>
-                <ew-text name="fattura_pec" label="PEC" value="$ctrl.model.fattura_pec"
-                  on-change="$ctrl.updateModel($event)"></ew-text>
+
+              <row
+                style="grid-template-columns: 1fr 180px 120px 120px 90px"
+                ng-if="$ctrl.model.fattura_nazione === 'ITA' && !['PRI', 'ENT'].includes($ctrl.model.fattura_ente)"
+              >
+                <ew-text
+                  name="fattura_sdi"
+                  label="SDI"
+                  value="$ctrl.model.fattura_sdi"
+                  on-change="$ctrl.updateModel($event)"
+                ></ew-text>
+                <ew-text
+                  name="fattura_pec"
+                  label="PEC"
+                  value="$ctrl.model.fattura_pec"
+                  on-change="$ctrl.updateModel($event)"
+                ></ew-text>
               </row>
             </section>
-
           </ibox-content>
         </ew-ibox>
       </div>
@@ -98,9 +179,14 @@
             <h5>Capogruppo</h5>
           </ibox-title>
           <ibox-content>
-            <ew-ui-select name="capogruppo_id" label="Capogruppo" on-change="$ctrl.updateCapogruppo($event)"
-              options="::$ctrl.lookup.Guests.capigruppo" placeholder="Cerca capogruppo..."
-              value="$ctrl.model.capogruppo_id">
+            <ew-ui-select
+              name="capogruppo_id"
+              label="Capogruppo"
+              on-change="$ctrl.updateCapogruppo($event)"
+              options="::$ctrl.lookup.Guests.capigruppo"
+              placeholder="Cerca capogruppo..."
+              value="$ctrl.model.capogruppo_id"
+            >
             </ew-ui-select>
           </ibox-content>
         </ew-ibox>
@@ -111,54 +197,93 @@
           </ibox-title>
           <ibox-content>
             <section class="input--inline low-impact" id="contatori">
-              <row style="grid-template-columns: 1fr 100px 100px; margin-bottom: 8px">
+              <row
+                style="grid-template-columns: 1fr 100px 100px; margin-bottom: 8px"
+              >
                 <b></b>
                 <b class="text-center">Ingresso</b>
                 <b class="text-center">Uscita</b>
               </row>
 
-              <row style="grid-template-columns: 1fr 100px 100px" ng-repeat="c in $ctrl.lookup.Camps.contatori track by c.value">
+              <row
+                style="grid-template-columns: 1fr 100px 100px"
+                ng-repeat="c in $ctrl.lookup.Camps.contatori track by c.value"
+              >
                 <label>{{ c.name }}</label>
-                <ew-numeric name="contatori.{{ c.value }}.ingresso" value="$ctrl.model.contatori[c.value].ingresso" on-change="$ctrl.updateModel($event)"></ew-numeric>
-                <ew-numeric name="contatori.{{ c.value }}.uscita" value="$ctrl.model.contatori[c.value].uscita" on-change="$ctrl.updateModel($event)"></ew-numeric>
+                <ew-numeric
+                  name="contatori.{{ c.value }}.ingresso"
+                  value="$ctrl.model.contatori[c.value].ingresso"
+                  on-change="$ctrl.updateModel($event)"
+                ></ew-numeric>
+                <ew-numeric
+                  name="contatori.{{ c.value }}.uscita"
+                  value="$ctrl.model.contatori[c.value].uscita"
+                  on-change="$ctrl.updateModel($event)"
+                ></ew-numeric>
               </row>
-              
-              <hr>
+
+              <hr />
               <row style="grid-template-columns: 1fr 100px">
                 <label>Lenzuola singole</label>
-                <ew-numeric name="lenzuola_singole" value="$ctrl.model.lenzuola_singole" on-change="$ctrl.updateModel($event)"></ew-numeric>
+                <ew-numeric
+                  name="lenzuola_singole"
+                  value="$ctrl.model.lenzuola_singole"
+                  on-change="$ctrl.updateModel($event)"
+                ></ew-numeric>
               </row>
               <row style="grid-template-columns: 1fr 100px">
                 <label>Lenzuola doppie</label>
-                <ew-numeric name="lenzuola_doppie" value="$ctrl.model.lenzuola_doppie" on-change="$ctrl.updateModel($event)"></ew-numeric>
+                <ew-numeric
+                  name="lenzuola_doppie"
+                  value="$ctrl.model.lenzuola_doppie"
+                  on-change="$ctrl.updateModel($event)"
+                ></ew-numeric>
               </row>
               <row style="grid-template-columns: 1fr 100px">
                 <label>Asciugamani</label>
-                <ew-numeric name="asciugamani" value="$ctrl.model.asciugamani" on-change="$ctrl.updateModel($event)"></ew-numeric>
+                <ew-numeric
+                  name="asciugamani"
+                  value="$ctrl.model.asciugamani"
+                  on-change="$ctrl.updateModel($event)"
+                ></ew-numeric>
               </row>
 
               <div ng-if="$ctrl.isAuthorized('ipotesiSpesa')">
-                <hr>
-                <ew-money name="ipotesi_spesa" label="Ipotesi di Spesa" value="$ctrl.model.ipotesi_spesa"
-                  on-change="$ctrl.updateModel($event)">
+                <hr />
+                <ew-money
+                  name="ipotesi_spesa"
+                  label="Ipotesi di Spesa"
+                  value="$ctrl.model.ipotesi_spesa"
+                  on-change="$ctrl.updateModel($event)"
+                >
                 </ew-money>
 
-                <upload-edit-row action="{{ $ctrl.action }}" on-reload-form-data="$ctrl.reloadFormData()"
-                  on-upload-file="$ctrl.onUploadFile($event)" required="false" upload="$ctrl.model.upload">
+                <upload-edit-row
+                  action="{{ $ctrl.action }}"
+                  on-reload-form-data="$ctrl.reloadFormData()"
+                  on-upload-file="$ctrl.onUploadFile($event)"
+                  required="false"
+                  upload="$ctrl.model.upload"
+                >
                 </upload-edit-row>
               </div>
-
             </section>
           </ibox-content>
         </ew-ibox>
       </div>
-
     </row>
 
-    <ew-save-button form-dirty="$ctrl.form.$dirty" alt-save="$ctrl.saveAndStay()">
+    <ew-save-button
+      form-dirty="$ctrl.form.$dirty"
+      alt-save="$ctrl.saveAndStay()"
+    >
       <buttons>
-        <a class="btn btn-default btn-sm" ui-sref="camps.view({ id: $ctrl.model.id })" uib-tooltip="Dettagli campo"
-          ng-if="$ctrl.isEdit()">
+        <a
+          class="btn btn-default btn-sm"
+          ui-sref="camps.view({ id: $ctrl.model.id })"
+          uib-tooltip="Dettagli campo"
+          ng-if="$ctrl.isEdit()"
+        >
           <i class="far fa-fw fa-info"></i> DETTAGLI
         </a>
       </buttons>

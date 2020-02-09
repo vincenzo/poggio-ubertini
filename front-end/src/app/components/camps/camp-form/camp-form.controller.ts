@@ -123,8 +123,8 @@ export class CampFormComponentController {
   updateCapogruppo(event) {
     return this.updateModel({
       name: event.name,
-      value: event.value.id,
-    })
+      value: event.value.value,
+    });
   }
 
   /**

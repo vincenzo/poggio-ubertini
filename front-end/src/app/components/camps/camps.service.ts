@@ -45,6 +45,14 @@ export class CampsService extends EwCommonService {
       { name: "consuntivo", type: "string" },
       { name: "ipotesi_spesa", type: "number" },
       {
+        name: "capogruppo",
+        type: "object",
+        fields: [
+          { name: "id", type: "number" },
+          { name: "nome_cognome", type: "string" }
+        ]
+      },
+      {
         name: "upload_ipotesi_spesa",
         type: "object",
         fields: [

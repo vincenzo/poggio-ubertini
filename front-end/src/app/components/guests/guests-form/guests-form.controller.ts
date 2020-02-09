@@ -1,14 +1,14 @@
-import { getLookup } from './../../../vendors/ew-angularjs-utils/components/lookup/lookup.actions';
-import { CampsService } from './../../camps/camps.service';
-import { EwCommonFormController } from '../../../vendors/ew-angularjs-utils/common/common-form-controller';
+import { getLookup } from "./../../../vendors/ew-angularjs-utils/components/lookup/lookup.actions";
+import { CampsService } from "./../../camps/camps.service";
+import { EwCommonFormController } from "../../../vendors/ew-angularjs-utils/common/common-form-controller";
+import { ModalService } from "./../../../vendors/ew-angularjs-utils/components/modal/modal.service";
 
-import { ReservationsService } from './../../reservations/reservations.service';
-import { LookupService } from './../../../vendors/ew-angularjs-utils/components/lookup/lookup.service';
-import { CitiesService } from './../../cities/cities.service';
-import { GuestsService } from '../guests.service';
+import { ReservationsService } from "./../../reservations/reservations.service";
+import { LookupService } from "./../../../vendors/ew-angularjs-utils/components/lookup/lookup.service";
+import { CitiesService } from "./../../cities/cities.service";
+import { GuestsService } from "../guests.service";
 
 export class GuestsFormComponentController extends EwCommonFormController {
-
   getLookup: Function;
   getCampFormData: Function;
   saveReservation: Function;
@@ -16,22 +16,23 @@ export class GuestsFormComponentController extends EwCommonFormController {
   constructor(
     $ngRedux,
     private GuestsService: GuestsService,
+    public ModalService: ModalService,
     private CampsService: CampsService,
     private ReservationsService: ReservationsService,
     private CitiesService: CitiesService,
-    private LookupService: LookupService,
+    private LookupService: LookupService
   ) {
-    'ngInject';
+    "ngInject";
     super($ngRedux, GuestsService);
     this.config = {
-      deleteSuccess: 'Ospite cancellato correttamente',
-      formId: '#guestsForm',
+      deleteSuccess: "Ospite cancellato correttamente",
+      formId: "#guestsForm",
       isModal: true,
-      parentIdParam: 'id',
-      parentRoute: 'guests',
-      saveError: 'Sono presenti degli errori. Controlla e riprova.',
-      saveSuccess: 'Ospite salvato.',
-      titleEntity: 'ospite',
+      parentIdParam: "id",
+      parentRoute: "guests",
+      saveError: "Sono presenti degli errori. Controlla e riprova.",
+      saveSuccess: "Ospite salvato.",
+      titleEntity: "ospite"
     };
   }
 
@@ -42,97 +43,105 @@ export class GuestsFormComponentController extends EwCommonFormController {
 
     return this.saveReservation({
       camp_id: this.parentId,
-      guest_id: response.id,
+      guest_id: response.id
     })
       .then(() => this.getFormData(this.model.id))
       .then(() => this.getCampFormData(this.parentId))
-      .then(() => !stay ? this.stateGo('camps.view') : null)
-      ;
+      .then(() => (!stay ? this.stateGo("camps.view") : null));
   }
 
   afterSubmit() {
+    this.dismissModal();
     return this.getLookup();
   }
 
   getParentRoutes() {
-    return ['camps.view.guests.add', 'camps.view.guests.edit'];
+    return ["camps.view.guests.add", "camps.view.guests.edit"];
   }
 
   queryCity(event) {
-    return this.CitiesService.search(event.query)
-      // aggiungo a mano il valore cercato se nessun risultato presente
-      .then((res: any) => (res.data.length ? res.data : [{
-        'id': null,
-        'codice': null,
-        'comune': event.query,
-        'datafineval': null,
-        'provincia': '',
-      }]));
+    return (
+      this.CitiesService.search(event.query)
+        // aggiungo a mano il valore cercato se nessun risultato presente
+        .then((res: any) =>
+          res.data.length
+            ? res.data
+            : [
+                {
+                  id: null,
+                  codice: null,
+                  comune: event.query,
+                  datafineval: null,
+                  provincia: ""
+                }
+              ]
+        )
+    );
   }
 
   selectCitta(event) {
     this.updateModel({
-      name: 'citta',
+      name: "citta",
       value: event.item.comune
     });
 
     if (event.item.id) {
       this.updateModel({
-        name: 'nazione',
-        value: 'ITALIA',
+        name: "nazione",
+        value: "ITALIA"
       });
       this.updateModel({
-        name: 'provincia',
+        name: "provincia",
         value: event.item.provincia
       });
       this.focusOnField(`${this.config.formId} #provincia`);
     }
 
     this.updateModel({
-      name: 'nazione',
-      value: null,
+      name: "nazione",
+      value: null
     });
     this.updateModel({
-      name: 'provincia',
-      value: ''
+      name: "provincia",
+      value: ""
     });
     this.focusOnField(`${this.config.formId} #se-nazione`);
   }
 
   selectCittaNascita(event) {
     this.updateModel({
-      name: 'citta_nascita',
+      name: "citta_nascita",
       value: event.item.comune
     });
 
     if (event.item.id) {
       this.updateModel({
-        name: 'nazione_nascita',
-        value: 'ITALIA',
+        name: "nazione_nascita",
+        value: "ITALIA"
       });
       this.updateModel({
-        name: 'provincia_nascita',
+        name: "provincia_nascita",
         value: event.item.provincia
       });
       this.focusOnField(`${this.config.formId} #provincia_nascita`);
     }
 
     this.updateModel({
-      name: 'nazione_nascita',
-      value: null,
+      name: "nazione_nascita",
+      value: null
     });
     this.updateModel({
-      name: 'provincia_nascita',
-      value: ''
+      name: "provincia_nascita",
+      value: ""
     });
     this.focusOnField(`${this.config.formId} #se-nazione_nascita`);
   }
 
   getMapDispatchToThisParams(dispatch) {
     return {
-      getCampFormData: (id) => dispatch(this.CampsService.getFormData(id)),
+      getCampFormData: id => dispatch(this.CampsService.getFormData(id)),
       getLookup: () => dispatch(this.LookupService.getLookup()),
-      saveReservation: model => dispatch(this.ReservationsService.save(model)),
+      saveReservation: model => dispatch(this.ReservationsService.save(model))
     };
   }
 
