@@ -6,7 +6,7 @@ import { ReservationsService } from "./../../reservations/reservations.service";
 import { UploadsService } from "../../../vendors/ew-angularjs-utils/components/uploads/uploads.service";
 
 export class CampViewComponentController extends EwCommonFormController {
-  getDisponibilita: (dataDa: string, dataA?: string) => Promise<any>;
+  getDisponibilitaCampo: (data: { camp_id: number, data_da: string, data_a: string }) => Promise<any>;
   uploadFile: Function;
 
   constructor(
@@ -32,6 +32,11 @@ export class CampViewComponentController extends EwCommonFormController {
     };
   }
 
+  $onInit() {
+    super.$onInit();
+    this.getAvailability();
+  }
+
   chiudi(id) {
     var answer = confirm("Confermi di voler chiudere il campo?");
     if (answer) {
@@ -49,8 +54,8 @@ export class CampViewComponentController extends EwCommonFormController {
 
   getMapDispatchToThisParams(dispatch) {
     return {
-      getDisponibilita: (dataDa, dataA?) =>
-        dispatch(this.RoomsService.getDisponibilita(dataDa, dataA)),
+      getDisponibilitaCampo: (data) =>
+        dispatch(this.RoomsService.getDisponibilita(data)),
       uploadFile: model => dispatch(this.UploadsService.upload(model))
     };
   }
@@ -60,11 +65,11 @@ export class CampViewComponentController extends EwCommonFormController {
   }
 
   getAvailability() {
-    if (!this.model.data_disponibilita) {
-      return;
-    }
-
-    return this.getDisponibilita(this.model.data_disponibilita);
+    return this.getDisponibilitaCampo({
+      camp_id: this.model.id,
+      data_da: moment(this.model.data_inizio).format('YYYY-MM-DD'),
+      data_a: moment(this.model.data_fine).format('YYYY-MM-DD'),
+    });
   }
 
   upload(file) {

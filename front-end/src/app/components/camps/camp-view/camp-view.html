@@ -275,27 +275,6 @@
         select="$ctrl.selectTab('camere')"
         title="Camere (ctrl+2)"
       >
-        <form name="$ctrl.form" novalidate>
-          <row style="grid-template-columns: 120px 180px">
-            <ew-datepicker
-              name="data_disponibilita"
-              label="Data inizio"
-              value="$ctrl.model.data_disponibilita"
-              on-change="$ctrl.updateModel($event)"
-            ></ew-datepicker>
-            <button
-              type="button"
-              class="btn btn-primary"
-              style="height: 32px; margin-top: 22px;"
-              ng-click="$ctrl.getAvailability()"
-              ng-disabled="!$ctrl.model.data_disponibilita"
-              ladda="$ctrl.camps.rooms.isLoading"
-            >
-              Mostra disponibilità
-            </button>
-          </row>
-        </form>
-
         <div class="rooms mar-top-1">
           <row style="grid-template-columns: repeat(9, 1fr)">
             <div class="room" ng-repeat="r in $ctrl.camps.rooms.list">
@@ -317,7 +296,7 @@
         select="$ctrl.selectTab('documenti')"
         title="Documenti (ctrl+3)"
       >
-        <camp-documents></camp-documents>        
+        <camp-documents></camp-documents>
       </uib-tab>
     </uib-tabset>
   </div>

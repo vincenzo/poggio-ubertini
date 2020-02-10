@@ -24,9 +24,9 @@ export class RoomsService extends EwCommonService {
     this.ignoreFieldsOnSave = ["created", "modified"];
   }
 
-  getDisponibilita = (dataDa: string, dataA?: string) => dispatch => {
+  getDisponibilita = (data) => dispatch => {
     return dispatch(
-      promiseAction("GET_DISPONIBILITA", this._getDisponibilita(dataDa, dataA))
+      promiseAction("GET_DISPONIBILITA", this._getDisponibilitaCampo(data))
     );
   };
 
