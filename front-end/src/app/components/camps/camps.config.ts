@@ -22,7 +22,7 @@ function camps() {
       },
       {
         label: 'Capogruppo',
-        field: 'capogruppo_id',
+        field: 'capogruppo.nome_cognome',
       },
       {
         label: 'Nome',

@@ -32,6 +32,9 @@ class CampsController extends AppController
     {
         $q = $this->Camps
             ->find('all')
+            ->contain(['Capogruppo' => function($q) {
+                return $q->select(['nome', 'cognome']);   
+            }])
             ;
 
         $this->filterPaginate($q);
@@ -119,6 +122,7 @@ class CampsController extends AppController
                 'Reservations.Guests',
                 'Capogruppo',
                 'UploadIpotesiSpesa',
+                'Documenti'
             ]);
     }
     

@@ -40,6 +40,12 @@ class CampsTable extends Table
             'foreignKey' => 'model_id'
         ]);
 
+        $this->hasMany('Documenti', [
+            'className' => 'Uploads',
+            'conditions' => ['categoria' => 'extra', 'model_name' => 'Camps'],
+            'foreignKey' => 'model_id'
+        ]);
+
         $this->addBehavior('Timestamp');
     }
 

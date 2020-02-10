@@ -78,7 +78,7 @@ export class NavController {
         },
         {
           title: 'Report',
-          icon: 'gears',
+          icon: 'file',
           state: 'reports',
         },
         // {
