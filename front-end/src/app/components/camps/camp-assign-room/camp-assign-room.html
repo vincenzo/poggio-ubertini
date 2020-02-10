@@ -1,5 +1,10 @@
 <h1>Assegna a stanze</h1>
 
+<form name="$ctrl.form" ng-submit="$ctrl.submit()" novalidate>
+  <ew-daterange-picker name="daterange" on-change="$ctrl.onDaterangeFilter($event)" value="$ctrl.daterange">
+  </ew-daterange-picker>
+</form>
+
 <row style="grid-template-columns: 200px 1fr">
   <section>
     <!-- <pre>{{ $ctrl.reservations | json }}</pre> -->

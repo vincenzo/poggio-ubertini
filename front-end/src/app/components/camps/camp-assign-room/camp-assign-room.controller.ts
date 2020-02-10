@@ -28,9 +28,10 @@ export class CampAssignRoomComponentController {
   }
 
   assegna(room) {
-
-    if (!Object.keys(this.checks).length) {
-      return this.ReservationsService.toaster.info("Seleziona almeno un ospite");
+    if (!Object.keys(this.checks).length) {
+      return this.ReservationsService.toaster.info(
+        "Seleziona almeno un ospite"
+      );
     }
 
     this.ModalService.close("assignRoomForm");
@@ -56,6 +57,10 @@ export class CampAssignRoomComponentController {
     this.countedChecks = Object.keys(this.checks).filter(
       key => this.checks[key]
     ).length;
+  }
+
+  onDaterangeFilter(event) {
+    console.log(event);
   }
 
   /**
