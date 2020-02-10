@@ -155,8 +155,8 @@
     </tbody>
   </table>
 
-  <section class="RIMUOVIQUESTOQUANDOPRONTO-print-only">
-    <p>Poggio Ubertini lì, DATA_DI_OGGI_FIXME</p>
+  <section class="print-only">
+    <p>Poggio Ubertini lì, {{ $ctrl.today | date:'dd/MM/yyyy' }}</p>
     <row style="grid-template-columns: 1fr 200px 1fr 200px 1fr">
       <span></span>
       <span style="display:inline-block; padding-bottom: 60px; border-bottom: 1px solid black">

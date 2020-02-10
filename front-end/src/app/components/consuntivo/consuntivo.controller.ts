@@ -3,6 +3,8 @@ import { ConsuntivoService } from "./consuntivo.service";
 import { EwCommonFormController } from "../../vendors/ew-angularjs-utils/common/common-form-controller";
 
 export class ConsuntivoComponentController extends EwCommonFormController {
+  today: Date;
+
   constructor($ngRedux, hotkeys, ConsuntivoService: ConsuntivoService) {
     "ngInject";
     super($ngRedux, ConsuntivoService);
@@ -17,6 +19,11 @@ export class ConsuntivoComponentController extends EwCommonFormController {
       title: "Consuntivo",
       titleEntity: "consuntivo"
     };
+  }
+
+  $onInit() {
+    super.$onInit();
+    this.today = new Date();
   }
 
   getName(value) {
