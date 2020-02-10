@@ -68,7 +68,7 @@
         <td class="w_xs text-center">
           <input type="checkbox" ng-model="r.selected" />
         </td>
-        <td>
+        <td class="w_sm nowrap">
           <i
             ng-if="r.guest.capogruppo"
             class="far fa-fw fa-user-shield"
@@ -97,7 +97,7 @@
               Check-in
             </a>
           </span>
-          <span ng-if="r.data_in"
+          <span ng-if="r.data_in" class="nowrap"
             >{{ r.data_in | date: "dd/MM/yyyy HH:mm" }}</span
           >
         </td>
@@ -113,12 +113,11 @@
             </a>
             <span ng-if="!r.data_in">Check-out</span>
           </span>
-          <span ng-if="r.data_out"
+          <span ng-if="r.data_out" class="nowrap"
             >{{ r.data_out | date: "dd/MM/yyyy HH:mm" }}</span
           >
         </td>
-        <!-- TODO: da cambiare non appena mi includi room nella risposta back -->
-        <td>{{ r.room_id ? r.room.display_name : '' }}</td>
+        <td>{{ r.room.display_name }}</td>
         <td class="actions">
           <a
             ui-sref="camps.view.guests.edit({ guestId: r.guest_id })"
