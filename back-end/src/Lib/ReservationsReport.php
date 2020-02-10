@@ -100,6 +100,7 @@ trait ReservationsReport {
 			'Rooms.numero', 'Rooms.structure_id', 'Structures.nome',
 			'Guests.nome', 'Guests.cognome', 'Guests.documento_italiano', 'Guests.documento_tipo', 'Guests.documento_numero', 'Guests.documento_data_rilascio', 'Guests.documento_data_scadenza', 'Guests.documento_rilasciato_ente', 'Guests.documento_rilasciato_comune', 'Guests.data_nascita', 'Guests.citta_nascita', 'Guests.nazione_nascita', 'Guests.provincia_nascita', 'Guests.cittadinanza_italiana', 'Guests.indirizzo', 'Guests.citta', 'Guests.nazione', 'Guests.cap', 'Guests.provincia',
 		])
+		->whereNotNull('data_in')
 		->where([
 			['OR' => [
 				'data_in >=' => $this->rptDa,

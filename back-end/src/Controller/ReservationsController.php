@@ -114,8 +114,8 @@ class ReservationsController extends AppController
         if(empty($params['room_id']))
             throw new WarningException("Sotto params manca 'room_id'");
 
-        $r->data_previsto_in = $this->request->getData('data_previsto_in', $r->camp->data_inizio);
-        $r->data_previsto_out = $this->request->getData('data_previsto_out', $r->camp->data_fine);
+        $r->data_previsto_in = $params['data_previsto_in'] ?? $r->camp->data_inizio;
+        $r->data_previsto_out = $params['data_previsto_out'] ?? $r->camp->data_fine;
         $r->room_id = $params['room_id'];
         return $this->Reservations->save($r);
     }
