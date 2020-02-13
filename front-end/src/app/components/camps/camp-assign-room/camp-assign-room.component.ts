@@ -4,7 +4,7 @@ import './camp-assign-room.scss';
 
 export const CampAssignRoomComponent = {
   bindings: {
-    reservations: '<',
+    camp: '<',
     rooms: '<',
   },
   controller: CampAssignRoomComponentController,

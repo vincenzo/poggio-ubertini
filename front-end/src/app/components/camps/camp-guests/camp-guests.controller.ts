@@ -87,10 +87,10 @@ export class CampGuestsComponentController extends EwCommonFormController {
         className: "ngdialog-large ngdialog-tall",
         // preCloseCallback: value =>
         //   this.ModalService.preCloseCallbackDefault(value, "camps.view"),
-        template: `<camp-assign-room reservations="$ctrl.reservations" rooms="$ctrl.rooms.data"></camp-assign-room>`,
+        template: `<camp-assign-room camp="$ctrl.camp" rooms="$ctrl.rooms.data"></camp-assign-room>`,
         controller: () => {
           return {
-            reservations: this.model.reservations,
+            camp: this.model,
             rooms: rooms
           };
         }
