@@ -7,7 +7,7 @@
   </row>
 </form>
 
-<row style="grid-template-columns: 200px 1fr">
+<row style="grid-template-columns: 340px 1fr">
   <section>
     <!-- <pre>{{ $ctrl.camp.reservations | json }}</pre> -->
     <h3>Seleziona ospiti</h3>
@@ -19,13 +19,13 @@
           ng-model="res.check"
           ng-change="$ctrl.countCheck(res.id, res.check)"
         />
-        {{ res.guest.nome }} {{ res.guest.cognome }}
+        {{ res.guest.nome }} {{ res.guest.cognome }} | {{ res.data_previsto_in | date:'dd/MM/yyyy' }} - {{ res.data_previsto_out | date:'dd/MM/yyyy' }}
       </label>
     </div>
   </section>
   <section id="rooms">
     <!-- <pre>{{ $ctrl.rooms | json }}</pre> -->
-    <row style="grid-template-columns: repeat(10, 70px)">
+    <row style="grid-template-columns: repeat(8, 70px)">
       <button
         ng-repeat="room in $ctrl.rooms track by room.id"
         class="room"

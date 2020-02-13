@@ -86,6 +86,8 @@ export class CampsService extends EwCommonService {
           { name: "room_id", type: "number" },
           { name: "data_in", type: "date" },
           { name: "data_out", type: "date" },
+          { name: "data_previsto_in", type: "date" },
+          { name: "data_previsto_out", type: "date" },
           { name: "flag_in", type: "boolean" },
           { name: "flag_out", type: "boolean" },
           { name: "tipo_tariffa", type: "string" },
