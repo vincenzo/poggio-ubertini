@@ -55,6 +55,8 @@
         >
           Cognome
         </th>
+        <th class="w_md">Prev. arrivo</th>
+        <th class="w_md">Prev. partenza</th>
         <th class="w_md">Arrivo</th>
         <th class="w_md">Partenza</th>
         <th class="w_md">Stanza</th>
@@ -87,6 +89,8 @@
         </td>
         <td>{{ r.guest.nome }}</td>
         <td>{{ r.guest.cognome }}</td>
+        <td>{{ r.data_previsto_in | date: "dd/MM/yyyy HH:mm" }}</td>
+        <td>{{ r.data_previsto_out | date: "dd/MM/yyyy HH:mm" }}</td>
         <td>
           <span ng-if="!r.data_in">
             <a

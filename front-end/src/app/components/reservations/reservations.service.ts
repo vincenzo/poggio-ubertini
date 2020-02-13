@@ -11,6 +11,8 @@ type TMultiActionsParams =
     }
   | {
       room_id: number;
+      data_previsto_in: string;
+      data_previsto_out: string;
     };
 
 export class ReservationsService extends EwCommonService {

@@ -48,13 +48,18 @@ export class CampAssignRoomComponentController {
     }
 
     this.ModalService.close("assignRoomForm");
+    
+    const [dataDa, dataA] = this.daterange.split(" | ");
+
     return this.$ngRedux
       .dispatch(
         this.ReservationsService.multiActions(
           "assignRoom",
           Object.keys(this.checks).map(key => Number(key)),
           {
-            room_id: room.id
+            room_id: room.id,
+            data_previsto_in: dataDa,
+            data_previsto_out: dataA,
           }
         )
       )
@@ -74,6 +79,8 @@ export class CampAssignRoomComponentController {
 
   onDaterangeFilter(event) {
     console.log(event);
+
+    this.daterange = event.value;
 
     const [dataDa, dataA] = event.value.split(" | ");
 
