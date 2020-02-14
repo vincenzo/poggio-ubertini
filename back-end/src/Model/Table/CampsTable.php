@@ -72,6 +72,11 @@ class CampsTable extends Table
                 $entity->n_scheda = $this->getIncremental(['YEAR(created)' => date('Y')], 'n_scheda');
             }
         }
+        // Se ho almeno un iscritto non capogruppo il campo è effettivo.
+        // Do per scontato che il primo aggiunto sia sempre il capogruppo
+        if(!empty($entity->guests) && count($entity->guests) > 1) {
+            $entity->effettivo = true;
+        }
         return true;
     }
 

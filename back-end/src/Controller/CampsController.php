@@ -14,7 +14,7 @@ class CampsController extends AppController
         'limit' => 25,
         'maxLimit' => 250,
         'fields' => [
-            'id', 'n_scheda', 'data_scheda', 'capogruppo_id', 'nome', 'data_inizio', 'data_fine', 'tipo', 'chiuso', 'created',
+            'id', 'n_scheda', 'data_scheda', 'capogruppo_id', 'nome', 'data_inizio', 'data_fine', 'tipo', 'effettivo', 'chiuso', 'created',
         ],
         'sortWhitelist' => [
             'id',
@@ -24,6 +24,7 @@ class CampsController extends AppController
 
     public $filterWhitelist = [
         'Camps' => [
+            'effettivo' => 'boolean',
             'chiuso' => 'boolean',
         ],
     ];
@@ -119,7 +120,7 @@ class CampsController extends AppController
                 'Reservations.Rooms',
                 'Reservations.Rooms.Structures',
                 'Reservations',
-                'Reservations.Guests',
+                'Reservations.Guests' => function($q) { return $q->order(['capogruppo' => 'DESC']); },
                 'Capogruppo',
                 'UploadIpotesiSpesa',
                 'Documenti'

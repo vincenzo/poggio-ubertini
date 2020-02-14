@@ -45,7 +45,7 @@
               ></ew-readonly-input>
             </row>
 
-            <row style="grid-template-columns: 120px 120px 170px">
+            <row style="grid-template-columns: 120px 120px 170px 170px">
               <ew-readonly-input
                 label="Data inizio"
                 value="$ctrl.model.data_inizio"
@@ -59,6 +59,10 @@
               <ew-readonly-input
                 label="Tipo"
                 value="$ctrl.model.tipo"
+              ></ew-readonly-input>
+              <ew-readonly-input
+                label="Prenotaz. / effettivo"
+                value="$ctrl.model.effettivo ? 'EFFETTIVO' : 'PRENOTAZIONE'"
               ></ew-readonly-input>
             </row>
 
