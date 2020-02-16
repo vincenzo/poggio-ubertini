@@ -4,8 +4,8 @@ import "./camp-checkinout.scss";
 
 export const CampCheckinoutComponent = {
   bindings: {
-    reservations: "<",
-    title: "@"
+    ids: "<",
+    type: "@"
   },
   controller: CampCheckinoutComponentController,
   templateUrl: require("./camp-checkinout.html")

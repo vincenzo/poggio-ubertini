@@ -142,13 +142,13 @@ export class CampGuestsComponentController extends EwCommonFormController {
 
     return this.ModalService.open({
       name: "checkInOutForm",
-      className: "ngdialog-small ngdialog-tall",
+      className: "ngdialog-xsmall ngdialog-tall",
       // preCloseCallback: value =>
       //   this.ModalService.preCloseCallbackDefault(value, "camps.view"),
-      template: `<camp-checkinout reservations="$ctrl.reservations" title="Check In"></camp-checkinout>`,
+      template: `<camp-checkinout ids="$ctrl.ids" type="in"></camp-checkinout>`,
       controller: () => {
         return {
-          reservations: ids
+          ids: ids
         };
       }
     });
@@ -189,13 +189,13 @@ export class CampGuestsComponentController extends EwCommonFormController {
 
     return this.ModalService.open({
       name: "checkInOutForm",
-      className: "ngdialog-small ngdialog-tall",
+      className: "ngdialog-xsmall ngdialog-tall",
       // preCloseCallback: value =>
       //   this.ModalService.preCloseCallbackDefault(value, "camps.view"),
-      template: `<camp-checkinout reservations="$ctrl.reservations" title="Check Out"></camp-checkinout>`,
+      template: `<camp-checkinout ids="$ctrl.ids" type="out"></camp-checkinout>`,
       controller: () => {
         return {
-          reservations: ids
+          ids: ids
         };
       }
     });
