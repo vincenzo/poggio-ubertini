@@ -35,6 +35,7 @@ export class CampsService extends EwCommonService {
       { name: "fattura_pec", type: "string" },
       { name: "tipo_documento_fiscale", type: "string" },
       { name: "note", type: "string" },
+      { name: "effettivo", type: "boolean" },
       { name: "chiuso", type: "boolean" },
       { name: "created", type: "date" },
       { name: "modified", type: "date" },

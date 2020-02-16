@@ -46,7 +46,7 @@
               ></ew-text>
             </row>
 
-            <row style="grid-template-columns: 120px 120px 170px">
+            <row style="grid-template-columns: 120px 120px 170px 150px">
               <ew-datepicker
                 name="data_inizio"
                 label="Data inizio"
@@ -66,6 +66,7 @@
                 on-change="$ctrl.updateModel($event)"
                 options="::$ctrl.lookup.Camps.tipo"
               ></ew-select>
+              <ew-checkbox name="effettivo" label="Campo Effettivo" class="single-checkbox" value="$ctrl.model.effettivo" on-change="$ctrl.updateModel($event)"></ew-checkbox>
             </row>
           </ibox-content>
         </ew-ibox>
