@@ -1,32 +1,63 @@
-<ew-page-header add-button="{ action: 'camps.add' }" on-action="$ctrl.onAction(action, value)" header-title="Campi">
-
+<ew-page-header
+  add-button="{ action: 'camps.add' }"
+  on-action="$ctrl.onAction(action, value)"
+  header-title="Campi"
+>
   <right-side>
-    <ew-filters-buttons filters="$ctrl.filters" on-refresh="$ctrl.get()" on-reset="$ctrl.resetFiltersAndUpdate()"
-      open-filters-panel="$ctrl.openFiltersPanel('Camps.id')">
+    <ew-filters-buttons
+      filters="$ctrl.filters"
+      on-refresh="$ctrl.get()"
+      on-reset="$ctrl.resetFiltersAndUpdate()"
+      open-filters-panel="$ctrl.openFiltersPanel('Camps.id')"
+    >
     </ew-filters-buttons>
   </right-side>
 
   <under-title>
-    <div class="col-sm-5">
-      <ew-filters-radio buttons="$ctrl.config.rapidFilters.stateButtons" model="$ctrl.filters['Camps.chiuso'].value"
-        on-change="$ctrl.addFilterOnFields([{ name: 'Camps.chiuso', value: model }])">
+    <row style="grid-template-columns: 230px 1fr">
+      <ew-filters-radio
+        buttons="$ctrl.config.rapidFilters.effectiveButtons"
+        model="$ctrl.filters['Camps.effettivo'].value"
+        on-change="$ctrl.addFilterOnFields([{ name: 'Camps.effettivo', value: model }])"
+      >
       </ew-filters-radio>
-    </div>
-    <div class="col-sm-2 pull-right text-right">
-      <!-- <ew-export-table></ew-export-table> -->
-    </div>
+      <ew-filters-radio
+        ng-if="$ctrl.filters['Camps.effettivo'].value === '1'"
+        buttons="$ctrl.config.rapidFilters.stateButtons"
+        model="$ctrl.filters['Camps.chiuso'].value"
+        on-change="$ctrl.addFilterOnFields([{ name: 'Camps.chiuso', value: model }])"
+      >
+      </ew-filters-radio>
+    </row>
   </under-title>
 </ew-page-header>
 
-<ew-table-list config="$ctrl.config" data="$ctrl.list" extra="$ctrl.extra" filters="$ctrl.filters" sort="$ctrl.sort"
-  on-action="$ctrl.onAction(action, value, $event)" on-sort="$ctrl.onSort(field)"
-  open-filters-panel="$ctrl.openFiltersPanel(field)" row-clickable="true">
+<ew-table-list
+  config="$ctrl.config"
+  data="$ctrl.list"
+  extra="$ctrl.extra"
+  filters="$ctrl.filters"
+  sort="$ctrl.sort"
+  on-action="$ctrl.onAction(action, value, $event)"
+  on-sort="$ctrl.onSort(field)"
+  open-filters-panel="$ctrl.openFiltersPanel(field)"
+  row-clickable="true"
+>
 </ew-table-list>
 
-<ew-pagination change-page="$ctrl.changePage(page)" change-pagination-limit="$ctrl.changePaginationLimit($event)"
-  pagination="$ctrl.pagination">
+<ew-pagination
+  change-page="$ctrl.changePage(page)"
+  change-pagination-limit="$ctrl.changePaginationLimit($event)"
+  pagination="$ctrl.pagination"
+>
 </ew-pagination>
 
-<camps-filters field="{{ $ctrl.filterPanel.focusedField }}" filters="$ctrl.filters" is-open="$ctrl.filterPanel.isOpen"
-  on-close="$ctrl.closeFiltersPanel()" on-reset="$ctrl.resetFiltersAndUpdate()" on-submit="$ctrl.filter($event)">
+<camps-filters
+  field="{{ $ctrl.filterPanel.focusedField }}"
+  filters="$ctrl.filters"
+  is-open="$ctrl.filterPanel.isOpen"
+  on-close="$ctrl.closeFiltersPanel()"
+  on-reset="$ctrl.resetFiltersAndUpdate()"
+  on-submit="$ctrl.filter($event)"
+>
 </camps-filters>
