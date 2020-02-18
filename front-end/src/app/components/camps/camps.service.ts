@@ -2,7 +2,7 @@ import { campsConfig } from "./camps.config";
 import { EwServerService } from "../../vendors/ew-angularjs-utils/components/server/server.service";
 import { EwCommonService } from "../../vendors/ew-angularjs-utils/common/common-service";
 
-import { promiseAction } from "./camps.actions";
+import { filterGuestsByRoom, promiseAction } from "./camps.actions";
 
 export class CampsService extends EwCommonService {
   apiPath: string;
@@ -174,6 +174,10 @@ export class CampsService extends EwCommonService {
     return dispatch(
       promiseAction("ADD_MANY_GUESTS", this._addManyGuests(data))
     );
+  };
+
+  filterGuestsByRoom = roomId => dispatch => {
+    return dispatch(filterGuestsByRoom(roomId));
   };
 
   /**

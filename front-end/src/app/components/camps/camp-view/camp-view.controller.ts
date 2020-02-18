@@ -6,8 +6,13 @@ import { ReservationsService } from "./../../reservations/reservations.service";
 import { UploadsService } from "../../../vendors/ew-angularjs-utils/components/uploads/uploads.service";
 
 export class CampViewComponentController extends EwCommonFormController {
-  getDisponibilitaCampo: (data: { camp_id: number, data_da: string, data_a: string }) => Promise<any>;
+  getDisponibilitaCampo: (data: {
+    camp_id: number;
+    data_da: string;
+    data_a: string;
+  }) => Promise<any>;
   uploadFile: Function;
+  _filterGuestsByRoom: Function;
 
   constructor(
     $ngRedux,
@@ -52,10 +57,17 @@ export class CampViewComponentController extends EwCommonFormController {
     return this.stateGo("consuntivo", { id });
   }
 
+  filterGuestsByRoom(room) {
+    this.activeTab = 0;
+    this._filterGuestsByRoom(room.id);
+  }
+
   getMapDispatchToThisParams(dispatch) {
     return {
-      getDisponibilitaCampo: (data) =>
+      getDisponibilitaCampo: data =>
         dispatch(this.RoomsService.getDisponibilita(data)),
+      _filterGuestsByRoom: roomId =>
+        dispatch(this.service.filterGuestsByRoom(roomId)),
       uploadFile: model => dispatch(this.UploadsService.upload(model))
     };
   }
@@ -67,8 +79,8 @@ export class CampViewComponentController extends EwCommonFormController {
   getAvailability() {
     return this.getDisponibilitaCampo({
       camp_id: this.model.id,
-      data_da: moment(this.model.data_inizio).format('YYYY-MM-DD'),
-      data_a: moment(this.model.data_fine).format('YYYY-MM-DD'),
+      data_da: moment(this.model.data_inizio).format("YYYY-MM-DD"),
+      data_a: moment(this.model.data_fine).format("YYYY-MM-DD")
     });
   }
 

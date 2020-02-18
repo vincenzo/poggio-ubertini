@@ -13,6 +13,7 @@ import { fromJS } from "immutable";
 const constants = CAMPS;
 
 const INITIAL_STATE = fromJS({
+  filterGuestsByRoom: null,
   filters: {
     "Camps.id": {
       active: false,
@@ -55,6 +56,10 @@ const INITIAL_STATE = fromJS({
   }
 });
 
+function filterGuestsByRoom(state, action) {
+  return state.set("filterGuestsByRoom", action.payload.roomId);
+}
+
 function multiActionsFulfilled(state, action) {
   return state.set("isLoading", false);
 }
@@ -89,6 +94,8 @@ function getDisponibilitaRejected(state, action) {
 }
 
 const customActions = {
+  [CAMPS.FILTER_GUESTS_BY_ROOM]: filterGuestsByRoom,
+
   [RESERVATIONS.MULTI_ACTIONS_FULFILLED]: multiActionsFulfilled,
   [RESERVATIONS.MULTI_ACTIONS_PENDING]: multiActionsPending,
   [RESERVATIONS.MULTI_ACTIONS_REJECTED]: multiActionsRejected,

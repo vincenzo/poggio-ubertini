@@ -1,5 +1,5 @@
 <div class="mar-top-1">
-  <row style="grid-template-columns: repeat(4, 120px)">
+  <row style="grid-template-columns: repeat(4, 120px) 180px">
     <button
       type="button"
       class="btn btn-primary"
@@ -23,6 +23,13 @@
     <a class="btn btn-default" ui-sref="camps.view.guests.add">
       Aggiungi ospite
     </a>
+
+    <select
+      name="roomFilter"
+      id="roomFilter"
+      ng-options="room.name for room in $ctrl.roomsList track by room.id"
+      ng-model="$ctrl.camps.filterGuestsByRoom"
+    ></select>
   </row>
 </div>
 
@@ -65,7 +72,7 @@
     </thead>
     <tbody>
       <tr
-        ng-repeat="r in $ctrl.model.reservations | orderBy:$ctrl.sortColumnName:$ctrl.sortReverse track by r.id"
+        ng-repeat="r in $ctrl.model.reservations | filter: { 'room_id': $ctrl.camps.filterGuestsByRoom } | orderBy:$ctrl.sortColumnName:$ctrl.sortReverse track by r.id"
       >
         <td class="w_xs text-center">
           <input type="checkbox" ng-model="r.selected" />

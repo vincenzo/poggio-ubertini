@@ -17,6 +17,8 @@ export class CampGuestsComponentController extends EwCommonFormController {
   getCampFormData: Function;
   getDisponibilitaCampo: Function;
   saveReservation: Function;
+  roomFilter: string = '';
+  roomsList: any[];
   selectAll: boolean;
   sortColumnName: string;
   sortReverse: boolean;
@@ -51,6 +53,23 @@ export class CampGuestsComponentController extends EwCommonFormController {
       title: "Ospiti campo",
       titleEntity: "ospite"
     };
+  }
+
+  $onInit() {
+    this.roomsList = [
+      {
+        name: "A01",
+        value: "A01"
+      },
+      {
+        name: "A02",
+        value: "A02"
+      },
+      {
+        name: "A03",
+        value: "A03"
+      }
+    ];
   }
 
   afterGet(stay: any, model: any, response: any) {

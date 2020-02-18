@@ -281,7 +281,7 @@
       >
         <div class="rooms mar-top-1">
           <row style="grid-template-columns: repeat(9, 1fr)">
-            <div class="room" ng-repeat="r in $ctrl.camps.rooms.list">
+            <div class="room" ng-repeat="r in $ctrl.camps.rooms.list" ng-click="$ctrl.filterGuestsByRoom(r)">
               <h3>{{ r.display_name }}</h3>
               <h4>{{ r.posti_liberi }} / <span>{{ r.posti_letto }}</span></h4>
               <div

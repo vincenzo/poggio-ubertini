@@ -1,5 +1,5 @@
-import { generateCommonAction } from '../../vendors/ew-angularjs-utils/utils/generic-actions';
-import { CAMPS } from './camps.constants';
+import { generateCommonAction } from "../../vendors/ew-angularjs-utils/utils/generic-actions";
+import { CAMPS } from "./camps.constants";
 
 export const {
   applyFiltersAction,
@@ -20,3 +20,8 @@ export const {
   toggleActiveAction,
   updateModelAction
 } = generateCommonAction(CAMPS);
+
+export const filterGuestsByRoom = roomId => ({
+  type: CAMPS.FILTER_GUESTS_BY_ROOM,
+  payload: { roomId }
+});
