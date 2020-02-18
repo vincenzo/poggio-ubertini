@@ -27,9 +27,12 @@
     <select
       name="roomFilter"
       id="roomFilter"
-      ng-options="room.name for room in $ctrl.roomsList track by room.id"
       ng-model="$ctrl.camps.filterGuestsByRoom"
-    ></select>
+      ng-options="room.value as room.name for room in $ctrl.lookup.Rooms.list"
+      ng-change="$ctrl.updateRoomFilter()"
+    >
+      <option value="">-- Tutte --</option>
+    </select>
   </row>
 </div>
 
@@ -72,7 +75,7 @@
     </thead>
     <tbody>
       <tr
-        ng-repeat="r in $ctrl.model.reservations | filter: { 'room_id': $ctrl.camps.filterGuestsByRoom } | orderBy:$ctrl.sortColumnName:$ctrl.sortReverse track by r.id"
+        ng-repeat="r in $ctrl.model.reservations | filter: { 'room_id': $ctrl.camps.filterGuestsByRoom || '!!' } | orderBy:$ctrl.sortColumnName:$ctrl.sortReverse track by r.id"
       >
         <td class="w_xs text-center">
           <input type="checkbox" ng-model="r.selected" />

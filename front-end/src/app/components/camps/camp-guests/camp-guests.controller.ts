@@ -11,14 +11,14 @@ import { ReservationsService } from "./../../reservations/reservations.service";
 import { CitiesService } from "./../../cities/cities.service";
 
 export class CampGuestsComponentController extends EwCommonFormController {
+  camps: any;
+  _filterGuestsByRoom: Function;
   modelFileOspiti: any;
   multipleOptionsSelect: any;
   addManyGuests: Function;
   getCampFormData: Function;
   getDisponibilitaCampo: Function;
   saveReservation: Function;
-  roomFilter: string = '';
-  roomsList: any[];
   selectAll: boolean;
   sortColumnName: string;
   sortReverse: boolean;
@@ -53,23 +53,6 @@ export class CampGuestsComponentController extends EwCommonFormController {
       title: "Ospiti campo",
       titleEntity: "ospite"
     };
-  }
-
-  $onInit() {
-    this.roomsList = [
-      {
-        name: "A01",
-        value: "A01"
-      },
-      {
-        name: "A02",
-        value: "A02"
-      },
-      {
-        name: "A03",
-        value: "A03"
-      }
-    ];
   }
 
   afterGet(stay: any, model: any, response: any) {
@@ -117,6 +100,10 @@ export class CampGuestsComponentController extends EwCommonFormController {
     });
   };
 
+  updateRoomFilter() {
+    this._filterGuestsByRoom(this.camps.filterGuestsByRoom);
+  }
+
   checkIn(reservation: any, date?: string) {
     const params = {
       type: "in",
@@ -135,6 +122,8 @@ export class CampGuestsComponentController extends EwCommonFormController {
 
   getMapDispatchToThisParams(dispatch) {
     return {
+      _filterGuestsByRoom: roomId =>
+        dispatch(this.CampsService.filterGuestsByRoom(roomId)),
       addManyGuests: data => dispatch(this.CampsService.addManyGuests(data)),
       getCampFormData: id => dispatch(this.CampsService.getFormData(id)),
       multiActions: (a, i, p) =>
