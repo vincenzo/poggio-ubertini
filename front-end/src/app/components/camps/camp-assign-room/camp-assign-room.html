@@ -1,17 +1,17 @@
 <h1>Assegna a stanze</h1>
 
-<form name="$ctrl.form" ng-submit="$ctrl.submit()" novalidate>
+<form name="$ctrl.form" ng-submit="$ctrl.submit()" style="float:right;margin-right: 90px;margin-top: -40px;" novalidate>
   <row style="grid-template-columns: 240px">
     <ew-daterange-picker name="daterange" on-change="$ctrl.onDaterangeFilter($event)" value="$ctrl.daterange">
     </ew-daterange-picker>
   </row>
 </form>
-
+<hr>
 <row style="grid-template-columns: 340px 1fr">
   <section>
     <!-- <pre>{{ $ctrl.camp.reservations | json }}</pre> -->
-    <h3>Seleziona ospiti</h3>
-    <input type="text" placeholder="Cerca ospite..." ng-model="$ctrl.search" />
+    <!-- <h3>Seleziona ospiti</h3> -->
+    <input type="text" class="form-control" placeholder="Cerca ospite..." ng-model="$ctrl.search" />
     <div ng-repeat="res in $ctrl.camp.reservations | filter: $ctrl.search track by res.id">
       <label ng-if="!res.room_id">
         <input
