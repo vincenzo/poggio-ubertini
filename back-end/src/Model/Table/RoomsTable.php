@@ -105,7 +105,7 @@ class RoomsTable extends Table
                     // logd($row); 
                     // TODO
                     $row->posti_liberi = $row->days[0]['posti_liberi'];
-                    $row->posti_occupati = $row->posti_letto;
+                    $row->posti_occupati = $row->posti_letto - $row->posti_liberi;
                     $row->perc_occupazione = round($row->posti_occupati / $row->posti_letto * 100, 2);
                     if($row->perc_occupazione > 100)
                         $row->perc_occupazione = 100;
