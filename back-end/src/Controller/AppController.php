@@ -124,9 +124,21 @@ class AppController extends Controller
             'Lookup' => \Cake\Core\Configure::read('Lookup'),
         ];
 
+        $data['Lookup']['Rooms']['list'] = \Cake\ORM\TableRegistry::get('Rooms')->find('all')
+            ->contain(['Structures'])
+            ->order(['structure_id' => 'ASC', 'numero' => 'ASC'])
+            ->formatResults(function ($results){
+                return $results->map(function ($row) {
+                    return ['name' => $row->display_name, 'value' => $row->id];
+                });
+            })
+            ->cache('rooms', 'long')
+            ;
+
         $data['Lookup']['Countries']['list'] = \Cake\ORM\TableRegistry::get('Countries')->find('all')
             ->select(['name' => 'descrizione', 'value' => 'descrizione'])
             ->order(['descrizione' => 'ASC'])
+            ->cache('countries', 'long')
             ->enableHydration(false);
 
         $data['Lookup']['Structures']['list'] = \Cake\ORM\TableRegistry::get('Structures')->find('all')
