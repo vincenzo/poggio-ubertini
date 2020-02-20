@@ -48,6 +48,8 @@ class CampsController extends AppController
         if($this->request->getData('file.error') != 0)
             throw new WarningException("Errore nel caricamento del file");
 
+        $camp = $this->Camps->get($this->request->getData('camp_id'));
+
         $registry = \Robotusers\Excel\Registry::instance();
         $table = $registry->get($this->request->getData('file.tmp_name'), null, [
             'startRow' => 3,
@@ -63,11 +65,13 @@ class CampsController extends AppController
 
         $upTrim = function($t) { return trim(strtoupper($t)); };
         $formatDate = function($str) { return $str ? Time::createFromFormat('d/m/Y', $str) : null; };
-
+        
         $reservations = [];
         foreach ($all as $r) {
             $data = [
-                'camp_id' => $this->request->getData('camp_id'),
+                'camp_id' => $camp->id,
+                'data_previsto_in' => $camp->data_inizio,
+                'data_previsto_out' => $camp->data_fine,
                 'guest' => [
                     'cittadinanza_italiana' => $upTrim($r['A']) == "SI",
                     'cognome' => $r['B'],
@@ -80,8 +84,8 @@ class CampsController extends AppController
                     'indirizzo' => $r['I'],
                     'cap' => $r['J'],
                     'citta' => $r['K'],
-                    'provincia' => $r['L'],
-                    'nazione' => $r['M'],
+                    'provincia' => $upTrim($r['L']),
+                    'nazione' => $upTrim($r['M']),
                     'documento_tipo' => 'PAS',
                     'documento_numero' => $r['N'],
                     'documento_data_rilascio' => $r['O'],

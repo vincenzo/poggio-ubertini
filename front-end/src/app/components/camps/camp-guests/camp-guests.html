@@ -99,8 +99,8 @@
         </td>
         <td>{{ r.guest.nome }}</td>
         <td>{{ r.guest.cognome }}</td>
-        <td>{{ r.data_previsto_in | date: "dd/MM/yyyy HH:mm" }}</td>
-        <td>{{ r.data_previsto_out | date: "dd/MM/yyyy HH:mm" }}</td>
+        <td>{{ r.data_previsto_in | date: "dd/MM/yyyy" }}</td>
+        <td>{{ r.data_previsto_out | date: "dd/MM/yyyy" }}</td>
         <td>
           <span ng-if="!r.data_in">
             <a
@@ -144,7 +144,7 @@
             class="text-warning"
             ng-click="$ctrl.removeRoom(r.id)"
             uib-tooltip="Rimuovi assegnazione stanza"
-            ng-disabled="r.room_id"
+            ng-if="r.room_id"
           >
             <i class="far fa-fw fa-unlink"></i>
           </a>
@@ -155,7 +155,7 @@
 </div>
 
 <p>
-  Grazie a questa funzionalità puoi caricare un file excel (CSV) per aggiungere
+  Grazie a questa funzionalità puoi caricare un file Excel (XSLX) per aggiungere
   rapidamente tutti gli ospiti al campo. Scarica il modello da compilare dal tab
   Documenti.
 </p>
