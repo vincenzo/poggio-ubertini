@@ -99,7 +99,10 @@ class CampsController extends AppController
             // logd($data);
         }
 
-        $this->Camps->Reservations->saveMany($reservations);
+        if($this->Camps->Reservations->saveMany($reservations)) {
+            $camp->effettivo = true;
+            $this->Camps->save($camp);
+        }
         $this->_setJson(true, []);
     }
 
