@@ -54,6 +54,12 @@ export class ReservationsService extends EwCommonService {
     );
   };
 
+  nominaCapogruppo(reservationId) {
+    return this.serverService
+      .post(this.apiPath + "/nominaCapogruppo", { id: reservationId })
+      .then((response: any) => response.data);
+  }
+
   removeRoom(id) {
     return this.serverService
       .post(this.apiPath + "/removeRoom", { id })

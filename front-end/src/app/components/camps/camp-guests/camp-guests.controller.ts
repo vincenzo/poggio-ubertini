@@ -359,6 +359,22 @@ export class CampGuestsComponentController extends EwCommonFormController {
       .then(() => this.getCampFormData(this.parentId));
   }
 
+  chargePowers(r) {
+    const answer = confirm(
+      `Confermi di voler nominare ${r.guest.nome} ${r.guest.cognome} come capogruppo?`
+    );
+
+    if (!answer) {
+      return;
+    }
+
+    return this.ReservationsService.nominaCapogruppo(r.id)
+      .then(response =>
+        this.service.toaster.success("Capogruppo nominato correttamente")
+      )
+      .then(() => this.getCampFormData(this.parentId));
+  }
+
   sortColumn = col => {
     this.sortColumnName = col;
 
