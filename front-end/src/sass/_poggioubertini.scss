@@ -1,10 +1,10 @@
 body {
-	background: url("/assets/sayagata-400px.png");
+  background: url("/assets/sayagata-400px.png");
 }
 
 ew-page-header .page-header .page-title,
 .ibox.ibox-default .ibox-title {
-	background-color: #254f73;
+  background-color: #254f73;
 }
 
 /** Toaster **/
@@ -14,18 +14,27 @@ ew-page-header .page-header .page-title,
 
 /** Upload */
 .table td.uploaded_file {
-	padding: 2px 0 0;
+  padding: 2px 0 0;
 
-	a {
-	    color: #4182bc;
-	    background-color: rgba(244, 249, 253, 0.58);
-	    border-color: rgba(153, 192, 226, 0.48);
-	    text-overflow: ellipsis;
-	    overflow-x: hidden;
-	}
+  a {
+    color: #4182bc;
+    background-color: rgba(244, 249, 253, 0.58);
+    border-color: rgba(153, 192, 226, 0.48);
+    text-overflow: ellipsis;
+    overflow-x: hidden;
+  }
 }
 
 .uploaded_file .progress {
-	margin-bottom: 0;
-	margin-top: 3px;
+  margin-bottom: 0;
+  margin-top: 3px;
+}
+
+// Definisce il colore delle icone maschio/femmina
+.fa-male {
+  color: #8ecefd;
+}
+
+.fa-female {
+  color: #f88b9d;
 }
