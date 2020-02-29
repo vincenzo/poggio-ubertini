@@ -66,7 +66,7 @@
 
         <hr />
 
-        <row style="grid-template-columns: 120px 1fr 140px 40px">
+        <row style="grid-template-columns: 120px 140px 1fr 40px">
           <ew-datepicker
             name="data_nascita"
             label="Data nascita"
@@ -74,6 +74,13 @@
             on-change="$ctrl.updateModel($event)"
             required="true"
           ></ew-datepicker>
+          <ew-select
+            name="nazione_nascita"
+            label="Nazione"
+            value="$ctrl.model.nazione_nascita"
+            on-change="$ctrl.updateModel($event)"
+            options="::$ctrl.lookup.Countries.list"
+          ></ew-select>
           <ew-autocomplete
             name="citta_nascita"
             placeholder="Cerca un comune..."
@@ -83,15 +90,17 @@
             on-query="$ctrl.queryCity($event)"
             on-select="$ctrl.selectCittaNascita($event)"
             required="true"
+            ng-if="$ctrl.model.nazione_nascita === 'ITALIA'"
           >
           </ew-autocomplete>
-          <ew-select
-            name="nazione_nascita"
-            label="Nazione"
-            value="$ctrl.model.nazione_nascita"
+          <ew-text
+            name="citta_nascita"
+            label="Città di nascita"
+            value="$ctrl.model.citta_nascita"
             on-change="$ctrl.updateModel($event)"
-            options="::$ctrl.lookup.Countries.list"
-          ></ew-select>
+            required="true"
+            ng-if="$ctrl.model.nazione_nascita !== 'ITALIA'"
+          ></ew-text>
           <ew-text
             name="provincia_nascita"
             label="Prov."
@@ -166,6 +175,13 @@
             value="$ctrl.model.indirizzo"
             on-change="$ctrl.updateModel($event)"
           ></ew-text>
+          <ew-select
+            name="nazione"
+            label="Nazione"
+            value="$ctrl.model.nazione"
+            on-change="$ctrl.updateModel($event)"
+            options="::$ctrl.lookup.Countries.list"
+          ></ew-select>
           <ew-autocomplete
             name="citta"
             placeholder="Cerca un comune..."
@@ -175,25 +191,27 @@
             on-query="$ctrl.queryCity($event)"
             on-select="$ctrl.selectCitta($event)"
             required="true"
+            ng-if="$ctrl.model.nazione === 'ITALIA'"
           >
           </ew-autocomplete>
-          <ew-select
-            name="nazione"
-            label="Nazione"
-            value="$ctrl.model.nazione"
-            on-change="$ctrl.updateModel($event)"
-            options="::$ctrl.lookup.Countries.list"
-          ></ew-select>
           <ew-text
-            name="provincia"
-            label="Prov."
-            value="$ctrl.model.provincia"
+            name="fattura_citta"
+            label="Città"
+            value="$ctrl.model.fattura_citta"
             on-change="$ctrl.updateModel($event)"
+            required="true"
+            ng-if="$ctrl.model.nazione !== 'ITALIA'"
           ></ew-text>
           <ew-text
             name="cap"
             label="CAP"
             value="$ctrl.model.cap"
+            on-change="$ctrl.updateModel($event)"
+          ></ew-text>
+          <ew-text
+            name="provincia"
+            label="Prov."
+            value="$ctrl.model.provincia"
             on-change="$ctrl.updateModel($event)"
           ></ew-text>
         </row>
@@ -239,7 +257,6 @@
       form-dirty="$ctrl.form.$dirty"
       modified="$ctrl.model.modified"
       on-close="$ctrl.closeForm()"
-      alt-save="$ctrl.saveAndStay()"
       is-loading="$ctrl.clients.isLoading"
     >
     </ew-save-button>

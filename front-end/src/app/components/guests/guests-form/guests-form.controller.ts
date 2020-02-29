@@ -1,3 +1,4 @@
+import * as jQuery from "jquery";
 import { getLookup } from "./../../../vendors/ew-angularjs-utils/components/lookup/lookup.actions";
 import { CampsService } from "./../../camps/camps.service";
 import { EwCommonFormController } from "../../../vendors/ew-angularjs-utils/common/common-form-controller";
@@ -79,62 +80,36 @@ export class GuestsFormComponentController extends EwCommonFormController {
     );
   }
 
-  selectCitta(event) {
-    this.updateModel({
-      name: "citta",
-      value: event.item.comune
-    });
-
-    if (event.item.id) {
-      this.updateModel({
-        name: "nazione",
-        value: "ITALIA"
-      });
-      this.updateModel({
-        name: "provincia",
-        value: event.item.provincia
-      });
-      this.focusOnField(`${this.config.formId} #provincia`);
-    }
-
-    this.updateModel({
-      name: "nazione",
-      value: null
-    });
-    this.updateModel({
-      name: "provincia",
-      value: ""
-    });
-    this.focusOnField(`${this.config.formId} #se-nazione`);
-  }
-
   selectCittaNascita(event) {
     this.updateModel({
       name: "citta_nascita",
       value: event.item.comune
     });
-
-    if (event.item.id) {
-      this.updateModel({
-        name: "nazione_nascita",
-        value: "ITALIA"
-      });
-      this.updateModel({
-        name: "provincia_nascita",
-        value: event.item.provincia
-      });
-      this.focusOnField(`${this.config.formId} #provincia_nascita`);
-    }
-
-    this.updateModel({
-      name: "nazione_nascita",
-      value: null
-    });
+    // this.updateModel({
+    //   name: "cap",
+    //   value: event.item.cap
+    // });
     this.updateModel({
       name: "provincia_nascita",
-      value: ""
+      value: event.item.provincia
     });
-    this.focusOnField(`${this.config.formId} #se-nazione_nascita`);
+    setTimeout(() => jQuery("#se-documento_tipo").focus(), 10);
+  }
+
+  selectCitta(event) {
+    this.updateModel({
+      name: "citta",
+      value: event.item.comune
+    });
+    this.updateModel({
+      name: "cap",
+      value: event.item.cap
+    });
+    this.updateModel({
+      name: "provincia",
+      value: event.item.provincia
+    });
+    setTimeout(() => jQuery("#cap").focus(), 10);
   }
 
   getMapDispatchToThisParams(dispatch) {
