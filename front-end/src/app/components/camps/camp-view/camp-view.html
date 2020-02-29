@@ -123,6 +123,7 @@
           <section class="low-impact" id="contatori">
             <row
               style="grid-template-columns: 1fr 100px 100px; margin-bottom: 8px"
+              ng-if="$ctrl.model.tipo !=='EXT'"
             >
               <b></b>
               <b class="text-center">Ingresso</b>
@@ -132,6 +133,7 @@
             <row
               style="grid-template-columns: 1fr 100px 100px"
               ng-repeat="c in $ctrl.lookup.Camps.contatori track by c.value"
+              ng-if="$ctrl.model.tipo !=='EXT'"
             >
               <label>{{ c.name }}</label>
               <ew-readonly-input
@@ -144,7 +146,7 @@
               ></ew-readonly-input>
             </row>
 
-            <hr />
+            <hr ng-if="$ctrl.model.tipo !=='EXT'" />
             <row style="grid-template-columns: 1fr 100px">
               <label>Lenzuola singole</label>
               <ew-readonly-input
@@ -281,7 +283,11 @@
       >
         <div class="rooms mar-top-1">
           <row style="grid-template-columns: repeat(9, 1fr)">
-            <div class="room" ng-repeat="r in $ctrl.camps.rooms.list" ng-click="$ctrl.filterGuestsByRoom(r)">
+            <div
+              class="room"
+              ng-repeat="r in $ctrl.camps.rooms.list"
+              ng-click="$ctrl.filterGuestsByRoom(r)"
+            >
               <h3>{{ r.display_name }}</h3>
               <h4>{{ r.posti_liberi }} / <span>{{ r.posti_letto }}</span></h4>
               <div

@@ -66,7 +66,13 @@
                 on-change="$ctrl.updateModel($event)"
                 options="::$ctrl.lookup.Camps.tipo"
               ></ew-select>
-              <ew-checkbox name="effettivo" label="Campo Effettivo" class="single-checkbox" value="$ctrl.model.effettivo" on-change="$ctrl.updateModel($event)"></ew-checkbox>
+              <ew-checkbox
+                name="effettivo"
+                label="Campo Effettivo"
+                class="single-checkbox"
+                value="$ctrl.model.effettivo"
+                on-change="$ctrl.updateModel($event)"
+              ></ew-checkbox>
             </row>
           </ibox-content>
         </ew-ibox>
@@ -200,6 +206,7 @@
             <section class="input--inline low-impact" id="contatori">
               <row
                 style="grid-template-columns: 1fr 100px 100px; margin-bottom: 8px"
+                ng-if="$ctrl.model.tipo !=='EXT'"
               >
                 <b></b>
                 <b class="text-center">Ingresso</b>
@@ -209,6 +216,7 @@
               <row
                 style="grid-template-columns: 1fr 100px 100px"
                 ng-repeat="c in $ctrl.lookup.Camps.contatori track by c.value"
+                ng-if="$ctrl.model.tipo !=='EXT'"
               >
                 <label>{{ c.name }}</label>
                 <ew-numeric
@@ -223,7 +231,7 @@
                 ></ew-numeric>
               </row>
 
-              <hr />
+              <hr ng-if="$ctrl.model.tipo !=='EXT'" />
               <row style="grid-template-columns: 1fr 100px">
                 <label>Lenzuola singole</label>
                 <ew-numeric
