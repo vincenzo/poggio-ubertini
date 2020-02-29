@@ -19,7 +19,12 @@
 </ew-page-header>
 
 <div class="container">
-  <form ng-submit="$ctrl.submit($ctrl.model)" name="$ctrl.form" novalidate>
+  <form
+    id="camp-form"
+    ng-submit="$ctrl.submit($ctrl.model)"
+    name="$ctrl.form"
+    novalidate
+  >
     <row style="grid-template-columns: 1fr 360px">
       <div>
         <ew-ibox>
@@ -124,17 +129,11 @@
                 ></ew-select>
               </row>
 
-              <row style="grid-template-columns: 1fr 180px 120px 120px 90px">
+              <row style="grid-template-columns: 1fr 120px 180px 120px 90px">
                 <ew-text
                   name="fattura_indirizzo"
                   label="Indirizzo"
                   value="$ctrl.model.fattura_indirizzo"
-                  on-change="$ctrl.updateModel($event)"
-                ></ew-text>
-                <ew-text
-                  name="fattura_citta"
-                  label="Città"
-                  value="$ctrl.model.fattura_citta"
                   on-change="$ctrl.updateModel($event)"
                 ></ew-text>
                 <ew-select
@@ -144,11 +143,22 @@
                   on-change="$ctrl.updateModel($event)"
                   options="::$ctrl.lookup.Countries.list"
                 ></ew-select>
+                <ew-autocomplete
+                  name="fattura_citta"
+                  placeholder="Cerca un comune..."
+                  label="Città"
+                  label-prop="comune"
+                  model="$ctrl.model.fattura_citta"
+                  on-query="$ctrl.queryCity($event)"
+                  on-select="$ctrl.selectCittaFattura($event)"
+                  ng-if="$ctrl.model.fattura_nazione === 'ITALIA'"
+                ></ew-autocomplete>
                 <ew-text
-                  name="fattura_provincia"
-                  label="Provincia"
-                  value="$ctrl.model.fattura_provincia"
+                  name="fattura_citta"
+                  label="Città"
+                  value="$ctrl.model.fattura_citta"
                   on-change="$ctrl.updateModel($event)"
+                  ng-if="$ctrl.model.fattura_nazione !== 'ITALIA'"
                 ></ew-text>
                 <ew-text
                   name="fattura_cap"
@@ -156,11 +166,17 @@
                   value="$ctrl.model.fattura_cap"
                   on-change="$ctrl.updateModel($event)"
                 ></ew-text>
+                <ew-text
+                  name="fattura_provincia"
+                  label="Provincia"
+                  value="$ctrl.model.fattura_provincia"
+                  on-change="$ctrl.updateModel($event)"
+                ></ew-text>
               </row>
 
               <row
                 style="grid-template-columns: 1fr 180px 120px 120px 90px"
-                ng-if="$ctrl.model.fattura_nazione === 'ITA' && !['PRI', 'ENT'].includes($ctrl.model.fattura_ente)"
+                ng-if="$ctrl.model.fattura_nazione === 'ITALIA' && !['PRI', 'ENT'].includes($ctrl.model.fattura_ente)"
               >
                 <ew-text
                   name="fattura_sdi"

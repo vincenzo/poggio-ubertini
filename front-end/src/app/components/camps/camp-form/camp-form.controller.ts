@@ -1,3 +1,4 @@
+import { CitiesService } from "./../../cities/cities.service";
 import * as jQuery from "jquery";
 import ngRedux from "ng-redux";
 import { scrollToElement } from "../../../vendors/ew-angularjs-utils/utils/scroll-to-top";
@@ -32,6 +33,7 @@ export class CampFormComponentController {
     private $timeout: ng.ITimeoutService,
     private hotkeys,
     private CampsService: CampsService,
+    private CitiesService: CitiesService,
     private UploadsService: UploadsService
   ) {
     "ngInject";
@@ -108,12 +110,48 @@ export class CampFormComponentController {
     return this._uploadFile(event.value);
   }
 
+  queryCity(event) {
+    return (
+      this.CitiesService.search(event.query)
+        // aggiungo a mano il valore cercato se nessun risultato presente
+        .then((res: any) =>
+          res.data.length
+            ? res.data
+            : [
+                {
+                  id: null,
+                  codice: null,
+                  comune: event.query,
+                  datafineval: null,
+                  provincia: ""
+                }
+              ]
+        )
+    );
+  }
+
   reloadFormData() {
     return this.updateModel({
       name: "upload",
       value: null,
       skipHash: true
     }).then(() => this.getFormData(this.model.id));
+  }
+
+  selectCittaFattura(event) {
+    this.updateModel({
+      name: 'fattura_citta',
+      value: event.item.comune
+    });
+    this.updateModel({
+      name: 'fattura_cap',
+      value: event.item.cap
+    });
+    this.updateModel({
+      name: 'fattura_provincia',
+      value: event.item.provincia
+    });
+    setTimeout(() => jQuery('#fattura_provincia').focus(), 10);
   }
 
   selectTab(tabName: string) {
