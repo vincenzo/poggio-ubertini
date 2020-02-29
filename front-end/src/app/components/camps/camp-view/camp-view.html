@@ -190,11 +190,15 @@
                   upload="$ctrl.model.upload_ipotesi_spesa"
                 >
                 </upload-edit-row>
-                <form
+                <p ng-if="!$ctrl.model.upload_ipotesi_spesa">
+                  Nessun file di ipotesi spesa caricato. Modifica il campo per
+                  caricarne uno.
+                </p>
+                <!-- <form
                   ng-submit=""
                   name="$ctrl.fileForm"
                   novalidate
-                  id="file-form"
+                  id="file-ipotesi-spesa-form"
                   ng-if="!$ctrl.model.upload_ipotesi_spesa"
                 >
                   <ew-upload-button
@@ -207,7 +211,7 @@
                     max-size="5"
                   >
                   </ew-upload-button>
-                </form>
+                </form> -->
               </div>
             </div>
           </section>
