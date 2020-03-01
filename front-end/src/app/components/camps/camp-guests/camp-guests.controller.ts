@@ -12,6 +12,7 @@ import { CitiesService } from "./../../cities/cities.service";
 
 export class CampGuestsComponentController extends EwCommonFormController {
   camps: any;
+  dispParams: any;
   _filterGuestsByRoom: Function;
   modelFileOspiti: any;
   multipleOptionsSelect: any;
@@ -55,6 +56,16 @@ export class CampGuestsComponentController extends EwCommonFormController {
     };
   }
 
+  $onInit() {
+    super.$onInit();
+
+    this.dispParams = {
+      camp_id: this.model.id,
+      data_da: moment(this.model.data_inizio).format("YYYY-MM-DD"),
+      data_a: moment(this.model.data_fine).format("YYYY-MM-DD")
+    };
+  }
+
   afterGet(stay: any, model: any, response: any) {
     const cittadinanzaItaliana = this.model.cittadinanza_italiana;
     return this.saveReservation({
@@ -79,12 +90,10 @@ export class CampGuestsComponentController extends EwCommonFormController {
   }
 
   assignRoom = () => {
-    return this.RoomsService.getDisponibilitaCampo({
-      camp_id: this.model.id,
-      data_da: moment(this.model.data_inizio).format("YYYY-MM-DD"),
-      data_a: moment(this.model.data_fine).format("YYYY-MM-DD")
-    }).then(rooms => {
-      return this.ModalService.open({
+    // qui richiamo volutamente RoomsService.getDisponibilitaCampo anziché emettere la action perché mi serve per renderizzare le camere nella modal assegnazione e non 
+    // per aggionrare quelle del tab camere!!!
+    return this.RoomsService.getDisponibilitaCampo(this.dispParams).then(rooms => {
+      const modal = this.ModalService.open({
         name: "assignRoomForm",
         className: "ngdialog-large ngdialog-tall",
         // preCloseCallback: value =>
@@ -97,6 +106,13 @@ export class CampGuestsComponentController extends EwCommonFormController {
           };
         }
       });
+
+      modal.closePromise.then(() => {
+        console.log("here we are");
+        return this.getDisponibilitaCampo(this.dispParams);
+      });
+
+      return modal;
     });
   };
 
@@ -126,6 +142,8 @@ export class CampGuestsComponentController extends EwCommonFormController {
         dispatch(this.CampsService.filterGuestsByRoom(roomId)),
       addManyGuests: data => dispatch(this.CampsService.addManyGuests(data)),
       getCampFormData: id => dispatch(this.CampsService.getFormData(id)),
+      getDisponibilitaCampo: data =>
+        dispatch(this.RoomsService.getDisponibilita(data)),
       multiActions: (a, i, p) =>
         dispatch(this.ReservationsService.multiActions(a, i, p)),
       saveReservation: model => dispatch(this.ReservationsService.save(model))
@@ -148,7 +166,7 @@ export class CampGuestsComponentController extends EwCommonFormController {
       return this.service.toaster.info("Seleziona almeno un ospite!");
     }
 
-    return this.ModalService.open({
+    const modal = this.ModalService.open({
       name: "checkInOutForm",
       className: "ngdialog-xsmall ngdialog-tall",
       // preCloseCallback: value =>
@@ -161,32 +179,11 @@ export class CampGuestsComponentController extends EwCommonFormController {
       }
     });
 
-    // swal
-    //   .fire({
-    //     title: "Data Check-in",
-    //     input: "text",
-    //     inputValue: moment().format("DD/MM/YYYY"),
-    //     inputPlaceholder: "gg/mm/aaaa oo:mm",
-    //     inputValidator: value => {
-    //       if (!value) {
-    //         return "Campo obbligatorio!";
-    //       }
-    //       const momentdate = moment(value, "DD/MM/YYYY HH:ii", true);
-    //       if (!momentdate.isValid()) {
-    //         return "Formato data non valido!";
-    //       }
-    //     }
-    //   })
-    //   .then(({ value: data }) => {
-    //     if (data) {
-    //       return this.multiActions("check", ids, {
-    //         type: "in",
-    //         value: moment(data, "DD/MM/YYYY").format("YYYY-MM-DD")
-    //       });
-    //     }
-    //   })
-    //   .then(() => this.getCampFormData(this.parentId))
-    //   .then(() => (this.selectAll = false));
+    modal.closePromise.then(() =>
+      this.getDisponibilitaCampo(this.dispParams)
+    );
+
+    return modal;
   }
 
   multipleCheckOut() {
@@ -195,7 +192,7 @@ export class CampGuestsComponentController extends EwCommonFormController {
       return this.service.toaster.info("Seleziona almeno un ospite!");
     }
 
-    return this.ModalService.open({
+    const modal = this.ModalService.open({
       name: "checkInOutForm",
       className: "ngdialog-xsmall ngdialog-tall",
       // preCloseCallback: value =>
@@ -208,32 +205,11 @@ export class CampGuestsComponentController extends EwCommonFormController {
       }
     });
 
-    // swal
-    //   .fire({
-    //     title: "Data Check-out",
-    //     input: "text",
-    //     inputValue: moment().format("DD/MM/YYYY"),
-    //     inputPlaceholder: "gg/mm/aaaa",
-    //     inputValidator: value => {
-    //       if (!value) {
-    //         return "Campo obbligatorio!";
-    //       }
-    //       const momentdate = moment(value, "DD/MM/YYYY", true);
-    //       if (!momentdate.isValid()) {
-    //         return "Formato data non valido!";
-    //       }
-    //     }
-    //   })
-    //   .then(({ value: data }) => {
-    //     if (data) {
-    //       return this.multiActions("check", ids, {
-    //         type: "out",
-    //         value: moment(data, "DD/MM/YYYY").format("YYYY-MM-DD")
-    //       });
-    //     }
-    //   })
-    //   .then(() => this.getCampFormData(this.parentId))
-    //   .then(() => (this.selectAll = false));
+    modal.closePromise.then(() =>
+      this.getDisponibilitaCampo(this.dispParams)
+    );
+
+    return modal;
   }
 
   multipleToom() {
@@ -356,7 +332,8 @@ export class CampGuestsComponentController extends EwCommonFormController {
       .then(response =>
         this.service.toaster.success("Assegnazione stanza rimossa")
       )
-      .then(() => this.getCampFormData(this.parentId));
+      .then(() => this.getCampFormData(this.parentId))
+      .then(() => this.getDisponibilitaCampo(this.dispParams));
   }
 
   chargePowers(r) {
@@ -401,8 +378,8 @@ export class CampGuestsComponentController extends EwCommonFormController {
    */
 
   private _check(ids: number[], params: { type: string; value: string }) {
-    return this.multiActions("check", ids, params).then(() =>
-      this.getCampFormData(this.parentId)
-    );
+    return this.multiActions("check", ids, params)
+      .then(() => this.getCampFormData(this.parentId))
+      .then(() => this.getDisponibilitaCampo(this.dispParams));
   }
 }
