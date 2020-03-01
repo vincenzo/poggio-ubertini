@@ -13,7 +13,7 @@ import { fromJS } from "immutable";
 const constants = CAMPS;
 
 const INITIAL_STATE = fromJS({
-  filterGuestsByRoom: 9,
+  filterGuestsByRoom: null,
   filters: {
     "Camps.id": {
       active: false,

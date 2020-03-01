@@ -42,6 +42,10 @@ export class CampViewComponentController extends EwCommonFormController {
     this.getAvailability();
   }
 
+  $onDestroy() {
+    this.filterGuestsByRoom({ id: null });
+  }
+
   chiudi(id) {
     var answer = confirm("Confermi di voler chiudere il campo?");
     if (answer) {
