@@ -54,6 +54,30 @@ export class CampsService extends EwCommonService {
         ]
       },
       {
+        name: "documenti",
+        type: "array",
+        fields: [
+          { name: "id", type: "number" },
+          { name: "model_id", type: "number" },
+          { name: "model_name", type: "string" },
+          { name: "categoria", type: "string" },
+          { name: "descrizione", type: "string" },
+          { name: "extra_data", type: "string" },
+          { name: "file_name", type: "string" },
+          { name: "base_name", type: "string" },
+          { name: "estensione", type: "string" },
+          { name: "suffisso_auto", type: "string" },
+          { name: "file_type", type: "string" },
+          { name: "file_dir", type: "string" },
+          { name: "archiviato", type: "string" },
+          { name: "data_archiviato", type: "date" },
+          { name: "created", type: "date" },
+          { name: "public_filename", type: "string" },
+          { name: "presigned_url", type: "string" },
+          { name: "preview_url", type: "string" }
+        ]
+      },
+      {
         name: "upload_ipotesi_spesa",
         type: "object",
         fields: [

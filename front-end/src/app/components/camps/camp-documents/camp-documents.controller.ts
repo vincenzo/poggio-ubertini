@@ -1,3 +1,4 @@
+import { UploadsService } from "./../../../vendors/ew-angularjs-utils/components/uploads/uploads.service";
 import { RoomsService } from "./../../rooms/rooms.service";
 import { ModalService } from "./../../../vendors/ew-angularjs-utils/components/modal/modal.service";
 import * as moment from "moment";
@@ -13,11 +14,13 @@ export class CampDocumentsComponentController extends EwCommonFormController {
   addManyGuests: Function;
   getCampFormData: Function;
   getDisponibilitaCampo: Function;
+  modelFileExtra: any;
   saveReservation: Function;
   selectAll: boolean;
   sortColumnName: string;
   sortReverse: boolean;
   sortReverseclass: string;
+  uploadFile: Function;
 
   multiActions: (
     action: "check" | "assignRoom",
@@ -29,7 +32,8 @@ export class CampDocumentsComponentController extends EwCommonFormController {
     $ngRedux,
     hotkeys,
     CampsService: CampsService,
-    public ModalService: ModalService
+    public ModalService: ModalService,
+    private UploadsService: UploadsService
   ) {
     "ngInject";
     super($ngRedux, CampsService);
@@ -47,14 +51,37 @@ export class CampDocumentsComponentController extends EwCommonFormController {
   }
 
   getMapDispatchToThisParams(dispatch) {
-    return {};
+    return {
+      uploadFile: model => dispatch(this.UploadsService.upload(model))
+    };
   }
 
   getMapStateToThisParams(state) {
     return {};
   }
 
+  upload(file) {
+    // console.log("file", file);
+
+    const data = {
+      file: file.value,
+      model_name: "Camps",
+      model_id: this.model.id,
+      categoria: "extra"
+    };
+
+    this.modelFileExtra = null;
+
+    return this._uploadFile(data);
+  }
+
   /**
    * PRIVATES
    */
+
+  private _uploadFile(upload) {
+    return this.uploadFile(upload).then(
+      ({ sameRoute, upload }) => sameRoute && this.getFormData(this.model.id)
+    );
+  }
 }

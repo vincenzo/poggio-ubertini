@@ -1,26 +1,39 @@
 <h3>Documenti</h3>
 <div class="table-responsive mar-top-1">
+  <p ng-if="!$ctrl.model.documenti.length">Nessun documento caricato.</p>
   <table
     class="table table-striped table-bordered table-hover"
     id="documents-table"
+    ng-if="$ctrl.model.documenti.length"
   >
     <thead>
       <tr>
         <th>Nome</th>
-        <th>Download</th>
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <td>Ripetimi</td>
+      <tr ng-repeat="u in $ctrl.model.documenti">
         <td>
-          Scarica
+          <a ng-href="{{ u.presigned_url }}" target="_blank">
+            <i class="fa fa-download"></i> {{ u.public_filename }}
+          </a>
         </td>
       </tr>
-
     </tbody>
   </table>
 </div>
+<form ng-submit="" name="$ctrl.fileForm" novalidate id="file-documenti-form">
+  <ew-upload-button
+    name="extra"
+    label="Documento da caricare"
+    value="$ctrl.modelFileExtra"
+    on-change="$ctrl.upload($event)"
+  >
+  </ew-upload-button>
+</form>
+
+<hr />
+
 <h3>Modelli</h3>
 <!-- I modelli sono in hosting nella cartella Dropbox Entheosweb/Poggio. Quando incolli metti ?dl=1 alla fine dell'url -->
 <div class="table-responsive mar-top-1">
@@ -28,10 +41,18 @@
     class="table table-striped table-bordered table-hover"
     id="documents-table"
   >
+    <thead>
+      <tr>
+        <th>Nome</th>
+      </tr>
+    </thead>
     <tbody>
       <tr>
         <td>
-          <a href="https://www.dropbox.com/s/zl1hnkcd9h853a8/Modello%20Ospiti%20Poggio.xlsx?dl=1" target="_blank">
+          <a
+            href="https://www.dropbox.com/s/zl1hnkcd9h853a8/Modello%20Ospiti%20Poggio.xlsx?dl=1"
+            target="_blank"
+          >
             <i class="fa fa-download"></i> Modello per aggiunta rapida ospiti
           </a>
         </td>
@@ -41,21 +62,30 @@
       </tr>
       <tr>
         <td>
-          <a href="https://www.dropbox.com/s/pv2oc7r2tlsyxv2/PU%20piano%20primo.jpg?dl=1" target="_blank">
+          <a
+            href="https://www.dropbox.com/s/pv2oc7r2tlsyxv2/PU%20piano%20primo.jpg?dl=1"
+            target="_blank"
+          >
             <i class="fa fa-download"></i> Piantina Piano Primo
           </a>
         </td>
       </tr>
       <tr>
         <td>
-          <a href="https://www.dropbox.com/s/7cy1cuulhjk1m9a/PU%20piano%20seminterrato.jpg?dl=1" target="_blank">
+          <a
+            href="https://www.dropbox.com/s/7cy1cuulhjk1m9a/PU%20piano%20seminterrato.jpg?dl=1"
+            target="_blank"
+          >
             <i class="fa fa-download"></i> Piantina Piano Seminterrato
           </a>
         </td>
       </tr>
       <tr>
         <td>
-          <a href="https://www.dropbox.com/s/7qq3vxvzhrufx8v/PU%20piano%20terreno.jpg?dl=1" target="_blank">
+          <a
+            href="https://www.dropbox.com/s/7qq3vxvzhrufx8v/PU%20piano%20terreno.jpg?dl=1"
+            target="_blank"
+          >
             <i class="fa fa-download"></i> Piantina Piano Terreno
           </a>
         </td>
