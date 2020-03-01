@@ -109,7 +109,6 @@ export class CampGuestsComponentController extends EwCommonFormController {
         });
 
         modal.closePromise.then(() => {
-          console.log("here we are");
           return this.getDisponibilitaCampo(this.dispParams);
         });
 

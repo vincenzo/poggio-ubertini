@@ -9,17 +9,15 @@
 <hr>
 <row style="grid-template-columns: 340px 1fr">
   <section>
-    <!-- <pre>{{ $ctrl.camp.reservations | json }}</pre> -->
-    <!-- <h3>Seleziona ospiti</h3> -->
     <input type="text" class="form-control" placeholder="Cerca ospite..." ng-model="$ctrl.search" />
     <div ng-repeat="res in $ctrl.camp.reservations | filter: $ctrl.search track by res.id">
-      <label ng-if="!res.room_id">
+      <label>
         <input
           type="checkbox"
-          ng-model="res.check"
-          ng-change="$ctrl.countCheck(res.id, res.check)"
+          ng-model="res.selected"
+          ng-change="$ctrl.countCheck(res.id, res.selected)"
         />
-        {{ res.guest.nome }} {{ res.guest.cognome }} | {{ res.data_previsto_in | date:'dd/MM/yyyy' }} - {{ res.data_previsto_out | date:'dd/MM/yyyy' }}
+        {{ res.guest.nome }} {{ res.guest.cognome }} | {{ res.data_previsto_in | date:'dd/MM/yyyy' }} - {{ res.data_previsto_out | date:'dd/MM/yyyy' }} {{ res.room_id ? '|' + res.room.display_name : ''}}
       </label>
     </div>
   </section>

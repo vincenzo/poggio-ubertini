@@ -38,6 +38,8 @@ export class CampAssignRoomComponentController {
       moment(this.camp.data_inizio).format("YYYY-MM-DD") +
       " | " +
       moment(this.camp.data_fine).format("YYYY-MM-DD");
+
+    this.camp.reservations.forEach(r => this.countCheck(r.id, r.selected));
   }
 
   assegna(room) {
@@ -48,7 +50,7 @@ export class CampAssignRoomComponentController {
     }
 
     this.ModalService.close("assignRoomForm");
-    
+
     const [dataDa, dataA] = this.daterange.split(" | ");
 
     return this.$ngRedux
@@ -59,7 +61,7 @@ export class CampAssignRoomComponentController {
           {
             room_id: room.id,
             data_previsto_in: dataDa,
-            data_previsto_out: dataA,
+            data_previsto_out: dataA
           }
         )
       )
