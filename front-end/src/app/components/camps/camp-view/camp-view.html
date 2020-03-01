@@ -285,11 +285,22 @@
         select="$ctrl.selectTab('camere')"
         title="Camere (ctrl+2)"
       >
+
+        <button type="button" class="btn btn-primary" ng-click="$ctrl.filterRooms = {}">Tutte</button>
+        <button type="button" class="btn btn-primary" ng-click="$ctrl.filterRooms = { 'structure_id': 1 }">Camere</button>
+        <button type="button" class="btn btn-mini btn-default" ng-click="$ctrl.filterRooms = { 'structure_id': 1, 'ala_vecchia': true }">Ala vecchia</button>
+        <button type="button" class="btn btn-mini btn-default" ng-click="$ctrl.filterRooms = { 'structure_id': 1, 'ala_vecchia': false }">Ala nuova</button>
+        <button type="button" class="btn btn-mini btn-default" ng-click="$ctrl.filterRooms = { 'structure_id': 1, 'servizi': true }">Con servizi</button>
+        <button type="button" class="btn btn-mini btn-default" ng-click="$ctrl.filterRooms = { 'structure_id': 1, 'servizi': false }">Senza servizi</button>
+        
+        <button type="button" class="btn btn-primary" ng-click="$ctrl.filterRooms = { 'structure_id': 2 }">Unità abitative</button>
+
         <div class="rooms mar-top-1">
           <row style="grid-template-columns: repeat(9, 1fr)">
             <div
               class="room"
-              ng-repeat="r in $ctrl.camps.rooms.list"
+              style="cursor: pointer;"
+              ng-repeat="r in $ctrl.camps.rooms.list | filter: $ctrl.filterRooms "
               ng-click="$ctrl.filterGuestsByRoom(r)"
             >
               <h3>{{ r.display_name }}</h3>

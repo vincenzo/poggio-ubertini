@@ -22,10 +22,20 @@
     </div>
   </section>
   <section id="rooms">
-    <!-- <pre>{{ $ctrl.rooms | json }}</pre> -->
+    <button type="button" class="btn btn-primary" ng-click="$ctrl.filterRooms = {}">Tutte</button>
+    <button type="button" class="btn btn-primary" ng-click="$ctrl.filterRooms = { 'structure_id': 1 }">Camere</button>
+    <button type="button" class="btn btn-mini btn-default" ng-click="$ctrl.filterRooms = { 'structure_id': 1, 'ala_vecchia': true }">Ala vecchia</button>
+    <button type="button" class="btn btn-mini btn-default" ng-click="$ctrl.filterRooms = { 'structure_id': 1, 'ala_vecchia': false }">Ala nuova</button>
+    <button type="button" class="btn btn-mini btn-default" ng-click="$ctrl.filterRooms = { 'structure_id': 1, 'servizi': true }">Con servizi</button>
+    <button type="button" class="btn btn-mini btn-default" ng-click="$ctrl.filterRooms = { 'structure_id': 1, 'servizi': false }">Senza servizi</button>
+    
+    <button type="button" class="btn btn-primary" ng-click="$ctrl.filterRooms = { 'structure_id': 2 }">Unità abitative</button>
+
+    <hr />
+
     <row style="grid-template-columns: repeat(8, 70px)">
       <button
-        ng-repeat="room in $ctrl.rooms track by room.id"
+        ng-repeat="room in $ctrl.rooms | filter: $ctrl.filterRooms track by room.id"
         class="room"
         ng-class="['color--' + room.disponibilita, { 'too-small': room.posti_liberi < $ctrl.countedChecks }]"
         ng-click="$ctrl.assegna(room)"
