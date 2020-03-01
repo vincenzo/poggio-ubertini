@@ -90,30 +90,32 @@ export class CampGuestsComponentController extends EwCommonFormController {
   }
 
   assignRoom = () => {
-    // qui richiamo volutamente RoomsService.getDisponibilitaCampo anziché emettere la action perché mi serve per renderizzare le camere nella modal assegnazione e non 
+    // qui richiamo volutamente RoomsService.getDisponibilitaCampo anziché emettere la action perché mi serve per renderizzare le camere nella modal assegnazione e non
     // per aggionrare quelle del tab camere!!!
-    return this.RoomsService.getDisponibilitaCampo(this.dispParams).then(rooms => {
-      const modal = this.ModalService.open({
-        name: "assignRoomForm",
-        className: "ngdialog-large ngdialog-tall",
-        // preCloseCallback: value =>
-        //   this.ModalService.preCloseCallbackDefault(value, "camps.view"),
-        template: `<camp-assign-room camp="$ctrl.camp" rooms="$ctrl.rooms.data"></camp-assign-room>`,
-        controller: () => {
-          return {
-            camp: this.model,
-            rooms: rooms
-          };
-        }
-      });
+    return this.RoomsService.getDisponibilitaCampo(this.dispParams).then(
+      rooms => {
+        const modal = this.ModalService.open({
+          name: "assignRoomForm",
+          className: "ngdialog-large ngdialog-tall",
+          // preCloseCallback: value =>
+          //   this.ModalService.preCloseCallbackDefault(value, "camps.view"),
+          template: `<camp-assign-room camp="$ctrl.camp" rooms="$ctrl.rooms.data"></camp-assign-room>`,
+          controller: () => {
+            return {
+              camp: this.model,
+              rooms: rooms
+            };
+          }
+        });
 
-      modal.closePromise.then(() => {
-        console.log("here we are");
-        return this.getDisponibilitaCampo(this.dispParams);
-      });
+        modal.closePromise.then(() => {
+          console.log("here we are");
+          return this.getDisponibilitaCampo(this.dispParams);
+        });
 
-      return modal;
-    });
+        return modal;
+      }
+    );
   };
 
   updateRoomFilter() {
@@ -179,9 +181,7 @@ export class CampGuestsComponentController extends EwCommonFormController {
       }
     });
 
-    modal.closePromise.then(() =>
-      this.getDisponibilitaCampo(this.dispParams)
-    );
+    modal.closePromise.then(() => this.getDisponibilitaCampo(this.dispParams));
 
     return modal;
   }
@@ -205,9 +205,7 @@ export class CampGuestsComponentController extends EwCommonFormController {
       }
     });
 
-    modal.closePromise.then(() =>
-      this.getDisponibilitaCampo(this.dispParams)
-    );
+    modal.closePromise.then(() => this.getDisponibilitaCampo(this.dispParams));
 
     return modal;
   }
@@ -295,14 +293,14 @@ export class CampGuestsComponentController extends EwCommonFormController {
   }
 
   toggleCheck(value) {
+    const filter = value ? ":not(:checked)" : ":checked";
+
     setTimeout(
       () =>
         jquery("#guests-table tbody")
           .find("input[type=checkbox]")
-          .click()
-      // .prop("checked", value)
-      // .triggerHandler("click")
-      // .trigger("input")
+          .filter(filter)
+          .click() // simulo il click perché sennò angular non aggiorna il model, è l'unico workaround che funziona!
     );
   }
 
